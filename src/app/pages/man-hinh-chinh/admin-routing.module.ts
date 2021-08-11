@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
 
 import { AdminComponent } from './admin.component';
+import { FormKhachHangComponent } from './khach-hang/form-khach-hang/form-khach-hang.component';
 
 const routes: Routes = [{
   path: '',
@@ -23,5 +24,6 @@ export class AdminsRoutingModule { }
 
 export const routedComponents = [
   KhachHangComponent,
-  AdminComponent
+  AdminComponent,
+  FormKhachHangComponent
 ];
