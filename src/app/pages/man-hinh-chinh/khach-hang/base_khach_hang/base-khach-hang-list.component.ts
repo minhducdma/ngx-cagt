@@ -1,13 +1,13 @@
 import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { WindowService, WindowCloseResult } from "@progress/kendo-angular-dialog";
-import { GridDataResult, PagerSettings } from "@progress/kendo-angular-grid";
+import { NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
+import { PagerSettings } from "@progress/kendo-angular-grid";
 import { State } from "@progress/kendo-data-query";
 import { TooltipDirective } from "@swimlane/ngx-charts";
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { ReziseTable } from "../../../../@core/constants/app.constant";
+import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { ApiService } from "../../../../@core/services/api.service";
-import { ActionEnum } from "../khach-hang.component";
 
 @Directive()
 export abstract class BaseKhachHangListComponent<T> implements OnInit, OnDestroy {
@@ -23,6 +23,12 @@ export abstract class BaseKhachHangListComponent<T> implements OnInit, OnDestroy
         skip: 0,
         take: 20,
     };
+    buttonsConfig: NbWindowControlButtonsConfig = {
+        minimize: false,
+        maximize: false,
+        fullScreen: true,
+      };
+  
     nhanSuId: number;
     tabName: string;
     openFirstTime = false;
@@ -44,12 +50,12 @@ export abstract class BaseKhachHangListComponent<T> implements OnInit, OnDestroy
         this.pageHeight = event.target.innerHeight - ReziseTable + 30;
     }
 
-    protected windowService: WindowService;
+    protected windowService: NbWindowService;
     protected apiService: ApiService;
     constructor(
         injector : Injector
     ) {
-        this.windowService = injector.get(WindowService)
+        this.windowService = injector.get(NbWindowService)
         this.apiService = injector.get(ApiService)
     }
 

@@ -24,5 +24,8 @@ export const UrlConstant = {
         // FORBIDEN: '/management/403',
         // PROFILE: '/management/profile',
         // MODULE: '/management/module',
-    }
+
+        KHACH_HANG: '/khach-hangs',
+    },
+    
 }

@@ -10,5 +10,5 @@
 
 export const environment = {
   production: false,
-  apiUrl:'',
+  apiUrl:'https://apisipm.migroup.asia/api/app',
 };
