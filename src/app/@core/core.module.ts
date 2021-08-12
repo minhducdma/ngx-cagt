@@ -54,6 +54,7 @@ import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
 import { KhachHangExampleData } from './data/khach-hang-demo';
 import { KhachHangExampleService } from './mock/khach-hang-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const socialLinks = [
   {
@@ -152,6 +153,7 @@ export const NB_CORE_PROVIDERS = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule
   ],
   exports: [
     NbAuthModule,

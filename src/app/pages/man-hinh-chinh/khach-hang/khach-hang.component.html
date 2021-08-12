@@ -6,7 +6,7 @@
         <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
         </ng2-smart-table> -->
         <kendo-grid 
-            [data]="gridData" 
+            [data]="gridView$ | async" 
             [resizable]="true" 
             [pageSize]="gridState.take" 
             [skip]="gridState.skip"

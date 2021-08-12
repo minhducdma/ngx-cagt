@@ -1,99 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { KhachHangExampleData } from '../../../@core/data/khach-hang-demo';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { CustomerDataExample } from './example-data';
 import { WindowService, WindowCloseResult } from '@progress/kendo-angular-dialog';
+import { BaseKhachHangListComponent } from './base_khach_hang/base-khach-hang-list.component';
+import { finalize, map, tap } from 'rxjs/operators';
+import { IPagedResult } from '../../../shared/models/response-data.model';
+import { PageConfig } from '../../../@core/constants/app.constant';
 
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
     styleUrls: ['.//khach-hang.component.scss'],
 })
-export class KhachHangComponent implements OnInit {
-    model: IKhachHang;
-    protected action: ActionEnum;
-    public gridData: GridDataResult;
-    source: LocalDataSource = new LocalDataSource();
-    isLoading = false;
-    opened = false;
-    gridState: State = {
-        sort: [{ field: 'id', dir: 'desc' }],
-        skip: 0,
-        take: 10,
-    };
-    selectionIds: number[] = [];
+export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> implements OnInit {
 
     constructor(
-        private service: KhachHangExampleData,
-        protected windowService: WindowService
+        injector : Injector
     ) {
-        const data = this.service.getData();
-        this.source.load(data);
+        super(injector)
     }
 
     ngOnInit(): void {
-        this.loadItems();
-    }
-
-    settings = {
-        add: {
-            addButtonContent: '<i class="nb-plus"></i>',
-            createButtonContent: '<i class="nb-checkmark"></i>',
-            cancelButtonContent: '<i class="nb-close"></i>',
-        },
-        edit: {
-            editButtonContent: '<i class="nb-edit"></i>',
-            saveButtonContent: '<i class="nb-checkmark"></i>',
-            cancelButtonContent: '<i class="nb-close"></i>',
-        },
-        delete: {
-            deleteButtonContent: '<i class="nb-trash"></i>',
-            confirmDelete: true,
-        },
-        columns: {
-            id: {
-                title: 'ID',
-                type: 'number',
-            },
-            hoTen: {
-                title: 'Họ tên',
-                type: 'string',
-            },
-            ngaySinh: {
-                title: 'Ngày sinh',
-                type: 'string',
-            },
-            gioiTinh: {
-                title: 'Giới tính',
-                type: 'string',
-            },
-            diaChi: {
-                title: 'Địa chỉ',
-                type: 'string',
-            },
-            soDienThoai: {
-                title: 'Số điện thoại',
-                type: 'string',
-            },
-            email: {
-                title: 'Email',
-                type: 'string',
-            },
-            loaiKhachHang: {
-                title: 'Loại khách hàng',
-                type: 'string',
-            },
-        },
-    };
-
-    onDeleteConfirm(event): void {
-        if (window.confirm('Are you sure you want to delete?')) {
-            event.confirm.resolve();
-        } else {
-            event.confirm.reject();
-        }
+        super.ngOnInit();
     }
 
     onStateChange(state: State) {
@@ -102,11 +33,13 @@ export class KhachHangComponent implements OnInit {
     }
 
     loadItems() {
-
-        this.gridData = {
-            data: CustomerDataExample.results.items,
-            total: CustomerDataExample.results.pagingInfo.totalItems,
-        }
+        this.apiService.get('https://apisipm.migroup.asia/api/app/khach-hangs', {})
+        .subscribe((res : any) => {
+            if(res && res.items){
+                this.gridView$.data = res.items;
+                this.gridView$.total = res.totalCount;
+            }
+        });
     }
 
     protected showFormCreateOrUpdate() {
