@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormDirectiveModule } from '../../shared/directives/forms';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
+import { CKEditorModule } from 'ng2-ckeditor';
 @NgModule({
   imports: [
     NbCardModule,
@@ -36,6 +37,8 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
     FormDirectiveModule,
     NbDialogModule,
     TreeViewModule,
+    CKEditorModule,
+    NbCheckboxModule
   ],
   declarations: [
     ...routedComponents,

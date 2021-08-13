@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ICauHoi } from '../model/tao-de-thi.model';
+import { ICauHoi, IDapAn } from '../model/tao-de-thi.model';
+import '../../../shared/controls/ckeditor-config/ckeditor.loader';
+import 'ckeditor';
 
 @Component({
     selector: 'ngx-tao-de-thi',
@@ -9,6 +11,7 @@ import { ICauHoi } from '../model/tao-de-thi.model';
 export class TaoDeThiComponent implements OnInit {
     public expandedKeys: number[] = [1];
     public dataCauHoi: ICauHoi[] = [];
+    selectedCauHoi: ICauHoi;
     tenCauHoi: string = "";
 
     constructor() { }
@@ -18,7 +21,7 @@ export class TaoDeThiComponent implements OnInit {
     addCauHoi() {
         let cauhoi = {
             id: Math.random(),
-            parentId: 0,
+            parentId: null,
             codeCauHoi: null,
             tenCauHoi: this.tenCauHoi,
             noiDungCauHoi: null,
@@ -47,10 +50,26 @@ export class TaoDeThiComponent implements OnInit {
         console.log(this.dataCauHoi);
     }
 
-    testValue:string;
     showCauHoi(item){
-        debugger;
-        console.log(item);
-        this.testValue = item.tenCauHoi;
+        this.selectedCauHoi = item as ICauHoi;
+    }
+
+    addCauTraLoi(item: ICauHoi){
+        let dapAn = {
+            cauHoiId: item.id,
+            noiDungCauHoi: null,
+            isDapAnDung: null,
+            creationTime: null,
+            creatorId: null,
+            id: Math.random()
+        } as IDapAn;
+        this.selectedCauHoi.dapAns.push(dapAn);
+        console.log(this.selectedCauHoi);
+    }
+    removeCauTraLoi(item: IDapAn){
+        const index = this.selectedCauHoi.dapAns.indexOf(item, 0);
+        if (index > -1) {
+            this.selectedCauHoi.dapAns.splice(index, 1);
+        }
     }
 }
