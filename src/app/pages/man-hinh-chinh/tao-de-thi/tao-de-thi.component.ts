@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICauHoi, IDapAn } from '../model/tao-de-thi.model';
 import '../../../shared/controls/ckeditor-config/ckeditor.loader';
 import 'ckeditor';
-
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 @Component({
     selector: 'ngx-tao-de-thi',
     templateUrl: './tao-de-thi.component.html',
@@ -72,5 +72,16 @@ export class TaoDeThiComponent implements OnInit {
             this.selectedCauHoi.dapAns.splice(index, 1);
         }
     }
+
+    drop(event: CdkDragDrop<string[]>) {
+        if (event.previousContainer === event.container) {
+          moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        } else {
+          transferArrayItem(event.previousContainer.data,
+                            event.container.data,
+                            event.previousIndex,
+                            event.currentIndex);
+        }
+      }
 }
 //test commit
