@@ -7,6 +7,7 @@ import { UrlConstant } from '../../../@core/constants/url.constant';
 import {BaseKhachHangListComponent} from '../base/base-khach-hang-list.component'
 import { WindowCloseResult, WindowService } from '@progress/kendo-angular-dialog';
 import { FormImportKhachHangComponent } from './form-import-khach-hang/form-import-khach-hang.component';
+import { ChamSocKhachHangComponent } from './cham-soc-khach-hang/cham-soc-khach-hang.component';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -74,6 +75,32 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
                 this.loadItems();
             }
         });
+    }
+    protected showFormCSKHUpdate() {
+        this.opened = true;
+        const windowRef = this.windowService2.open({
+            title: 'Cập nhật khách hàng',
+            content: ChamSocKhachHangComponent,
+            width: 1200,
+            top: 10,
+            autoFocusedElement: 'body',
+        });
+        const param = windowRef.content.instance;
+        param.action = this.action;
+        param.model = this.model;
+
+        windowRef.result.subscribe(result => {
+            if (result instanceof WindowCloseResult) {
+                this.opened = false;
+                this.loadItems();
+            }
+        });
+    }
+    editHandlerCSKH (dataItem) {
+        // tslint:disable-next-line: no-unsafe-any
+        this.model = dataItem;
+        this.action = ActionEnum.UPDATE;
+        this.showFormCSKHUpdate();
     }
 
     editHandler(dataItem) {
