@@ -1,11 +1,10 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { State } from '@progress/kendo-data-query';
-import { BaseKhachHangListComponent } from './base_khach_hang/base-khach-hang-list.component';
 import { FormKhachHangComponent } from './form-khach-hang/form-khach-hang.component';
 import { ActionEnum } from '../../../@core/constants/enum.constant';
-import { IKhachHang } from './model/khach-hang.model';
+import { IKhachHang } from '../model/khach-hang.model';
 import { UrlConstant } from '../../../@core/constants/url.constant';
-
+import {BaseKhachHangListComponent} from '../base/base-khach-hang-list.component'
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -67,5 +66,11 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
 
     removeHandler(item) {
 
+    }
+
+    
+    valuex:string="8";
+    test() {
+        console.log(this.valuex);
     }
 }

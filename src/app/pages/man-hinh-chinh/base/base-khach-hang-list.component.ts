@@ -5,15 +5,17 @@ import { PagerSettings } from "@progress/kendo-angular-grid";
 import { State } from "@progress/kendo-data-query";
 import { TooltipDirective } from "@swimlane/ngx-charts";
 import { Subject } from "rxjs";
-import { ReziseTable } from "../../../../@core/constants/app.constant";
-import { ActionEnum } from "../../../../@core/constants/enum.constant";
-import { ApiService } from "../../../../@core/services/api.service";
+import { ReziseTable } from "../../../@core/constants/app.constant";
+import { ActionEnum } from "../../../@core/constants/enum.constant";
+import { ApiService } from "../../../@core/services/api.service";
+import { DropDownListEnum } from "../../../shared/controls/cagt-select/cagt.data";
 
 @Directive()
 export abstract class BaseKhachHangListComponent<T> implements OnInit, OnDestroy {
     @ViewChild(TooltipDirective) public tooltipDir: TooltipDirective;
     isLoading = false;
     opened = false;
+    dropdownListEnum = DropDownListEnum;
     gridView$ = {
         data:[],
         total: 0

@@ -1,5 +1,25 @@
 <nb-card>
-    
+    <nb-card-body>
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-xxxl-3 row">
+                <div class="col-md-12 col-lg-12">
+                    Loại khách hàng
+                </div>
+                <div class="col-md-12 col-lg-12">
+                    <ngx-cagt-select-multiple 
+                        [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG"
+                        [(ngModel)]="valuex">
+                    </ngx-cagt-select-multiple>
+                    {{valuex}}
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12">
+                <button nbButton status="primary" size="small" (click)="test()">
+                    <i class="fa fa-search"></i> Tìm kiếm
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
 </nb-card>
 <nb-card>
     <nb-card-header>

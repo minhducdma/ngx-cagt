@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { BaseKhachHangFormComponent } from '../base_khach_hang/base-khach-hang-form.component';
-import { IKhachHang } from '../model/khach-hang.model';
-
+import { IKhachHang } from '../../model/khach-hang.model';
+import {BaseKhachHangFormComponent} from '../../base/base-khach-hang-form.component'
 @Component({
     selector: 'ngx-form-khach-hang',
     templateUrl: './form-khach-hang.component.html',
@@ -13,7 +12,7 @@ export class FormKhachHangComponent extends BaseKhachHangFormComponent<IKhachHan
     ) {
         super(injector);
     }
-
+    
     ngOnInit() {
         console.log(this.model);
     }

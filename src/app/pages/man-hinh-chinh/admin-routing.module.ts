@@ -4,7 +4,6 @@ import { KhachHangComponent } from './khach-hang/khach-hang.component';
 
 import { AdminComponent } from './admin.component';
 import { FormKhachHangComponent } from './khach-hang/form-khach-hang/form-khach-hang.component';
-import { BaseKhachHangListComponent } from './khach-hang/base_khach_hang/base-khach-hang-list.component';
 
 const routes: Routes = [{
   path: '',
