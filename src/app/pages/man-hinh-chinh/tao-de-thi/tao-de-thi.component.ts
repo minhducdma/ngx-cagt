@@ -3,7 +3,7 @@ import { ICauHoi, IDapAn } from '../model/tao-de-thi.model';
 import '../../../shared/controls/ckeditor-config/ckeditor.loader';
 import 'ckeditor';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import {config} from '../../../shared/controls/ckeditor-config/ckeditor.config'
+import { config } from '../../../shared/controls/ckeditor-config/ckeditor.config'
 @Component({
     selector: 'ngx-tao-de-thi',
     templateUrl: './tao-de-thi.component.html',
@@ -32,7 +32,8 @@ export class TaoDeThiComponent implements OnInit {
             tongSoDiem: null,
             tongThoiGian: null,
             metadata: null,
-            dapAns: []
+            dapAns: [],
+            items: null
         } as ICauHoi;
         this.dataCauHoi.push(cauhoi);
     }
@@ -41,14 +42,22 @@ export class TaoDeThiComponent implements OnInit {
     }
 
     removeCauHoi(item) {
-        const index = this.dataCauHoi.indexOf(item, 0);
-        if (index > -1) {
-            this.dataCauHoi.splice(index, 1);
-        }
+        var flatData = [];
+        debugger;
+        this.dataCauHoi = this.flattenArray(this.dataCauHoi, flatData);
+        this.dataCauHoi.forEach(i => {
+            if(i.id == item.id){
+                const index = this.dataCauHoi.indexOf(i, 0);
+                if (index > -1) {
+                    this.dataCauHoi.splice(index, 1);
+                }
+            }
+        });
+
     }
 
     saveListCauHoi() {
-        //console.log(this.flatTreeArray(this.dataCauHoi));
+        console.log(this.dataCauHoi);
     }
 
     showCauHoi(item) {
@@ -85,30 +94,21 @@ export class TaoDeThiComponent implements OnInit {
         }
     }
 
-    
-    // flatTreeArray(root) {
-    //     var stack = [], array = [], hashMap = {};
-    //     stack.push(root);
-    
-    //     while(stack.length !== 0) {
-    //         var node = stack.pop();
-    //         if(node.children === null) {
-    //             this.visitNode(node, hashMap, array);
-    //         } else {
-    //             for(var i = node.children.length - 1; i >= 0; i--) {
-    //                 stack.push(node.children[i]);
-    //             }
-    //         }
-    //     }
-    
-    //     return array;
-    // }
+    flattenArray(dataIn: any[], dataOut: any[]) {
+        dataIn.forEach(item => {
+            if (dataOut.filter(x => x.id == item.id).length == 0)
+                dataOut.push(item)
+            if (item.items !== null)
+                this.flattenArray(item.items, dataOut)
+        });
 
-    // visitNode(node, hashMap, array) {
-    //     if(!hashMap[node.data]) {
-    //         hashMap[node.data] = true;
-    //         array.push(node);
-    //     }
-    // }
+        dataOut = dataOut.map(i => {
+            return{
+                ...i,
+                items:null
+            }
+        })
+        return dataOut;
+    }
 }
 //test commit

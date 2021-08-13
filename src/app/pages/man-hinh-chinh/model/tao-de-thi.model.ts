@@ -10,7 +10,8 @@ export interface ICauHoi {
     tongSoDiem: number,
     tongThoiGian: number,
     metadata: string,
-    dapAns: IDapAn[]
+    dapAns: IDapAn[],
+    items: ICauHoi[]
 }
 
 export interface IDapAn{
