@@ -1,53 +1,104 @@
 <nb-card>
     <nb-card-header>
         Tạo đề thi
+        <button nbButton status="primary" size="small" (click)="saveListCauHoi()" style="height: 100%; float: right;">
+            <i class="fa fa-file mr-2"></i>Lưu đề thi
+        </button>
     </nb-card-header>
     <nb-card-body>
-        <div class="col-lg-4 col-4">
-            <nb-card>
-                <nb-card-header>
-                    <div style="text-align: right;">
-                        <button nbButton status="success" size="small" (click)="addCauHoi()" class="mr-2" style="height: 100%;">
-                            <i class="fa fa-plus mr-2"></i>Thêm
-                        </button>
-                        <button nbButton status="primary" size="small"  (click)="saveListCauHoi()" style="height: 100%;">
-                            <i class="fa fa-file mr-2"></i>Lưu
-                        </button>
-                    </div>
-                </nb-card-header>
-                <kendo-treeview
-                    [resizable]="true"
-                    kendoTreeViewDragAndDrop
-                    kendoTreeViewDragAndDropEditing
-                    kendoTreeViewHierarchyBinding
-                    [childrenField]="'items'"
-                    [nodes]="dataCauHoi"
-                    [textField]="'tenCauHoi'"
-                    kendoTreeViewExpandable
-                    [expandBy]="'id'"
-                    [expandedKeys]="expandedKeys"
-                    ng-click="selectCauHoi($event)"
-                    >
+        <div class="row">
+            <div class="col-lg-4 col-4">
+                <nb-card>
+                    <nb-card-header>
+                        <div style="text-align: left;">
+                            <button nbButton status="success" size="small" (click)="addCauHoi()" class="mr-2"
+                                style="height: 100%;">
+                                <i class="fa fa-plus mr-2"></i>Thêm câu hỏi
+                            </button>
+                        </div>
+                    </nb-card-header>
+                    <kendo-treeview [resizable]="true" kendoTreeViewDragAndDrop kendoTreeViewDragAndDropEditing
+                        kendoTreeViewHierarchyBinding [childrenField]="'items'" [nodes]="dataCauHoi"
+                        [textField]="'tenCauHoi'" kendoTreeViewExpandable [expandBy]="'id'"
+                        [expandedKeys]="expandedKeys" ng-click="selectCauHoi($event)">
                         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                             <div class="row" style="width: 100%;" (click)="showCauHoi(dataItem)">
                                 <div class="col-lg-8">
-                                    <input type="text" nbInput class="m-input form-control" [(ngModel)]="dataItem.tenCauHoi" />
+                                    <input type="text" nbInput class="m-input form-control"
+                                        [(ngModel)]="dataItem.tenCauHoi" />
                                 </div>
                                 <div class="col-lg-4">
-                                    <button nbButton status="danger" size="small" (click)="removeCauHoi(dataItem)" class="mr-1"  style="height: 100%;">
+                                    <button nbButton status="danger" size="small" (click)="removeCauHoi(dataItem)"
+                                        class="mr-1" style="height: 100%;">
                                         <i class="fa fa-trash"></i>
                                     </button>
-                                    <button nbButton status="success" size="small" (click)="addCauHoi()" class="mr-1" style="height: 100%;">
+                                    <button nbButton status="success" size="small" (click)="addCauHoi()" class="mr-1"
+                                        style="height: 100%;">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
                         </ng-template>
                     </kendo-treeview>
-            </nb-card>
-        </div>
-        <div class="col-lg-8 col-8">
-            {{testValue}}
+                </nb-card>
+            </div>
+            <div class="col-lg-8 col-8">
+                <div *ngIf="selectedCauHoi != null">
+                    <nb-card>
+                        <nb-card-header>
+                            Câu hỏi
+                        </nb-card-header>
+                        <nb-card-body>
+                            <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"
+                                [(ngModel)]="selectedCauHoi.noiDungCauHoi"></ckeditor>
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card>
+                        <nb-card-header>
+                            Câu trả lời
+                            <button nbButton status="success" size="small" (click)="addCauTraLoi(selectedCauHoi)"
+                                class="mr-1" style="float: right;height: 100%;">
+                                <i class="fa fa-plus mr-2"></i>Thêm câu trả lời
+                            </button>
+                        </nb-card-header>
+                        <nb-card-body *ngIf="selectedCauHoi.dapAns.length > 0" >
+                            <nb-card>
+                                <nb-card-body>
+                                    <div *ngFor="let dapAn of selectedCauHoi.dapAns;let i = index" class="mb-3">
+                                        <nb-card>
+                                            <nb-card-body>
+                                                <nb-checkbox [(ngModel)]="dapAn.isDapAnDung" status="info" class="mb-3" style="float: right;">Đáp án đúng</nb-checkbox>
+                                                <span class="mr-2" style="font-weight: bold; font-size: 20px;">{{i +
+                                                    1}}.</span><input type="text" nbInput class="m-input form-control"
+                                                    [(ngModel)]="dapAn.tenCauHoi" class="mb-3" />
+                                                <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"
+                                                    [(ngModel)]="dapAn.noiDungCauHoi"></ckeditor>
+                                                <div class="mt-3" style="text-align: right;">
+                                                    <button nbButton status="danger" size="small"
+                                                        (click)="removeCauTraLoi(dapAn)" class="mr-1"
+                                                        style="height: 100%;">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                    <button nbButton status="success" size="small"
+                                                        (click)="addCauTraLoi(selectedCauHoi)" class="mr-1"
+                                                        style="height: 100%;">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </nb-card-body>
+                                        </nb-card>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
         </div>
     </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="primary" size="small" (click)="saveListCauHoi()" style="height: 100%; float: right;">
+            <i class="fa fa-file mr-2"></i>Lưu đề thi
+        </button>
+    </nb-card-footer>
 </nb-card>
