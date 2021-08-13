@@ -41,23 +41,11 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     }
 
     protected showFormCreateOrUpdate() {
-        // this.windowService.open(
-        //     FormKhachHangComponent,
-        //     {
-        //         title:'Cập nhật khách hàng',
-        //         buttons: this.buttonsConfig,
-        //         context:{
-        //             action: this.action,
-        //             model: this.model
-        //         }
-        //     }
-        // ).onClose.subscribe(res=>{this.loadItems()});
-
         this.opened = true;
         const windowRef = this.windowService2.open({
             title: 'Cập nhật khách hàng',
             content: FormKhachHangComponent,
-            width: 1200,
+            width: 600,
             top: 100,
             autoFocusedElement: 'body',
         });

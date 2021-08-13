@@ -10,6 +10,7 @@ import { ControlsModule } from '../../shared/controls/controls.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormDirectiveModule } from '../../shared/directives/forms';
+import { TreeViewModule } from '@progress/kendo-angular-treeview';
 @NgModule({
   imports: [
     NbCardModule,
@@ -33,7 +34,8 @@ import { FormDirectiveModule } from '../../shared/directives/forms';
     FormsModule,
     ReactiveFormsModule,
     FormDirectiveModule,
-    NbDialogModule
+    NbDialogModule,
+    TreeViewModule,
   ],
   declarations: [
     ...routedComponents,

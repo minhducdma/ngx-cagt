@@ -1,10 +1,18 @@
 import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
+  //Link ICON: https://akveo.github.io/eva-icons/#/
+
   {
     title: 'Khách hàng',
-    icon: 'shopping-cart-outline',
+    icon: 'people-outline',
     link: '/pages/admin/khach-hang',
+    home: true,
+  },
+  {
+    title: 'Tạo đề thi',
+    icon: 'book-outline',
+    link: '/pages/admin/tao-de-thi',
     home: true,
   },
   // {

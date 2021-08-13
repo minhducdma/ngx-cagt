@@ -1,0 +1,53 @@
+<nb-card>
+    <nb-card-header>
+        Tạo đề thi
+    </nb-card-header>
+    <nb-card-body>
+        <div class="col-lg-4 col-4">
+            <nb-card>
+                <nb-card-header>
+                    <div style="text-align: right;">
+                        <button nbButton status="success" size="small" (click)="addCauHoi()" class="mr-2" style="height: 100%;">
+                            <i class="fa fa-plus mr-2"></i>Thêm
+                        </button>
+                        <button nbButton status="primary" size="small"  (click)="saveListCauHoi()" style="height: 100%;">
+                            <i class="fa fa-file mr-2"></i>Lưu
+                        </button>
+                    </div>
+                </nb-card-header>
+                <kendo-treeview
+                    [resizable]="true"
+                    kendoTreeViewDragAndDrop
+                    kendoTreeViewDragAndDropEditing
+                    kendoTreeViewHierarchyBinding
+                    [childrenField]="'items'"
+                    [nodes]="dataCauHoi"
+                    [textField]="'tenCauHoi'"
+                    kendoTreeViewExpandable
+                    [expandBy]="'id'"
+                    [expandedKeys]="expandedKeys"
+                    ng-click="selectCauHoi($event)"
+                    >
+                        <ng-template kendoTreeViewNodeTemplate let-dataItem>
+                            <div class="row" style="width: 100%;" (click)="showCauHoi(dataItem)">
+                                <div class="col-lg-8">
+                                    <input type="text" nbInput class="m-input form-control" [(ngModel)]="dataItem.tenCauHoi" />
+                                </div>
+                                <div class="col-lg-4">
+                                    <button nbButton status="danger" size="small" (click)="removeCauHoi(dataItem)" class="mr-1"  style="height: 100%;">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <button nbButton status="success" size="small" (click)="addCauHoi()" class="mr-1" style="height: 100%;">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </kendo-treeview>
+            </nb-card>
+        </div>
+        <div class="col-lg-8 col-8">
+            {{testValue}}
+        </div>
+    </nb-card-body>
+</nb-card>

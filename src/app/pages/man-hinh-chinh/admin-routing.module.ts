@@ -4,6 +4,7 @@ import { KhachHangComponent } from './khach-hang/khach-hang.component';
 
 import { AdminComponent } from './admin.component';
 import { FormKhachHangComponent } from './khach-hang/form-khach-hang/form-khach-hang.component';
+import { TaoDeThiComponent } from './tao-de-thi/tao-de-thi.component';
 
 const routes: Routes = [{
   path: '',
@@ -12,6 +13,10 @@ const routes: Routes = [{
     {
       path: 'khach-hang',
       component: KhachHangComponent,
+    },
+    {
+      path: 'tao-de-thi',
+      component: TaoDeThiComponent,
     },
   ],
 }];
@@ -26,4 +31,5 @@ export const routedComponents = [
   KhachHangComponent,
   AdminComponent,
   FormKhachHangComponent,
+  TaoDeThiComponent
 ];
