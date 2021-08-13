@@ -1,31 +1,59 @@
 import { OnInit, OnDestroy, Input, Directive, Injector } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { Subject } from "rxjs";
 import { NbWindowRef, NbWindowService } from '@nebular/theme';
 import { ActionEnum } from "../../../@core/constants/enum.constant";
+import { WindowRef } from "@progress/kendo-angular-dialog";
+import { DropDownListEnum } from "../../../shared/controls/cagt-select/cagt.data";
+import { ApiService } from "../../../@core/services/api.service";
 
+export interface IGenerice {
+    id?: number;
+    idNhanSu?: number;
+    idFileDinhKem?: number;
+    tenFile?: string;
+    type?: number;
+    size?: number;
+    path?: string;
+    forWeb?: boolean;
+    checkSum?: string;
+    guidId?: string;
+    idsFileDinhKem?: any[];
+
+}
 @Directive()
-export abstract class BaseKhachHangFormComponent<T> implements OnInit, OnDestroy {
+export abstract class BaseKhachHangFormComponent<T extends IGenerice> implements OnInit, OnDestroy {
     @Input() action: ActionEnum;
     @Input() model: T;
 
     form: FormGroup;
 
-    //dropdownListEnum = DropDownListEnum;
+    dropdownListEnum = DropDownListEnum;
 
     //fileInput: IFileAttach[] = [];
 
     protected destroyed$ = new Subject();
 
-    protected windowRef: NbWindowRef;
+    //protected windowRef: NbWindowRef;
+    protected windowRef: WindowRef;
+    protected formBuilder: FormBuilder;
+    protected apiService: ApiService;
+
+
     constructor(
         injector : Injector
     ) {
-        this.windowRef = injector.get(NbWindowRef)
+        this.windowRef = injector.get(WindowRef)
+        this.formBuilder = injector.get(FormBuilder)
+        this.apiService = injector.get(ApiService)
     }
 
     ngOnInit(): void {
         this.createForm();
+        if (!this.action) {
+            this.action = this.model && this.model.id ? ActionEnum.UPDATE : ActionEnum.CREATE;
+        }
+
     }
 
     ngOnDestroy(): void {
@@ -37,7 +65,11 @@ export abstract class BaseKhachHangFormComponent<T> implements OnInit, OnDestroy
         this.windowRef.close();
     }
 
-    protected abstract onSubmit();
+    setFormValue(data) {
+        this.form.patchValue(data);
+    }
+    
+    abstract onSubmit();
 
-    protected abstract createForm();
+    abstract createForm();
 }

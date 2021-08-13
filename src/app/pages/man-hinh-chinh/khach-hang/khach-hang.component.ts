@@ -5,6 +5,7 @@ import { ActionEnum } from '../../../@core/constants/enum.constant';
 import { IKhachHang } from '../model/khach-hang.model';
 import { UrlConstant } from '../../../@core/constants/url.constant';
 import {BaseKhachHangListComponent} from '../base/base-khach-hang-list.component'
+import { WindowCloseResult, WindowService } from '@progress/kendo-angular-dialog';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -13,7 +14,9 @@ import {BaseKhachHangListComponent} from '../base/base-khach-hang-list.component
 export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> implements OnInit {
     url: string = UrlConstant.ROUTE.KHACH_HANG;
     constructor(
-        injector: Injector
+        injector: Injector,
+        protected windowService2: WindowService,
+
     ) {
         super(injector)
     }
@@ -38,17 +41,36 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     }
 
     protected showFormCreateOrUpdate() {
-        this.windowService.open(
-            FormKhachHangComponent,
-            {
-                title:'Cập nhật khách hàng',
-                buttons: this.buttonsConfig,
-                context:{
-                    action: this.action,
-                    model: this.model
-                }
+        // this.windowService.open(
+        //     FormKhachHangComponent,
+        //     {
+        //         title:'Cập nhật khách hàng',
+        //         buttons: this.buttonsConfig,
+        //         context:{
+        //             action: this.action,
+        //             model: this.model
+        //         }
+        //     }
+        // ).onClose.subscribe(res=>{this.loadItems()});
+
+        this.opened = true;
+        const windowRef = this.windowService2.open({
+            title: 'Cập nhật khách hàng',
+            content: FormKhachHangComponent,
+            width: 1200,
+            top: 100,
+            autoFocusedElement: 'body',
+        });
+        const param = windowRef.content.instance;
+        param.action = this.action;
+        param.model = this.model;
+
+        windowRef.result.subscribe(result => {
+            if (result instanceof WindowCloseResult) {
+                this.opened = false;
+                this.loadItems();
             }
-        ).onClose.subscribe(res=>{this.loadItems()});
+        });
     }
 
     editHandler(dataItem) {
@@ -72,5 +94,9 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     valuex:string="8";
     test() {
         console.log(this.valuex);
+    }
+    
+    testchange(){
+        debugger
     }
 }

@@ -1,4 +1,4 @@
-<nb-card>
+<!-- <nb-card>
     <nb-card-body>
         <div class="row">
             <div class="col-md-6 col-lg-6 col-xxxl-3 row">
@@ -8,7 +8,8 @@
                 <div class="col-md-12 col-lg-12">
                     <ngx-cagt-select-multiple 
                         [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG"
-                        [(ngModel)]="valuex">
+                        [(ngModel)]="valuex"
+                        onchange="testchange()">
                     </ngx-cagt-select-multiple>
                     {{valuex}}
                 </div>
@@ -20,11 +21,16 @@
             </div>
         </div>
     </nb-card-body>
-</nb-card>
+</nb-card> -->
 <nb-card>
     <nb-card-header>
         Khách hàng
     </nb-card-header>
+    <nb-card-body>
+        <button nbButton status="success" (click)="addHandler()">
+            Thêm mới
+        </button>
+    </nb-card-body>
     <nb-card-body>
         <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
         </ng2-smart-table> -->
@@ -136,3 +142,8 @@
         </kendo-grid>
     </nb-card-body>
 </nb-card>
+
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
+    <div kendoWindowContainer></div>
+</div>

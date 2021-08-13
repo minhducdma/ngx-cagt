@@ -1,5 +1,5 @@
 import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormBuilder, FormControl } from "@angular/forms";
 import { NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
 import { PagerSettings } from "@progress/kendo-angular-grid";
 import { State } from "@progress/kendo-data-query";
@@ -54,11 +54,13 @@ export abstract class BaseKhachHangListComponent<T> implements OnInit, OnDestroy
 
     protected windowService: NbWindowService;
     protected apiService: ApiService;
+    protected formBuilder: FormBuilder;
     constructor(
         injector : Injector
     ) {
         this.windowService = injector.get(NbWindowService)
         this.apiService = injector.get(ApiService)
+        this.formBuilder = injector.get(FormBuilder)
     }
 
     ngOnInit(): void {
