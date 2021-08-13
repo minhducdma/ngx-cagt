@@ -47,9 +47,10 @@
                     <nb-card>
                         <nb-card-header>
                             Câu hỏi
+                            <input type="text" nbInput class="m-input form-control" [(ngModel)]="selectedCauHoi.tenCauHoi" class="mb-3" />
                         </nb-card-header>
                         <nb-card-body>
-                            <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"
+                            <ckeditor [config]="ckConfig"
                                 [(ngModel)]="selectedCauHoi.noiDungCauHoi"></ckeditor>
                         </nb-card-body>
                     </nb-card>
