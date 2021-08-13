@@ -6,6 +6,7 @@ import { IKhachHang } from '../model/khach-hang.model';
 import { UrlConstant } from '../../../@core/constants/url.constant';
 import {BaseKhachHangListComponent} from '../base/base-khach-hang-list.component'
 import { WindowCloseResult, WindowService } from '@progress/kendo-angular-dialog';
+import { FormImportKhachHangComponent } from './form-import-khach-hang/form-import-khach-hang.component';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -82,7 +83,7 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     }
 
     removeSelectedHandler() {
-        if (this.selectionIds.length > 0) {
+        if (this.selectionIds.length > 0) { 
             const body = {
                 ids: [...new Set(this.selectionIds)],
             };
@@ -93,6 +94,26 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
             });
         }
     }
-}
 
-//Quan test commit khach hang
+    importHandler() { 
+        this.opened = true;
+        const windowRef = this.windowService2.open({
+            title: 'Import dữ liệu khách hàng',
+            content: FormImportKhachHangComponent,
+            width: 800,
+            top: 100,
+            autoFocusedElement: 'body',
+        }); 
+        windowRef.result.subscribe(result => {
+            if (result instanceof WindowCloseResult) {
+                this.opened = false;
+                this.loadItems();
+            }
+        });
+    }
+
+    exportHandler() {
+        alert("Chức năng đang được cập nhật !"); 
+    }
+}
+ 
