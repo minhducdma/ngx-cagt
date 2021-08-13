@@ -86,17 +86,23 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
         this.showFormCreateOrUpdate();
     }
 
-    removeHandler(item) {
 
+    removeHandler(dataItem) {
+        this.selectionIds = [];
+        this.selectionIds.push(dataItem.id);
+        this.removeSelectedHandler();
     }
 
-    
-    valuex:string="8";
-    test() {
-        console.log(this.valuex);
-    }
-    
-    testchange(){
-        debugger
+    removeSelectedHandler() {
+        if (this.selectionIds.length > 0) {
+            const body = {
+                ids: [...new Set(this.selectionIds)],
+            };
+            this.apiService.post(this.url + '/many-khach-hangs', body).subscribe(res => {
+                this.selectionIds = [];
+                alert('Xóa thành công');
+                this.loadItems();
+            });
+        }
     }
 }
