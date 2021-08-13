@@ -6,6 +6,7 @@ import { IKhachHang } from '../model/khach-hang.model';
 import { UrlConstant } from '../../../@core/constants/url.constant';
 import {BaseKhachHangListComponent} from '../base/base-khach-hang-list.component'
 import { WindowCloseResult, WindowService } from '@progress/kendo-angular-dialog';
+import { FormImportKhachHangComponent } from './form-import-khach-hang/form-import-khach-hang.component';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -13,6 +14,17 @@ import { WindowCloseResult, WindowService } from '@progress/kendo-angular-dialog
 })
 export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> implements OnInit {
     url: string = UrlConstant.ROUTE.KHACH_HANG;
+    modelSearch = {
+        keyword: '', 
+        doanhThuTu: null,
+        doanhThuDen: null,
+        nguonKhachHang: '',
+        thoiGianTu: null,
+        thoiGianDen: null,
+        loaiKhachHang: '',
+        danhSachNhanVien: ''
+    }
+
     constructor(
         injector: Injector,
         protected windowService2: WindowService,
@@ -31,7 +43,10 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     }
 
     loadItems() {
-        this.apiService.get(this.url, {})
+        this.apiService.get(this.url, {
+            // ...this.modelSearch,
+            // ...this.queryOptions
+        })
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
@@ -43,7 +58,7 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     protected showFormCreateOrUpdate() {
         this.opened = true;
         const windowRef = this.windowService2.open({
-            title: 'Cập nhật khách hàng',
+            title:  this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
             content: FormKhachHangComponent,
             width: 600,
             top: 100,
@@ -82,7 +97,7 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     }
 
     removeSelectedHandler() {
-        if (this.selectionIds.length > 0) {
+        if (this.selectionIds.length > 0) { 
             const body = {
                 ids: [...new Set(this.selectionIds)],
             };
@@ -93,4 +108,39 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
             });
         }
     }
+
+    resetHandler() {
+        this.modelSearch = {
+            keyword: '', 
+            doanhThuTu: null,
+            doanhThuDen: null,
+            nguonKhachHang: '',
+            thoiGianTu: null,
+            thoiGianDen: null,
+            loaiKhachHang: '',
+            danhSachNhanVien: ''
+        };
+    }
+
+    importHandler() { 
+        this.opened = true;
+        const windowRef = this.windowService2.open({
+            title: 'Import dữ liệu khách hàng',
+            content: FormImportKhachHangComponent,
+            width: 800,
+            top: 100,
+            autoFocusedElement: 'body',
+        }); 
+        windowRef.result.subscribe(result => {
+            if (result instanceof WindowCloseResult) {
+                this.opened = false;
+                this.loadItems();
+            }
+        });
+    }
+
+    exportHandler() {
+        alert("Chức năng đang được cập nhật !"); 
+    }
 }
+ 
