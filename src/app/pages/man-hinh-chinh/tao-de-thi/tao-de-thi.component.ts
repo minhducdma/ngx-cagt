@@ -3,6 +3,7 @@ import { ICauHoi, IDapAn } from '../model/tao-de-thi.model';
 import '../../../shared/controls/ckeditor-config/ckeditor.loader';
 import 'ckeditor';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {config} from '../../../shared/controls/ckeditor-config/ckeditor.config'
 @Component({
     selector: 'ngx-tao-de-thi',
     templateUrl: './tao-de-thi.component.html',
@@ -13,7 +14,7 @@ export class TaoDeThiComponent implements OnInit {
     public dataCauHoi: ICauHoi[] = [];
     selectedCauHoi: ICauHoi;
     tenCauHoi: string = "";
-
+    ckConfig = config.basicOption;
     constructor() { }
 
     ngOnInit() {
