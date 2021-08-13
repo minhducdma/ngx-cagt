@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormDirectiveModule } from '../../shared/directives/forms';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   imports: [
     NbCardModule,
@@ -38,7 +40,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     NbDialogModule,
     TreeViewModule,
     CKEditorModule,
-    NbCheckboxModule
+    NbCheckboxModule,
+    DragDropModule,
   ],
   declarations: [
     ...routedComponents,
