@@ -7,6 +7,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/admin/khach-hang',
     home: true,
   },
+  {
+    title: 'Traning',
+    icon: 'grid-outline',
+    children: [
+      {
+        title: 'Exam',
+        link: '/pages/training/exam',
+      },
+    ],
+  },
   // {
   //   title: 'E-commerce',
   //   icon: 'shopping-cart-outline',
@@ -49,28 +59,28 @@ export const MENU_ITEMS: NbMenuItem[] = [
   //     },
   //   ],
   // },
-  // {
-  //   title: 'Forms',
-  //   icon: 'edit-2-outline',
-  //   children: [
-  //     {
-  //       title: 'Form Inputs',
-  //       link: '/pages/forms/inputs',
-  //     },
-  //     {
-  //       title: 'Form Layouts',
-  //       link: '/pages/forms/layouts',
-  //     },
-  //     {
-  //       title: 'Buttons',
-  //       link: '/pages/forms/buttons',
-  //     },
-  //     {
-  //       title: 'Datepicker',
-  //       link: '/pages/forms/datepicker',
-  //     },
-  //   ],
-  // },
+  {
+    title: 'Forms',
+    icon: 'edit-2-outline',
+    children: [
+      {
+        title: 'Form Inputs',
+        link: '/pages/forms/inputs',
+      },
+      {
+        title: 'Form Layouts',
+        link: '/pages/forms/layouts',
+      },
+      {
+        title: 'Buttons',
+        link: '/pages/forms/buttons',
+      },
+      {
+        title: 'Datepicker',
+        link: '/pages/forms/datepicker',
+      },
+    ],
+  },
   // {
   //   title: 'UI Features',
   //   icon: 'keypad-outline',

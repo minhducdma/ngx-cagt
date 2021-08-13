@@ -39,7 +39,6 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    NbWindowModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })

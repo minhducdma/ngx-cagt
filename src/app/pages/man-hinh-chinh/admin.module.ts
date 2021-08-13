@@ -1,15 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTreeGridModule } from '@nebular/theme';
+import { NgModule } from '@angular/core';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTreeGridModule, NbUserModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AdminsRoutingModule, routedComponents } from './admin-routing.module';
-import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
-import { ControlsModule } from '../../shared/controls/controls.module';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormDirectiveModule } from '../../shared/directives/forms';
 @NgModule({
   imports: [
     NbCardModule,
@@ -22,22 +18,24 @@ import { FormDirectiveModule } from '../../shared/directives/forms';
     GridModule,
     DialogsModule,
     TooltipModule,
-    WindowModule,
+
+
+
+
+    ThemeModule,
+    NbInputModule,
+    NbCardModule,
     NbButtonModule,
-    ControlsModule,
-    CommonModule,
+    NbActionsModule,
+    NbUserModule,
     NbCheckboxModule,
-    NbDatepickerModule,
     NbRadioModule,
+    NbDatepickerModule,
     NbSelectModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormDirectiveModule,
-    NbDialogModule
+    
   ],
   declarations: [
     ...routedComponents,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AdminModule { }
