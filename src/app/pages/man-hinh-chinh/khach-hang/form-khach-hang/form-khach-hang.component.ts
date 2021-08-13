@@ -16,9 +16,8 @@ export class FormKhachHangComponent extends BaseKhachHangFormComponent<IKhachHan
         injector: Injector,
     ) {
         super(injector);
-    }
-    
-    ngOnInit() {
+    } 
+    ngOnInit() { 
         super.ngOnInit();
         switch(this.action){
             case ActionEnum.CREATE:
@@ -61,17 +60,21 @@ export class FormKhachHangComponent extends BaseKhachHangFormComponent<IKhachHan
                 break;
         }
     }
-    createForm() {
-        debugger
+    createForm() { 
         this.form = this.formBuilder.group({
             id: [0, Validators.required],
             hoTen: [null, Validators.required],
             ngaySinh: [null],
             gioiTinh: [null],
+            cmnd: [null], 
             diaChi: [null],
-            soDienThoai: [null],
-            email: [null],
-            loaiKhachHang: [null],
+            soDienThoai: [null, Validators.required],
+            email: [null, Validators.required],
+            loaiKhachHang: [null, Validators.required],
+            nguonKhachHang: [null],
+            nhanVienPhuTrach:  [null],
+            ghiChu: [null],
+            trangThaiKhachHang:  [null],
         });
     }
 }

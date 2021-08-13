@@ -60,7 +60,7 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
         const windowRef = this.windowService2.open({
             title:  this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
             content: FormKhachHangComponent,
-            width: 600,
+            width: 900,
             top: 100,
             autoFocusedElement: 'body',
         });
