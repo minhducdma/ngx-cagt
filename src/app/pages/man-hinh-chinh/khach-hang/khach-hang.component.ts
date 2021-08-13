@@ -94,3 +94,5 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
         }
     }
 }
+
+//Quan test commit khach hang
