@@ -6,6 +6,8 @@ import { AdminComponent } from './admin.component';
 import { FormKhachHangComponent } from './khach-hang/form-khach-hang/form-khach-hang.component';
 import { TaoDeThiComponent } from './tao-de-thi/tao-de-thi.component';
 import { FormImportKhachHangComponent } from './khach-hang/form-import-khach-hang/form-import-khach-hang.component';
+import { ChamSocKhachHangComponent } from './khach-hang/cham-soc-khach-hang/cham-soc-khach-hang.component';
+import { FormChamSocKhachHangComponent } from './khach-hang/cham-soc-khach-hang/form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
 
 const routes: Routes = [{
   path: '',
@@ -33,5 +35,8 @@ export const routedComponents = [
   AdminComponent,
   FormKhachHangComponent,
   TaoDeThiComponent,
-  FormImportKhachHangComponent
+  FormImportKhachHangComponent,
+  ChamSocKhachHangComponent,
+  FormChamSocKhachHangComponent
+
 ];
