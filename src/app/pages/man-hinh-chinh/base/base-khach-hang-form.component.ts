@@ -1,8 +1,8 @@
 import { OnInit, OnDestroy, Input, Directive, Injector } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Subject } from "rxjs";
-import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { NbWindowRef, NbWindowService } from '@nebular/theme';
+import { ActionEnum } from "../../../@core/constants/enum.constant";
 
 @Directive()
 export abstract class BaseKhachHangFormComponent<T> implements OnInit, OnDestroy {
