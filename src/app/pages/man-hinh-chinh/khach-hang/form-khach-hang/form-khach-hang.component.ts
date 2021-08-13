@@ -25,9 +25,12 @@ export class FormKhachHangComponent extends BaseKhachHangFormComponent<IKhachHan
                 break;
             case ActionEnum.UPDATE:
                 this.setFormValue(this.model);
+
+                this.form.get('ngaySinh').setValue(this.formatDate(this.form.get('ngaySinh').value));
+
                 break;
         }
-    }
+    } 
 
     onSubmit() {
         if (this.form.invalid) {

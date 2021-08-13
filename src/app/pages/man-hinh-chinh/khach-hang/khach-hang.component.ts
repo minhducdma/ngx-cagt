@@ -14,6 +14,17 @@ import { FormImportKhachHangComponent } from './form-import-khach-hang/form-impo
 })
 export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> implements OnInit {
     url: string = UrlConstant.ROUTE.KHACH_HANG;
+    modelSearch = {
+        keyword: '', 
+        doanhThuTu: null,
+        doanhThuDen: null,
+        nguonKhachHang: '',
+        thoiGianTu: null,
+        thoiGianDen: null,
+        loaiKhachHang: '',
+        danhSachNhanVien: ''
+    }
+
     constructor(
         injector: Injector,
         protected windowService2: WindowService,
@@ -32,7 +43,10 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     }
 
     loadItems() {
-        this.apiService.get(this.url, {})
+        this.apiService.get(this.url, {
+            // ...this.modelSearch,
+            // ...this.queryOptions
+        })
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
@@ -44,7 +58,7 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
     protected showFormCreateOrUpdate() {
         this.opened = true;
         const windowRef = this.windowService2.open({
-            title: 'Cập nhật khách hàng',
+            title:  this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
             content: FormKhachHangComponent,
             width: 600,
             top: 100,
@@ -93,6 +107,19 @@ export class KhachHangComponent extends BaseKhachHangListComponent<IKhachHang> i
                 this.loadItems();
             });
         }
+    }
+
+    resetHandler() {
+        this.modelSearch = {
+            keyword: '', 
+            doanhThuTu: null,
+            doanhThuDen: null,
+            nguonKhachHang: '',
+            thoiGianTu: null,
+            thoiGianDen: null,
+            loaiKhachHang: '',
+            danhSachNhanVien: ''
+        };
     }
 
     importHandler() { 
