@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-admins',
+  selector: 'ngx-training',
   template: `<router-outlet></router-outlet>`,
 })
-export class AdminComponent {
+export class TrainingComponent {
 }

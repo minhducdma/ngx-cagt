@@ -4,6 +4,7 @@ import { KhachHangComponent } from './khach-hang/khach-hang.component';
 
 import { AdminComponent } from './admin.component';
 import { FormKhachHangComponent } from './khach-hang/form-khach-hang/form-khach-hang.component';
+import { FormChamSocKhachHangComponent } from './khach-hang/form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
 
 const routes: Routes = [{
   path: '',
@@ -26,4 +27,6 @@ export const routedComponents = [
   KhachHangComponent,
   AdminComponent,
   FormKhachHangComponent,
+  FormChamSocKhachHangComponent,
+  
 ];

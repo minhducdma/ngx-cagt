@@ -1,0 +1,199 @@
+<!-- <kendo-treeview [nodes]="data" [textField]="'text'" kendoTreeViewHierarchyBinding [childrenField]="'items'" kendoTreeViewExpandable [expandBy]="'id'" [expandedKeys]="[1]" kendoTreeViewDragAndDrop kendoTreeViewDragAndDropEditing (nodeDragStart)="log('nodeDragStart', $event)"
+    (nodeDrag)="log('nodeDrag', $event)" (nodeDrop)="handleDrop($event)" (addItem)="log('addItem', $event)" (removeItem)="log('removeItem', $event)" (nodeDragEnd)="log('nodeDragEnd', $event)">
+    <ng-template kendoTreeViewNodeTemplate let-dataItem>
+        <span [ngClass]="iconClass(dataItem)"></span> {{ dataItem.text }}
+    </ng-template>
+    <ng-template kendoTreeViewDragClueTemplate let-action="action" let-destinationItem="destinationItem" let-text="text">
+        <span class="k-drag-status k-icon" [ngClass]="getDragStatus(action, destinationItem)"></span>
+        <span>{{ text }}</span>
+    </ng-template>
+</kendo-treeview> -->
+
+<section>
+    <div class="slide_question mt-4">
+
+        <div class="container">
+            <div class="slide_boder p-2">
+
+                <div class="row">
+                    <div class="col-md-3 col-xs-12">
+                        <div class="box_title_question" id="box_title_question">
+                            <ul>
+                                <li class="btn active"><a href="#">Cau 1: cau hoi bt</a></li>
+                                <li class="btn"><a href="#">Cau 1: cau hoi bt</a></li>
+                                <li class="btn"><a href="#">Cau 1: cau hoi bt</a></li>
+                                <li class="btn"><a href="#">Cau 1: cau hoi bt</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-xs-12">
+                        <div class="slide">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="item p-4">
+                                            <div class="title pb-1">
+                                                <h3>Cau hoi: Cau hoi kiem tra</h3>
+                                            </div>
+                                            <p class="content">
+                                                Your result page will appear in this frame.Your result page will appear in this frame.Your result page will appear in this frame.Your result page will appear in this frame.
+                                            </p>
+                                            <textarea id="w3review" name="w3review" rows="4" cols="100">
+                                      At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+
+                                          </textarea>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="mt-4">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <div class="title_main">
+                    <h2>Cau truc de bai</h2>
+                </div>
+
+                <div class="structure">
+                    <button class="create_bnt" onclick="document.getElementById('create_question').style.display='block'">Tao
+              cau
+              hoi</button>
+
+                    <div class="list_question">
+                        <ul>
+                            <li>
+                                <span>Cau hoi: bai tap</span>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_question">sua</button>
+                            </li>
+                            <li>
+                                <span>Cau hoi: bai tap</span>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_question">sua</button>
+                            </li>
+                        </ul>
+
+                        <div class="modal fade" id="edit_question" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="create_question" class="modal_add">
+                        <span onclick="document.getElementById('create_question').style.display='none'" class="close">×</span>
+                        <form class="modal-content" action="/action_page.php">
+                            <div class="container_text">
+                                .........
+
+
+                                <div class="clearfix">
+                                    <button type="button" onclick="document.getElementById('create_question').style.display='none'" class="savebtn">Luu</button>
+                                    <button type="button" onclick="document.getElementById('create_question').style.display='none'" class="cancelbtn">Thoat</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12">
+                <div class="from_question">
+                    <div class="build_question">
+                        <div class="title_main">
+                            <h2>Xay dung cau hoi</h2>
+                        </div>
+                        <div class="box_build_question">
+                            <span>
+                      <input class="basic-slide" id="name" type="text" placeholder="Your best name" />
+                      <label for="name">So diem</label>
+                  </span>
+                            <span>
+                      <input class="basic-slide" id="name" type="text" placeholder="Your best name" />
+                      <label for="name">So phuts</label>
+                  </span>
+                            <span>
+                      <ul class="unstyled centered">
+                          <li>
+                              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1" />
+                              <label for="styled-checkbox-1">Checkbox</label>
+                          </li>
+                          <li>
+                              <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox" value="value2"
+                                  checked />
+                              <label for="styled-checkbox-2">CSS Only</label>
+                          </li>
+                          <li>
+                              <input class="styled-checkbox" id="styled-checkbox-3" type="checkbox" value="value3"
+                                  checked />
+                              <label for="styled-checkbox-3">CSS Only</label>
+                          </li>
+                      </ul>
+                  </span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <div class="title_main">
+                            <h2>Phan cau hoi</h2>
+                        </div>
+                        <div class="box_question">
+                            <textarea id="w3review" name="w3review" rows="4" cols="100">
+                              At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+                              </textarea>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <div class="title_main">
+                            <h2>Phan dap an</h2>
+                        </div>
+                        <div class="box_answer">
+                            <div id="list">
+                                <div class="box_list">
+                                    <textarea id="w3review" name="w3review" rows="4" cols="100">
+                                              At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+                                      </textarea>
+                                    <input class="styled-answer" id="styled-answer-1" type="checkbox" value="value1" />
+                                    <label for="styled-answer-1">Dap an dung</label>
+                                </div>
+                            </div>
+                            <button id="add">Add an element to the list</button>
+                        </div>
+                    </div>
+                    <div class=" border-bottom"></div>
+                    <button class="save_bnt">luu</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

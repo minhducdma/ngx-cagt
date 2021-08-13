@@ -1,0 +1,411 @@
+.slide_boder {
+    border: 1px solid #35beb3;
+}
+
+.slide_question {
+    .box_title_question {
+        ul {
+            list-style-type: none;
+            padding: 0;
+            li {
+                width: 100%;
+                display: flex;
+                &:hover {
+                    background-color: #35beb3;
+                    color: white;
+                }
+            }
+            li.active {
+                background-color: #35beb3;
+                color: white;
+            }
+        }
+    }
+    .slide {
+        .item {
+            background: #fff;
+            textarea {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.carousel-control-next {
+    width: 15px !important;
+    background: #35beb3;
+    height: 30px;
+    top: 45%;
+}
+
+.carousel-control-prev {
+    width: 15px !important;
+    background: #35beb3;
+    height: 30px;
+    top: 45%;
+}
+
+.title_main {
+    h2 {
+        text-align: center;
+    }
+}
+
+.structure {
+    position: relative;
+    form {
+        .cancelbtn {
+            background-color: #35beb3;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            float: left;
+            width: 50%;
+            background-color: #f44336;
+        }
+        .savebtn {
+            background-color: #35beb3;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            float: left;
+            width: 50%;
+        }
+    }
+    .create_bnt {
+        background-color: #35beb3;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.list_question {
+    border-top: 1px solid;
+    padding-top: 10px;
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+            padding-bottom: 10px;
+            span {
+                width: 80%;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.container_text {
+    padding: 16px;
+    text-align: center;
+}
+
+.modal_add {
+    width: 100%;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 62px;
+    height: 252px;
+    overflow: auto;
+    background-color: #35beb3;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 3px;
+    border: 1px solid #35beb3;
+    width: 100%;
+    height: 100%;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f44336;
+    z-index: 11;
+    &:hover {
+        color: #f44336;
+        cursor: pointer;
+    }
+    &:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+}
+
+.clearfix {
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+.box_build_question {
+    display: flex;
+    border-top: 1px solid #dee2e6;
+    span {
+        position: relative;
+        display: inline-block;
+        margin: 30px 10px;
+    }
+}
+
+.basic-slide {
+    display: inline-block;
+    width: 215px;
+    padding: 10px 0 10px 15px;
+    font-family: "Open Sans", sans;
+    font-weight: 400;
+    color: #35beb3;
+    background: #efefef;
+    border: 0;
+    border-radius: 3px;
+    outline: 0;
+    text-indent: 70px;
+    transition: all .3s ease-in-out;
+    &::-webkit-input-placeholder {
+        color: #efefef;
+        text-indent: 0;
+        font-weight: 300;
+    }
+    &:focus {
+        color: #35beb3;
+        text-indent: 0;
+        background: #fff;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        &::-webkit-input-placeholder {
+            color: #aaa;
+        }
+    }
+    &:active {
+        color: #35beb3;
+        text-indent: 0;
+        background: #fff;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        &::-webkit-input-placeholder {
+            color: #aaa;
+        }
+    }
+    &:focus+label {
+        transform: translateX(-100%);
+    }
+    &:active+label {
+        transform: translateX(-100%);
+    }
+}
+
+.basic-slide+label {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    padding: 10px 15px;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
+    background: #35beb3;
+    transition: all .3s ease-in-out;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.styled-checkbox {
+    position: absolute;
+    opacity: 0;
+    &:hover+label {
+        &:before {
+            background: #f35429;
+        }
+    }
+    &:focus+label {
+        &:before {
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+        }
+    }
+    &:checked+label {
+        &:before {
+            background: #f35429;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 9px;
+            background: white;
+            width: 2px;
+            height: 2px;
+            box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+            transform: rotate(45deg);
+        }
+    }
+    &:disabled+label {
+        color: #b8b8b8;
+        cursor: auto;
+        &:before {
+            box-shadow: none;
+            background: #ddd;
+        }
+    }
+}
+
+.styled-checkbox+label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    display: initial;
+    &:before {
+        content: "";
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        width: 20px;
+        height: 20px;
+        background: white;
+    }
+}
+
+.unstyled {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.box_question {
+    border-top: 1px solid #dee2e6;
+    padding-top: 10px;
+    textarea {
+        width: 100%;
+    }
+}
+
+.box_answer {
+    border-top: 1px solid #dee2e6;
+}
+
+.answer {
+    textarea {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+.styled-answer {
+    &:checked+label {
+        &:before {
+            background: #f35429;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 9px;
+            background: white;
+            width: 2px;
+            height: 2px;
+            box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+            transform: rotate( 45deg);
+        }
+    }
+    position: absolute;
+    opacity: 0;
+}
+
+.styled-answer+label {
+    &:before {
+        content: "";
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        width: 20px;
+        height: 20px;
+        background: white;
+    }
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    display: initial;
+}
+
+ul {
+    li {
+        decoration: none;
+        display: block;
+        margin-top: 1em;
+        text-align: center;
+        font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+        font-size: 18px;
+    }
+}
+
+#add {
+    background-color: #35beb3;
+    color: white;
+    border: none;
+    width: 280px;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 15px;
+    outline: none;
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    &:hover {
+        background-color: #35beb3;
+        color: white;
+        border: none;
+        outline: none;
+    }
+    &:active {
+        position: relative;
+        bottom: 2px;
+    }
+}
+
+.delete_answer {
+    color: #fff;
+    background-color: #35beb3;
+    border-color: #35beb3;
+    border-radius: .25rem;
+    border: none;
+    padding: 10px;
+    margin: auto;
+    display: block;
+    float: right;
+}
+
+button.save_bnt {
+    background-color: #35beb3;
+    color: white;
+    padding: 14px 20px;
+    margin: auto;
+    display: block;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    opacity: 0.9;
+    margin-top: 15px;
+}

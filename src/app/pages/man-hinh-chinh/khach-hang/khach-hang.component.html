@@ -1,54 +1,23 @@
-<!-- <nb-card>
-    <nb-card-body>
-        <div class="row">
-            <div class="col-md-6 col-lg-6 col-xxxl-3 row">
-                <div class="col-md-12 col-lg-12">
-                    Loại khách hàng
-                </div>
-                <div class="col-md-12 col-lg-12">
-                    <ngx-cagt-select-multiple 
-                        [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG"
-                        [(ngModel)]="valuex"
-                        onchange="testchange()">
-                    </ngx-cagt-select-multiple>
-                    {{valuex}}
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-12">
-                <button nbButton status="primary" size="small" (click)="test()">
-                    <i class="fa fa-search"></i> Tìm kiếm
-                </button>
-            </div>
-        </div>
-    </nb-card-body>
-</nb-card> -->
 <nb-card>
     <nb-card-header>
         Khách hàng
     </nb-card-header>
     <nb-card-body>
-        <button nbButton status="success" (click)="addHandler()">
-            Thêm mới
-        </button>
-    </nb-card-body>
-    <nb-card-body>
         <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
         </ng2-smart-table> -->
-        <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip"
-            [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true"
-            [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
-            <kendo-grid-column class="text-center" [width]="70">
+        <kendo-grid [data]="gridData" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column [showSelectAll]="true" [width]="60" [columnMenu]="false">
+            </kendo-grid-checkbox-column>
+            <kendo-grid-column title="'Thao tác" class="text-center" [width]="100" [columnMenu]="false">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <button nbButton status="primary" size="small" (click)="editHandler(dataItem)">
+                    <nz-button-group>
+                        <button nz-button class="btn-light ml-2" (click)="editHandler(dataItem)">
                         <i class="fa fa-edit"></i>
                     </button>
-                </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column class="text-center" [width]="70">
-                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <button nbButton status="danger" size="small" (click)="removeHandler(dataItem)">
+                        <button nz-button class="btn-light" (click)="removeHandler(dataItem)">
                         <i class="fa fa-trash"></i>
                     </button>
+                    </nz-button-group>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column class="text-center" field="id" title="ID">
@@ -69,11 +38,11 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <label class="col-2 col-form-label">Họ tên
-                                    <span class="float-right">:</span>
-                                </label>
+                                <span class="float-right">:</span>
+                            </label>
                                 <label class="col-10 col-form-label lb-bold-info">
-                                    {{ dataItem?.hoTen }}
-                                </label>
+                                {{ dataItem?.hoTen }}
+                            </label>
                             </div>
                         </div>
                     </div>
@@ -81,11 +50,11 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <label class="col-2 col-form-label">Ngày sinh
-                                    <span class="float-right">:</span>
-                                </label>
+                                <span class="float-right">:</span>
+                            </label>
                                 <label class="col-10 col-form-label lb-bold-info">
-                                    {{ dataItem?.ngaySinh }}
-                                </label>
+                                {{ dataItem?.ngaySinh }}
+                            </label>
                             </div>
                         </div>
                     </div>
@@ -93,11 +62,11 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <label class="col-2 col-form-label">Địa chỉ
-                                    <span class="float-right">:</span>
-                                </label>
+                                <span class="float-right">:</span>
+                            </label>
                                 <label class="col-10 col-form-label lb-bold-info">
-                                    {{ dataItem?.diaChi }}
-                                </label>
+                                {{ dataItem?.diaChi }}
+                            </label>
                             </div>
                         </div>
                     </div>
@@ -105,11 +74,11 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <label class="col-2 col-form-label">Số điện thoại
-                                    <span class="float-right">:</span>
-                                </label>
+                                <span class="float-right">:</span>
+                            </label>
                                 <label class="col-10 col-form-label lb-bold-info">
-                                    {{ dataItem?.soDienThoai }}
-                                </label>
+                                {{ dataItem?.soDienThoai }}
+                            </label>
                             </div>
                         </div>
                     </div>
@@ -117,11 +86,11 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <label class="col-2 col-form-label">Email
-                                    <span class="float-right">:</span>
-                                </label>
+                                <span class="float-right">:</span>
+                            </label>
                                 <label class="col-10 col-form-label lb-bold-info">
-                                    {{ dataItem?.email }}
-                                </label>
+                                {{ dataItem?.email }}
+                            </label>
                             </div>
                         </div>
                     </div>
@@ -129,11 +98,11 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <label class="col-2 col-form-label">Loại khách hàng
-                                    <span class="float-right">:</span>
-                                </label>
+                                <span class="float-right">:</span>
+                            </label>
                                 <label class="col-10 col-form-label lb-bold-info">
-                                    {{ dataItem?.loaiKhachHang }}
-                                </label>
+                                {{ dataItem?.loaiKhachHang }}
+                            </label>
                             </div>
                         </div>
                     </div>
@@ -142,8 +111,6 @@
         </kendo-grid>
     </nb-card-body>
 </nb-card>
-
-<div class="k-overlay" *ngIf="opened"></div>
 <div class="wrapper form-layouts">
     <div kendoWindowContainer></div>
 </div>
