@@ -17,7 +17,13 @@ export const config = {
     },
     basicOption:{
         extraPlugins:
-            "divarea",
-        height: '100'
+            "image,uploadimage,divarea",
+            removePlugins: 'horizontalrule,tabletools,specialchar,about,list,others',
+            removeButtons: 'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Textarea,Find,Select,Button,HiddenField,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,ShowBlocks,Cut,Copy,Paste,Table,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent,Blockquote',
+        height: '100',
+        filebrowserBrowseUrl:'/api/Promotions/UploadImageCKEdit',
+        filebrowserUploadUrl: '/api/Promotions/UploadImageCKEdit'
     }
 }
+
+//removeButtons: 'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Find,Select,Button,ImageButton,HiddenField,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,Iframe,Font,FontSize,TextColor,BGColor,ShowBlocks,Cut,Copy,Paste,Table,Image,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent,Blockquote,Underline',
