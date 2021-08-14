@@ -1,299 +1,217 @@
 <nb-card>
-  <nb-card-body>
-    <div class="row">
-      <div class="col-md-6 col-lg-6 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Từ khóa</div>
-        <div class="col-md-12 col-lg-12">
-          <input
-            type="text"
-            nbInput
-            class="m-input form-control"
-            [(ngModel)]="modelSearch.keyword"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Doanh thu từ</div>
-        <div class="col-md-12 col-lg-12">
-          <input
-            type="number"
-            nbInput
-            class="m-input form-control"
-            [(ngModel)]="modelSearch.doanhThuTu"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Doanh thu đến</div>
-        <div class="col-md-12 col-lg-12">
-          <input
-            type="number"
-            nbInput
-            class="m-input form-control"
-            [(ngModel)]="modelSearch.doanhThuDen"
-          />
-        </div>
-      </div>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Từ khóa</div>
+                    <div class="col-md-12 col-lg-12">
+                        <input type="text" nbInput class="m-input form-control" [(ngModel)]="modelSearch.keyword" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Doanh thu từ</div>
+                    <div class="col-md-12 col-lg-12">
+                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuTu" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Doanh thu đến</div>
+                    <div class="col-md-12 col-lg-12">
+                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuDen" />
+                    </div>
+                </div>
+            </div>
 
-      <div class="col-md-6 col-lg-6 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Nguồn khách hàng</div>
-        <div class="col-md-12 col-lg-12">
-          <nb-select placeholder="--Chọn--" style="width: 100%">
-            <nb-option value="1">Facebook</nb-option>
-            <nb-option value="2">Website</nb-option>
-            <nb-option value="3">Giới thiệu</nb-option>
-            <nb-option value="4">TeleSales</nb-option>
-            <nb-option value="4">Không có nguồn</nb-option>
-          </nb-select>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Thời gian từ</div>
-        <div class="col-md-12 col-lg-12">
-          <input
-            type="date"
-            nbInput
-            class="m-input form-control"
-            [(ngModel)]="modelSearch.thoiGianTu"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Thời gian đến</div>
-        <div class="col-md-12 col-lg-12">
-          <input
-            type="date"
-            nbInput
-            class="m-input form-control"
-            [(ngModel)]="modelSearch.thoiGianDen"
-          />
-        </div>
-      </div>
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Nguồn khách hàng</div>
+                    <div class="col-md-12 col-lg-12">
+                        <nb-select placeholder="--Chọn--" style="width: 100%">
+                            <nb-option value="1">Facebook</nb-option>
+                            <nb-option value="2">Website</nb-option>
+                            <nb-option value="3">Giới thiệu</nb-option>
+                            <nb-option value="4">TeleSales</nb-option>
+                            <nb-option value="4">Không có nguồn</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Thời gian từ</div>
+                    <div class="col-md-12 col-lg-12">
+                        <input type="date" nbInput class="m-input form-control" [(ngModel)]="modelSearch.thoiGianTu" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Thời gian đến</div>
+                    <div class="col-md-12 col-lg-12">
+                        <input type="date" nbInput class="m-input form-control" [(ngModel)]="modelSearch.thoiGianDen" />
+                    </div>
+                </div>
+            </div>
 
-      <div class="col-md-6 col-lg-6 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Loại khách hàng</div>
-        <div class="col-md-12 col-lg-12">
-          <nb-select placeholder="--Chọn--" style="width: 100%">
-            <nb-option value="1">Tạo mới</nb-option>
-            <nb-option value="2">Khách hàng tiềm năng</nb-option>
-            <nb-option value="3">Đã hoàn thành</nb-option>
-          </nb-select>
-        </div>
-      </div>
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
+                    <div class="col-md-12 col-lg-12">
+                        <nb-select placeholder="--Chọn--" style="width: 100%">
+                            <nb-option value="1">Tạo mới</nb-option>
+                            <nb-option value="2">Khách hàng tiềm năng</nb-option>
+                            <nb-option value="3">Đã hoàn thành</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
 
-      <div class="col-md-6 col-lg-6 col-xxxl-3 row">
-        <div class="col-md-12 col-lg-12">Danh sách nhân viên</div>
-        <div class="col-md-12 col-lg-12">
-          <nb-select placeholder="--Chọn--" style="width: 100%">
-            <nb-option value="1">NV001 - Trần Thu Huỳnh</nb-option>
-            <nb-option value="2">NV002 - Võ Trần Bảo Nam</nb-option>
-            <nb-option value="3">NV003 - Huỳnh Công Tuấn</nb-option>
-          </nb-select>
+            <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pb-1">Danh sách nhân viên</div>
+                    <div class="col-md-12 col-lg-12">
+                        <nb-select placeholder="--Chọn--" style="width: 100%">
+                            <nb-option value="1">NV001 - Trần Thu Huỳnh</nb-option>
+                            <nb-option value="2">NV002 - Võ Trần Bảo Nam</nb-option>
+                            <nb-option value="3">NV003 - Huỳnh Công Tuấn</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-md-12 col-lg-12">
-        <div class="col-md-6 offset-md-3 text-center">
-          <button class="mr-1" nbButton status="primary" size="small">
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <button class="mr-1" nbButton status="primary" size="small">
             <i class="fa fa-search"></i> Tìm kiếm
           </button>
-          <button
-            class="mr-1"
-            nbButton
-            status="warning"
-            size="small"
-            (click)="resetHandler()"
-          >
+                    <button class="mr-1" nbButton status="warning" size="small" (click)="resetHandler()">
             <i class="fa fa-search"></i> Làm mới
           </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </nb-card-body>
+    </nb-card-body>
 </nb-card>
 <nb-card>
-  <nb-card-header> Khách hàng </nb-card-header>
-  <nb-card-body class="group-button">
-    <button nbButton status="primary" (click)="addHandler()">Thêm mới</button>
-    <button
-      nbButton
-      status="danger"
-      (click)="removeSelectedHandler()"
-      [disabled]="selectionIds.length < 1"
-    >
+    <nb-card-header> Khách hàng </nb-card-header>
+    <nb-card-body class="group-button">
+        <button nbButton status="primary" (click)="addHandler()">Thêm mới</button>
+        <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
       Xóa
     </button>
-    <button nbButton status="wrapper" (click)="importHandler()">Import</button>
-    <button nbButton status="success" (click)="exportHandler()">Export</button>
-  </nb-card-body>
-  <nb-card-body>
-    <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+        <button nbButton status="wrapper" (click)="importHandler()">Import</button>
+        <button nbButton status="success" (click)="exportHandler()">Export</button>
+    </nb-card-body>
+    <nb-card-body>
+        <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
         </ng2-smart-table> -->
-    <kendo-grid
-      [data]="gridView$"
-      [resizable]="true"
-      [pageSize]="gridState.take"
-      [skip]="gridState.skip"
-      [loading]="isLoading"
-      [pageable]="true"
-      [resizable]="true"
-      kendoGridSelectBy="id"
-      [selectable]="true"
-      [selectedKeys]="selectionIds"
-      (dataStateChange)="onStateChange($event)"
-    >
-      <kendo-grid-checkbox-column
-        class="text-center"
-        showSelectAll="true"
-        [width]="50"
-        [columnMenu]="false"
-        [headerStyle]="{
+        <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
           'text-align': 'center'
-        }"
-      >
-      </kendo-grid-checkbox-column>
-      <kendo-grid-column class="text-center" [width]="70" [columnMenu]="false">
-        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-          <button
-            nbButton
-            status="primary"
-            size="small"
-            (click)="editHandler(dataItem)"
-          >
+        }">
+
+            </kendo-grid-checkbox-column>
+            <kendo-grid-column class="text-center" [width]="70">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <button nbButton status="success" size="small" (click)="editHandlerCSKH(dataItem)">
+          <i class="fa fa-user"></i>
+        </button>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column class="text-center" [width]="70" [columnMenu]="false">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <button nbButton status="primary" size="small" (click)="editHandler(dataItem)">
             <i class="fa fa-edit"></i>
           </button>
-        </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column class="text-center" [width]="70" [columnMenu]="false">
-        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-          <button
-            nbButton
-            status="danger"
-            size="small"
-            (click)="removeHandler(dataItem)"
-          >
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column class="text-center" [width]="70" [columnMenu]="false">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <button nbButton status="danger" size="small" (click)="removeHandler(dataItem)">
             <i class="fa fa-trash"></i>
           </button>
-        </ng-template>
-      </kendo-grid-column>
-      <!-- <kendo-grid-column class="text-center" field="id" title="ID" [width]="60">
+                </ng-template>
+            </kendo-grid-column>
+            <!-- <kendo-grid-column class="text-center" field="id" title="ID" [width]="60">
             </kendo-grid-column> -->
 
-      <kendo-grid-column
-        title="STT"
-        [width]="60"
-        class="text-center"
-        [headerStyle]="{
+            <kendo-grid-column title="STT" [width]="60" class="text-center" [headerStyle]="{
           'text-align': 'center'
-        }"
-      >
-        <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-          {{ rowIndex + 1 }}
-        </ng-template>
-      </kendo-grid-column>
+        }">
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    {{ rowIndex + 1 }}
+                </ng-template>
+            </kendo-grid-column>
 
-      <kendo-grid-column field="hoTen" title="Họ tên" [width]="220">
-      </kendo-grid-column>
-      <kendo-grid-column
-        field="ngaySinh"
-        title="Ngày sinh"
-        [width]="100"
-        class="text-center"
-        [headerStyle]="{
+            <kendo-grid-column field="hoTen" title="Họ tên" [width]="220">
+            </kendo-grid-column>
+            <kendo-grid-column field="ngaySinh" title="Ngày sinh" [width]="100" class="text-center" [headerStyle]="{
           'text-align': 'center'
-        }"
-      >
-        <ng-template kendoGridCellTemplate let-dataItem>
-          {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
-        </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column
-        field="soDienThoai"
-        title="Số điện thoại"
-        [width]="120"
-      >
-      </kendo-grid-column>
-      <kendo-grid-column field="email" title="Email" [width]="120">
-      </kendo-grid-column>
-      <kendo-grid-column
-        field="loaiKhachHang"
-        title="Loại khách hàng"
-        [width]="140"
-      >
-      </kendo-grid-column>
-      <kendo-grid-column class="text-center" [width]="70">
-        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-          <button
-            nbButton
-            status="primary"
-            size="small"
-            (click)="editHandlerCSKH(dataItem)"
-          >
+        }">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="soDienThoai" title="Số điện thoại" [width]="120">
+            </kendo-grid-column>
+            <kendo-grid-column field="email" title="Email" [width]="120">
+            </kendo-grid-column>
+            <kendo-grid-column field="loaiKhachHang" title="Loại khách hàng" [width]="140">
+            </kendo-grid-column>
+            <kendo-grid-column class="text-center" [width]="70">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <button nbButton status="primary" size="small" (click)="editHandlerCSKH(dataItem)">
             <i class="fa fa-user"></i>
           </button>
-        </ng-template>
-      </kendo-grid-column>
-      <ng-template kendoGridDetailTemplate let-dataItem>
-        <section>
-          <div
-            class="row"
-            *ngIf="dataItem.hoTen != null && dataItem.hoTen != ''"
-          >
-            <div class="col-md-12">
-              Họ tên: <b> {{ dataItem?.hoTen }} </b>
-            </div>
-          </div>
-          <div
-            class="row"
-            *ngIf="dataItem.ngaySinh != null && dataItem.ngaySinh != ''"
-          >
-            <div class="col-md-12">
-              Ngày sinh: <b> {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} </b>
-            </div>
-          </div>
-          <div
-            class="row"
-            *ngIf="dataItem.diaChi != null && dataItem.diaChi != ''"
-          >
-            <div class="col-md-12">
-              Địa chỉ: <b> {{ dataItem?.diaChi }} </b>
-            </div>
-          </div>
-          <div
-            class="row"
-            *ngIf="dataItem.soDienThoai != null && dataItem.soDienThoai != ''"
-          >
-            <div class="col-md-12">
-              Số điện thoại: <b> {{ dataItem?.soDienThoai }} </b>
-            </div>
-          </div>
-          <div
-            class="row"
-            *ngIf="dataItem.email != null && dataItem.email != ''"
-          >
-            <div class="col-md-12">
-              Email: <b> {{ dataItem?.email }} </b>
-            </div>
-          </div>
-          <div
-            class="row"
-            *ngIf="
+                </ng-template>
+            </kendo-grid-column>
+            <ng-template kendoGridDetailTemplate let-dataItem>
+                <section>
+                    <div class="row" *ngIf="dataItem.hoTen != null && dataItem.hoTen != ''">
+                        <div class="col-md-12">
+                            Họ tên: <b> {{ dataItem?.hoTen }} </b>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataItem.ngaySinh != null && dataItem.ngaySinh != ''">
+                        <div class="col-md-12">
+                            Ngày sinh: <b> {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} </b>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataItem.diaChi != null && dataItem.diaChi != ''">
+                        <div class="col-md-12">
+                            Địa chỉ: <b> {{ dataItem?.diaChi }} </b>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataItem.soDienThoai != null && dataItem.soDienThoai != ''">
+                        <div class="col-md-12">
+                            Số điện thoại: <b> {{ dataItem?.soDienThoai }} </b>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="dataItem.email != null && dataItem.email != ''">
+                        <div class="col-md-12">
+                            Email: <b> {{ dataItem?.email }} </b>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="
               dataItem.loaiKhachHang != null && dataItem.loaiKhachHang != ''
-            "
-          >
-            <div class="col-md-12">
-              Loại khách hàng: <b> {{ dataItem?.loaiKhachHang }} </b>
-            </div>
-          </div>
-        </section>
-      </ng-template>
-    </kendo-grid>
-  </nb-card-body>
+            ">
+                        <div class="col-md-12">
+                            Loại khách hàng: <b> {{ dataItem?.loaiKhachHang }} </b>
+                        </div>
+                    </div>
+                </section>
+            </ng-template>
+        </kendo-grid>
+    </nb-card-body>
 </nb-card>
 
 <div class="k-overlay" *ngIf="opened"></div>
 <div class="wrapper form-layouts">
-  <div kendoWindowContainer></div>
+    <div kendoWindowContainer></div>
 </div>
