@@ -13,7 +13,8 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Doanh thu từ</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuTu" />
+                        <input type="number" nbInput class="m-input form-control"
+                            [(ngModel)]="modelSearch.doanhThuTu" />
                     </div>
                 </div>
             </div>
@@ -21,7 +22,8 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Doanh thu đến</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuDen" />
+                        <input type="number" nbInput class="m-input form-control"
+                            [(ngModel)]="modelSearch.doanhThuDen" />
                     </div>
                 </div>
             </div>
@@ -30,11 +32,8 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
                     <div class="col-md-12 col-lg-12">
-                        <ngx-cagt-select
-                                [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG"
-                                [isMulti]="true"
-                                [(ngModel)]="modelSearch.loaiKhachHang"
-                            >
+                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" [isMulti]="true"
+                            [(ngModel)]="modelSearch.loaiKhachHang">
                         </ngx-cagt-select>
                     </div>
                 </div>
@@ -43,7 +42,8 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Thời gian từ</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianTu" />
+                        <input type="date" nbInput class="m-input form-control mr-2"
+                            [(ngModel)]="modelSearch.thoiGianTu" />
                     </div>
                 </div>
             </div>
@@ -51,7 +51,8 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Thời gian đến</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianDen" />
+                        <input type="date" nbInput class="m-input form-control mr-2"
+                            [(ngModel)]="modelSearch.thoiGianDen" />
                     </div>
                 </div>
             </div>
@@ -87,11 +88,11 @@
             <div class="col-md-12 col-lg-12">
                 <div class="col-md-6 offset-md-3 text-center">
                     <button class="mr-1" nbButton status="primary" size="small">
-            <i class="fa fa-search"></i> Tìm kiếm
-          </button>
+                        <i class="fa fa-search"></i> Tìm kiếm
+                    </button>
                     <button class="mr-1" nbButton status="warning" size="small" (click)="resetHandler()">
-            <i class="fa fa-search"></i> Làm mới
-          </button>
+                        <i class="fa fa-search"></i> Làm mới
+                    </button>
                 </div>
             </div>
         </div>
@@ -102,39 +103,39 @@
     <nb-card-body class="group-button">
         <button nbButton status="primary" (click)="addHandler()">Thêm mới</button>
         <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
-      Xóa
-    </button>
+            Xóa
+        </button>
         <button nbButton status="wrapper" (click)="importHandler()">Import</button>
         <button nbButton status="success" (click)="exportHandler()">Export</button>
     </nb-card-body>
     <nb-card-body>
         <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
         </ng2-smart-table> -->
-        <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
-            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
+        <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip"
+            [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true"
+            [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false"
+                [headerStyle]="{
           'text-align': 'center'
         }">
 
             </kendo-grid-checkbox-column>
             <kendo-grid-column class="text-center" [width]="70">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <button nbButton status="success" size="small" (click)="editHandlerCSKH(dataItem)">
-          <i class="fa fa-user"></i>
-        </button>
-                </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column class="text-center" [width]="70" [columnMenu]="false">
-                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <button nbButton status="primary" size="small" (click)="editHandler(dataItem)">
-            <i class="fa fa-edit"></i>
-          </button>
-                </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column class="text-center" [width]="70" [columnMenu]="false">
-                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <button nbButton status="danger" size="small" (click)="removeHandler(dataItem)">
-            <i class="fa fa-trash"></i>
-          </button>
+                    <button nbButton status="info" [matMenuTriggerFor]="menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="editHandlerCSKH(dataItem)">
+                            <i class="fa fa-user mr-2"></i> Chăm sóc khách hàng
+                        </button>
+                        <button mat-menu-item (click)="editHandler(dataItem)">
+                            <i class="fa fa-edit mr-2"></i> chỉnh sửa
+                        </button>
+                        <button mat-menu-item (click)="removeHandler(dataItem)">
+                            <i class="fa fa-trash mr-2"></i> Xóa
+                        </button>
+                    </mat-menu>
                 </ng-template>
             </kendo-grid-column>
             <!-- <kendo-grid-column class="text-center" field="id" title="ID" [width]="60">
@@ -162,13 +163,6 @@
             <kendo-grid-column field="email" title="Email" [width]="120">
             </kendo-grid-column>
             <kendo-grid-column field="loaiKhachHang" title="Loại khách hàng" [width]="140">
-            </kendo-grid-column>
-            <kendo-grid-column class="text-center" [width]="70">
-                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    <button nbButton status="primary" size="small" (click)="editHandlerCSKH(dataItem)">
-            <i class="fa fa-user"></i>
-          </button>
-                </ng-template>
             </kendo-grid-column>
             <ng-template kendoGridDetailTemplate let-dataItem>
                 <section>
