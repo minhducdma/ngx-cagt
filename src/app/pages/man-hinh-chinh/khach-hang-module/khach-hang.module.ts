@@ -14,6 +14,8 @@ import { ThemeModule } from '../../../@theme/theme.module';
 import { KhachHangRoutingModule, routedComponents } from './khach-hang-routing.module';
 import { ControlErrorModule } from '../../../shared/controls/control-error/control-error.module';
 import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -44,7 +46,9 @@ import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-sele
     DragDropModule,
     ControlErrorModule,
     CagtSelectModule,
-    NbToastrModule
+    NbToastrModule,
+    DropDownsModule,
+    MatMenuModule
   ],
   declarations: [
     ...routedComponents,
