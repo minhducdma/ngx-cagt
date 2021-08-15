@@ -26,6 +26,7 @@ export const UrlConstant = {
         // MODULE: '/management/module',
 
         KHACH_HANG: '/khach-hangs',
+        KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais', 
         DANH_MUC: '/common/du-lieu-phan-loai-by-table'
     },
     

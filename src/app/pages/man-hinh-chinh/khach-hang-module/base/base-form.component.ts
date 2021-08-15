@@ -7,22 +7,8 @@ import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.d
 import { ApiService } from "../../../../@core/services/api.service";
 import { NbToastrService } from "@nebular/theme";
 
-export interface IGenerice {
-    id?: number;
-    idNhanSu?: number;
-    idFileDinhKem?: number;
-    tenFile?: string;
-    type?: number;
-    size?: number;
-    path?: string;
-    forWeb?: boolean;
-    checkSum?: string;
-    guidId?: string;
-    idsFileDinhKem?: any[];
-
-}
 @Directive()
-export abstract class BaseFormComponent<T extends IGenerice> implements OnInit, OnDestroy {
+export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
     @Input() action: ActionEnum;
     @Input() model: T;
 
@@ -53,7 +39,7 @@ export abstract class BaseFormComponent<T extends IGenerice> implements OnInit, 
     ngOnInit(): void {
         this.createForm();
         if (!this.action) {
-            this.action = this.model && this.model.id ? ActionEnum.UPDATE : ActionEnum.CREATE;
+            this.action = this.model ? ActionEnum.UPDATE : ActionEnum.CREATE;
         }
 
     }
