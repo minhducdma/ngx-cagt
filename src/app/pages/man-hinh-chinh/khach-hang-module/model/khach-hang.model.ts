@@ -1,4 +1,6 @@
-export interface IKhachHang {
+import { IGenerice } from "./base.model";
+
+export interface IKhachHang extends IGenerice {
     id: 5;
     hoTen: string;
     ngaySinh: string;
