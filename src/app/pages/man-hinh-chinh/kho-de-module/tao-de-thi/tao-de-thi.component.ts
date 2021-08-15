@@ -18,7 +18,15 @@ export class TaoDeThiComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        this.firstLoad();
     }
+
+    firstLoad() {
+        this.addCauHoi();
+        this.showCauHoi(this.dataCauHoi[0]);
+        this.addCauTraLoi(this.dataCauHoi[0]);
+    }
+
     addCauHoi() {
         let cauhoi = {
             id: Math.random(),
@@ -41,19 +49,15 @@ export class TaoDeThiComponent implements OnInit {
         console.log(data);
     }
 
-    removeCauHoi(item) {
-        var flatData = [];
-        debugger;
-        this.dataCauHoi = this.flattenArray(this.dataCauHoi, flatData);
-        this.dataCauHoi.forEach(i => {
-            if(i.id == item.id){
-                const index = this.dataCauHoi.indexOf(i, 0);
-                if (index > -1) {
-                    this.dataCauHoi.splice(index, 1);
-                }
+    removeCauHoi(dataItem : ICauHoi[], item:ICauHoi) {
+        dataItem.map(i => {
+            const index = dataItem.indexOf(item, 0);
+            if (index > -1) {
+                dataItem.splice(index, 1);
             }
-        });
-
+            else if(i.items != null && i.items.length > 0)
+                this.removeCauHoi(i.items, item)
+        })
     }
 
     saveListCauHoi() {
@@ -92,22 +96,5 @@ export class TaoDeThiComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex);
         }
-    }
-
-    flattenArray(dataIn: any[], dataOut: any[]) {
-        dataIn.forEach(item => {
-            if (dataOut.filter(x => x.id == item.id).length == 0)
-                dataOut.push(item)
-            if (item.items !== null)
-                this.flattenArray(item.items, dataOut)
-        });
-
-        dataOut = dataOut.map(i => {
-            return{
-                ...i,
-                items:null
-            }
-        })
-        return dataOut;
     }
 }

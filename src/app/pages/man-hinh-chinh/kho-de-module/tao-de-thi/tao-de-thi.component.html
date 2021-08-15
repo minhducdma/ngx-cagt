@@ -1,9 +1,15 @@
 <nb-card>
     <nb-card-header>
-        Tạo đề thi
-        <button nbButton status="primary" size="small" (click)="saveListCauHoi()" style="height: 100%; float: right;">
-            <i class="fa fa-file mr-2"></i>Lưu đề thi
-        </button>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <span>Tên đề thi</span>
+                <input type="text" nbInput class="ml-2 m-input form-control" style="display: inline;"/>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <span>Số giờ làm bài</span>
+                <input type="number" nbInput class="ml-2 m-input form-control" style="display: inline;"/>
+            </div>
+        </div>
     </nb-card-header>
     <nb-card-body>
         <div class="row">
@@ -17,10 +23,17 @@
                             </button>
                         </div>
                     </nb-card-header>
-                    <kendo-treeview [resizable]="true" kendoTreeViewDragAndDrop kendoTreeViewDragAndDropEditing
-                        kendoTreeViewHierarchyBinding [childrenField]="'items'" [nodes]="dataCauHoi"
-                        [textField]="'tenCauHoi'" kendoTreeViewExpandable [expandBy]="'id'"
-                        [expandedKeys]="expandedKeys" ng-click="selectCauHoi($event)">
+                    <kendo-treeview 
+                        [resizable]="true" 
+                        kendoTreeViewDragAndDrop kendoTreeViewDragAndDropEditing
+                        kendoTreeViewHierarchyBinding 
+                        [childrenField]="'items'" 
+                        [nodes]="dataCauHoi"
+                        [textField]="'tenCauHoi'" 
+                        kendoTreeViewExpandable [expandBy]="'id'"
+                        [expandedKeys]="expandedKeys"
+                        ng-click="selectCauHoi($event)"
+                        >
                         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                             <div class="row" style="width: 100%;" (click)="showCauHoi(dataItem)">
                                 <div class="col-lg-8">
@@ -28,7 +41,7 @@
                                         [(ngModel)]="dataItem.tenCauHoi" />
                                 </div>
                                 <div class="col-lg-4">
-                                    <button nbButton status="danger" size="small" (click)="removeCauHoi(dataItem)"
+                                    <button nbButton status="danger" size="small" (click)="removeCauHoi(dataCauHoi,dataItem)"
                                         class="mr-1" style="height: 100%;">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -47,7 +60,6 @@
                     <nb-card>
                         <nb-card-header>
                             Câu hỏi
-                            <input type="text" nbInput class="m-input form-control" [(ngModel)]="selectedCauHoi.tenCauHoi" class="mb-3" />
                         </nb-card-header>
                         <nb-card-body>
                             <ckeditor [config]="ckConfig"
@@ -62,16 +74,16 @@
                                 <i class="fa fa-plus mr-2"></i>Thêm câu trả lời
                             </button>
                         </nb-card-header>
-                        <nb-card-body *ngIf="selectedCauHoi.dapAns.length > 0" >
+                        <nb-card-body *ngIf="selectedCauHoi.dapAns != null && selectedCauHoi.dapAns.length > 0" >
                             <nb-card>
                                 <nb-card-body>
-                                    <div *ngFor="let dapAn of selectedCauHoi.dapAns;let i = index" class="mb-3">
+                                    <div *ngFor="let dapAn of selectedCauHoi.dapAns" class="mb-3">
                                         <nb-card>
                                             <nb-card-body>
-                                                <nb-checkbox [(ngModel)]="dapAn.isDapAnDung" status="info" class="mb-3" style="float: right;">Đáp án đúng</nb-checkbox>
-                                                <span class="mr-2" style="font-weight: bold; font-size: 20px;">{{i +
-                                                    1}}.</span><input type="text" nbInput class="m-input form-control"
-                                                    [(ngModel)]="dapAn.tenCauHoi" class="mb-3" />
+                                                <div class="mb-3">
+                                                    <nb-checkbox [(ngModel)]="dapAn.isDapAnDung" status="info" style="float: right;">Đáp án đúng</nb-checkbox>
+                                                    <span class="mr-2" style="font-weight: bold; font-size: 20px;">{{i + 1}}.</span>
+                                                </div>
                                                 <ckeditor [config]="ckConfig"
                                                     [(ngModel)]="dapAn.noiDungCauHoi"></ckeditor>
                                                 <div class="mt-3" style="text-align: right;">
@@ -98,7 +110,10 @@
         </div>
     </nb-card-body>
     <nb-card-footer>
-        <button nbButton status="primary" size="small" (click)="saveListCauHoi()" style="height: 100%; float: right;">
+        <button nbButton size="large" status="basic" class="float-left">
+            <i class="fa fa-arrow-left mr-2"></i>Trở về
+        </button>
+        <button nbButton size="large" status="primary" (click)="saveListCauHoi()" class="float-right">
             <i class="fa fa-file mr-2"></i>Lưu đề thi
         </button>
     </nb-card-footer>
