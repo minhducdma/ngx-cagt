@@ -15,6 +15,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/admin/kho-de/tao-de-thi',
     home: true,
   },
+  {
+    title: 'Chăm sóc khách hàng',
+    icon: 'book-outline',
+    link: '/pages/admin/quan-ly-khach-hang/cham-soc-khach-hang',
+    home: true,
+  },
   // {
   //   title: 'E-commerce',
   //   icon: 'shopping-cart-outline',
