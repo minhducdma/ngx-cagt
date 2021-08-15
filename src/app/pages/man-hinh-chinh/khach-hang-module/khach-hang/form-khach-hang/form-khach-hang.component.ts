@@ -43,7 +43,7 @@ export class FormKhachHangComponent extends BaseFormComponent<IKhachHang> implem
                     .post(this.url, this.form.value)
                     .subscribe(res => {
                         // show notification
-                        alert("Lưu thành công!");
+                        this.notification.show('Success','Tạo mới thành công', { status :'success' });
                         // close form
                         this.closeForm();
                     });
@@ -53,7 +53,7 @@ export class FormKhachHangComponent extends BaseFormComponent<IKhachHang> implem
                     .put(this.url + '/' + this.model.id.toString(), this.form.value)
                     .subscribe(res => {
                         // show notification
-                        alert("Lưu thành công!");
+                        this.notification.show('Thành công','Cập nhật thành công', { status :'success' });
                         // close form
                         this.closeForm();
                     });

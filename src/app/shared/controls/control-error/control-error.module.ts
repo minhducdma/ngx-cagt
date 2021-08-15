@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import { ControlErrorComponent } from './control-error/control-error.component';
+import {ControlErrorComponent} from './control-error.component';
 
 
 @NgModule({
@@ -13,5 +13,5 @@ import { ControlErrorComponent } from './control-error/control-error.component';
         ControlErrorComponent
     ]
 })
-export class ControlsModule {
+export class ControlErrorModule {
 }

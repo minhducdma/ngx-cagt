@@ -24,7 +24,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         thoiGianDen: null,
         loaiKhachHang: '',
         danhSachNhanVien: ''
-    }
+    };
 
     constructor(
         injector: Injector,
@@ -136,6 +136,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         }
     }
 
+
     resetHandler() {
         this.modelSearch = {
             keyword: '', 
@@ -169,5 +170,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     exportHandler() {
         alert("Chức năng đang được cập nhật !"); 
     }
+
+    
 }
  

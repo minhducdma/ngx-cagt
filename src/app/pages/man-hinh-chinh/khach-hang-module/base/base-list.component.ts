@@ -1,6 +1,6 @@
 import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl } from "@angular/forms";
-import { NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
+import { NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
 import { PagerSettings } from "@progress/kendo-angular-grid";
 import { State } from "@progress/kendo-data-query";
 import { TooltipDirective } from "@swimlane/ngx-charts";
@@ -55,12 +55,14 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     protected windowService: NbWindowService;
     protected apiService: ApiService;
     protected formBuilder: FormBuilder;
+    protected notification: NbToastrService;
     constructor(
         injector : Injector
     ) {
         this.windowService = injector.get(NbWindowService)
         this.apiService = injector.get(ApiService)
         this.formBuilder = injector.get(FormBuilder)
+        this.notification = injector.get(NbToastrService)
     }
 
     ngOnInit(): void {

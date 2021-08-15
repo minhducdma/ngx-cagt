@@ -91,7 +91,8 @@
     "@progress/kendo-data-query": "^1.0.0",
     "@progress/kendo-drawing": "^1.1.2",
     "@progress/kendo-recurrence": "^1.0.1",
-    "@progress/kendo-theme-default": "latest"
+    "@progress/kendo-theme-default": "latest",
+    "@ng-select/ng-select": "^2.16.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.1.0",

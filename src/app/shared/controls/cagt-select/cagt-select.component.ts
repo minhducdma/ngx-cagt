@@ -1,32 +1,35 @@
 import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UrlConstant } from '../../../../@core/constants/url.constant';
-import { ApiService } from '../../../../@core/services/api.service';
-import { DropDownListEnum } from '../cagt.data';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { UrlConstant } from '../../../@core/constants/url.constant';
+import { ApiService } from '../../../@core/services/api.service';
+import { DropDownListEnum } from './cagt.data';
 
 @Component({
-    selector: 'ngx-cagt-select-multiple',
-    templateUrl: './cagt-select-multiple.component.html',
-    styleUrls: ['./cagt-select-multiple.component.scss'],
+    selector: 'ngx-cagt-select',
+    templateUrl: './cagt-select.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
             multi: true,
-            useExisting: forwardRef(() => CagtSelectMultipleComponent),
+            useExisting: forwardRef(() => CagtSelectComponent),
         },
     ],
 })
-export class CagtSelectMultipleComponent implements ControlValueAccessor {
+export class CagtSelectComponent implements ControlValueAccessor {
     @Input() modeOfDropDowList: DropDownListEnum;
+    @Input() isMulti: Boolean;
 
     url: string = UrlConstant.ROUTE.DANH_MUC;
     value: string;
     lstData = [];
     reference: string;
     isDisabled: boolean;
+    private readonly destroy$ = new Subject<void>();
 
     constructor(private apiService: ApiService) { }
-        onChange(value) {}
+    onChange(value) { }
 
     onTouched: () => void;
     writeValue(obj: any) {
@@ -45,10 +48,10 @@ export class CagtSelectMultipleComponent implements ControlValueAccessor {
         this.isDisabled = isDisabled;
     }
 
-    handleOnProvinceChange(e) {
+    handleOnChange(e) {
         this.writeValue(e);
         this.onChange(e);
-      }
+    }
     ngOnInit() {
         switch (this.modeOfDropDowList) {
             case DropDownListEnum.LOAI_KHACH_HANG:
@@ -60,9 +63,10 @@ export class CagtSelectMultipleComponent implements ControlValueAccessor {
     loadLoaiKhachHang() {
         this.apiService
             .get(this.url + `?tenBang=GetKhachHangs&tenCot=LoaiKhachHang`)
+            .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res
                 }
             });
     }

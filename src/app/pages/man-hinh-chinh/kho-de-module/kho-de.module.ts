@@ -12,7 +12,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormDirectiveModule } from '../../../shared/directives/forms';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { KhachHangRoutingModule, routedComponents } from './kho-de-routing.module';
-import { ControlsModule } from '../../../shared/controls/controls.module';
 
 @NgModule({
     imports: [
@@ -28,7 +27,6 @@ import { ControlsModule } from '../../../shared/controls/controls.module';
         TooltipModule,
         WindowModule,
         NbButtonModule,
-        ControlsModule,
         CommonModule,
         NbCheckboxModule,
         NbDatepickerModule,

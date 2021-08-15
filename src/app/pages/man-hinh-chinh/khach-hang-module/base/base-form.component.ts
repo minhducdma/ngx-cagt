@@ -5,6 +5,7 @@ import { WindowRef } from "@progress/kendo-angular-dialog";
 import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
 import { ApiService } from "../../../../@core/services/api.service";
+import { NbToastrService } from "@nebular/theme";
 
 export interface IGenerice {
     id?: number;
@@ -37,6 +38,7 @@ export abstract class BaseFormComponent<T extends IGenerice> implements OnInit, 
     protected windowRef: WindowRef;
     protected formBuilder: FormBuilder;
     protected apiService: ApiService;
+    protected notification: NbToastrService;
 
 
     constructor(
@@ -45,6 +47,7 @@ export abstract class BaseFormComponent<T extends IGenerice> implements OnInit, 
         this.windowRef = injector.get(WindowRef)
         this.formBuilder = injector.get(FormBuilder)
         this.apiService = injector.get(ApiService)
+        this.notification = injector.get(NbToastrService)
     }
 
     ngOnInit(): void {

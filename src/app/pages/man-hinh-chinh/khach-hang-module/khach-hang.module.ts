@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTreeGridModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
@@ -12,7 +12,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormDirectiveModule } from '../../../shared/directives/forms';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { KhachHangRoutingModule, routedComponents } from './khach-hang-routing.module';
-import { ControlsModule } from '../../../shared/controls/controls.module';
+import { ControlErrorModule } from '../../../shared/controls/control-error/control-error.module';
+import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
 
 @NgModule({
   imports: [
@@ -28,7 +29,6 @@ import { ControlsModule } from '../../../shared/controls/controls.module';
     TooltipModule,
     WindowModule,
     NbButtonModule,
-    ControlsModule,
     CommonModule,
     NbCheckboxModule,
     NbDatepickerModule,
@@ -42,6 +42,9 @@ import { ControlsModule } from '../../../shared/controls/controls.module';
     CKEditorModule,
     NbCheckboxModule,
     DragDropModule,
+    ControlErrorModule,
+    CagtSelectModule,
+    NbToastrModule
   ],
   declarations: [
     ...routedComponents,
