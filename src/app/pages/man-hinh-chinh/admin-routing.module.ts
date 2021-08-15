@@ -15,6 +15,7 @@ const routes: Routes = [{
       loadChildren: () => import('./kho-de-module/kho-de.module')
       .then(m => m.KhoDeModule),
     },
+   
   ],
 }];
 
