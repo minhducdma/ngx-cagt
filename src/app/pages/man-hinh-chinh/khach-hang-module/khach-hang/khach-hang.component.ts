@@ -5,7 +5,7 @@ import { ActionEnum } from '../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { WindowCloseResult, WindowService } from '@progress/kendo-angular-dialog';
 import { FormImportKhachHangComponent } from './form-import-khach-hang/form-import-khach-hang.component';
-import { ChamSocKhachHangComponent } from './cham-soc-khach-hang/cham-soc-khach-hang.component';
+import { ChamSocKhachHangComponent } from '../cham-soc-khach-hang/cham-soc-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
 import { IKhachHang } from '../model/khach-hang.model';
 @Component({
@@ -88,8 +88,10 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         const param = windowRef.content.instance;
         param.action = this.action;
         param.model = this.model;
+        param.isChild = true;
 
         windowRef.result.subscribe(result => {
+            
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
                 this.loadItems();

@@ -1,0 +1,301 @@
+<nb-card>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-md-12 col-lg-3 col-xxxl-3">
+                <nb-alert status="primary"> <span class="report_nb">3</span> Tỏng số</nb-alert>
+            </div>
+            <div class="col-md-12 col-lg-3 col-xxxl-3">
+                <nb-alert status="success"><span class="report_nb">3</span>Mới tạo</nb-alert>
+            </div>
+            <div class="col-md-12 col-lg-3 col-xxxl-3">
+                <nb-alert status="info"><span class="report_nb>">3</span>Chăm sóc thành công</nb-alert>
+            </div>
+            <div class="col-md-12 col-lg-3 col-xxxl-3">
+                <nb-alert status="warning"><span class="report_nb">3</span>Chăm sóc không thành công</nb-alert>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-body>
+        <form>
+            <div class="row">
+                <div class="col-md-12 col-lg-3 col-xxxl-3">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="label">Tìm kiếm</label>
+                        <input type="email" class="w-100 " nbInput fullWidth id="exampleInputEmail1" placeholder="Tên KH, SĐT, Tiêu đề CSKH">
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-3 col-xxxl-3">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="label">Chọn khoảng thời gian:</label>
+                        <nb-card-body>
+                            <input nbInput placeholder="08/14/2021 - 08/14/2021" [nbDatepicker]="rangepicker">
+                            <nb-rangepicker #rangepicker></nb-rangepicker>
+                        </nb-card-body>
+                    </div>
+
+                </div>
+                <div class="col-md-12 col-lg-6 col-xxxl-6">
+
+                    <div class="row">
+                        <div class="col-md-12 col-lg-4 col-xxxl-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="label">Tình trạng:</label>
+                                <nb-select selected="1" class="w-100 ">
+                                    <nb-option value="1">Option 1</nb-option>
+                                    <nb-option value="2">Option 2</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3 col-xxxl-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="label">NV Phụ trách</label>
+                                <nb-select selected="1" class="w-100 ">
+                                    <nb-option value="1">Option 1</nb-option>
+                                    <nb-option value="2">Option 2</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3 col-xxxl-2">
+                            <div class="form-group">
+                                <label class="label">Số lượng</label>
+                                <input nbInput class="w-100 " type="number" [(ngModel)]="duration" name="timeout">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-2 col-xxxl-2 justify">
+
+                            <button type="submit" icon="search-outline" nbButton status="danger"><i class="fa fa-search mr-2"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+    </nb-card-body>
+</nb-card>
+
+
+<nb-card>
+    <nb-card-header>
+        Chăm sóc khách hàng
+    </nb-card-header>
+    <nb-card-body>
+        <button nbButton status="success" (click)="addHandler()" *ngIf="!isChild">
+            Thêm mới
+        </button>
+    </nb-card-body>
+    <nb-card-body>
+
+
+
+
+        <nb-tabset>
+            <nb-tab tabTitle="Tất cả">
+                <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
+
+
+
+                    <kendo-grid-column class="text-center" field="id" title="ID" [width]="60">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="hoTen" title="Thông tin khách hàng">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="ngaySinh" title="Ngày CSKH dự kiến">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="soDienThoai" title="Thông tin CSKH">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="email" title="Phản hồi KH">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="loaiKhachHang" title="Nhân viên phụ trách">
+                    </kendo-grid-column>
+                    <ng-template kendoGridDetailTemplate let-dataItem>
+                        <i class="fas fa-caret-down"></i>
+                        <section>
+                            <div class="row" *ngIf="dataItem.hoTen != null && dataItem.hoTen != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Họ tên
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.hoTen }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.ngaySinh != null && dataItem.ngaySinh != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Ngày sinh
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.ngaySinh }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.diaChi != null && dataItem.diaChi != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Địa chỉ
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.diaChi }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.soDienThoai != null && dataItem.soDienThoai != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Số điện thoại
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.soDienThoai }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.email != null && dataItem.email != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Email
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.email }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.loaiKhachHang != null && dataItem.loaiKhachHang != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Loại khách hàng
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.loaiKhachHang }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </ng-template>
+                </kendo-grid>
+            </nb-tab>
+            <nb-tab tabTitle="Đã chăm sóc">
+                <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
+
+                    <kendo-grid-column class="text-center" field="id" title="ID" [width]="60">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="hoTen" title="Thông tin khách hàng">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="ngaySinh" title="Ngày CSKH dự kiến">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="soDienThoai" title="Thông tin CSKH">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="email" title="Phản hồi KH">
+                    </kendo-grid-column>
+                    <kendo-grid-column field="loaiKhachHang" title="Nhân viên phụ trách">
+                    </kendo-grid-column>
+                    <ng-template kendoGridDetailTemplate let-dataItem>
+                        <section>
+                            <div class="row" *ngIf="dataItem.hoTen != null && dataItem.hoTen != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Họ tên
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.hoTen }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.ngaySinh != null && dataItem.ngaySinh != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Ngày sinh
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.ngaySinh }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.diaChi != null && dataItem.diaChi != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Địa chỉ
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.diaChi }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.soDienThoai != null && dataItem.soDienThoai != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Số điện thoại
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.soDienThoai }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.email != null && dataItem.email != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Email
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.email }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="dataItem.loaiKhachHang != null && dataItem.loaiKhachHang != ''">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label class="col-2 col-form-label">Loại khách hàng
+                                            <span class="float-right">:</span>
+                                        </label>
+                                        <label class="col-10 col-form-label lb-bold-info">
+                                            {{ dataItem?.loaiKhachHang }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </ng-template>
+                </kendo-grid>
+            </nb-tab>
+            <nb-tab tabTitle="Chưa chăm sóc">
+                .........
+            </nb-tab>
+        </nb-tabset>
+
+
+        <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+        </ng2-smart-table> -->
+
+    </nb-card-body>
+</nb-card>
+
+<div *ngIf="!isChild">
+    <div class="k-overlay" *ngIf="opened"></div>
+    <div class="wrapper form-layouts">
+        <div kendoWindowContainer></div>
+    </div>
+</div>
