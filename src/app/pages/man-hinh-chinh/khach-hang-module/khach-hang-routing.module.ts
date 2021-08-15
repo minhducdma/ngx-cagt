@@ -5,6 +5,9 @@ import { FormChamSocKhachHangComponent } from './khach-hang/cham-soc-khach-hang/
 import { FormImportKhachHangComponent } from './khach-hang/form-import-khach-hang/form-import-khach-hang.component';
 import { FormKhachHangComponent } from './khach-hang/form-khach-hang/form-khach-hang.component';
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
+import { TrangThaiChamSoc1Component } from './khach-hang/trang-thai-cham-soc/trang-thai-cham-soc-1/trang-thai-cham-soc-1.component';
+import { TrangThaiChamSoc2Component } from './khach-hang/trang-thai-cham-soc/trang-thai-cham-soc-2/trang-thai-cham-soc-2.component';
+import { TrangThaiChamSoc3Component } from './khach-hang/trang-thai-cham-soc/trang-thai-cham-soc-3/trang-thai-cham-soc-3.component';
 
 const routes: Routes = [{
   path: '',
@@ -29,6 +32,8 @@ export const routedComponents = [
   FormKhachHangComponent,
   FormImportKhachHangComponent,
   ChamSocKhachHangComponent,
-  FormChamSocKhachHangComponent
-
+  FormChamSocKhachHangComponent,
+  TrangThaiChamSoc1Component,
+  TrangThaiChamSoc2Component, 
+  TrangThaiChamSoc3Component,
 ];

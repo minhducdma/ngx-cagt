@@ -8,6 +8,10 @@ import { FormImportKhachHangComponent } from './form-import-khach-hang/form-impo
 import { ChamSocKhachHangComponent } from './cham-soc-khach-hang/cham-soc-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
 import { IKhachHang } from '../model/khach-hang.model';
+import { TrangThaiChamSoc1Component } from './trang-thai-cham-soc/trang-thai-cham-soc-1/trang-thai-cham-soc-1.component';
+import { EKhachHang } from '../base/base.enum';
+import { TrangThaiChamSoc2Component } from './trang-thai-cham-soc/trang-thai-cham-soc-2/trang-thai-cham-soc-2.component';
+import { TrangThaiChamSoc3Component } from './trang-thai-cham-soc/trang-thai-cham-soc-3/trang-thai-cham-soc-3.component';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -171,6 +175,48 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         alert("Chức năng đang được cập nhật !"); 
     }
 
+    statusHandler(dataItem: IKhachHang, status?: EKhachHang) { 
+        if(status) {
+            let _content = TrangThaiChamSoc1Component;
+            let _title = "";
+            switch(status){
+                case EKhachHang.Status01:
+                    _content = TrangThaiChamSoc1Component;
+                    _title = 'Chuyển trạng thái - Đăng ký';
+                break;
+                case EKhachHang.Status02:
+                    _content = TrangThaiChamSoc2Component;
+                    _title = 'Chuyển trạng thái - Liên hệ'; 
+                break;
+                case EKhachHang.Status03:
+                    _content = TrangThaiChamSoc3Component;
+                    _title = 'Chuyển trạng thái - Hoàn tất';  
+                break;
+            }
+            this.opened = true;
+            const windowRef = this.windowService2.open({
+                title: _title,
+                content: _content,
+                width: 800,
+                top: 10,
+                autoFocusedElement: 'body',
+            });
+            const param = windowRef.content.instance;
+            param.action = this.action;
+            param.model = this.model;
+    
+            windowRef.result.subscribe(result => {
+                if (result instanceof WindowCloseResult) {
+                    this.opened = false;
+                    this.loadItems();
+                }
+            });
+        }
+        else {
+            alert("Trạng thái không tồn tại !"); 
+        }
+       
+    }
     
 }
  

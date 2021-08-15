@@ -9,6 +9,7 @@ import { ReziseTable } from "../../../../@core/constants/app.constant";
 import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { ApiService } from "../../../../@core/services/api.service";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
+import { EKhachHang } from "./base.enum";
 
 @Directive()
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
@@ -16,6 +17,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     isLoading = false;
     opened = false;
     dropdownListEnum = DropDownListEnum;
+    khachHangEnum = EKhachHang;
     gridView$ = {
         data:[],
         total: 0
