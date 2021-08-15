@@ -4,7 +4,7 @@ import {FormSubmitDirective} from './form-submit.directive';
 import {ControlErrorContainerDirective} from './control-error-container.directive';
 import {ControlErrorsDirective} from './control-errors.directive';
 import {ControlRequiredDirective} from './control-required.directive';
-import { ControlErrorModule } from '../../controls/control-error/control-error.module';
+import { ControlsModule } from '../../controls/controls.module';
 const AllDirective = [
     ControlErrorContainerDirective,
     ControlErrorsDirective,
@@ -14,7 +14,7 @@ const AllDirective = [
 
 @NgModule({
     declarations: [AllDirective],
-    imports: [CommonModule, ControlErrorModule],
+    imports: [CommonModule, ControlsModule],
     exports: [AllDirective],
 })
 export class FormDirectiveModule {

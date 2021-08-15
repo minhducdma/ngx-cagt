@@ -1,0 +1,14 @@
+@import '../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.group-button {
+  text-align: right;
+}
+.group-button button {
+  margin-right: 5px !important;
+}

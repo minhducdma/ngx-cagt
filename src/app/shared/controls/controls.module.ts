@@ -1,18 +1,17 @@
-import { CommonModule } from "@angular/common";
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
-import { NbSelectModule } from "@nebular/theme";
-import { CagtSelectMultipleComponent } from "./cagt-select/cagt-select-multiple/cagt-select-multiple.component";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import { ControlErrorComponent } from './control-error/control-error.component';
+
 
 @NgModule({
+    declarations: [ControlErrorComponent],
+    entryComponents: [ControlErrorComponent],
     imports: [
-        NbSelectModule,
-        CommonModule 
+        CommonModule
     ],
-    declarations: [
-        CagtSelectMultipleComponent
-    ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-    exports: [CagtSelectMultipleComponent],
-
-  })
-  export class ControlsModule { }
+    exports: [
+        ControlErrorComponent
+    ]
+})
+export class ControlsModule {
+}

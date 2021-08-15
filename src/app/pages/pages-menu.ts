@@ -6,13 +6,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Khách hàng',
     icon: 'people-outline',
-    link: '/pages/admin/khach-hang',
+    link: '/pages/admin/quan-ly-khach-hang/khach-hang',
     home: true,
   },
   {
     title: 'Tạo đề thi',
     icon: 'book-outline',
-    link: '/pages/admin/tao-de-thi',
+    link: '/pages/admin/kho-de/tao-de-thi',
     home: true,
   },
   // {
