@@ -3,6 +3,10 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthService } from '@abp/ng.core';
+import { OAuthService } from 'angular-oauth2-oidc'
+import { ConfigStateService } from '@abp/ng.core';
+
 
 @Component({
   selector: 'ngx-header',
@@ -36,18 +40,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [ { title: 'Profile' }, { title: 'Log out', action: 'logout' } ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private authService: AuthService,
+              private oAuthService: OAuthService,
+              private config: ConfigStateService) {
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
+    if(this.oAuthService.hasValidAccessToken()){
+      this.config.getOne$("currentUser").subscribe(currentUser => {
+        this.user = currentUser;
+     })
 
+    }
     // this.userService.getUsers()
     //   .pipe(takeUntil(this.destroy$))
     //   .subscribe((users: any) => this.user = users.nick);

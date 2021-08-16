@@ -20,6 +20,14 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { AccountConfigModule } from '@abp/ng.account/config';
+import { CoreModule as CoreModuleAbp } from '@abp/ng.core';
+import { registerLocale } from '@abp/ng.core/locale';
+import { IdentityConfigModule } from '@abp/ng.identity/config';
+import { SettingManagementConfigModule } from '@abp/ng.setting-management/config';
+import { TenantManagementConfigModule } from '@abp/ng.tenant-management/config';
+import { environment } from '../environments/environment';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,6 +48,15 @@ import {
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     NbWindowModule.forRoot(),
+    CoreModuleAbp.forRoot({
+      environment,
+      registerLocaleFn: registerLocale(),
+    }),
+    AccountConfigModule.forRoot(),
+    IdentityConfigModule.forRoot(),
+    TenantManagementConfigModule.forRoot(),
+    SettingManagementConfigModule.forRoot(),
+    NgxsModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })

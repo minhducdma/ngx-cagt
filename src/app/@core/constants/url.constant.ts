@@ -2,7 +2,7 @@ import { environment } from "../../../environments/environment";
 
 const prefixACL = 'ACL/';
 export const UrlConstant = {
-    BASE_URL: environment.apiUrl,
+    BASE_URL: environment.apis.default.url + "/api/app",
 
     API: {
         //List API in here
@@ -26,8 +26,8 @@ export const UrlConstant = {
         // MODULE: '/management/module',
 
         KHACH_HANG: '/khach-hangs',
-        KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais', 
+        KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais',
         DANH_MUC: '/common/du-lieu-phan-loai-by-table'
     },
-    
+
 }
