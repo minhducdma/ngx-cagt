@@ -25,7 +25,6 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
     }
 
     ngOnInit(): void {
-        debugger
         super.ngOnInit();
     }
 
