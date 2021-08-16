@@ -4,5 +4,5 @@ import { Component } from '@angular/core';
   selector: 'ngx-admins-khach-hang',
   template: `<router-outlet></router-outlet>`,
 })
-export class KhachHangComponent {
+export class KhachHangsComponent {
 }

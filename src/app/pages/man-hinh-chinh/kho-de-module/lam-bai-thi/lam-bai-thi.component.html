@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-lg-9">
+        <nb-card>
+            <nb-card-header>
+                Làm bài thi
+            </nb-card-header>
+            <nb-card-body>
+                <cdk-virtual-scroll-viewport style="height: 400px" itemSize="90">
+                    <nb-card>
+                        <nb-card-header>
+                            Câu 1
+                        </nb-card-header>
+                        <nb-card-body>
+                            <p>
+                                <nb-checkbox status="info">Đáp án 1</nb-checkbox>
+                            <p>
+                            <p>
+                                <nb-checkbox status="info">Đáp án 2</nb-checkbox>
+                            <p>
+                            <p>
+                                <nb-checkbox status="info">Đáp án 3</nb-checkbox>
+                            <p>
+                            <p>
+                                <nb-checkbox status="info">Đáp án 4</nb-checkbox>
+                            <p>
+                        </nb-card-body>
+                    </nb-card>
+                </cdk-virtual-scroll-viewport>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-lg 3">
+        <nb-card>
+            <nb-card-header>
+                Thời gian làm bài
+            </nb-card-header>
+            <nb-card-header>
+                <!-- Set by minutes -->
+                <h2 class="text-center text-bold" style="color: red;">
+                    <ngx-count-down interval="0.5" (onComplete)="completed()"></ngx-count-down>
+                </h2>
+            </nb-card-header>
+        </nb-card>
+        <nb-card>
+            <nb-card-body>
+                <nb-alert status="info" class="text-center">Danh sách câu hỏi</nb-alert>
+                <cdk-virtual-scroll-viewport style="height: 215px" itemSize="90">
+                    <button nbButton hero class="m-1" status="success">1</button>
+                    <button nbButton hero class="m-1" status="success">2</button>
+                    <button nbButton hero class="m-1" status="success">3</button>
+                    <button nbButton hero class="m-1" status="success">4</button>
+                    <button nbButton hero class="m-1" status="basic">5</button>
+                    <button nbButton hero class="m-1" status="basic">6</button>
+                    <button nbButton hero class="m-1" status="basic">7</button>
+                </cdk-virtual-scroll-viewport>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-lg-12">
+        <nb-card>
+            <nb-card-body>
+                <div class="float-left">
+                    <button nbButton size="medium" status="primary" class=" mr-2">
+                        <i class="fa fa-arrow-left mr-2"></i>Câu trước
+                    </button>
+                    <button nbButton size="medium" status="primary">
+                        Câu sau <i class="fa fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+                <div class="float-right">
+                    <button nbButton size="medium" status="success">
+                        <i class="fa fa-file mr-2"></i>Nộp bài
+                    </button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

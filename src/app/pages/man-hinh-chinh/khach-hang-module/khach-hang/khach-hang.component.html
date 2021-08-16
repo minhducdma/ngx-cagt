@@ -13,8 +13,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Doanh thu từ</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="number" nbInput class="m-input form-control"
-                            [(ngModel)]="modelSearch.doanhThuTu" />
+                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuTu" />
                     </div>
                 </div>
             </div>
@@ -22,8 +21,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Doanh thu đến</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="number" nbInput class="m-input form-control"
-                            [(ngModel)]="modelSearch.doanhThuDen" />
+                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuDen" />
                     </div>
                 </div>
             </div>
@@ -32,8 +30,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
                     <div class="col-md-12 col-lg-12">
-                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" [isMulti]="true"
-                            [(ngModel)]="modelSearch.loaiKhachHang">
+                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" [isMulti]="true" [(ngModel)]="modelSearch.loaiKhachHang">
                         </ngx-cagt-select>
                     </div>
                 </div>
@@ -42,8 +39,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Thời gian từ</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="date" nbInput class="m-input form-control mr-2"
-                            [(ngModel)]="modelSearch.thoiGianTu" />
+                        <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianTu" />
                     </div>
                 </div>
             </div>
@@ -51,8 +47,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Thời gian đến</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="date" nbInput class="m-input form-control mr-2"
-                            [(ngModel)]="modelSearch.thoiGianDen" />
+                        <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianDen" />
                     </div>
                 </div>
             </div>
@@ -111,11 +106,8 @@
     <nb-card-body>
         <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
         </ng2-smart-table> -->
-        <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip"
-            [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true"
-            [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
-            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false"
-                [headerStyle]="{
+        <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
           'text-align': 'center'
         }">
 
@@ -126,14 +118,20 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="editHandlerCSKH(dataItem)">
-                            <i class="fa fa-user mr-2"></i> Chăm sóc khách hàng
+                        <button mat-menu-item class="button_box" (click)="editHandlerCSKH(dataItem)">
+                            <div class="box_botton">
+                                Chăm sóc khách hàng<i class="fa fa-user mr-2"></i> 
+                            </div>
                         </button>
-                        <button mat-menu-item (click)="editHandler(dataItem)">
-                            <i class="fa fa-edit mr-2"></i> chỉnh sửa
+                        <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
+                            <div class="box_botton">
+                            chỉnh sửa<i class="fa fa-edit mr-2"></i> 
+                             </div>
                         </button>
-                        <button mat-menu-item (click)="removeHandler(dataItem)">
-                            <i class="fa fa-trash mr-2"></i> Xóa
+                        <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
+                            <div class="box_botton">
+                            Xóa<i class="fa fa-trash mr-2"></i> 
+                            </div>
                         </button>
                     </mat-menu>
                 </ng-template>

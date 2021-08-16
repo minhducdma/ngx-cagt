@@ -1,14 +1,36 @@
 @import '../../../../@theme/styles/themes';
-
 @include nb-install-component() {
-  nb-card {
-    transform: translate3d(0, 0, 0);
-  }
+    nb-card {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .group-button {
-  text-align: right;
+    text-align: right;
 }
+
 .group-button button {
-  margin-right: 5px !important;
+    margin-right: 5px !important;
+}
+
+.button_box:focus {
+    outline: unset;
+}
+
+.box_botton i {
+    float: right;
+    padding: 15px 0;
+    margin-left: 10px;
+}
+
+.box_botton {
+    .fa-user {
+        color: #00d78f;
+    }
+    .fa-edit {
+        color: #36f;
+    }
+    .fa-trash {
+        color: #ff3d71;
+    }
 }

@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
@@ -12,6 +12,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormDirectiveModule } from '../../../shared/directives/forms';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { KhachHangRoutingModule, routedComponents } from './kho-de-routing.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CountdownModule } from '../../../shared/controls/count-down/count-down.module';
 
 @NgModule({
     imports: [
@@ -40,6 +42,9 @@ import { KhachHangRoutingModule, routedComponents } from './kho-de-routing.modul
         CKEditorModule,
         NbCheckboxModule,
         DragDropModule,
+        ScrollingModule,
+        CountdownModule,
+        NbAlertModule
     ],
     declarations: [
         ...routedComponents,

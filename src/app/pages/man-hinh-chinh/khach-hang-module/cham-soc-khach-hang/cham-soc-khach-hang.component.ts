@@ -1,17 +1,19 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
+import { WindowService, WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { State } from '@progress/kendo-data-query';
+import { ActionEnum } from '../../../../@core/constants/enum.constant';
+import { UrlConstant } from '../../../../@core/constants/url.constant';
+import { BaseListComponent } from '../base/base-list.component';
+import { IKhachHang } from '../model/khach-hang.model';
 import { FormChamSocKhachHangComponent } from './form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
-import { ActionEnum } from '../../../../../@core/constants/enum.constant';
-import { UrlConstant } from '../../../../../@core/constants/url.constant';
-import { WindowCloseResult, WindowService } from '@progress/kendo-angular-dialog';
-import { BaseListComponent } from '../../base/base-list.component';
-import { IKhachHang } from '../../model/khach-hang.model';
+
 @Component({
     selector: 'ngx-cham-soc-khach-hang',
     templateUrl: './cham-soc-khach-hang.component.html',
     styleUrls: ['./cham-soc-khach-hang.component.scss'],
 })
 export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> implements OnInit {
+    @Input() isChild = false;
     duration = 20;
     url: string = UrlConstant.ROUTE.KHACH_HANG;
     constructor(
@@ -96,5 +98,3 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
     }
   
 }
-
-//Quan test commit khach hang

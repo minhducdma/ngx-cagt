@@ -1,5 +1,10 @@
 .k-dialog-titlebar {
-    border-color: inherit;
-    color: #ffffff;
+    border-color    : inherit;
+    color           : #ffffff;
     background-color: #3366ff;
+}
+
+.k-in {
+    width: 100% !important;
+    padding-right: 0px;
 }
