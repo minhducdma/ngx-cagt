@@ -18,16 +18,24 @@ import { TrangThaiChamSoc3Component } from './trang-thai-cham-soc/trang-thai-cha
     styleUrls: ['.//khach-hang.component.scss'],
 })
 export class KhachHangComponent extends BaseListComponent<IKhachHang> implements OnInit {
-    url: string = UrlConstant.ROUTE.KHACH_HANG;
+    url: string = UrlConstant.ROUTE.KHACH_HANG_KENDO;
     modelSearch = {
-        keyword: '', 
-        doanhThuTu: null,
-        doanhThuDen: null,
-        nguonKhachHang: '',
+        keyword: '',
+        trangThaiKhachHangs: null,
+        loaiKhachHangs: '',
+        nguonKhachHangs: null,
+        nguoiPhuTrachs: null,
+        sapXep: null,
+        kichBan: null,
         thoiGianTu: null,
         thoiGianDen: null,
-        loaiKhachHang: '',
-        danhSachNhanVien: ''
+        danhSachNhanVien: '',
+        hoTen: null,
+            diaChi: null,
+            email: null,
+            soDienThoai: null,
+            ngaySinh: null,
+         
     };
 
     constructor(
@@ -47,15 +55,36 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         this.loadItems();
     }
 
+    private get extendQueryOptions() {
+        return {
+          
+            keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null ,
+            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null ,
+            loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null , 
+            nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null ,
+            nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.modelSearch.nguoiPhuTrachs : null ,
+            sapXep: this.modelSearch.sapXep ? this.modelSearch.sapXep : null ,
+            kichBan: this.modelSearch.kichBan ? this.modelSearch.kichBan : null ,
+            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null ,
+            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null ,
+            hoTen: this.modelSearch.hoTen ? this.modelSearch.hoTen : null ,
+            diaChi: this.modelSearch.diaChi ? this.modelSearch.diaChi : null ,  
+            email: this.modelSearch.email ? this.modelSearch.email : null ,
+            soDienThoai: this.modelSearch.soDienThoai ? this.modelSearch.soDienThoai : null ,
+            ngaySinh: this.modelSearch.ngaySinh ? this.modelSearch.ngaySinh : null ,
+          
+           
+            ...this.queryOptions,
+            isAsc: false,
+        };
+    }
+ 
     loadItems() {
-        this.apiService.get(this.url, {
-            // ...this.modelSearch,
-            // ...this.queryOptions
-        })
+        this.apiService.post(this.url,this.extendQueryOptions)
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
-                    this.gridView$.total = res.totalCount;
+                    this.gridView$.total = res.pagingInfo.totalItems;
                 }
             });
     }
@@ -83,7 +112,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     protected showFormCSKHUpdate() {
         this.opened = true;
         const windowRef = this.windowService2.open({
-            title: 'Cập nhật khách hàng',
+            title: 'Chăm sóc khách hàng',
             content: ChamSocKhachHangComponent,
             width: 1200,
             top: 10,
@@ -145,14 +174,22 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     resetHandler() {
         this.modelSearch = {
-            keyword: '', 
-            doanhThuTu: null,
-            doanhThuDen: null,
-            nguonKhachHang: '',
+            keyword: '',
+            trangThaiKhachHangs: null,
+            loaiKhachHangs: '',
+            nguonKhachHangs: null,
+            nguoiPhuTrachs: null,
+            sapXep: null,
+            kichBan: null,
             thoiGianTu: null,
             thoiGianDen: null,
-            loaiKhachHang: '',
-            danhSachNhanVien: ''
+            danhSachNhanVien: '',
+            hoTen: null,
+                diaChi: null,
+                email: null,
+                soDienThoai: null,
+                ngaySinh: null,
+      
         };
     }
 

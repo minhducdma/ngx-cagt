@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Doanh thu từ</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuTu" />
+                        <input type="number" nbInput class="m-input form-control" />
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Doanh thu đến</div>
                     <div class="col-md-12 col-lg-12">
-                        <input type="number" nbInput class="m-input form-control" [(ngModel)]="modelSearch.doanhThuDen" />
+                        <input type="number" nbInput class="m-input form-control" />
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
                     <div class="col-md-12 col-lg-12">
-                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" [isMulti]="true" [(ngModel)]="modelSearch.loaiKhachHang">
+                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" [isMulti]="true" [(ngModel)]="modelSearch.loaiKhachHangs">
                         </ngx-cagt-select>
                     </div>
                 </div>
@@ -54,13 +54,10 @@
 
             <div class="col-md-3 col-lg-3 col-xxxl-3 ">
                 <div class="row">
-                    <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
+                    <div class="col-md-12 col-lg-12 pb-1">Nguồn khách hàng</div>
                     <div class="col-md-12 col-lg-12">
-                        <nb-select placeholder="--Chọn--" style="width: 100%">
-                            <nb-option value="1">Tạo mới</nb-option>
-                            <nb-option value="2">Khách hàng tiềm năng</nb-option>
-                            <nb-option value="3">Đã hoàn thành</nb-option>
-                        </nb-select>
+                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.NGUON_KHACH_HANG" [isMulti]="true" [(ngModel)]="modelSearch.nguonKhachHangs">
+                        </ngx-cagt-select>
                     </div>
                 </div>
             </div>
@@ -82,7 +79,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12">
                 <div class="col-md-6 offset-md-3 text-center">
-                    <button class="mr-1" nbButton status="primary" size="small">
+                    <button class="mr-1" nbButton status="primary" size="small" (click)="onSearchChange()"> 
                         <i class="fa fa-search"></i> Tìm kiếm
                     </button>
                     <button class="mr-1" nbButton status="warning" size="small" (click)="resetHandler()">
@@ -120,17 +117,17 @@
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item class="button_box" (click)="editHandlerCSKH(dataItem)">
                             <div class="box_botton">
-                                Chăm sóc khách hàng<i class="fa fa-user mr-2"></i> 
+                                <i class="fa fa-user mr-2"></i>  Chăm sóc khách hàng
                             </div>
                         </button>
                         <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
                             <div class="box_botton">
-                            chỉnh sửa<i class="fa fa-edit mr-2"></i> 
+                                <i class="fa fa-edit mr-2"></i> Chỉnh sửa
                              </div>
                         </button>
                         <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
                             <div class="box_botton">
-                            Xóa<i class="fa fa-trash mr-2"></i> 
+                                <i class="fa fa-trash mr-2"></i> Xóa
                             </div>
                         </button>
                     </mat-menu>
@@ -164,37 +161,77 @@
             </kendo-grid-column>
             <ng-template kendoGridDetailTemplate let-dataItem>
                 <section>
-                    <div class="row" *ngIf="dataItem.hoTen != null && dataItem.hoTen != ''">
-                        <div class="col-md-12">
-                            Họ tên: <b> {{ dataItem?.hoTen }} </b>
+                    <div *ngIf="dataItem.hoTen != null && dataItem.hoTen != ''">
+                        <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                            <label class="col-form-label">  Họ tên </label>
+                            <span class="float-right">:</span>
                         </div>
+                        <div class="col-md-12 col-lg-9 col-xxxl-2">
+                            <label class=" col-form-label lb-bold-info">
+                                {{ dataItem?.hoTen }} 
+                            </label>
+                        </div>
+
                     </div>
-                    <div class="row" *ngIf="dataItem.ngaySinh != null && dataItem.ngaySinh != ''">
-                        <div class="col-md-12">
-                            Ngày sinh: <b> {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} </b>
+                    <div *ngIf="dataItem.ngaySinh != null && dataItem.ngaySinh != ''">
+                        <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                            <label class="col-form-label">  Ngày sinh </label>
+                            <span class="float-right">:</span>
                         </div>
+                        <div class="col-md-12 col-lg-9 col-xxxl-2">
+                            <label class=" col-form-label lb-bold-info">
+                                {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} 
+                            </label>
+                        </div>
+
                     </div>
-                    <div class="row" *ngIf="dataItem.diaChi != null && dataItem.diaChi != ''">
-                        <div class="col-md-12">
-                            Địa chỉ: <b> {{ dataItem?.diaChi }} </b>
+                    <div *ngIf="dataItem.diaChi != null && dataItem.diaChi != ''">
+                        <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                            <label class="col-form-label">  Địa chỉ</label>
+                            <span class="float-right">:</span>
                         </div>
+                        <div class="col-md-12 col-lg-9 col-xxxl-2">
+                            <label class=" col-form-label lb-bold-info">
+                                {{ dataItem?.diaChi }}
+                            </label>
+                        </div>
+
                     </div>
-                    <div class="row" *ngIf="dataItem.soDienThoai != null && dataItem.soDienThoai != ''">
-                        <div class="col-md-12">
-                            Số điện thoại: <b> {{ dataItem?.soDienThoai }} </b>
+                    <div *ngIf="dataItem.soDienThoai != null && dataItem.soDienThoai != ''">
+                        <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                            <label class="col-form-label">   Số điện thoại </label>
+                            <span class="float-right">:</span>
                         </div>
+                        <div class="col-md-12 col-lg-9 col-xxxl-2">
+                            <label class=" col-form-label lb-bold-info">
+                                {{ dataItem?.soDienThoai }}
+                            </label>
+                        </div>
+
                     </div>
-                    <div class="row" *ngIf="dataItem.email != null && dataItem.email != ''">
-                        <div class="col-md-12">
-                            Email: <b> {{ dataItem?.email }} </b>
+                    <div *ngIf="dataItem.email != null && dataItem.email != ''">
+                        <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                            <label class="col-form-label">   Email</label>
+                            <span class="float-right">:</span>
                         </div>
+                        <div class="col-md-12 col-lg-9 col-xxxl-2">
+                            <label class=" col-form-label lb-bold-info">
+                                {{ dataItem?.email }}
+                            </label>
+                        </div>
+
                     </div>
-                    <div class="row" *ngIf="
-              dataItem.loaiKhachHang != null && dataItem.loaiKhachHang != ''
-            ">
-                        <div class="col-md-12">
-                            Loại khách hàng: <b> {{ dataItem?.loaiKhachHang }} </b>
+                    <div *ngIf="dataItem.loaiKhachHang != null && dataItem.loaiKhachHang != ''">
+                        <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                            <label class="col-form-label">   Loại khách hàng </label>
+                            <span class="float-right">:</span>
                         </div>
+                        <div class="col-md-12 col-lg-9 col-xxxl-2">
+                            <label class=" col-form-label lb-bold-info">
+                                {{ dataItem?.loaiKhachHang }}
+                </label>
+                        </div>
+
                     </div>
                 </section>
             </ng-template>

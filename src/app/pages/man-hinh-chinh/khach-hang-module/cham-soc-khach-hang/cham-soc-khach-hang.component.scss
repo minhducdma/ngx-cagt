@@ -1,32 +1,55 @@
-span {
-    /* position: absolute; */
-    /* top: 10px; */
-    /* right: 10px; */
-    float: right;
-    /* background: #ff3d71; */
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    overflow: hidden;
-    text-align: center;
-    font-size: 26px;
-    padding: 3px;
-}
-
-.k-window-titlebar {
-    background-color: #1a347f!important;
-}
-
-.justify {
-    margin-top: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    i {
-        margin: 0;
-    }
-}
-
-.w-100 {
-    width: 100%;
-}
+       .box_alert {
+           span {
+               /* position: absolute; */
+               /* top: 10px; */
+               /* right: 10px; */
+               float: right;
+               /* background: #ff3d71; */
+               height: 30px;
+               width: 30px;
+               border-radius: 50%;
+               overflow: hidden;
+               text-align: center;
+               font-size: 26px;
+               padding: 3px;
+           }
+       }
+       
+       .k-grid-header {
+           .k-header {
+               font-weight: bold!important;
+           }
+       }
+       
+       .custom_table {
+           label {
+               font-weight: bold;
+           }
+           span {
+               padding: 7px 0;
+               font-weight: bold;
+           }
+       }
+       
+       .justify {
+           margin-top: 12px;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           i {
+               margin: 0;
+           }
+       }
+       
+       .w-100 {
+           width: 100%;
+       }
+       
+       .group-button {
+           text-align: right;
+       }
+       
+       .group-button button {
+           margin-right: 5px !important;
+           width: 100px;
+       }

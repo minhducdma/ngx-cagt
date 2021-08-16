@@ -144,9 +144,19 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         return {
             pageNumber: this.gridState.skip / this.gridState.take + 1,
             pageSize: this.gridState.take,
-            keyword: this.searchControl.value,
-            sortCol: this.gridState.sort[0].field,
-            isAsc: this.gridState.sort[0].dir === 'asc' ? true : false,
+            // sortCol: this.gridState.sort[0].field,
+            // isAsc: this.gridState.sort[0].dir === 'asc' ? true : false,
         };
+    }
+
+    convertArrToStr(obj: any){
+        let result = '';
+        if(typeof obj !== 'string'){
+            if(obj.length > 0)
+                result = obj.join(",");
+        }else{
+            result = obj;
+        }
+        return result;
     }
 }
