@@ -25,7 +25,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
     }
 
     ngOnInit(): void {
-        debugger
+      
         super.ngOnInit();
     }
 
@@ -78,7 +78,26 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
         this.showFormCreateOrUpdate();
     }
 
-
+    resetHandler() {
+        // this.modelSearch = {
+        //     keyword: '',
+        //     trangThaiKhachHangs: null,
+        //     loaiKhachHangs: '',
+        //     nguonKhachHangs: null,
+        //     nguoiPhuTrachs: null,
+        //     sapXep: null,
+        //     kichBan: null,
+        //     thoiGianTu: null,
+        //     thoiGianDen: null,
+        //     danhSachNhanVien: '',
+        //     hoTen: null,
+        //         diaChi: null,
+        //         email: null,
+        //         soDienThoai: null,
+        //         ngaySinh: null,
+      
+        // };
+    }
     removeHandler(dataItem) {
         this.selectionIds = [];
         this.selectionIds.push(dataItem.id);
@@ -96,6 +115,13 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
                 this.loadItems();
             });
         }
+    }
+
+    importHandler() { 
+        alert("Chức năng đang được cập nhật !"); 
+    }
+    exportHandler() {
+        alert("Chức năng đang được cập nhật !"); 
     }
   
 }

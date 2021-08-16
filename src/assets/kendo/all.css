@@ -3,3 +3,7 @@
     color: #ffffff;
     background-color: #3366ff;
 }
+
+.k-grid-header .k-header {
+    font-weight: bold;
+}

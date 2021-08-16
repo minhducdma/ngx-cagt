@@ -27,7 +27,8 @@ export const UrlConstant = {
 
         KHACH_HANG: '/khach-hangs',
         KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais', 
-        DANH_MUC: '/common/du-lieu-phan-loai-by-table'
+        DANH_MUC: '/common/du-lieu-phan-loai-by-table',
+        KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang'
     },
     
 }
