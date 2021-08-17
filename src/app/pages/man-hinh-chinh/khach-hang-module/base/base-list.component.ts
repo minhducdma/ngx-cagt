@@ -15,6 +15,7 @@ import { EKhachHang } from "./base.enum";
 @Directive()
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     @ViewChild(TooltipDirective) public tooltipDir: TooltipDirective;
+    destroy$ = new Subject<void>();
     isLoading = false;
     opened = false;
     dropdownListEnum = DropDownListEnum;

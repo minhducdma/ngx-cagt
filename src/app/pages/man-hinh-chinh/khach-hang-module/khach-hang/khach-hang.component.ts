@@ -12,8 +12,8 @@ import { TrangThaiChamSoc1Component } from './trang-thai-cham-soc/trang-thai-cha
 import { EKhachHang } from '../base/base.enum';
 import { TrangThaiChamSoc2Component } from './trang-thai-cham-soc/trang-thai-cham-soc-2/trang-thai-cham-soc-2.component';
 import { TrangThaiChamSoc3Component } from './trang-thai-cham-soc/trang-thai-cham-soc-3/trang-thai-cham-soc-3.component';
-import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
+import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -82,6 +82,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     loadItems() {
         this.apiService.post(this.url, this.extendQueryOptions)
+            .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
@@ -165,18 +166,20 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
                 title: 'Xác nhận xóa',
                 message: 'Bạn có chắc chắn muốn xóa?',
             },
-        }).onClose.subscribe(res => {
-            if (res) {
-                if (this.selectionIds.length > 0) {
-                    const body = [...new Set(this.selectionIds)]
-                    this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
-                        this.selectionIds = [];
-                        this.showMessage('success','Thành công','Xóa thành công');
-                        this.loadItems();
-                    });
+        }).onClose
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(res => {
+                if (res) {
+                    if (this.selectionIds.length > 0) {
+                        const body = [...new Set(this.selectionIds)]
+                        this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
+                            this.selectionIds = [];
+                            this.showMessage('success', 'Thành công', 'Xóa thành công');
+                            this.loadItems();
+                        });
+                    }
                 }
-            }
-        });
+            });
 
         // const dialogRef = this.dialog.open(AlertDialogComponent, {
         //     data: {
