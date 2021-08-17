@@ -24,6 +24,7 @@ export const UrlConstant = {
         // FORBIDEN: '/management/403',
         // PROFILE: '/management/profile',
         // MODULE: '/management/module',
+        UPLOAD_FILE: 'https://apisipm.migroup.asia/FileUpload/UploadFiles',
 
         KHACH_HANG: '/khach-hangs',
         DANH_MUC: '/common/du-lieu-phan-loai-by-table',

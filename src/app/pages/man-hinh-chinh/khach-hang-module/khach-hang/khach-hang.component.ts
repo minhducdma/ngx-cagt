@@ -12,6 +12,8 @@ import { TrangThaiChamSoc1Component } from './trang-thai-cham-soc/trang-thai-cha
 import { EKhachHang } from '../base/base.enum';
 import { TrangThaiChamSoc2Component } from './trang-thai-cham-soc/trang-thai-cham-soc-2/trang-thai-cham-soc-2.component';
 import { TrangThaiChamSoc3Component } from './trang-thai-cham-soc/trang-thai-cham-soc-3/trang-thai-cham-soc-3.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -31,17 +33,16 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         thoiGianDen: null,
         danhSachNhanVien: '',
         hoTen: null,
-            diaChi: null,
-            email: null,
-            soDienThoai: null,
-            ngaySinh: null,
-         
+        diaChi: null,
+        email: null,
+        soDienThoai: null,
+        ngaySinh: null,
+
     };
 
     constructor(
         injector: Injector,
         protected windowService2: WindowService,
-
     ) {
         super(injector)
     }
@@ -57,30 +58,30 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     private get extendQueryOptions() {
         return {
-          
-            keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null ,
-            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null ,
-            loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null , 
-            nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null ,
-            nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.modelSearch.nguoiPhuTrachs : null ,
-            sapXep: this.modelSearch.sapXep ? this.modelSearch.sapXep : null ,
-            kichBan: this.modelSearch.kichBan ? this.modelSearch.kichBan : null ,
-            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null ,
-            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null ,
-            hoTen: this.modelSearch.hoTen ? this.modelSearch.hoTen : null ,
-            diaChi: this.modelSearch.diaChi ? this.modelSearch.diaChi : null ,  
-            email: this.modelSearch.email ? this.modelSearch.email : null ,
-            soDienThoai: this.modelSearch.soDienThoai ? this.modelSearch.soDienThoai : null ,
-            ngaySinh: this.modelSearch.ngaySinh ? this.modelSearch.ngaySinh : null ,
-          
-           
+
+            keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null,
+            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null,
+            loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null,
+            nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null,
+            nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.modelSearch.nguoiPhuTrachs : null,
+            sapXep: this.modelSearch.sapXep ? this.modelSearch.sapXep : null,
+            kichBan: this.modelSearch.kichBan ? this.modelSearch.kichBan : null,
+            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
+            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null,
+            hoTen: this.modelSearch.hoTen ? this.modelSearch.hoTen : null,
+            diaChi: this.modelSearch.diaChi ? this.modelSearch.diaChi : null,
+            email: this.modelSearch.email ? this.modelSearch.email : null,
+            soDienThoai: this.modelSearch.soDienThoai ? this.modelSearch.soDienThoai : null,
+            ngaySinh: this.modelSearch.ngaySinh ? this.modelSearch.ngaySinh : null,
+
+
             ...this.queryOptions,
             isAsc: false,
         };
     }
- 
+
     loadItems() {
-        this.apiService.post(this.url,this.extendQueryOptions)
+        this.apiService.post(this.url, this.extendQueryOptions)
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
@@ -92,7 +93,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     protected showFormCreateOrUpdate() {
         this.opened = true;
         const windowRef = this.windowService2.open({
-            title:  this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
+            title: this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
             content: FormKhachHangComponent,
             width: 900,
             top: 60,
@@ -124,14 +125,14 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         param.isChild = true;
 
         windowRef.result.subscribe(result => {
-            
+
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
                 this.loadItems();
             }
         });
     }
-    editHandlerCSKH (dataItem) {
+    editHandlerCSKH(dataItem) {
         // tslint:disable-next-line: no-unsafe-any
         this.model = dataItem;
         this.action = ActionEnum.UPDATE;
@@ -159,16 +160,49 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     }
 
     removeSelectedHandler() {
-        if (this.selectionIds.length > 0) { 
-            const body = {
-                ids: [...new Set(this.selectionIds)],
-            };
-            this.apiService.post(this.url + '/many-khach-hangs', body).subscribe(res => {
-                this.selectionIds = [];
-                alert('Xóa thành công');
-                this.loadItems();
-            });
-        }
+        this.dialogService.open(AlertDialogComponent, {
+            context: {
+                title: 'Xác nhận xóa',
+                message: 'Bạn có chắc chắn muốn xóa?',
+            },
+        }).onClose.subscribe(res => {
+            if (res) {
+                if (this.selectionIds.length > 0) {
+                    const body = [...new Set(this.selectionIds)]
+                    this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
+                        this.selectionIds = [];
+                        this.showToast('success','Thành công','Xóa thành công');
+                        this.loadItems();
+                    });
+                }
+            }
+        });
+
+        // const dialogRef = this.dialog.open(AlertDialogComponent, {
+        //     data: {
+        //         message: 'Bạn có chắc chắn muốn xóa?',
+        //         buttonText: {
+        //             ok: 'Có',
+        //             cancel: 'Không'
+        //         }
+        //     }
+        // });
+        // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        //     if (confirmed) {
+        //         if (this.selectionIds.length > 0) {
+        //             const body = {
+        //                 ids: [...new Set(this.selectionIds)],
+        //             };
+        //             this.apiService.post(this.url + '/many-khach-hangs', body).subscribe(res => {
+        //                 this.selectionIds = [];
+        //                 alert('Xóa thành công');
+        //                 this.loadItems();
+        //             });
+        //         }
+        //     }
+        // });
+
+
     }
 
 
@@ -185,15 +219,15 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             thoiGianDen: null,
             danhSachNhanVien: '',
             hoTen: null,
-                diaChi: null,
-                email: null,
-                soDienThoai: null,
-                ngaySinh: null,
-      
+            diaChi: null,
+            email: null,
+            soDienThoai: null,
+            ngaySinh: null,
+
         };
     }
 
-    importHandler() { 
+    importHandler() {
         this.opened = true;
         const windowRef = this.windowService2.open({
             title: 'Import dữ liệu khách hàng',
@@ -201,7 +235,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             width: 800,
             top: 60,
             autoFocusedElement: 'body',
-        }); 
+        });
         windowRef.result.subscribe(result => {
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
@@ -211,26 +245,26 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     }
 
     exportHandler() {
-        alert("Chức năng đang được cập nhật !"); 
+        alert("Chức năng đang được cập nhật !");
     }
 
-    statusHandler(dataItem: IKhachHang, status?: EKhachHang) { 
-        if(status) {
+    statusHandler(dataItem: IKhachHang, status?: EKhachHang) {
+        if (status) {
             let _content = TrangThaiChamSoc1Component;
             let _title = "";
-            switch(status){
+            switch (status) {
                 case EKhachHang.Status01:
                     _content = TrangThaiChamSoc1Component;
                     _title = 'Chuyển trạng thái - Đăng ký';
-                break;
+                    break;
                 case EKhachHang.Status02:
                     _content = TrangThaiChamSoc2Component;
-                    _title = 'Chuyển trạng thái - Liên hệ'; 
-                break;
+                    _title = 'Chuyển trạng thái - Liên hệ';
+                    break;
                 case EKhachHang.Status03:
                     _content = TrangThaiChamSoc3Component;
-                    _title = 'Chuyển trạng thái - Hoàn tất';  
-                break;
+                    _title = 'Chuyển trạng thái - Hoàn tất';
+                    break;
             }
             this.opened = true;
             const windowRef = this.windowService2.open({
@@ -243,7 +277,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             const param = windowRef.content.instance;
             param.action = this.action;
             param.model = this.model;
-    
+
             windowRef.result.subscribe(result => {
                 if (result instanceof WindowCloseResult) {
                     this.opened = false;
@@ -252,10 +286,9 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             });
         }
         else {
-            alert("Trạng thái không tồn tại !"); 
+            alert("Trạng thái không tồn tại !");
         }
-       
+
     }
-    
+
 }
- 
