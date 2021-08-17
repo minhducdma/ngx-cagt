@@ -171,7 +171,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
                     const body = [...new Set(this.selectionIds)]
                     this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
                         this.selectionIds = [];
-                        this.showToast('success','Thành công','Xóa thành công');
+                        this.showMessage('success','Thành công','Xóa thành công');
                         this.loadItems();
                     });
                 }

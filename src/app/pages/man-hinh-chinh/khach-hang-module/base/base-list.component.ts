@@ -163,7 +163,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         return result;
     }
 
-    showToast(type:string, title: string, body: string) {
+    showMessage(type:string, title: string, body: string) {
         const config = {
             status: type,
         };
