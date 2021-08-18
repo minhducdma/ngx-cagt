@@ -68,7 +68,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             title: "Chăm sóc khách hàng",
             content: FormChamSocKhachHangComponent,
             width: 900,
-            top: 10,
+            top: 100,
             autoFocusedElement: 'body',
         });
         const param = windowRef.content.instance;

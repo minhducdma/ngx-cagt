@@ -12,3 +12,12 @@
 .k-grid-header .k-header {
     font-weight: bold;
 }
+
+kendo-window.k-widget.k-window.ng-star-inserted {
+    z-index: 999 !important;
+}
+
+.k-overlay.ng-star-inserted {
+    z-index: 998 !important;
+
+}
