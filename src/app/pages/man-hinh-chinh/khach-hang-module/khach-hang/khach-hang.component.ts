@@ -22,23 +22,29 @@ import { takeUntil } from 'rxjs/operators';
 export class KhachHangComponent extends BaseListComponent<IKhachHang> implements OnInit {
     url: string = UrlConstant.ROUTE.KHACH_HANG_KENDO;
     modelSearch = {
-        keyword: '',
+        filter: null,
         trangThaiKhachHangs: null,
-        loaiKhachHangs: '',
+        loaiKhachHangs: null,
         nguonKhachHangs: null,
         nguoiPhuTrachs: null,
-        sapXep: null,
-        kichBan: null,
         thoiGianTu: null,
         thoiGianDen: null,
-        danhSachNhanVien: '',
-        hoTen: null,
-        diaChi: null,
-        email: null,
-        soDienThoai: null,
-        ngaySinh: null,
-
     };
+
+    private get extendQueryOptions() {
+        return {
+
+            filter: this.modelSearch.filter ? this.modelSearch.filter : null,
+            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null,
+            loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null,
+            nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null,
+            nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.convertArrToStr(this.modelSearch.nguoiPhuTrachs) : null,
+            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
+            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null,
+            ...this.queryOptions,
+            isAsc: false,
+        };
+    }
 
     constructor(
         injector: Injector,
@@ -54,30 +60,6 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     onStateChange(state: State) {
         this.gridState = state;
         this.loadItems();
-    }
-
-    private get extendQueryOptions() {
-        return {
-
-            keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null,
-            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null,
-            loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null,
-            nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null,
-            nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.modelSearch.nguoiPhuTrachs : null,
-            sapXep: this.modelSearch.sapXep ? this.modelSearch.sapXep : null,
-            kichBan: this.modelSearch.kichBan ? this.modelSearch.kichBan : null,
-            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
-            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null,
-            hoTen: this.modelSearch.hoTen ? this.modelSearch.hoTen : null,
-            diaChi: this.modelSearch.diaChi ? this.modelSearch.diaChi : null,
-            email: this.modelSearch.email ? this.modelSearch.email : null,
-            soDienThoai: this.modelSearch.soDienThoai ? this.modelSearch.soDienThoai : null,
-            ngaySinh: this.modelSearch.ngaySinh ? this.modelSearch.ngaySinh : null,
-
-
-            ...this.queryOptions,
-            isAsc: false,
-        };
     }
 
     loadItems() {
@@ -96,7 +78,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         const windowRef = this.windowService2.open({
             title: this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
             content: FormKhachHangComponent,
-            width: 900,
+            width: 1200,
             top: 100,
             autoFocusedElement: 'body',
         });
@@ -211,23 +193,16 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     resetHandler() {
         this.modelSearch = {
-            keyword: '',
+            filter: null,
             trangThaiKhachHangs: null,
-            loaiKhachHangs: '',
+            loaiKhachHangs: null,
             nguonKhachHangs: null,
             nguoiPhuTrachs: null,
-            sapXep: null,
-            kichBan: null,
             thoiGianTu: null,
             thoiGianDen: null,
-            danhSachNhanVien: '',
-            hoTen: null,
-            diaChi: null,
-            email: null,
-            soDienThoai: null,
-            ngaySinh: null,
-
         };
+
+        this.loadItems();
     }
 
     importHandler() {

@@ -1,4 +1,7 @@
 <nb-card>
+    <nb-card-header>
+        Tìm kiếm
+    </nb-card-header>
     <nb-card-body>
         <div class="row">
             <div class="col-md-12 col-lg-3 col-xxxl-3">
@@ -15,73 +18,73 @@
             </div>
         </div>
     </nb-card-body>
-    <nb-card-body>
-        <form>
-            <div class="row">
-                <div class="col-md-12 col-lg-3 col-xxxl-3">
-                    <div class="form-group ">
-                        <label for="exampleInputEmail1" class="label">Tìm kiếm</label>
-                        <input type="email" class="w-100 " nbInput fullWidth id="exampleInputEmail1" placeholder="Tên KH, SĐT, Tiêu đề CSKH">
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-3 col-xxxl-3">
-
-                    <div class="form-group ">
-                        <label for="exampleInputEmail1" class="label">Chọn khoảng thời gian:</label>
-                        <nb-card-body>
-                            <input nbInput placeholder="08/14/2021 - 08/14/2021" [nbDatepicker]="rangepicker">
-                            <nb-rangepicker #rangepicker></nb-rangepicker>
-                        </nb-card-body>
-                    </div>
-
-                </div>
-                <div class="col-md-12 col-lg-6 col-xxxl-6">
-
-                    <div class="row">
-                        <div class="col-md-12 col-lg-4 col-xxxl-4">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="label">Tình trạng:</label>
-                                <nb-select selected="1" class="w-100 ">
-                                    <nb-option value="1">Option 1</nb-option>
-                                    <nb-option value="2">Option 2</nb-option>
-                                </nb-select>
-                            </div>
+    <div *ngIf="!isChild">
+        <nb-card-body>
+            <form>
+                <div class="row">
+                    <div class="col-md-12 col-lg-3 col-xxxl-3">
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1" class="label">Tìm kiếm</label>
+                            <input type="email" class="w-100 " nbInput fullWidth id="exampleInputEmail1" placeholder="Tên KH, SĐT, Tiêu đề CSKH">
                         </div>
-                        <div class="col-md-12 col-lg-4 col-xxxl-4">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="label">NV Phụ trách</label>
-                                <nb-select selected="1" class="w-100 ">
-                                    <nb-option value="1">Option 1</nb-option>
-                                    <nb-option value="2">Option 2</nb-option>
-                                </nb-select>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-4 col-xxxl-2">
-                            <div class="form-group">
-                                <label class="label">Số lượng</label>
-                                <input nbInput class="w-100 " type="number" [(ngModel)]="duration" name="timeout">
-                            </div>
-                        </div>
-
                     </div>
-
-                </div>
-                <div class="col-md-12 col-lg-12 col-xxxl-12 ">
-
-                    <div class="col-md-6 offset-md-3 text-center">
-                        <button class="mr-1" nbButton status="primary" size="small" (click)="onSearchChange()"> 
-                            <i class="fa fa-search"></i> Tìm kiếm
-                        </button>
-                        <button class="mr-1" nbButton status="warning" size="small" (click)="resetHandler()">
-                            <i class="fa fa-search"></i> Làm mới
-                        </button>
+                    <div class="col-md-12 col-lg-3 col-xxxl-3">
+    
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1" class="label">Chọn khoảng thời gian:</label>
+                            <nb-card-body>
+                                <input nbInput placeholder="08/14/2021 - 08/14/2021" [nbDatepicker]="rangepicker">
+                                <nb-rangepicker #rangepicker></nb-rangepicker>
+                            </nb-card-body>
+                        </div>
+    
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-xxxl-6">
+    
+                        <div class="row">
+                            <div class="col-md-12 col-lg-4 col-xxxl-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="label">Tình trạng:</label>
+                                    <nb-select selected="1" class="w-100 ">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 col-xxxl-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="label">NV Phụ trách</label>
+                                    <nb-select selected="1" class="w-100 ">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 col-xxxl-2">
+                                <div class="form-group">
+                                    <label class="label">Số lượng</label>
+                                    <input nbInput class="w-100 " type="number" [(ngModel)]="duration" name="timeout">
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xxxl-12 ">
+    
+                        <div class="col-md-6 offset-md-3 text-center">
+                            <button class="mr-2" nbButton status="primary" size="medium" (click)="onSearchChange()"> 
+                                <i class="fa fa-search mr-2"></i> Tìm kiếm
+                            </button>
+                            <button class="mr-2" nbButton status="warning" size="medium" (click)="resetHandler()">
+                                <i class="fa fa-search mr-2"></i> Làm mới
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-        </form>
-    </nb-card-body>
+            </form>
+        </nb-card-body>
+    </div>
 </nb-card>
 
 
@@ -89,7 +92,7 @@
     <nb-card-header>
         Chăm sóc khách hàng
     </nb-card-header>
-    <nb-card-body class="group-button text-right pb-0">
+    <nb-card-body class="group-button text-right pb-0" *ngIf="!isChild">
         <button nbButton status="primary" (click)="addHandler()">Thêm mới</button>
         <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
             Xóa
@@ -103,10 +106,6 @@
         </button>
     </nb-card-body> -->
     <nb-card-body>
-
-
-
-
         <nb-tabset>
             <nb-tab class="pl-0 pr-0" tabTitle="Tất cả">
                 <kendo-grid class="kendo_custom " [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds"
