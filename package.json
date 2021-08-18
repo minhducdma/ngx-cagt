@@ -101,8 +101,7 @@
     "@abp/ng.tenant-management": "~4.3.3",
     "@abp/ng.theme.basic": "~4.3.3",
     "@abp/ng.theme.shared": "~4.3.3",
-    "ckeditor4-angular": "^0.1.2",
-    "@ng-select/ng-select": "^2.16.0"
+    "ckeditor4-angular": "^0.1.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.1.0",
