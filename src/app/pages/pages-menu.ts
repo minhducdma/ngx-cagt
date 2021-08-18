@@ -27,6 +27,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/admin/kho-de/lam-bai-thi',
         home: true,
     },
+    {
+        title: 'Đề thi',
+        icon: 'edit-outline',
+        link: '/pages/admin/kho-de/de-thi',
+        home: true,
+    },
     // {
     //   title: 'E-commerce',
     //   icon: 'shopping-cart-outline',

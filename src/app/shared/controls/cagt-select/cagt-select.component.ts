@@ -85,5 +85,25 @@ export class CagtSelectComponent implements ControlValueAccessor {
                 }
             });
     }
+    loadTranngThaiKhachHang() {
+        this.apiService
+            .get(this.url + `?tenBang=GetKhachHangs&tenCot=trangThaiKhachHang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
+    loadLoaiChamSoc() {
+        this.apiService
+            .get(this.url + `?tenBang=GetChamSocKhachHangs&tenCot=loaichamsoc`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
 
 }

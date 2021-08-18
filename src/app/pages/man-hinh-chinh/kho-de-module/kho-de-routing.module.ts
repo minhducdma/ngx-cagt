@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DeThiComponent } from './de-thi/de-thi.component';
 import { KhoDeComponent } from './kho-de.component';
 import { LamBaiThiComponent } from './lam-bai-thi/lam-bai-thi.component';
 import { TaoDeThiComponent } from './tao-de-thi/tao-de-thi.component';
@@ -16,6 +17,10 @@ const routes: Routes = [{
             path: 'lam-bai-thi',
             component: LamBaiThiComponent,
         },
+        {
+            path: 'de-thi',
+            component: DeThiComponent,
+        },
     ],
 }];
 
@@ -23,10 +28,11 @@ const routes: Routes = [{
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class KhachHangRoutingModule { }
+export class KhoDeRoutingModule { }
 
 export const routedComponents = [
     TaoDeThiComponent,
     LamBaiThiComponent,
-    KhoDeComponent
+    KhoDeComponent,
+    DeThiComponent,
 ];

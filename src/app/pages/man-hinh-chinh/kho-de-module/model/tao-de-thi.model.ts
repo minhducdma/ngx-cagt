@@ -22,3 +22,9 @@ export interface IDapAn{
     creatorId: string,
     id: number
 }
+export interface IDeThi{
+    id: 0,
+    tenDeThi: string,
+    loaiDeThi: string,
+    trangThaiDeThi: string
+}

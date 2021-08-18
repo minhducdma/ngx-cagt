@@ -59,7 +59,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         return {
           
             keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null ,
-            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null ,
+            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.convertArrToStr(this.modelSearch.trangThaiKhachHangs) : null ,
             loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null , 
             nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null ,
             nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.modelSearch.nguoiPhuTrachs : null ,
@@ -80,7 +80,9 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     }
  
     loadItems() {
+        debugger
         this.apiService.post(this.url,this.extendQueryOptions)
+        
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
