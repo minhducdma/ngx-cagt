@@ -97,7 +97,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             title: this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
             content: FormKhachHangComponent,
             width: 900,
-            top: 60,
+            top: 100,
             autoFocusedElement: 'body',
         });
         const param = windowRef.content.instance;
@@ -117,7 +117,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             title: 'Chăm sóc khách hàng',
             content: ChamSocKhachHangComponent,
             width: 1200,
-            top: 10,
+            top: 100,
             autoFocusedElement: 'body',
         });
         const param = windowRef.content.instance;
