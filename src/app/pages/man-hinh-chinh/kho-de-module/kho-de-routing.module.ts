@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { KhoDeComponent } from './kho-de.component';
 import { LamBaiThiComponent } from './lam-bai-thi/lam-bai-thi.component';
+import { QuanLyDeThiComponent } from './quan-ly-de-thi/quan-ly-de-thi.component';
 import { TaoDeThiComponent } from './tao-de-thi/tao-de-thi.component';
 
 const routes: Routes = [{
@@ -16,6 +17,10 @@ const routes: Routes = [{
             path: 'lam-bai-thi',
             component: LamBaiThiComponent,
         },
+        {
+            path: 'de-thi',
+            component: QuanLyDeThiComponent,
+        },
     ],
 }];
 
@@ -29,4 +34,5 @@ export const routedComponents = [
     TaoDeThiComponent,
     LamBaiThiComponent,
     KhoDeComponent,
+    QuanLyDeThiComponent
 ];

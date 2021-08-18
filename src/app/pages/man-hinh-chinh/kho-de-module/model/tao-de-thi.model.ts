@@ -19,16 +19,10 @@ export interface ICauHoi {
 }
 
 export interface IDapAn{
-    cauHoiId: number,
-    noiDungCauHoi: string,
-    isDapAnDung: boolean,
-    creationTime: number,
-    creatorId: string,
-    id: number
-}
-export interface IDeThi{
-    id: 0,
-    tenDeThi: string,
-    loaiDeThi: string,
-    trangThaiDeThi: string
+    cauHoiId: number;
+    noiDungCauHoi: string;
+    isDapAnDung: boolean;
+    creationTime: number;
+    creatorId: string;
+    id: number;
 }

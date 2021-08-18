@@ -5,84 +5,121 @@
     <nb-card-body>
         <div class="row">
             <div class="col-md-12 col-lg-3 col-xxxl-3">
-                <nb-alert class="box_alert m-0" status="primary"> Tổng số<span class="report_nb">3</span> </nb-alert>
+                <nb-alert class="box_alert m-0" status="primary"> Tổng số<span class="report_nb text-right w-100 pr-4">3</span> </nb-alert>
             </div>
             <div class="col-md-12 col-lg-3 col-xxxl-3">
-                <nb-alert class="box_alert m-0" status="success">Mới tạo<span class="report_nb">3</span></nb-alert>
+                <nb-alert class="box_alert m-0" status="success">Mới tạo<span class="report_nb text-right w-100 pr-4">3</span></nb-alert>
             </div>
             <div class="col-md-12 col-lg-3 col-xxxl-3">
-                <nb-alert class="box_alert m-0" status="info">Chăm sóc thành công<span class="report_nb>">3</span></nb-alert>
+                <nb-alert class="box_alert m-0" status="info">Chăm sóc thành công<span class="report_nb text-right w-100 pr-4">3</span></nb-alert>
             </div>
             <div class="col-md-12 col-lg-3 col-xxxl-3">
-                <nb-alert class="box_alert m-0" status="warning">Chăm sóc không thành công<span class="report_nb">3</span></nb-alert>
+                <nb-alert class="box_alert m-0" status="warning">Chăm sóc không thành công<span class="report_nb text-right w-100 pr-4">3</span></nb-alert>
             </div>
         </div>
     </nb-card-body>
     <div *ngIf="!isChild">
         <nb-card-body>
-            <form>
-                <div class="row">
-                    <div class="col-md-12 col-lg-3 col-xxxl-3">
-                        <div class="form-group ">
-                            <label for="exampleInputEmail1" class="label">Tìm kiếm</label>
-                            <input type="email" class="w-100 " nbInput fullWidth id="exampleInputEmail1" placeholder="Tên KH, SĐT, Tiêu đề CSKH">
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-3 col-xxxl-3">
-    
-                        <div class="form-group ">
-                            <label for="exampleInputEmail1" class="label">Chọn khoảng thời gian:</label>
-                            <nb-card-body>
-                                <input nbInput placeholder="08/14/2021 - 08/14/2021" [nbDatepicker]="rangepicker">
-                                <nb-rangepicker #rangepicker></nb-rangepicker>
-                            </nb-card-body>
-                        </div>
-    
-                    </div>
-                    <div class="col-md-12 col-lg-6 col-xxxl-6">
-    
-                        <div class="row">
-                            <div class="col-md-12 col-lg-4 col-xxxl-4">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1" class="label">Tình trạng:</label>
-                                    <nb-select selected="1" class="w-100 ">
-                                        <nb-option value="1">Option 1</nb-option>
-                                        <nb-option value="2">Option 2</nb-option>
-                                    </nb-select>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-4 col-xxxl-4">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1" class="label">NV Phụ trách</label>
-                                    <nb-select selected="1" class="w-100 ">
-                                        <nb-option value="1">Option 1</nb-option>
-                                        <nb-option value="2">Option 2</nb-option>
-                                    </nb-select>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-4 col-xxxl-2">
-                                <div class="form-group">
-                                    <label class="label">Số lượng</label>
-                                    <input nbInput class="w-100 " type="number" [(ngModel)]="duration" name="timeout">
-                                </div>
-                            </div>
-    
-                        </div>
-    
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xxxl-12 ">
-    
-                        <div class="col-md-6 offset-md-3 text-center">
-                            <button class="mr-2" nbButton status="primary" size="medium" (click)="onSearchChange()"> 
-                                <i class="fa fa-search mr-2"></i> Tìm kiếm
-                            </button>
-                            <button class="mr-2" nbButton status="warning" size="medium" (click)="resetHandler()">
-                                <i class="fa fa-search mr-2"></i> Làm mới
-                            </button>
+            <div class="row">
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Từ khóa</div>
+                        <div class="col-md-12 col-lg-12">
+                            <input type="text" nbInput class="m-input form-control" [(ngModel)]="modelSearch.filter" />
                         </div>
                     </div>
                 </div>
-            </form>
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
+                        <div class="col-md-12 col-lg-12">
+                            <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" 
+                                [isMulti]="true"
+                                [selected]="modelSearch.loaiKhachHangs" 
+                                [(ngModel)]="modelSearch.loaiKhachHangs">
+                            </ngx-cagt-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Thời gian từ</div>
+                        <div class="col-md-12 col-lg-12">
+                            <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianTu" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Thời gian đến</div>
+                        <div class="col-md-12 col-lg-12">
+                            <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianDen" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Nguồn khách hàng</div>
+                        <div class="col-md-12 col-lg-12">
+                            <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.NGUON_KHACH_HANG" 
+                                [isMulti]="true"
+                                [(ngModel)]="modelSearch.nguonKhachHangs">
+                            </ngx-cagt-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
+                        <div class="col-md-12 col-lg-12">
+                            <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" 
+                                [isMulti]="true"
+                                [(ngModel)]="modelSearch.loaiKhachHangs">
+                            </ngx-cagt-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Người phụ trách</div>
+                        <div class="col-md-12 col-lg-12">
+                            <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH" 
+                                [isMulti]="true"
+                                [(ngModel)]="modelSearch.nguoiPhuTrachs">
+                            </ngx-cagt-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Trạng thái khách hàng</div>
+                        <div class="col-md-12 col-lg-12">
+                            <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_KHACH_HANG" 
+                                [isMulti]="true"
+                                [(ngModel)]="modelSearch.trangThaiKhachHangs">
+                            </ngx-cagt-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="col-md-6 offset-md-3 text-center">
+                        <button class="mr-2" nbButton status="primary" size="medium" (click)="onSearchChange()"> 
+                            <i class="fa fa-search mr-2"></i> Tìm kiếm
+                        </button>
+                        <button class="mr-2" nbButton status="warning" size="medium" (click)="resetHandler()">
+                            <i class="fas fa-redo-alt mr-2"></i> Làm mới
+                        </button>
+                    </div>
+                </div>
+            </div>
         </nb-card-body>
     </div>
 </nb-card>
