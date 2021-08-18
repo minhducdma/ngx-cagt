@@ -48,7 +48,6 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     constructor(
         injector: Injector,
-        protected windowService2: WindowService,
     ) {
         super(injector)
     }
@@ -75,7 +74,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     protected showFormCreateOrUpdate() {
         this.opened = true;
-        const windowRef = this.windowService2.open({
+        const windowRef = this.windowService.open({
             title: this.action == ActionEnum.UPDATE ? 'Cập nhật khách hàng' : 'Thêm mới khách hàng',
             content: FormKhachHangComponent,
             width: 1200,
@@ -95,7 +94,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     }
     protected showFormCSKHUpdate() {
         this.opened = true;
-        const windowRef = this.windowService2.open({
+        const windowRef = this.windowService.open({
             title: 'Chăm sóc khách hàng',
             content: ChamSocKhachHangComponent,
             width: 1200,
@@ -207,7 +206,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     importHandler() {
         this.opened = true;
-        const windowRef = this.windowService2.open({
+        const windowRef = this.windowService.open({
             title: 'Import dữ liệu khách hàng',
             content: FormImportKhachHangComponent,
             width: 800,
@@ -245,7 +244,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
                     break;
             }
             this.opened = true;
-            const windowRef = this.windowService2.open({
+            const windowRef = this.windowService.open({
                 title: _title,
                 content: _content,
                 width: 800,

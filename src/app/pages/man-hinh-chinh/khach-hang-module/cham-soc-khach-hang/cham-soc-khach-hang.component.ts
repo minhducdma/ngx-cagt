@@ -18,28 +18,29 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
   
     url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG;
     modelSearch = {
-        keyword: '',
+        filter: null,
         ngayChamSocTu: null,
         ngayChamSocDen: null,
         loaiChamSoc: null,
-        trangThaiChamSoc: null,
     };
+
+    gridDaChamSoc$ = {
+        data: [],
+        total: 0
+    };
+
     constructor(
         injector: Injector,
-        protected windowService2: WindowService,
     ) {
         super(injector)
     }
     private get extendQueryOptions() {
         return {
-            keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null,
+            keyword: this.modelSearch.filter ? this.modelSearch.filter : null,
             ngayChamSocTu: this.modelSearch.ngayChamSocTu ? this.modelSearch.ngayChamSocTu : null,
             ngayChamSocDen: this.modelSearch.ngayChamSocDen ? this.modelSearch.ngayChamSocDen : null,
             loaiChamSoc: this.modelSearch.loaiChamSoc ? this.convertArrToStr(this.modelSearch.loaiChamSoc) : null,
-            trangThaiChamSoc: this.modelSearch.trangThaiChamSoc ? this.modelSearch.trangThaiChamSoc: null,
-
             ...this.queryOptions,
-            isAsc: false,
         };
     }
     ngOnInit(): void {
@@ -51,7 +52,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
         this.loadItems();
     }
     loadItems() {
-        this.apiService.get(this.url, this.extendQueryOptions)
+        this.apiService.post(this.url, this.extendQueryOptions)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
@@ -64,7 +65,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
 
     protected showFormCreateOrUpdate() {
         this.opened = true;
-        const windowRef = this.windowService2.open({
+        const windowRef = this.windowService.open({
             title: "Chăm sóc khách hàng",
             content: FormChamSocKhachHangComponent,
             width: 900,
@@ -98,11 +99,10 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
 
     resetHandler() {
         this.modelSearch = {
-            keyword: '',
+            filter: null,
             ngayChamSocTu: null,
             ngayChamSocDen: null,
             loaiChamSoc: null,
-            trangThaiChamSoc: null,
         };
     }
     removeHandler(dataItem) {

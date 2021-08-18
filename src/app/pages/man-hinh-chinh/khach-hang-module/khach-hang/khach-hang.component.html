@@ -112,8 +112,10 @@
         <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
             <i class="fa fa-trash mr-2"></i> Xóa
         </button>
-        <button nbButton status="wrapper" (click)="importHandler()"><i class="fa fa-arrow-down mr-2"></i> Import</button>
-        <button nbButton status="success" (click)="exportHandler()"><i class="fa fa-print mr-2"></i>Export</button>
+        <button nbButton status="wrapper" (click)="importHandler()"><i
+                class="fas fa-file-upload mr-2"></i>Import</button>
+        <button nbButton status="success" (click)="exportHandler()"><i
+                class="fas fa-file-download mr-2"></i>Export</button>
     </nb-card-body>
     <kendo-grid [data]="gridView$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
         <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{

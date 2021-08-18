@@ -102,3 +102,42 @@ $nb-themes: nb-register-theme((
 button.select-button {
   height: 100% !important;
 }
+
+.group-button {
+  text-align: right;
+}
+
+.group-button button {
+  margin-right: 5px !important;
+}
+
+.button_box:focus {
+  outline: unset;
+}
+
+.box_botton i {
+  padding: 15px 0;
+  margin-right: 10px;
+}
+
+.custom_table {
+  label {
+      font-weight: bold;
+  }
+  span {
+      padding: 7px 0;
+      font-weight: bold;
+  }
+}
+
+.box_botton {
+  .fa-user {
+      color: #00d78f;
+  }
+  .fa-edit {
+      color: #36f;
+  }
+  .fa-trash {
+      color: #ff3d71;
+  }
+}
