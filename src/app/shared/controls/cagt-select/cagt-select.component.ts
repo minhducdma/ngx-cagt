@@ -61,6 +61,14 @@ export class CagtSelectComponent implements ControlValueAccessor {
             case DropDownListEnum.NGUON_KHACH_HANG:
                 this.loadNguonKhachHang();
                 break;
+
+            case DropDownListEnum.NHAN_VIEN_PHU_TRACH:
+                this.loadNhanVienPhuTrach();
+                break;
+
+            case DropDownListEnum.TRANG_THAI_KHACH_HANG:
+                this.loadTrangThaiKhachHang();
+                break;
         }
     }
 
@@ -77,7 +85,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
 
     loadNguonKhachHang() {
         this.apiService
-            .get(this.url + `?tenBang=GetKhachHangs&tenCot=nguonkhachhang`)
+            .get(this.url + `?tenBang=GetKhachHangs&tenCot=nguonKhachHang`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
@@ -106,4 +114,25 @@ export class CagtSelectComponent implements ControlValueAccessor {
             });
     }
 
+    loadNhanVienPhuTrach(){
+        this.apiService
+        .get(this.url + `?tenBang=GetKhachHangs&tenCot=nhanVienPhuTrach`)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+            if (res) {
+                this.lstData = res
+            }
+        });
+    }
+
+    loadTrangThaiKhachHang(){
+        this.apiService
+        .get(this.url + `?tenBang=GetKhachHangs&tenCot=trangthaikhachhang`)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+            if (res) {
+                this.lstData = res
+            }
+        });
+    }
 }
