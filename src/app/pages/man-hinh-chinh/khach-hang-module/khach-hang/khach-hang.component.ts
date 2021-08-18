@@ -58,23 +58,23 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     private get extendQueryOptions() {
         return {
-
-            keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null,
-            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null,
-            loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null,
-            nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null,
-            nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.modelSearch.nguoiPhuTrachs : null,
-            sapXep: this.modelSearch.sapXep ? this.modelSearch.sapXep : null,
-            kichBan: this.modelSearch.kichBan ? this.modelSearch.kichBan : null,
-            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
-            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null,
-            hoTen: this.modelSearch.hoTen ? this.modelSearch.hoTen : null,
-            diaChi: this.modelSearch.diaChi ? this.modelSearch.diaChi : null,
-            email: this.modelSearch.email ? this.modelSearch.email : null,
-            soDienThoai: this.modelSearch.soDienThoai ? this.modelSearch.soDienThoai : null,
-            ngaySinh: this.modelSearch.ngaySinh ? this.modelSearch.ngaySinh : null,
-
-
+          
+            keyword: this.modelSearch.keyword ? this.modelSearch.keyword : null ,
+            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.convertArrToStr(this.modelSearch.trangThaiKhachHangs) : null ,
+            loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null , 
+            nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null ,
+            nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.modelSearch.nguoiPhuTrachs : null ,
+            sapXep: this.modelSearch.sapXep ? this.modelSearch.sapXep : null ,
+            kichBan: this.modelSearch.kichBan ? this.modelSearch.kichBan : null ,
+            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null ,
+            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null ,
+            hoTen: this.modelSearch.hoTen ? this.modelSearch.hoTen : null ,
+            diaChi: this.modelSearch.diaChi ? this.modelSearch.diaChi : null ,  
+            email: this.modelSearch.email ? this.modelSearch.email : null ,
+            soDienThoai: this.modelSearch.soDienThoai ? this.modelSearch.soDienThoai : null ,
+            ngaySinh: this.modelSearch.ngaySinh ? this.modelSearch.ngaySinh : null ,
+          
+           
             ...this.queryOptions,
             isAsc: false,
         };

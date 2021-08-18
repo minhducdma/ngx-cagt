@@ -2,7 +2,7 @@
     <nb-card-body>
         <div class="row">
             <div class="col-md-12 col-lg-3 col-xxxl-3">
-                <nb-alert class="box_alert m-0" status="primary"> Tổng số<span class="report_nb">3</span> </nb-alert>
+                <nb-alert class="box_alert m-0" status="primary"> Tỏng số<span class="report_nb">3</span> </nb-alert>
             </div>
             <div class="col-md-12 col-lg-3 col-xxxl-3">
                 <nb-alert class="box_alert m-0" status="success">Mới tạo<span class="report_nb">3</span></nb-alert>
@@ -28,7 +28,7 @@
                     <div class="form-group ">
                         <label for="exampleInputEmail1" class="label">Thời gian từ:</label>
                         <nb-card-body>
-                            <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.ngayChamSocTu" />
+                            <input type="date" nbInput class="m-input form-control mr-2" />
                             <nb-rangepicker #rangepicker></nb-rangepicker>
                         </nb-card-body>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="form-group ">
                         <label for="exampleInputEmail1" class="label">Thời gian đến:</label>
                         <nb-card-body>
-                            <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.ngayChamSocDen" />
+                            <input type="date" nbInput class="m-input form-control mr-2" />
                             <nb-rangepicker #rangepicker></nb-rangepicker>
                         </nb-card-body>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="form-group ">
                         <label for="exampleInputEmail1" class="label">Loại chăm sóc:</label>
 
-                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_CHAM_SOC" [isMulti]="true" [(ngModel)]="modelSearch.loaiChamSoc">
+                        <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_CHAM_SOC">
                         </ngx-cagt-select>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         <button class="mr-2" nbButton status="primary" size="small" (click)="onSearchChange()"> 
                             <i class="fa fa-search mr-2"></i> Tìm kiếm
                         </button>
-                        <button class="mr-2" nbButton status="warning" size="small" (click)="resetHandler()">
+                        <button class="mr-2" nbButton status="warning" size="small">
                             <i class="fas fa-redo-alt mr-2"></i> Làm mới
                         </button>
                     </div>
@@ -304,8 +304,7 @@
         </nb-tabset>
 
 
-        <!-- <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
-        </ng2-smart-table> -->
+
 
     </nb-card-body>
 </nb-card>

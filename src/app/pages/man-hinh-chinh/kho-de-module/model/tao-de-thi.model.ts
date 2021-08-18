@@ -18,11 +18,17 @@ export interface ICauHoi {
     randomGUID: number;
 }
 
-export interface IDapAn {
-    cauHoiId: number;
-    noiDungCauHoi: string;
-    isDapAnDung: boolean;
-    creationTime: number;
-    creatorId: string;
-    id: number;
+export interface IDapAn{
+    cauHoiId: number,
+    noiDungCauHoi: string,
+    isDapAnDung: boolean,
+    creationTime: number,
+    creatorId: string,
+    id: number
+}
+export interface IDeThi{
+    id: 0,
+    tenDeThi: string,
+    loaiDeThi: string,
+    trangThaiDeThi: string
 }

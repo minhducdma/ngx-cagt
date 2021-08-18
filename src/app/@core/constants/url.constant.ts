@@ -29,7 +29,8 @@ export const UrlConstant = {
         KHACH_HANG: '/khach-hangs',
         DANH_MUC: '/common/du-lieu-phan-loai-by-table',
         KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais', 
-        KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang'
+        KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
+        CHAM_SOC_KHACH_HANG:'/cham-soc-khach-hangs/kendo-datatable-cham-soc-khach-hang'
     },
 
 }
