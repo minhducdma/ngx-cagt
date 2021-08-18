@@ -10,15 +10,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
         home: true,
     },
     {
-        title: 'Tạo đề thi',
-        icon: 'book-outline',
-        link: '/pages/admin/kho-de/tao-de-thi',
+        title: 'Chăm sóc khách hàng',
+        icon: 'person-done-outline',
+        link: '/pages/admin/quan-ly-khach-hang/cham-soc-khach-hang',
         home: true,
     },
     {
-        title: 'Chăm sóc khách hàng',
+        title: 'Tạo đề thi',
         icon: 'book-outline',
-        link: '/pages/admin/quan-ly-khach-hang/cham-soc-khach-hang',
+        link: '/pages/admin/kho-de/tao-de-thi',
         home: true,
     },
     {
@@ -27,12 +27,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/admin/kho-de/lam-bai-thi',
         home: true,
     },
-    {
-        title: 'Đề thi',
-        icon: 'edit-outline',
-        link: '/pages/admin/kho-de/de-thi',
-        home: true,
-    },
+    // {
+    //     title: 'Đề thi',
+    //     icon: 'edit-outline',
+    //     link: '/pages/admin/kho-de/de-thi',
+    //     home: true,
+    // },
     // {
     //   title: 'E-commerce',
     //   icon: 'shopping-cart-outline',

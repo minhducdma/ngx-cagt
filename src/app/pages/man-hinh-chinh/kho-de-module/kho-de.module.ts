@@ -23,7 +23,6 @@ import { CountdownModule } from '../../../shared/controls/count-down/count-down.
         NbInputModule,
         ThemeModule,
         KhoDeRoutingModule,
-        Ng2SmartTableModule,
         GridModule,
         DialogsModule,
         TooltipModule,
