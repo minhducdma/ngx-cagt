@@ -15,7 +15,7 @@ import { TrangThaiChamSoc3Component } from './trang-thai-cham-soc/trang-thai-cha
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
-    styleUrls: ['.//khach-hang.component.scss'],
+    styleUrls: ['./khach-hang.component.scss'],
 })
 export class KhachHangComponent extends BaseListComponent<IKhachHang> implements OnInit {
     url: string = UrlConstant.ROUTE.KHACH_HANG_KENDO;
