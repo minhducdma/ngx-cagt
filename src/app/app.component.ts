@@ -33,15 +33,17 @@ export class AppComponent implements OnInit {
   }
 
   checkLogin(): void{
+    // alert("Deo co")
     if(!this.oAuthService.hasValidAccessToken()){
-      console.log(1);
+
       this.authService.navigateToLogin();
     }
 
   }
   onContecxtItemSelection(title) {
-    if(title == 'Log out')
+    if(title == 'Log out'){
       this.authService.logout();
       this.authService.navigateToLogin();
+    }
   }
 }
