@@ -1,6 +1,7 @@
-import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Directive, HostListener, inject, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl } from "@angular/forms";
-import { NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
+import { MatDialog } from "@angular/material/dialog";
+import { NbDialogService, NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
 import { PagerSettings } from "@progress/kendo-angular-grid";
 import { State } from "@progress/kendo-data-query";
 import { TooltipDirective } from "@swimlane/ngx-charts";
@@ -14,12 +15,13 @@ import { EKhachHang } from "./base.enum";
 @Directive()
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     @ViewChild(TooltipDirective) public tooltipDir: TooltipDirective;
+    destroy$ = new Subject<void>();
     isLoading = false;
     opened = false;
     dropdownListEnum = DropDownListEnum;
     khachHangEnum = EKhachHang;
     gridView$ = {
-        data:[],
+        data: [],
         total: 0
     };
     gridState: State = {
@@ -31,8 +33,8 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         minimize: false,
         maximize: false,
         fullScreen: true,
-      };
-  
+    };
+
     nhanSuId: number;
     tabName: string;
     openFirstTime = false;
@@ -58,13 +60,15 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     protected apiService: ApiService;
     protected formBuilder: FormBuilder;
     protected notification: NbToastrService;
+    protected dialogService: NbDialogService;
     constructor(
-        injector : Injector
+        injector: Injector
     ) {
         this.windowService = injector.get(NbWindowService)
         this.apiService = injector.get(ApiService)
         this.formBuilder = injector.get(FormBuilder)
         this.notification = injector.get(NbToastrService)
+        this.dialogService = injector.get(NbDialogService)
     }
 
     ngOnInit(): void {
@@ -149,14 +153,24 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         };
     }
 
-    convertArrToStr(obj: any){
+    convertArrToStr(obj: any) {
         let result = '';
-        if(typeof obj !== 'string'){
-            if(obj.length > 0)
+        if (typeof obj !== 'string') {
+            if (obj.length > 0)
                 result = obj.join(",");
-        }else{
+        } else {
             result = obj;
         }
         return result;
+    }
+
+    showMessage(type:string, title: string, body: string) {
+        const config = {
+            status: type,
+        };
+        this.notification.show(
+            body,
+            title,
+            config);
     }
 }

@@ -1,6 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { WindowService, WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { State } from '@progress/kendo-data-query';
+import { takeUntil } from 'rxjs/operators';
 import { ActionEnum } from '../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { BaseListComponent } from '../base/base-list.component';
@@ -35,6 +36,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
 
     loadItems() {
         this.apiService.get(this.url, {})
+            .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
@@ -94,7 +96,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
         //         email: null,
         //         soDienThoai: null,
         //         ngaySinh: null,
-      
+
         // };
     }
     removeHandler(dataItem) {
@@ -116,11 +118,11 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
         }
     }
 
-    importHandler() { 
-        alert("Chức năng đang được cập nhật !"); 
+    importHandler() {
+        alert("Chức năng đang được cập nhật !");
     }
     exportHandler() {
-        alert("Chức năng đang được cập nhật !"); 
+        alert("Chức năng đang được cập nhật !");
     }
-  
+
 }

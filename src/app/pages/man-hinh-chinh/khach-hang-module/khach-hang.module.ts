@@ -16,6 +16,8 @@ import { ControlErrorModule } from '../../../shared/controls/control-error/contr
 import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
 
 @NgModule({
   imports: [
@@ -51,6 +53,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatMenuModule,
     NbAlertModule,
     NbTabsetModule,
+    AlertDialogModule,
   ],
   declarations: [
     ...routedComponents,

@@ -7,7 +7,7 @@ import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
-import { CKEditorModule } from 'ng2-ckeditor';
+import { CKEditorModule } from 'ckeditor4-angular';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormDirectiveModule } from '../../../shared/directives/forms';
 import { ThemeModule } from '../../../@theme/theme.module';
