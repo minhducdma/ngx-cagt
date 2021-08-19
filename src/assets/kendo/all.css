@@ -29,13 +29,14 @@ kendo-window.k-widget.k-window.ng-star-inserted {
 }
 .k-icon.k-plus{
     text-decoration: none;
-
 }
 .k-icon.k-plus:before {
     font-family: FontAwesome;
     content: '\f0da';
 }
-
+.k-icon.k-minus{
+    text-decoration: none;
+}
 .k-icon.k-minus:before {
     font-family: FontAwesome;
     content: '\f0d7';
