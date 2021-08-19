@@ -65,10 +65,10 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <div class="col-md-6 offset-md-3 text-center">
-                            <button class="mr-2" nbButton status="primary" size="medium" (click)="onSearchChange()">
+                            <button class="mr-2" nbButton status="primary" size="small" (click)="onSearchChange()">
                                 <i class="fa fa-search mr-2"></i> Tìm kiếm
                             </button>
-                            <button class="mr-2" nbButton status="warning" size="medium" (click)="resetHandler()">
+                            <button class="mr-2" nbButton status="warning" size="small" (click)="resetHandler()">
                                 <i class="fas fa-redo-alt mr-2"></i> Làm mới
                             </button>
                         </div>
@@ -82,15 +82,19 @@
     <nb-card-header>
         Chăm sóc khách hàng
     </nb-card-header>
-    <nb-card-body class="group-button text-right pb-0" *ngIf="!isChild">
+    <nb-card-body class="group-button pb-0" *ngIf="!isChild">
         <!-- <button nbButton status="primary" (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button> -->
-        <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
-            <i class="fa fa-trash mr-2"></i> Xóa
-        </button>
-        <button nbButton status="wrapper" (click)="importHandler()"><i
+        <div class="float-left">
+            <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
+                <i class="fa fa-trash mr-2"></i> Xóa
+            </button>
+        </div>
+        <div class="float-right">
+            <button nbButton status="basic" (click)="importHandler()"><i
                 class="fas fa-file-upload mr-2"></i>Import</button>
         <button nbButton status="success" (click)="exportHandler()"><i
                 class="fas fa-file-download mr-2"></i>Export</button>
+        </div>
     </nb-card-body>
     <nb-card-body>
         <nb-tabset>
@@ -114,7 +118,7 @@
                     </kendo-grid-checkbox-column>
                     <kendo-grid-column class="text-center" [width]="80" *ngIf="!isChild">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                            <button nbButton status="info" [matMenuTriggerFor]="menu">
+                            <button nbButton status="info" size="small" [matMenuTriggerFor]="menu">
                                     <i class="fa fa-bars"></i>
                                 </button>
                             <mat-menu #menu="matMenu">

@@ -37,7 +37,7 @@ import { CountdownModule } from '../../../shared/controls/count-down/count-down.
         ReactiveFormsModule,
         FormDirectiveModule,
         NbDialogModule,
-        //TreeViewModule,
+        TreeViewModule,
         CKEditorModule,
         NbCheckboxModule,
         //DragDropModule,
