@@ -1,7 +1,7 @@
 export interface ICauHoi {
     id: number;
     parentId: number;
-    codeCauHoi: number;
+    codeCauHoi: string;
     tenCauHoi: string;
     noiDungCauHoi: string;
     chiaSeUsers: string;
@@ -14,15 +14,24 @@ export interface ICauHoi {
     items: ICauHoi[];
     root: number;
     level: number;
-    orderDetail: number;
+    orderDetail: string;
     randomGUID: number;
+    cauTraLoi: string;
+    dapAnChon: number[];
 }
 
 export interface IDapAn{
     cauHoiId: number;
     noiDungCauHoi: string;
     isDapAnDung: boolean;
-    creationTime: number;
-    creatorId: string;
     id: number;
 }
+
+export interface IDeThi{
+  id: number;
+  tenDeThi: string;
+  loaiDeThi: string;
+  trangThaiDeThi: string;
+}
+
+

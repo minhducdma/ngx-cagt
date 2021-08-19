@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
 
 	checkLogin(): void {
 		if (!this.oAuthService.hasValidAccessToken()) {
-			console.log(1);
 			this.authService.navigateToLogin();
 		}
 
