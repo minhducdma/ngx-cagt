@@ -25,11 +25,14 @@ export const UrlConstant = {
         // PROFILE: '/management/profile',
         // MODULE: '/management/module',
         UPLOAD_FILE: 'https://apisipm.migroup.asia/FileUpload/UploadFiles',
+        STORE_FILE:'https://apisipm.migroup.asia/Uploads/',
 
         KHACH_HANG: '/khach-hangs',
         DANH_MUC: '/common/du-lieu-phan-loai-by-table',
-        KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais', 
-        KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang'
+        KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais',
+        KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
+        CREATE_DE_THI: '/cau-hois/or-update-de-thi_v1',
+        LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/1'
     },
 
 }

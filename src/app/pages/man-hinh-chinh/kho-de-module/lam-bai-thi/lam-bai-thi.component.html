@@ -5,24 +5,26 @@
                 Làm bài thi
             </nb-card-header>
             <nb-card-body>
+              <div *ngFor="let ht of giaoDienCauHois">
+                <div [innerHTML]="ht.noiDungCauHoi"></div>
+                <hr>
+              </div>
+
                 <cdk-virtual-scroll-viewport style="height: 400px" itemSize="90">
                     <nb-card>
                         <nb-card-header>
-                            Câu 1
+                          <div [innerHTML]="currentCauHoi.noiDungCauHoi"></div>
                         </nb-card-header>
                         <nb-card-body>
+                          <div *ngIf="currentCauHoi.dapAns.length <= 0">
+                            <h4>Ok</h4>
+                            <ckeditor [config]="ckConfig" [(ngModel)]="currentCauHoi.cauTraLoi"></ckeditor>
+                          </div>
+                          <div *ngFor="let item of currentCauHoi.dapAns">
                             <p>
-                                <nb-checkbox status="info">Đáp án 1</nb-checkbox>
+                              <nb-checkbox status="info"><div [innerHTML]="item.noiDungCauHoi"></div></nb-checkbox>
                             <p>
-                            <p>
-                                <nb-checkbox status="info">Đáp án 2</nb-checkbox>
-                            <p>
-                            <p>
-                                <nb-checkbox status="info">Đáp án 3</nb-checkbox>
-                            <p>
-                            <p>
-                                <nb-checkbox status="info">Đáp án 4</nb-checkbox>
-                            <p>
+                          </div>
                         </nb-card-body>
                     </nb-card>
                 </cdk-virtual-scroll-viewport>
@@ -45,13 +47,16 @@
             <nb-card-body>
                 <nb-alert status="info" class="text-center">Danh sách câu hỏi</nb-alert>
                 <cdk-virtual-scroll-viewport style="height: 215px" itemSize="90">
-                    <button nbButton hero class="m-1" status="success">1</button>
-                    <button nbButton hero class="m-1" status="success">2</button>
-                    <button nbButton hero class="m-1" status="success">3</button>
-                    <button nbButton hero class="m-1" status="success">4</button>
-                    <button nbButton hero class="m-1" status="basic">5</button>
-                    <button nbButton hero class="m-1" status="basic">6</button>
-                    <button nbButton hero class="m-1" status="basic">7</button>
+
+                    <div *ngFor="let item of cauHoiTreeLeaf;let i = index">
+                      <div *ngIf="i==0">
+                        <button nbButton hero class="m-1" status="success">{{i+1}}</button>
+                      </div>
+                      <div *ngIf="i>0">
+                        <button nbButton hero class="m-1" status="basic">{{i+1}}</button>
+                      </div>
+                    </div>
+
                 </cdk-virtual-scroll-viewport>
             </nb-card-body>
         </nb-card>

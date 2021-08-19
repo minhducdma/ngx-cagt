@@ -32,25 +32,8 @@ export class AppComponent implements OnInit {
 		this.seoService.trackCanonicalChanges();
 	}
 
-<<<<<<< HEAD
-  checkLogin(): void{
-    // alert("Deo co")
-    if(!this.oAuthService.hasValidAccessToken()){
-
-      this.authService.navigateToLogin();
-    }
-
-  }
-  onContecxtItemSelection(title) {
-    if(title == 'Log out'){
-      this.authService.logout();
-      this.authService.navigateToLogin();
-    }
-  }
-=======
 	checkLogin(): void {
 		if (!this.oAuthService.hasValidAccessToken()) {
-			console.log(1);
 			this.authService.navigateToLogin();
 		}
 
@@ -61,5 +44,4 @@ export class AppComponent implements OnInit {
 			this.authService.navigateToLogin();
 		}
 	}
->>>>>>> 37377af0099190f2eec9e5505ac30c3ad8c4c1c2
 }

@@ -7,8 +7,8 @@ export const config = {
             removePlugins: 'horizontalrule,tabletools,specialchar,about,list,others',
             removeButtons: 'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Textarea,Find,Select,Button,HiddenField,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,ShowBlocks,Cut,Copy,Paste,Table,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent,Blockquote',
         height: '200',
-        filebrowserBrowseUrl: UrlConstant.ROUTE.UPLOAD_FILE,
-        filebrowserUploadUrl: UrlConstant.ROUTE.UPLOAD_FILE
+        filebrowserImageBrowseUrl: UrlConstant.ROUTE.STORE_FILE,
+        filebrowserImageUploadUrl: UrlConstant.ROUTE.UPLOAD_FILE
     }
 }
 
