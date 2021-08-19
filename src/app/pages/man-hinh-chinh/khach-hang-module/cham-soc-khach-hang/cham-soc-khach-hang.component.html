@@ -88,11 +88,9 @@
             <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
                 <i class="fa fa-trash mr-2"></i> Xóa
             </button>
-        </div>
-        <div class="float-right">
             <button nbButton status="basic" (click)="importHandler()"><i
                 class="fas fa-file-upload mr-2"></i>Import</button>
-        <button nbButton status="success" (click)="exportHandler()"><i
+            <button nbButton status="success" (click)="exportHandler()"><i
                 class="fas fa-file-download mr-2"></i>Export</button>
         </div>
     </nb-card-body>

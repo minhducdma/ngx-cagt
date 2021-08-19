@@ -211,7 +211,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             title: 'Import dữ liệu khách hàng',
             content: FormImportKhachHangComponent,
             width: 800,
-            top: 60,
+            top: 100,
             autoFocusedElement: 'body',
         });
         windowRef.result.subscribe(result => {

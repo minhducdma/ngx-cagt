@@ -120,8 +120,6 @@
             <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
                 <i class="fa fa-trash mr-2"></i> Xóa
             </button>
-        </div>
-        <div class="float-right">
             <button nbButton status="basic" (click)="importHandler()"><i
                 class="fas fa-file-upload mr-2"></i>Import</button>
             <button nbButton status="success" (click)="exportHandler()"><i
@@ -186,7 +184,7 @@
             </kendo-grid-column>
             <kendo-grid-column field="loaiKhachHang" title="Loại khách hàng" [width]="140">
             </kendo-grid-column>
-            <kendo-grid-column field="trangThaiKhachHang" title="Trạng thái khách hàng" [width]="140">
+            <kendo-grid-column field="trangThaiKhachHang" title="Trạng thái" [width]="140">
             </kendo-grid-column>
             <ng-template kendoGridDetailTemplate let-dataItem>
                 <section>
