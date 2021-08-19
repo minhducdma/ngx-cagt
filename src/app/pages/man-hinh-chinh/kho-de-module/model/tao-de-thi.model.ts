@@ -20,12 +20,13 @@ export interface ICauHoi {
     dapAnChon: number[];
 }
 
-export interface IDapAn {
+export interface IDapAn{
     cauHoiId: number;
     noiDungCauHoi: string;
     isDapAnDung: boolean;
     id: number;
 }
+<<<<<<< HEAD
 
 export interface IDeThi{
   id: number;
@@ -35,3 +36,5 @@ export interface IDeThi{
 }
 
 
+=======
+>>>>>>> a8004fddf4f765992a9e837fbc7e646f51e972f4

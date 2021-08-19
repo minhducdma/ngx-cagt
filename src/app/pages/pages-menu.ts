@@ -2,31 +2,57 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
     //Link ICON: https://akveo.github.io/eva-icons/#/
+    {
+        title: 'Quản lý khách hàng',
+        icon: 'person-outline',
+        children: [
+            {
+                title: 'Khách hàng',
+                icon: 'people-outline',
+                link: '/pages/admin/quan-ly-khach-hang/khach-hang',
+                home: true,
+            },
+            {
+                title: 'Chăm sóc khách hàng',
+                icon: 'person-add-outline',
+                link: '/pages/admin/quan-ly-khach-hang/cham-soc-khach-hang',
+                home: true,
+            },
+        ],
+    },
 
     {
-        title: 'Khách hàng',
-        icon: 'people-outline',
-        link: '/pages/admin/quan-ly-khach-hang/khach-hang',
-        home: true,
+        title: 'Quản lý kho đề',
+        icon: 'file-outline',
+        children: [
+            {
+                title: 'Danh sách đề thi',
+                icon: 'file-text-outline',
+                link: '/pages/admin/kho-de/de-thi',
+                home: true,
+            },
+            {
+                title: 'Tạo đề thi',
+                icon: 'book-outline',
+                link: '/pages/admin/kho-de/tao-de-thi',
+                home: true,
+            },
+            {
+                title: 'Làm bài thi',
+                icon: 'edit-outline',
+                link: '/pages/admin/kho-de/lam-bai-thi',
+                home: true,
+            },
+        ],
     },
-    {
-        title: 'Tạo đề thi',
-        icon: 'book-outline',
-        link: '/pages/admin/kho-de/tao-de-thi',
-        home: true,
-    },
-    {
-        title: 'Chăm sóc khách hàng',
-        icon: 'book-outline',
-        link: '/pages/admin/quan-ly-khach-hang/cham-soc-khach-hang',
-        home: true,
-    },
-    {
-        title: 'Làm bài thi',
-        icon: 'edit-outline',
-        link: '/pages/admin/kho-de/lam-bai-thi',
-        home: true,
-    },
+
+
+    // {
+    //     title: 'Đề thi',
+    //     icon: 'edit-outline',
+    //     link: '/pages/admin/kho-de/de-thi',
+    //     home: true,
+    // },
     // {
     //   title: 'E-commerce',
     //   icon: 'shopping-cart-outline',

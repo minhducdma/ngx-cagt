@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAccordionModule, NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
@@ -27,10 +27,10 @@ import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-d
     NbInputModule,
     ThemeModule,
     KhachHangRoutingModule,
-    Ng2SmartTableModule,
+    //Ng2SmartTableModule,
     GridModule,
-    DialogsModule,
-    TooltipModule,
+    //DialogsModule,
+    //TooltipModule,
     WindowModule,
     NbButtonModule,
     CommonModule,
@@ -42,18 +42,19 @@ import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-d
     ReactiveFormsModule,
     FormDirectiveModule,
     NbDialogModule,
-    TreeViewModule,
+    //TreeViewModule,
     CKEditorModule,
     NbCheckboxModule,
     DragDropModule,
     ControlErrorModule,
     CagtSelectModule,
     NbToastrModule,
-    DropDownsModule,
+    //DropDownsModule,
     MatMenuModule,
     NbAlertModule,
     NbTabsetModule,
     AlertDialogModule,
+    NbAccordionModule
   ],
   declarations: [
     ...routedComponents,

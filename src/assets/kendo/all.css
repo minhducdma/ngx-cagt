@@ -1,7 +1,9 @@
 .k-dialog-titlebar {
     border-color: inherit;
     color: #ffffff;
-    background-color: #3366ff;
+    background: linear-gradient(to right, #3a7bd5, #3a6073);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .k-in {
@@ -11,4 +13,17 @@
 
 .k-grid-header .k-header {
     font-weight: bold;
+}
+
+kendo-window.k-widget.k-window.ng-star-inserted {
+    z-index: 999 !important;
+}
+
+.k-overlay.ng-star-inserted {
+    z-index: 998 !important;
+
+}
+
+kendo-window.k-widget.k-window.ng-star-inserted {
+    border-radius: 10px;
 }

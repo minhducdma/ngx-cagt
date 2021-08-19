@@ -57,9 +57,20 @@ export class CagtSelectComponent implements ControlValueAccessor {
             case DropDownListEnum.LOAI_KHACH_HANG:
                 this.loadLoaiKhachHang();
                 break;
-
             case DropDownListEnum.NGUON_KHACH_HANG:
                 this.loadNguonKhachHang();
+                break;
+            case DropDownListEnum.NHAN_VIEN_PHU_TRACH:
+                this.loadNhanVienPhuTrach();
+                break;
+            case DropDownListEnum.TRANG_THAI_KHACH_HANG:
+                this.loadTrangThaiKhachHang();
+                break;
+            case DropDownListEnum.LOAI_CHAM_SOC:
+                this.loadLoaiChamSoc();
+                break;
+            case DropDownListEnum.TRANG_THAI_CHAM_SOC:
+                this.loadTrangThaiChamSoc();
                 break;
         }
     }
@@ -77,7 +88,27 @@ export class CagtSelectComponent implements ControlValueAccessor {
 
     loadNguonKhachHang() {
         this.apiService
-            .get(this.url + `?tenBang=GetKhachHangs&tenCot=nguonkhachhang`)
+            .get(this.url + `?tenBang=GetKhachHangs&tenCot=nguonKhachHang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
+    loadTranngThaiKhachHang() {
+        this.apiService
+            .get(this.url + `?tenBang=GetKhachHangs&tenCot=trangThaiKhachHang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
+    loadLoaiChamSoc() {
+        this.apiService
+            .get(this.url + `?tenBang=GetChamSocKhachHangs&tenCot=loaichamsoc`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
@@ -86,4 +117,35 @@ export class CagtSelectComponent implements ControlValueAccessor {
             });
     }
 
+    loadNhanVienPhuTrach() {
+        this.apiService
+            .get(this.url + `?tenBang=GetKhachHangs&tenCot=nhanVienPhuTrach`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
+
+    loadTrangThaiKhachHang() {
+        this.apiService
+            .get(this.url + `?tenBang=GetKhachHangs&tenCot=trangthaikhachhang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
+    loadTrangThaiChamSoc(){
+        this.apiService
+            .get(this.url + `?tenBang=GetChamSocKhachHangs&tenCot=trangThaiChamSoc`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
 }

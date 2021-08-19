@@ -1,12 +1,24 @@
 import { IGenerice } from "./base.model";
 
 export interface IKhachHang extends IGenerice {
-    id: 5;
+    id: number;
     hoTen: string;
-    ngaySinh: string;
-    gioiTinh: string;
     diaChi: string;
-    soDienThoai: string;
     email: string;
+    soDienThoai: string;
+    ngaySinh: string;
+    nguonKhachHang: string;
     loaiKhachHang: string;
+    nhanVienPhuTrach: string;
+    trangThaiKhachHang: string;
+    trinhDo: string;
+    taiKhoanMangXaHoi: string;
+    hoTenBo: string;
+    soDienThoaiBo: string;
+    emailBo: string;
+    hoTenMe: string;
+    soDienThoaiMe: string;
+    emailMe: string;
+    ghiChu: string;
+    quanTamDuHoc: string;
 }

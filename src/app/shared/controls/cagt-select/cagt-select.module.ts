@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CagtSelectComponent } from './cagt-select.component';
 import { NbSelectModule } from '@nebular/theme';
 
-
 @NgModule({
     declarations: [CagtSelectComponent],
     entryComponents: [CagtSelectComponent],

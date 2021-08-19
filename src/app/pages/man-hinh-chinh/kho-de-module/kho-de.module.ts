@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAccordionModule, NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
@@ -11,7 +11,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormDirectiveModule } from '../../../shared/directives/forms';
 import { ThemeModule } from '../../../@theme/theme.module';
-import { KhachHangRoutingModule, routedComponents } from './kho-de-routing.module';
+import { KhoDeRoutingModule, routedComponents } from './kho-de-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CountdownModule } from '../../../shared/controls/count-down/count-down.module';
 
@@ -22,11 +22,10 @@ import { CountdownModule } from '../../../shared/controls/count-down/count-down.
         NbIconModule,
         NbInputModule,
         ThemeModule,
-        KhachHangRoutingModule,
-        Ng2SmartTableModule,
+        KhoDeRoutingModule,
         GridModule,
         DialogsModule,
-        TooltipModule,
+        //TooltipModule,
         WindowModule,
         NbButtonModule,
         CommonModule,
@@ -41,10 +40,12 @@ import { CountdownModule } from '../../../shared/controls/count-down/count-down.
         TreeViewModule,
         CKEditorModule,
         NbCheckboxModule,
-        DragDropModule,
+        //DragDropModule,
         ScrollingModule,
         CountdownModule,
-        NbAlertModule
+        NbAlertModule,  
+        NbTabsetModule,
+        NbAccordionModule
     ],
     declarations: [
         ...routedComponents,

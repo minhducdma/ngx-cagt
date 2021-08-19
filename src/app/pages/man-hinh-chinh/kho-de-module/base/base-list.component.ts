@@ -1,7 +1,7 @@
-import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Directive, HostListener, inject, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
 import { NbDialogService, NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
-import { WindowService } from "@progress/kendo-angular-dialog";
 import { PagerSettings } from "@progress/kendo-angular-grid";
 import { State } from "@progress/kendo-data-query";
 import { TooltipDirective } from "@swimlane/ngx-charts";
@@ -10,7 +10,6 @@ import { ReziseTable } from "../../../../@core/constants/app.constant";
 import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { ApiService } from "../../../../@core/services/api.service";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
-import { EKhachHang } from "./base.enum";
 
 @Directive()
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
@@ -19,7 +18,6 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     isLoading = false;
     opened = false;
     dropdownListEnum = DropDownListEnum;
-    khachHangEnum = EKhachHang;
     gridView$ = {
         data: [],
         total: 0
@@ -56,7 +54,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.pageHeight = event.target.innerHeight - ReziseTable + 30;
     }
 
-    protected windowService: WindowService;
+    protected windowService: NbWindowService;
     protected apiService: ApiService;
     protected formBuilder: FormBuilder;
     protected notification: NbToastrService;
@@ -64,7 +62,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     constructor(
         injector: Injector
     ) {
-        this.windowService = injector.get(WindowService)
+        this.windowService = injector.get(NbWindowService)
         this.apiService = injector.get(ApiService)
         this.formBuilder = injector.get(FormBuilder)
         this.notification = injector.get(NbToastrService)

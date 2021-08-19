@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ActionEnum } from '../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { BaseListComponent } from '../base/base-list.component';
-import { IKhachHang } from '../model/khach-hang.model';
+import { IChamSocKhachHang } from '../model/cham-soc-khach-hang.model';
 import { FormChamSocKhachHangComponent } from './form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
 
 @Component({
@@ -13,18 +13,52 @@ import { FormChamSocKhachHangComponent } from './form-cham-soc-khach-hang/form-c
     templateUrl: './cham-soc-khach-hang.component.html',
     styleUrls: ['./cham-soc-khach-hang.component.scss'],
 })
-export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> implements OnInit {
+export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHang> implements OnInit {
     @Input() isChild = false;
-    duration = 20;
-    url: string = UrlConstant.ROUTE.KHACH_HANG;
+    url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG_KENDO;
+    url_common: string = UrlConstant.ROUTE.DU_LIEU_PHAN_LOAI_BY_TABLE;
+    countChamSoc = {
+        tongSo: 0,
+        daChamSoc: 0,
+        chuaChamSoc: 0
+    }
+
+    trangThaiCS = {
+        daChamSoc: "Đã chăm sóc",
+        chuaChamSoc: "Chưa chăm sóc"
+    }
+
+    modelSearch = {
+        filter: null,
+        ngayChamSocTu: null,
+        ngayChamSocDen: null,
+        loaiChamSoc: null,
+    };
+
+    gridDaChamSoc$ = {
+        data: [],
+        total: 0
+    };
+
+    gridChuaChamSoc$ = {
+        data: [],
+        total: 0
+    };
+
     constructor(
         injector: Injector,
-        protected windowService2: WindowService,
-
     ) {
         super(injector)
     }
-
+    private get extendQueryOptions() {
+        return {
+            keyword: this.modelSearch.filter ? this.modelSearch.filter : null,
+            ngayChamSocTu: this.modelSearch.ngayChamSocTu ? this.modelSearch.ngayChamSocTu : null,
+            ngayChamSocDen: this.modelSearch.ngayChamSocDen ? this.modelSearch.ngayChamSocDen : null,
+            loaiChamSoc: this.modelSearch.loaiChamSoc ? this.convertArrToStr(this.modelSearch.loaiChamSoc) : null,
+            ...this.queryOptions,
+        };
+    }
     ngOnInit(): void {
         super.ngOnInit();
     }
@@ -33,25 +67,51 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
         this.gridState = state;
         this.loadItems();
     }
-
     loadItems() {
-        this.apiService.get(this.url, {})
+        this.apiService.post(this.url, this.extendQueryOptions)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
                     this.gridView$.data = res.items;
-                    this.gridView$.total = res.totalCount;
+                    this.gridView$.total = res.pagingInfo.totalItems;
+                    this.countChamSoc.tongSo = res.pagingInfo.totalItems;
+
+                    this.gridDaChamSoc$.data = res.items.filter(x => x.trangThaiChamSoc == this.trangThaiCS.daChamSoc);
+
+                    this.gridChuaChamSoc$.data = res.items.filter(x => x.trangThaiChamSoc == this.trangThaiCS.chuaChamSoc);
+
+                    this.getCountChamSocKhachHang();
+                }
+            });
+    }
+
+    getCountChamSocKhachHang() {
+        this.apiService
+            .get(this.url_common + `?tenBang=GetChamSocKhachHangs&tenCot=trangThaiChamSoc`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    res.map((e: any) => {
+                        if (e.ten == this.trangThaiCS.daChamSoc) {
+                            this.countChamSoc.daChamSoc = e.total;
+                            this.gridDaChamSoc$.total = e.total;
+                        }
+                        else if (e.ten == this.trangThaiCS.chuaChamSoc) {
+                            this.countChamSoc.chuaChamSoc = e.total;
+                            this.gridChuaChamSoc$.total = e.total;
+                        }
+                    })
                 }
             });
     }
 
     protected showFormCreateOrUpdate() {
         this.opened = true;
-        const windowRef = this.windowService2.open({
+        const windowRef = this.windowService.open({
             title: "Chăm sóc khách hàng",
             content: FormChamSocKhachHangComponent,
             width: 900,
-            top: 10,
+            top: 100,
             autoFocusedElement: 'body',
         });
         const param = windowRef.content.instance;
@@ -80,24 +140,12 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IKhachHang> imp
     }
 
     resetHandler() {
-        // this.modelSearch = {
-        //     keyword: '',
-        //     trangThaiKhachHangs: null,
-        //     loaiKhachHangs: '',
-        //     nguonKhachHangs: null,
-        //     nguoiPhuTrachs: null,
-        //     sapXep: null,
-        //     kichBan: null,
-        //     thoiGianTu: null,
-        //     thoiGianDen: null,
-        //     danhSachNhanVien: '',
-        //     hoTen: null,
-        //         diaChi: null,
-        //         email: null,
-        //         soDienThoai: null,
-        //         ngaySinh: null,
-
-        // };
+        this.modelSearch = {
+            filter: null,
+            ngayChamSocTu: null,
+            ngayChamSocDen: null,
+            loaiChamSoc: null,
+        };
     }
     removeHandler(dataItem) {
         this.selectionIds = [];
