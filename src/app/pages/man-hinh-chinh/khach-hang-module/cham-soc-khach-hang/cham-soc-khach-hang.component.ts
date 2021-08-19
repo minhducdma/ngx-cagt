@@ -23,6 +23,11 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
         chuaChamSoc: 0
     }
 
+    trangThaiCS = {
+        daChamSoc: "Đã chăm sóc",
+        chuaChamSoc: "Chưa chăm sóc"
+    }
+
     modelSearch = {
         filter: null,
         ngayChamSocTu: null,
@@ -71,28 +76,30 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
                     this.gridView$.total = res.pagingInfo.totalItems;
                     this.countChamSoc.tongSo = res.pagingInfo.totalItems;
 
-                    this.gridDaChamSoc$.data = res.items.filter(x=>x.trangThaiChamSoc == "Đã chăm sóc");
-                    this.gridDaChamSoc$.total = res.pagingInfo.totalItems;
+                    this.gridDaChamSoc$.data = res.items.filter(x => x.trangThaiChamSoc == this.trangThaiCS.daChamSoc);
 
-                    this.gridChuaChamSoc$.data = res.items.filter(x=>x.trangThaiChamSoc == "Chưa chăm sóc");
-                    this.gridChuaChamSoc$.total = res.pagingInfo.totalItems;
+                    this.gridChuaChamSoc$.data = res.items.filter(x => x.trangThaiChamSoc == this.trangThaiCS.chuaChamSoc);
 
                     this.getCountChamSocKhachHang();
                 }
             });
     }
 
-    getCountChamSocKhachHang(){
+    getCountChamSocKhachHang() {
         this.apiService
             .get(this.url_common + `?tenBang=GetChamSocKhachHangs&tenCot=trangThaiChamSoc`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    res.map((e:any)=>{
-                        if(e.ten == "Đã chăm sóc")
+                    res.map((e: any) => {
+                        if (e.ten == this.trangThaiCS.daChamSoc) {
                             this.countChamSoc.daChamSoc = e.total;
-                        else if(e.ten == "Chưa chăm sóc")
+                            this.gridDaChamSoc$.total = e.total;
+                        }
+                        else if (e.ten == this.trangThaiCS.chuaChamSoc) {
                             this.countChamSoc.chuaChamSoc = e.total;
+                            this.gridChuaChamSoc$.total = e.total;
+                        }
                     })
                 }
             });
