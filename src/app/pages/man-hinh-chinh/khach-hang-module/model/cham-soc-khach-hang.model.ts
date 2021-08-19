@@ -8,4 +8,7 @@ export interface IChamSocKhachHang extends IGenerice {
     feedBackKhahHang: string;
     loaiChamSoc: string;
     trangThaiChamSoc: string;
+    khachHangId: number;
+    baiThiThuId: number;
+    requestXepLopId: number;
 }

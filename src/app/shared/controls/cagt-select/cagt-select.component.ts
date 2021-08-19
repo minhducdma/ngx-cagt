@@ -69,6 +69,9 @@ export class CagtSelectComponent implements ControlValueAccessor {
             case DropDownListEnum.LOAI_CHAM_SOC:
                 this.loadLoaiChamSoc();
                 break;
+            case DropDownListEnum.TRANG_THAI_CHAM_SOC:
+                this.loadTrangThaiChamSoc();
+                break;
         }
     }
 
@@ -128,6 +131,16 @@ export class CagtSelectComponent implements ControlValueAccessor {
     loadTrangThaiKhachHang() {
         this.apiService
             .get(this.url + `?tenBang=GetKhachHangs&tenCot=trangthaikhachhang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res
+                }
+            });
+    }
+    loadTrangThaiChamSoc(){
+        this.apiService
+            .get(this.url + `?tenBang=GetChamSocKhachHangs&tenCot=trangThaiChamSoc`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {

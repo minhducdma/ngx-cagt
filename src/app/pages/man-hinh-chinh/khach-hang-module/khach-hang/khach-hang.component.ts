@@ -14,6 +14,7 @@ import { TrangThaiChamSoc2Component } from './trang-thai-cham-soc/trang-thai-cha
 import { TrangThaiChamSoc3Component } from './trang-thai-cham-soc/trang-thai-cham-soc-3/trang-thai-cham-soc-3.component';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { takeUntil } from 'rxjs/operators';
+import { FormChamSocKhachHangComponent } from '../cham-soc-khach-hang/form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -96,7 +97,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         this.opened = true;
         const windowRef = this.windowService.open({
             title: 'Chăm sóc khách hàng',
-            content: ChamSocKhachHangComponent,
+            content: FormChamSocKhachHangComponent,
             width: 1200,
             top: 100,
             autoFocusedElement: 'body',
@@ -117,7 +118,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     editHandlerCSKH(dataItem) {
         // tslint:disable-next-line: no-unsafe-any
         this.model = dataItem;
-        this.action = ActionEnum.UPDATE;
+        this.action = ActionEnum.CREATE;
         this.showFormCSKHUpdate();
     }
 

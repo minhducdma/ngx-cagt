@@ -15,8 +15,14 @@ import { FormChamSocKhachHangComponent } from './form-cham-soc-khach-hang/form-c
 })
 export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHang> implements OnInit {
     @Input() isChild = false;
-  
-    url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG;
+    url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG_KENDO;
+    url_common: string = UrlConstant.ROUTE.DU_LIEU_PHAN_LOAI_BY_TABLE;
+    countChamSoc = {
+        tongSo: 0,
+        daChamSoc: 0,
+        chuaChamSoc: 0
+    }
+
     modelSearch = {
         filter: null,
         ngayChamSocTu: null,
@@ -25,6 +31,11 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
     };
 
     gridDaChamSoc$ = {
+        data: [],
+        total: 0
+    };
+
+    gridChuaChamSoc$ = {
         data: [],
         total: 0
     };
@@ -58,10 +69,34 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
                 if (res && res.items) {
                     this.gridView$.data = res.items;
                     this.gridView$.total = res.pagingInfo.totalItems;
+                    this.countChamSoc.tongSo = res.pagingInfo.totalItems;
+
+                    this.gridDaChamSoc$.data = res.items.filter(x=>x.trangThaiChamSoc == "Đã chăm sóc");
+                    this.gridDaChamSoc$.total = res.pagingInfo.totalItems;
+
+                    this.gridChuaChamSoc$.data = res.items.filter(x=>x.trangThaiChamSoc == "Chưa chăm sóc");
+                    this.gridChuaChamSoc$.total = res.pagingInfo.totalItems;
+
+                    this.getCountChamSocKhachHang();
                 }
             });
     }
 
+    getCountChamSocKhachHang(){
+        this.apiService
+            .get(this.url_common + `?tenBang=GetChamSocKhachHangs&tenCot=trangThaiChamSoc`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    res.map((e:any)=>{
+                        if(e.ten == "Đã chăm sóc")
+                            this.countChamSoc.daChamSoc = e.total;
+                        else if(e.ten == "Chưa chăm sóc")
+                            this.countChamSoc.chuaChamSoc = e.total;
+                    })
+                }
+            });
+    }
 
     protected showFormCreateOrUpdate() {
         this.opened = true;

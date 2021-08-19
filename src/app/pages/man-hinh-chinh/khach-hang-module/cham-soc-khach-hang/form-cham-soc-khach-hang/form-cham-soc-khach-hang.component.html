@@ -1,35 +1,49 @@
-<nb-card>
-    <nb-card-header>Thông tin chăm sóc khách hàng</nb-card-header>
-    <nb-card-body>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="inputName" class="label">Thời gian</label>
-                    <input type="text" nbInput fullWidth id="inputFirstName" placeholder="">
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="inputNumber" class="label">Người phụ trách</label>
-                    <input type="text" nbInput fullWidth id="inputLastName" placeholder="">
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="inputDrict" class="label">Tiêu đề</label>
-                    <input type="email" nbInput fullWidth id="inputEmail" placeholder="">
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="exampleInputEmail" class="label">Nội dung</label>
-                    <textarea rows="2" nbInput fullWidth placeholder="Text Area"></textarea>
-                </div>
+<form class="m-form" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="label">Mã chăm sóc</label>
+                <input type="text" nbInput fullWidth formControlName="codeChamSoc" placeholder="">
             </div>
         </div>
-    </nb-card-body>
-</nb-card>
-<div class="custom_bt">
-    <button type="submit" nbButton status="primary">Save</button>
-    <button class="ml-2" type="submit" nbButton status="danger">Cancer</button>
-</div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="label">Ngày chăm sóc dự kiến</label>
+                <input type="date" nbInput fullWidth formControlName="ngayChamSocDuKien" placeholder="">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="label">Loại chăm sóc</label>
+                <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_CHAM_SOC" [isMulti]="false"
+                    formControlName="loaiChamSoc">
+                </ngx-cagt-select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="label">Trạng thái chăm sóc</label>
+                <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_CHAM_SOC" [isMulti]="false"
+                    formControlName="trangThaiChamSoc">
+                </ngx-cagt-select>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="label">Nội dung chăm sóc</label>
+                <textarea rows="3" nbInput fullWidth formControlName="noiDungChamSoc"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="label">Feedback khách hàng</label>
+                <textarea rows="3" nbInput fullWidth formControlName="feedBackKhahHang"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="text-right border-form-footer">
+        <button nbButton status="primary" type="button" (click)="closeForm()"
+            class="btn_custom btn_df mr-1">Hủy</button>
+        <button nbButton status="danger" type="submit" class="btn_custom btn_add">Lưu</button>
+    </div>
+</form>
