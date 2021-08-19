@@ -26,7 +26,6 @@ export interface IDapAn{
     isDapAnDung: boolean;
     id: number;
 }
-<<<<<<< HEAD
 
 export interface IDeThi{
   id: number;
@@ -36,5 +35,3 @@ export interface IDeThi{
 }
 
 
-=======
->>>>>>> a8004fddf4f765992a9e837fbc7e646f51e972f4

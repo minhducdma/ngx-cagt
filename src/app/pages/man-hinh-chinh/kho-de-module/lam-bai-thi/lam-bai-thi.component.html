@@ -9,11 +9,10 @@
                 <div [innerHTML]="ht.noiDungCauHoi"></div>
                 <hr>
               </div>
-
                 <cdk-virtual-scroll-viewport style="height: 400px" itemSize="90">
                     <nb-card>
                         <nb-card-header>
-                          <div [innerHTML]="currentCauHoi.noiDungCauHoi"></div>
+                          <div [innerHTML]="currentCauHoi.noiDungCauHoi | safeHtml"></div>
                         </nb-card-header>
                         <nb-card-body>
                           <div *ngIf="currentCauHoi.dapAns.length <= 0">
