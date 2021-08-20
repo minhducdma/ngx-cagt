@@ -12,7 +12,7 @@ import { baseUrl } from '../environments/environment';
 export const environment = {
   production: true,
   application: {
-    baseUrl,
+    baseUrl: baseUrl,
     name: 'SiPM',
     logoUrl: '',
   },

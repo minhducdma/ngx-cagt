@@ -15,7 +15,7 @@ exports.config = {
     }
   },
   directConnect: true,
-  baseUrl,
+  baseUrl: baseUrl,
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

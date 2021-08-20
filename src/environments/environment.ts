@@ -11,12 +11,12 @@
 
 import { Environment } from '@abp/ng.core';
 
-export const baseUrl = 'localhost:4200';
+export const baseUrl = 'http://localhost:4200';
 
 export const environment = {
   production: false,
   application: {
-    baseUrl,
+    baseUrl: baseUrl,
     name: 'SiPM',
     logoUrl: '',
   },
