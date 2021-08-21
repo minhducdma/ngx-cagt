@@ -1,0 +1,15 @@
+<input
+    #autocompleteInput
+    nbInput
+    fullWidth
+    [(ngModel)]="value"
+    [nbAutocomplete]="autoNgModel"
+    />
+<nb-autocomplete #autoNgModel (selectedChange)="onSelectionChange($event)">
+    <nb-option *ngFor="let option of lstData" [value]="option">
+        <div class="w-100">
+            <span class="float-left">{{option}}</span>
+            <button class="float-right" style="border: none; background: none; color: #ff3d71;" (click)="removeItem(option)"><i class="fa fa-trash" *ngIf="!fixedLstDataStr.includes(option)"></i></button>
+        </div>
+    </nb-option>
+</nb-autocomplete>
