@@ -8,6 +8,7 @@ import { timer } from 'rxjs';
 })
 export class CountDownComponent implements OnInit {
     @Input() interval: number;
+    @Input() isStart: boolean;
     @Output() onComplete = new EventEmitter();
 
     public countdown: string;
@@ -19,13 +20,15 @@ export class CountDownComponent implements OnInit {
     ngOnInit() {
         this.interval = this.interval * 60;
         this.countdown = this.getTime();
-        const countdownObservable = timer(1000, 1000).subscribe(val => {
-            this.manipulateInterval();
-            this.countdown = this.getTime();
-            if (this.interval === 0) {
-                this.countdownCompleted();
-            }
-        });
+        if(this.isStart){
+            const countdownObservable = timer(1000, 1000).subscribe(val => {
+                this.manipulateInterval();
+                this.countdown = this.getTime();
+                if (this.interval === 0) {
+                    this.countdownCompleted();
+                }
+            });
+        }
     }
 
     private getTime(): string {

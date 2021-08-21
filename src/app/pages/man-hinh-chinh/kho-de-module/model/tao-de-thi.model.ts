@@ -34,6 +34,8 @@ export interface IDeThi{
   tenDeThi: string;
   loaiDeThi: string;
   trangThaiDeThi: string;
+  tongThoiGian: number,
+  tongSoDiem: number,
 }
 
 
