@@ -17,7 +17,8 @@ export interface ICauHoi {
     orderDetail: string;
     randomGUID: number;
     cauTraLoi: string;
-    dapAnChon: number[];
+
+    dapAnChonSingle: number;
 }
 
 export interface IDapAn{
@@ -25,6 +26,7 @@ export interface IDapAn{
     noiDungCauHoi: string;
     isDapAnDung: boolean;
     id: number;
+    dapAnChon: boolean;
 }
 
 export interface IDeThi{

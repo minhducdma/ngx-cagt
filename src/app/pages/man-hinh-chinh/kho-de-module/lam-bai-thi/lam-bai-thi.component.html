@@ -5,8 +5,8 @@
                 Làm bài thi
             </nb-card-header>
             <nb-card-body>
-              <div *ngFor="let ht of giaoDienCauHois">
-                <div [innerHTML]="ht.noiDungCauHoi"></div>
+              <div *ngFor="let ht of giaoDienCauHois; let i = index">
+                <div style="display:inline" [innerHTML]="ht.noiDungCauHoi"></div>
                 <hr>
               </div>
                 <cdk-virtual-scroll-viewport style="height: 400px" itemSize="90">
@@ -15,13 +15,21 @@
                           <div [innerHTML]="currentCauHoi.noiDungCauHoi | safeHtml"></div>
                         </nb-card-header>
                         <nb-card-body>
-                          <div *ngIf="currentCauHoi.dapAns.length <= 0">
-                            <h4>Ok</h4>
+                          <div *ngIf='currentDapAnFlag == "ckeditor"'>
                             <ckeditor [config]="ckConfig" [(ngModel)]="currentCauHoi.cauTraLoi"></ckeditor>
                           </div>
-                          <div *ngFor="let item of currentCauHoi.dapAns">
-                            <p>
-                              <nb-checkbox status="info"><div [innerHTML]="item.noiDungCauHoi"></div></nb-checkbox>
+                          <div *ngIf='currentDapAnFlag == "radio"'>
+                            <nb-radio-group [(ngModel)]="currentCauHoi.dapAnChonSingle">
+                              <nb-radio
+                                *ngFor="let item of currentCauHoi.dapAns"
+                                [value]="item.id">
+                                <div [innerHTML]="item.noiDungCauHoi"></div>
+                              </nb-radio>
+                            </nb-radio-group>
+                          </div>
+                          <div *ngIf='currentDapAnFlag == "checkbox"'>
+                            <p *ngFor="let item of currentCauHoi.dapAns">
+                              <nb-checkbox [(ngModel)]="item.dapAnChon" status="info"><div [innerHTML]="item.noiDungCauHoi"></div></nb-checkbox>
                             <p>
                           </div>
                         </nb-card-body>
@@ -46,16 +54,7 @@
             <nb-card-body>
                 <nb-alert status="info" class="text-center">Danh sách câu hỏi</nb-alert>
                 <cdk-virtual-scroll-viewport style="height: 215px" itemSize="90">
-
-                    <div *ngFor="let item of cauHoiTreeLeaf;let i = index">
-                      <div *ngIf="i==0">
-                        <button nbButton hero class="m-1" status="success">{{i+1}}</button>
-                      </div>
-                      <div *ngIf="i>0">
-                        <button nbButton hero class="m-1" status="basic">{{i+1}}</button>
-                      </div>
-                    </div>
-
+                      <button *ngFor="let item of cauHoiTreeLeaf;let i = index" nbButton hero class="m-1" status='{{currentCauHoi.id == item.id ? "success" : "basic" }}' (click)="choosenCurrentCauHoi(item.id)">{{i+1}}</button>
                 </cdk-virtual-scroll-viewport>
             </nb-card-body>
         </nb-card>
@@ -64,15 +63,15 @@
         <nb-card>
             <nb-card-body>
                 <div class="float-left">
-                    <button nbButton size="medium" status="primary" class=" mr-2">
-                        <i class="fa fa-arrow-left mr-2"></i>Câu trước
+                    <button nbButton size="medium" status="primary" class=" mr-2" [hidden]="showNextButton()" (click)="previewRoot()">
+                        <i class="fa fa-arrow-left mr-2"></i>Root trước
                     </button>
-                    <button nbButton size="medium" status="primary">
-                        Câu sau <i class="fa fa-arrow-right ml-2"></i>
+                    <button nbButton size="medium" status="primary" [hidden]="showPrevButton()" (click)="nextRoot()">
+                        Root sau <i class="fa fa-arrow-right ml-2"></i>
                     </button>
                 </div>
                 <div class="float-right">
-                    <button nbButton size="medium" status="success">
+                    <button nbButton size="medium" status="success" (click)="submitBaiThi()">
                         <i class="fa fa-file mr-2"></i>Nộp bài
                     </button>
                 </div>
