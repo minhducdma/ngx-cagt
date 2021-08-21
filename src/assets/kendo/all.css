@@ -41,3 +41,9 @@ kendo-window.k-widget.k-window.ng-star-inserted {
     font-family: FontAwesome;
     content: '\f0d7';
 }
+td.k-detail-cell {
+    background: #FAFAFA;
+}
+td.k-hierarchy-cell {
+    background: #FAFAFA;
+}

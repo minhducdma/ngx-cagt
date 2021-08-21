@@ -7,13 +7,12 @@
 //   production: true,
 // };
 import { Environment } from '@abp/ng.core';
-
-const baseUrl = 'http://localhost:4200';
+import { baseUrl } from '../environments/environment';
 
 export const environment = {
   production: true,
   application: {
-    baseUrl,
+    baseUrl: baseUrl,
     name: 'SiPM',
     logoUrl: '',
   },
