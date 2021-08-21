@@ -1,5 +1,5 @@
-import { ICauHoi } from './../model/tao-de-thi.model';
-import { Component, Injector, OnInit } from '@angular/core';
+import { ICauHoi, IBoDemGio } from './../model/tao-de-thi.model';
+import { Component, Injector, OnInit, SimpleChanges } from '@angular/core';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { ApiService } from "../../../../@core/services/api.service";
 import { ContainsFilterOperatorComponent, GreaterOrEqualToFilterOperatorComponent } from '@progress/kendo-angular-grid';
@@ -8,6 +8,7 @@ import 'ckeditor';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
 import { HtmlParser } from '@angular/compiler';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ngx-lam-bai-thi',
@@ -16,7 +17,7 @@ import { HtmlParser } from '@angular/compiler';
 })
 export class LamBaiThiComponent implements OnInit {
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector,private route: ActivatedRoute) {
     this.apiService = injector.get(ApiService)
   }
   ckConfig = config.basicOption;
@@ -53,31 +54,56 @@ export class LamBaiThiComponent implements OnInit {
   cauTraLoi: [];
   safeHtml: "";
   url: string = UrlConstant.ROUTE.LOAD_DE_THI;
+  boDemGio : IBoDemGio[] = [];
+
+ngOnChanges(changes: SimpleChanges): void {
+  //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+  //Add '${implements OnChanges}' to the class.
+  var deThiId = this.route.snapshot.params.deThiId;
+    var userDetail = this.route.snapshot.params.userDetail;
+    console.log(this.boDemGio);
+    this.loadDeThi(deThiId);
+
+}
 
   ngOnInit() {
-    this.loadDeThi();
+    var deThiId = this.route.snapshot.params.deThiId;
+    var userDetail = this.route.snapshot.params.userDetail;
+    console.log(this.boDemGio);
+    this.loadDeThi(deThiId);
+
 
   }
-
-  completed() {
-  }
-
-  loadDeThi(id: number = 1) {
-    this.apiService.post(this.url, 1).subscribe((res: any) => {
+  loadDeThi(deThiId){
+    this.apiService.post(this.url, deThiId).subscribe((res: any) => {
       // show notification
       this.deThiData = res as ICauHoi[];
       this.maxRoot = Math.max.apply(Math, this.deThiData.map(function(o) { return o.root; }))
+      this.cauHoiTreeRoot = this.deThiData.filter(e => e.level == 1);
+      this.cauHoiTreeRoot.forEach(element => {
+        this.boDemGio.push({
+          ten: element.tenCauHoi,
+          thoiGian: element.tongThoiGian
+        })
+      });
+
       // console.log(this.deThiData);
+
       this.getAllLeaf(this.currentRoot);
 
       // this.notification.show('Success', 'Tạo mới thành công', { status: 'success' });
       // close form
     });
-
-
   }
+
+  completed() {
+  }
+
   getAllRoot() {
-    this.cauHoiTreeRoot = this.deThiData.filter(e => e.level == 0);
+
+    // console.log(this.cauHoiTreeRoot)
+
+
   }
   getAllLeaf(idRoot) {
     var lsCauHoiInRoot = this.deThiData.filter(r => r.root == idRoot);
@@ -163,5 +189,6 @@ export class LamBaiThiComponent implements OnInit {
   submitBaiThi() {
     console.log(this.deThiData);
   }
+
 
 }

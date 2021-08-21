@@ -36,4 +36,8 @@ export interface IDeThi{
   trangThaiDeThi: string;
 }
 
+export interface IBoDemGio{
+  ten: string;
+  thoiGian: number;
+}
 

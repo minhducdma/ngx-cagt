@@ -49,7 +49,39 @@
                     <ngx-count-down interval="0.5" (onComplete)="completed()"></ngx-count-down>
                 </h2>
             </nb-card-header>
+            <nb-card-header>
+              <!-- Set by minutes -->
+
+
+
+
+              <h2 class="text-center text-bold" style="color: red;">
+
+              </h2>
+          </nb-card-header>
         </nb-card>
+        <nb-card>
+          <nb-accordion>
+              <!-- Đặt vòng for ở đây -->
+              <div *ngFor="let item of boDemGio">
+                <h2>ok</h2>
+                <nb-accordion-item>
+                  <nb-accordion-item-header>
+                      {{item.ten}}
+                  </nb-accordion-item-header>
+                  <nb-accordion-item-body>
+                      <h2 class="text-center text-bold text-danger">
+                          <ngx-count-down interval="{{item.thoiGian}}" [isStart]="false" (onComplete)="completed()"></ngx-count-down>
+                      </h2>
+                  </nb-accordion-item-body>
+              </nb-accordion-item>
+
+              </div>
+
+
+
+          </nb-accordion>
+      </nb-card>
         <nb-card>
             <nb-card-body>
                 <nb-alert status="info" class="text-center">Danh sách câu hỏi</nb-alert>

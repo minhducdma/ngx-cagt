@@ -18,9 +18,14 @@ const routes: Routes = [{
             component: LamBaiThiComponent,
         },
         {
+          path: ':deThiId/user/:userDetail',
+          component: LamBaiThiComponent,
+        },
+        {
             path: 'de-thi',
             component: QuanLyDeThiComponent,
         },
+
     ],
 }];
 

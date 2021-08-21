@@ -43,7 +43,7 @@ import { CountdownModule } from '../../../shared/controls/count-down/count-down.
         //DragDropModule,
         ScrollingModule,
         CountdownModule,
-        NbAlertModule,  
+        NbAlertModule,
         NbTabsetModule,
         NbAccordionModule
     ],
