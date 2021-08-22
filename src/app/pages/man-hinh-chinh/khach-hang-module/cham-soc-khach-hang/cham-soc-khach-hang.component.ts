@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { WindowService, WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { State } from '@progress/kendo-data-query';
 import { takeUntil } from 'rxjs/operators';
@@ -14,7 +14,10 @@ import { FormChamSocKhachHangComponent } from './form-cham-soc-khach-hang/form-c
     styleUrls: ['./cham-soc-khach-hang.component.scss'],
 })
 export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHang> implements OnInit {
+    @Input() id: number = 0;
+    @Input() kichBan: number = 0;
     @Input() isChild = false;
+    @Output() onComplete = new EventEmitter<any>();
     url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG_KENDO;
     url_common: string = UrlConstant.ROUTE.DU_LIEU_PHAN_LOAI_BY_TABLE;
     countChamSoc = {
@@ -59,6 +62,12 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             ...this.queryOptions,
         };
     }
+
+    ngOnChange() {
+        debugger
+        this.loadItems();
+    }
+
     ngOnInit(): void {
         super.ngOnInit();
     }
@@ -72,15 +81,16 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
-                    this.gridView$.data = res.items;
-                    this.gridView$.total = res.pagingInfo.totalItems;
-                    this.countChamSoc.tongSo = res.pagingInfo.totalItems;
+                    let data = res.items.filter(x => x.khachHangId == this.id);
+                    this.gridView$.data = data;
+                    // this.gridView$.total = res.pagingInfo.totalItems;
+                    // this.countChamSoc.tongSo = res.pagingInfo.totalItems;
 
-                    this.gridDaChamSoc$.data = res.items.filter(x => x.trangThaiChamSoc == this.trangThaiCS.daChamSoc);
+                    this.gridDaChamSoc$.data = data.filter(x => x.trangThaiChamSoc == this.trangThaiCS.daChamSoc);
 
-                    this.gridChuaChamSoc$.data = res.items.filter(x => x.trangThaiChamSoc == this.trangThaiCS.chuaChamSoc);
+                    this.gridChuaChamSoc$.data = data.filter(x => x.trangThaiChamSoc == this.trangThaiCS.chuaChamSoc);
 
-                    this.getCountChamSocKhachHang();
+                    //this.getCountChamSocKhachHang();
                 }
             });
     }
@@ -105,7 +115,8 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             });
     }
 
-    protected showFormCreateOrUpdate() {
+    showFormCreateOrUpdate() {
+        this.onComplete.emit(true);
         this.opened = true;
         const windowRef = this.windowService.open({
             title: "Chăm sóc khách hàng",
@@ -120,6 +131,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
 
         windowRef.result.subscribe(result => {
             if (result instanceof WindowCloseResult) {
+                this.onComplete.emit(false);
                 this.opened = false;
                 this.loadItems();
             }
@@ -129,12 +141,25 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
     editHandler(dataItem) {
         // tslint:disable-next-line: no-unsafe-any
         this.model = dataItem;
+        this.model.kichBanHienTai = this.kichBan;
         this.action = ActionEnum.UPDATE;
         this.showFormCreateOrUpdate();
     }
 
     addHandler() {
-        this.model = undefined;
+        this.model = {
+            id: 0,
+            codeChamSoc: null,
+            noiDungChamSoc: null,
+            ngayChamSocDuKien: null,
+            feedBackKhahHang: null,
+            loaiChamSoc: null,
+            trangThaiChamSoc: null,
+            khachHangId: this.id,
+            baiThiThuId: 0,
+            requestXepLopId: 0,
+            kichBanHienTai: this.kichBan
+        };
         this.action = ActionEnum.CREATE;
         this.showFormCreateOrUpdate();
     }

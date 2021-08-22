@@ -23,9 +23,16 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label class="label">Trạng thái chăm sóc</label>
-                <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_CHAM_SOC" [isMulti]="false"
-                    formControlName="trangThaiChamSoc">
-                </ngx-cagt-select>
+                <nb-select formControlName="trangThaiChamSoc" fullWidth placeholder="Chọn trạng thái">
+                    <nb-option value="Đã chăm sóc">Đã chăm sóc</nb-option>
+                    <nb-option value="Chưa chăm sóc">Chưa chăm sóc</nb-option>
+                </nb-select>
+            </div>
+        </div>
+        <div class="col-sm-4" *ngIf="this.model.kichBanHienTai == EKichBanCSKH.KichBan2">
+            <div class="form-group">
+                <label class="label">Đề thi</label>
+                <app-trigger-chon-de-thi (dataDeThi)="chonDeThi($event)"></app-trigger-chon-de-thi>
             </div>
         </div>
         <div class="col-sm-12">

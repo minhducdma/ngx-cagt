@@ -15,52 +15,63 @@ import { KhachHangRoutingModule, routedComponents } from './khach-hang-routing.m
 import { ControlErrorModule } from '../../../shared/controls/control-error/control-error.module';
 import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
 import { CagtSelectCrtModule } from '../../../shared/controls/cagt-select-optionCrt/cagt-select-optionCrt.module';
+import { ChonDeThiComponent } from './_components/chon-de-thi/chon-de-thi.component';
+import { TriggerChonDeThiComponent } from './_components/chon-de-thi/trigger-chon-de-thi/trigger-chon-de-thi.component';
+
+const _component = [
+    ChonDeThiComponent,
+    TriggerChonDeThiComponent
+]
 
 @NgModule({
-  imports: [
-    NbCardModule,
-    NbTreeGridModule,
-    NbIconModule,
-    NbInputModule,
-    ThemeModule,
-    KhachHangRoutingModule,
-    //Ng2SmartTableModule,
-    GridModule,
-    //DialogsModule,
-    //TooltipModule,
-    WindowModule,
-    NbButtonModule,
-    CommonModule,
-    NbCheckboxModule,
-    NbDatepickerModule,
-    NbRadioModule,
-    NbSelectModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormDirectiveModule,
-    NbDialogModule,
-    //TreeViewModule,
-    CKEditorModule,
-    NbCheckboxModule,
-    DragDropModule,
-    ControlErrorModule,
-    CagtSelectModule,
-    NbToastrModule,
-    //DropDownsModule,
-    MatMenuModule,
-    NbAlertModule,
-    NbTabsetModule,
-    AlertDialogModule,
-    NbAccordionModule,
-    CagtSelectCrtModule
-  ],
-  declarations: [
-    ...routedComponents,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [
+        NbCardModule,
+        NbTreeGridModule,
+        NbIconModule,
+        NbInputModule,
+        ThemeModule,
+        KhachHangRoutingModule,
+        //Ng2SmartTableModule,
+        GridModule,
+        //DialogsModule,
+        //TooltipModule,
+        WindowModule,
+        NbButtonModule,
+        CommonModule,
+        NbCheckboxModule,
+        NbDatepickerModule,
+        NbRadioModule,
+        NbSelectModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FormDirectiveModule,
+        NbDialogModule,
+        //TreeViewModule,
+        CKEditorModule,
+        NbCheckboxModule,
+        DragDropModule,
+        ControlErrorModule,
+        CagtSelectModule,
+        NbToastrModule,
+        //DropDownsModule,
+        MatMenuModule,
+        NbAlertModule,
+        NbTabsetModule,
+        AlertDialogModule,
+        NbAccordionModule,
+        CagtSelectCrtModule
+    ],
+
+    
+
+    declarations: [
+        ...routedComponents,
+        ..._component
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class KhachHangModule { }

@@ -5,6 +5,7 @@ import { FormUtil } from '../../../../../shared/utils/form';
 import { UrlConstant } from '../../../../../@core/constants/url.constant';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { IKhachHang } from '../../model/khach-hang.model';
+import { EKichBanCSKH } from '../../base/base.enum';
 @Component({
     selector: 'ngx-form-khach-hang',
     templateUrl: './form-khach-hang.component.html',
@@ -70,7 +71,7 @@ export class FormKhachHangComponent extends BaseFormComponent<IKhachHang> implem
             ngaySinh: [null, Validators.required],
             nguonKhachHang: [null],
             loaiKhachHang: [null],
-            nhanVienPhuTrach: [null],
+            nhanVienPhuTrach: [null, Validators.required],
             trangThaiKhachHang: [null],
             trinhDo: [null],
             taiKhoanMangXaHoi: [null],
@@ -82,6 +83,7 @@ export class FormKhachHangComponent extends BaseFormComponent<IKhachHang> implem
             emailMe: [null],
             ghiChu: [null],
             quanTamDuHoc:[null],
+            kichBanHienTai: EKichBanCSKH.KichBan1
         });
     }
 }

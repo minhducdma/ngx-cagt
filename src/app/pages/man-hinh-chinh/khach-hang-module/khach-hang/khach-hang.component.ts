@@ -8,10 +8,7 @@ import { FormImportKhachHangComponent } from './form-import-khach-hang/form-impo
 import { ChamSocKhachHangComponent } from '../cham-soc-khach-hang/cham-soc-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
 import { IKhachHang } from '../model/khach-hang.model';
-import { TrangThaiChamSoc1Component } from './trang-thai-cham-soc/trang-thai-cham-soc-1/trang-thai-cham-soc-1.component';
-import { EKhachHang } from '../base/base.enum';
-import { TrangThaiChamSoc2Component } from './trang-thai-cham-soc/trang-thai-cham-soc-2/trang-thai-cham-soc-2.component';
-import { TrangThaiChamSoc3Component } from './trang-thai-cham-soc/trang-thai-cham-soc-3/trang-thai-cham-soc-3.component';
+import { EKhachHang, EKichBanCSKH } from '../base/base.enum';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { FormChamSocKhachHangComponent } from '../cham-soc-khach-hang/form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
@@ -30,7 +27,31 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         nguoiPhuTrachs: null,
         thoiGianTu: null,
         thoiGianDen: null,
+        kichBan: 0
     };
+
+    currentGrid = this.gridView$;
+
+    gridViewKB1$ = {
+        data: [],
+        total: 0
+    };
+    gridViewKB2$ = {
+        data: [],
+        total: 0
+    };
+    gridViewKB3$ = {
+        data: [],
+        total: 0
+    };
+    gridViewKB4$ = {
+        data: [],
+        total: 0
+    };
+
+    public get EKichBanCSKH(): typeof EKichBanCSKH {
+        return EKichBanCSKH;
+    }
 
     private get extendQueryOptions() {
         return {
@@ -42,6 +63,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.convertArrToStr(this.modelSearch.nguoiPhuTrachs) : null,
             thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
             thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null,
+            kichBan: this.modelSearch.kichBan,
             ...this.queryOptions,
             isAsc: false,
         };
@@ -59,19 +81,22 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     onStateChange(state: State) {
         this.gridState = state;
-        this.loadItems();
+        this.loadItemGrids(this.currentGrid);
     }
 
-    loadItems() {
+    loadItemGrids(gridView) {
         this.apiService.post(this.url, this.extendQueryOptions)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
-                    this.gridView$.data = res.items;
-                    this.gridView$.total = res.pagingInfo.totalItems;
+                    let data = res.items;
+                    gridView.data = data;
+                    gridView.total = res.pagingInfo.totalItems;
                 }
             });
     }
+
+    loadItems() { }
 
     protected showFormCreateOrUpdate() {
         this.opened = true;
@@ -89,7 +114,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         windowRef.result.subscribe(result => {
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
-                this.loadItems();
+                this.loadItemGrids(this.currentGrid);
             }
         });
     }
@@ -111,7 +136,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
-                this.loadItems();
+                this.loadItemGrids(this.currentGrid);
             }
         });
     }
@@ -157,7 +182,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
                         this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
                             this.selectionIds = [];
                             this.showMessage('success', 'Thành công', 'Xóa thành công');
-                            this.loadItems();
+                            this.loadItemGrids(this.currentGrid);
                         });
                     }
                 }
@@ -181,7 +206,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         //             this.apiService.post(this.url + '/many-khach-hangs', body).subscribe(res => {
         //                 this.selectionIds = [];
         //                 alert('Xóa thành công');
-        //                 this.loadItems();
+        //                 this.loadItemGrids();
         //             });
         //         }
         //     }
@@ -200,9 +225,10 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             nguoiPhuTrachs: null,
             thoiGianTu: null,
             thoiGianDen: null,
+            kichBan: 0
         };
 
-        this.loadItems();
+        this.loadItemGrids(this.currentGrid);
     }
 
     importHandler() {
@@ -217,7 +243,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         windowRef.result.subscribe(result => {
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
-                this.loadItems();
+                this.loadItemGrids(this.currentGrid);
             }
         });
     }
@@ -226,47 +252,81 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         alert("Chức năng đang được cập nhật !");
     }
 
-    statusHandler(dataItem: IKhachHang, status?: EKhachHang) {
-        if (status) {
-            let _content = TrangThaiChamSoc1Component;
-            let _title = "";
-            switch (status) {
-                case EKhachHang.Status01:
-                    _content = TrangThaiChamSoc1Component;
-                    _title = 'Chuyển trạng thái - Đăng ký';
-                    break;
-                case EKhachHang.Status02:
-                    _content = TrangThaiChamSoc2Component;
-                    _title = 'Chuyển trạng thái - Liên hệ';
-                    break;
-                case EKhachHang.Status03:
-                    _content = TrangThaiChamSoc3Component;
-                    _title = 'Chuyển trạng thái - Hoàn tất';
-                    break;
-            }
-            this.opened = true;
-            const windowRef = this.windowService.open({
-                title: _title,
-                content: _content,
-                width: 800,
-                top: 10,
-                autoFocusedElement: 'body',
-            });
-            const param = windowRef.content.instance;
-            param.action = this.action;
-            param.model = this.model;
+    // statusHandler(dataItem: IKhachHang, status?: EKhachHang) {
+    //     if (status) {
+    //         let _content = TrangThaiChamSoc1Component;
+    //         let _title = "";
+    //         switch (status) {
+    //             case EKhachHang.Status01:
+    //                 _content = TrangThaiChamSoc1Component;
+    //                 _title = 'Chuyển trạng thái - Đăng ký';
+    //                 break;
+    //             case EKhachHang.Status02:
+    //                 _content = TrangThaiChamSoc2Component;
+    //                 _title = 'Chuyển trạng thái - Liên hệ';
+    //                 break;
+    //             case EKhachHang.Status03:
+    //                 _content = TrangThaiChamSoc3Component;
+    //                 _title = 'Chuyển trạng thái - Hoàn tất';
+    //                 break;
+    //         }
+    //         this.opened = true;
+    //         const windowRef = this.windowService.open({
+    //             title: _title,
+    //             content: _content,
+    //             width: 800,
+    //             top: 10,
+    //             autoFocusedElement: 'body',
+    //         });
+    //         const param = windowRef.content.instance;
+    //         param.action = this.action;
+    //         param.model = this.model;
 
-            windowRef.result.subscribe(result => {
-                if (result instanceof WindowCloseResult) {
-                    this.opened = false;
-                    this.loadItems();
-                }
-            });
-        }
-        else {
-            alert("Trạng thái không tồn tại !");
-        }
+    //         windowRef.result.subscribe(result => {
+    //             if (result instanceof WindowCloseResult) {
+    //                 this.opened = false;
+    //                 this.loadItemGrids();
+    //             }
+    //         });
+    //     }
+    //     else {
+    //         alert("Trạng thái không tồn tại !");
+    //     }
 
+    // }
+
+    selectTab(kichBan) {
+        switch (kichBan.tabTitle) {
+            case "Kịch bản 1":
+                this.modelSearch.kichBan = EKichBanCSKH.KichBan1;
+                this.currentGrid = this.gridViewKB1$;
+                this.loadItemGrids(this.gridViewKB1$);
+                break;
+            case "Kịch bản 2":
+                this.modelSearch.kichBan = EKichBanCSKH.KichBan2;
+                this.currentGrid = this.gridViewKB2$;
+                this.loadItemGrids(this.gridViewKB2$);
+                break;
+            case "Kịch bản 3":
+                this.modelSearch.kichBan = EKichBanCSKH.KichBan3;
+                this.currentGrid = this.gridViewKB3$;
+                this.loadItemGrids(this.gridViewKB3$);
+                break;
+            case "Kịch bản 4":
+                this.modelSearch.kichBan = EKichBanCSKH.KichBan4;
+                this.currentGrid = this.gridViewKB4$;
+                this.loadItemGrids(this.gridViewKB4$);
+                break;
+
+            default:
+                this.modelSearch.kichBan = 0;
+                this.currentGrid = this.gridView$;
+                this.loadItemGrids(this.gridView$);
+                break;
+        }
     }
 
+    completeCSKH(isOpenPopup){
+        this.opened = isOpenPopup;
+    }
 }
