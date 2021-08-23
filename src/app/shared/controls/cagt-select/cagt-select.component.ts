@@ -125,11 +125,14 @@ export class CagtSelectComponent implements ControlValueAccessor {
 
     loadNhanVienPhuTrach() {
         this.apiService
-            .get(this.url + `?tenBang=GetKhachHangs&tenCot=nhanVienPhuTrach`)
+            .get(UrlConstant.ROUTE.GET_USER)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
+                    let data = res.items.map((x:any)=>{
+                        return x.name;
+                    })
+                    this.lstData = data
                 }
             });
     }

@@ -1,0 +1,9 @@
+<div class="w-100 row">
+    <div class="col-10">
+        <input type="text" nbInput placeholder="Chọn đề thi" style="display: inline;" [(ngModel)]="value" disabled>
+    </div>
+    <div class="col-2">
+        <a nbButton status="primary" (click)="chonDeThi()"><i class="fa fa-plus"></i></a>
+    </div>
+</div>
+<div class="k-overlay" *ngIf="opened"></div>

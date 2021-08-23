@@ -3,11 +3,12 @@
         Thông tin đề thi
     </nb-card-header>
     <nb-card-body>
-        <form  class="m-form" novalidate [formGroup]="form" (ngSubmit)="saveListCauHoi()">
+        <form class="m-form" novalidate [formGroup]="form" (ngSubmit)="saveListCauHoi()">
             <div class="row">
                 <div class="form-group m-form__group col-4">
                     <label>Tên đề thi</label>
-                    <input nbInput type="text" fullWidth nbInput class="m-input form-control" formControlName="tenDeThi" />
+                    <input nbInput type="text" fullWidth nbInput class="m-input form-control"
+                        formControlName="tenDeThi" />
                 </div>
                 <div class="form-group m-form__group col-2">
                     <label>Loại đề thi</label>
@@ -23,11 +24,12 @@
                 </div>
                 <div class="form-group m-form__group col-2">
                     <label>Thời gian làm bài</label>
-                    <input nbInput type="number" nbInput class="m-input form-control" formControlName="tongThoiGian" placeholder="(phút)"/>
+                    <input nbInput type="number" nbInput class="m-input form-control" formControlName="tongThoiGian"
+                        placeholder="(phút)" />
                 </div>
                 <div class="form-group m-form__group col-2">
                     <label>Tổng số điểm</label>
-                    <input nbInput type="number" nbInput class="m-input form-control" formControlName="tongSoDiem"/>
+                    <input nbInput type="number" nbInput class="m-input form-control" formControlName="tongSoDiem" />
                 </div>
             </div>
         </form>
@@ -91,11 +93,15 @@
                                 <div class="col-6 row m-0 p-0">
                                     <div class="col-6 text-right m-0 p-0">
                                         <label class="mr-2">Tổng điểm</label>
-                                        <input class="mr-2" nbInput type="number" class="float-right" nbInput size="small" style="display: inline; width: 40%;" class="m-input form-control" [(ngModel)]="selectedCauHoi.tongSoDiem"/>                               
+                                        <input class="mr-2" nbInput type="number" class="float-right" nbInput
+                                            size="small" style="display: inline; width: 40%;"
+                                            class="m-input form-control" [(ngModel)]="selectedCauHoi.tongSoDiem" />
                                     </div>
                                     <div class="col-6 text-right m-0 p-0">
                                         <label class="mr-2">Thời gian</label>
-                                        <input nbInput type="number" class="float-right" nbInput size="small" style="display: inline; width: 40%;" class="m-input form-control" [(ngModel)]="selectedCauHoi.tongThoiGian"/>
+                                        <input nbInput type="number" class="float-right" nbInput size="small"
+                                            style="display: inline; width: 40%;" class="m-input form-control"
+                                            [(ngModel)]="selectedCauHoi.tongThoiGian" />
                                     </div>
                                 </div>
                             </div>
@@ -112,39 +118,30 @@
                                 <i class="fa fa-plus mr-2"></i>Thêm câu trả lời
                             </button>
                         </nb-card-header>
-                        <nb-card-body *ngIf="selectedCauHoi.dapAns != null && selectedCauHoi.dapAns.length > 0">
+                        <nb-card-body>
                             <cdk-virtual-scroll-viewport style="height: 400px" itemSize="90">
-                                <nb-card>
-                                    <nb-card-body>
-                                        <div *ngFor="let dapAn of selectedCauHoi.dapAns; let i = index" class="mb-3">
-                                            <nb-card>
-                                                <nb-card-body>
-                                                    <div class="mb-3">
-                                                        <nb-checkbox [(ngModel)]="dapAn.isDapAnDung" status="info"
-                                                            style="float: right;">Đáp án đúng</nb-checkbox>
-                                                        <span class="mr-2"
-                                                            style="font-weight: bold; font-size: 20px;">{{i +
-                                                            1}}.</span>
-                                                    </div>
-                                                    <ckeditor [config]="ckConfig" [(ngModel)]="dapAn.noiDungCauHoi">
-                                                    </ckeditor>
-                                                    <div class="mt-3" style="text-align: right;">
-                                                        <button nbButton status="danger" size="small"
-                                                            (click)="removeCauTraLoi(dapAn)" class="mr-1"
-                                                            style="height: 100%;">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                        <button nbButton status="success" size="small"
-                                                            (click)="addCauTraLoi(selectedCauHoi)" class="mr-1"
-                                                            style="height: 100%;">
-                                                            <i class="fa fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </nb-card-body>
-                                            </nb-card>
-                                        </div>
-                                    </nb-card-body>
-                                </nb-card>
+                                <div *ngFor="let dapAn of selectedCauHoi.dapAns; let i = index" class="mb-3 p-2">
+                                    <div class="mb-3">
+                                        <nb-checkbox [(ngModel)]="dapAn.isDapAnDung" status="info"
+                                            style="float: right;">Đáp
+                                            án đúng</nb-checkbox>
+                                        <span class="mr-2" style="font-weight: bold; font-size: 20px;">{{i +
+                                            1}}.</span>
+                                    </div>
+                                    <ckeditor [config]="ckConfig2" [(ngModel)]="dapAn.noiDungCauHoi">
+                                    </ckeditor>
+                                    <div class="mt-3" style="text-align: right;">
+                                        <button nbButton status="danger" size="small"
+                                            (click)="removeCauTraLoi(dapAn)" class="mr-1" style="height: 100%;">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                        <button nbButton status="success" size="small"
+                                            (click)="addCauTraLoi(selectedCauHoi)" class="mr-1"
+                                            style="height: 100%;">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </cdk-virtual-scroll-viewport>
 
                         </nb-card-body>

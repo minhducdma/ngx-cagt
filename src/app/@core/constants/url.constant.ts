@@ -1,6 +1,7 @@
 import { environment } from "../../../environments/environment";
 
 const prefixACL = 'ACL/';
+const baseUrl = environment.apis.default.url + "/api/app";
 export const UrlConstant = {
     BASE_URL: environment.apis.default.url + "/api/app",
 
@@ -28,7 +29,7 @@ export const UrlConstant = {
         STORE_FILE:'https://apisipm.migroup.asia/Uploads/',
 
         KHACH_HANG: '/khach-hangs',
-        DANH_MUC: '/common/du-lieu-phan-loai-by-table',
+        DANH_MUC: baseUrl + '/common/du-lieu-phan-loai-by-table',
         KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais',
         KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
         CREATE_DE_THI: '/cau-hois/or-update-de-thi_v1',
@@ -37,7 +38,8 @@ export const UrlConstant = {
         // KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
         CHAM_SOC_KHACH_HANG_KENDO:'/cham-soc-khach-hangs/kendo-datatable-cham-soc-khach-hang',
         CHAM_SOC_KHACH_HANG:'/cham-soc-khach-hangs',
-        DU_LIEU_PHAN_LOAI_BY_TABLE:'/common/du-lieu-phan-loai-and-count-by-table'
+        DU_LIEU_PHAN_LOAI_BY_TABLE:'/common/du-lieu-phan-loai-and-count-by-table',
+        GET_USER: 'https://apisipm.cagt.top/api/identity/users'
     },
 
 }

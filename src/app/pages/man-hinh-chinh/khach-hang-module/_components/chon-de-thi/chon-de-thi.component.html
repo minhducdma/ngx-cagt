@@ -1,0 +1,51 @@
+<nb-card>
+    <nb-card-header>
+        Đề thi
+    </nb-card-header>
+    <nb-card-body>
+        <kendo-grid 
+            class="kendo_custom " 
+            [data]="gridView$" 
+            [resizable]="true" 
+            [pageSize]="gridState.take" 
+            [skip]="gridState.skip" 
+            [loading]="isLoading" 
+            [pageable]="true" 
+            [resizable]="true" 
+            kendoGridSelectBy="id" 
+            [selectable]="{mode: 'single'}"
+            [selectedKeys]="selectionIds"
+            (selectionChange)="selectRow($event)"
+            (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
+                'text-align': 'center'
+              }">
+            </kendo-grid-checkbox-column>
+            <kendo-grid-column title="STT" [width]="60" class="text-center" [headerStyle]="{
+                'text-align': 'center'
+                }">
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    {{ rowIndex + 1 }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="tenDeThi" class="kendo_title" title="Tên đề thi">
+            </kendo-grid-column>
+            <kendo-grid-column field="loaiDeThi" class="kendo_title" title="Loại đề thi" [width]="200">
+            </kendo-grid-column>
+            <kendo-grid-column field="trangThaiDeThi" class="kendo_title" title="Trạng thái đề thi" [width]="200">
+            </kendo-grid-column>
+            <kendo-grid-column field="creationTime" class="kendo_title" title="Ngày tạo" [headerStyle]="{'text-align': 'center'}" [width]="150">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div class="text-center">
+                        {{ dataItem.creationTime | date: "dd/MM/yyyy" }}
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+    </nb-card-body>
+</nb-card>
+<div class="text-right border-form-footer">
+    <button nbButton status="primary" type="button" (click)="closeForm()"
+        class="btn_custom btn_df mr-1">Hủy</button>
+    <a nbButton status="danger" (click)="chonDeThi()" class="btn_custom btn_add">Chọn</a>
+</div>

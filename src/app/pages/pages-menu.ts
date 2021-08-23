@@ -3,22 +3,10 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
     //Link ICON: https://akveo.github.io/eva-icons/#/
     {
-        title: 'Quản lý khách hàng',
-        icon: 'person-outline',
-        children: [
-            {
-                title: 'Khách hàng',
-                icon: 'people-outline',
-                link: '/pages/admin/quan-ly-khach-hang/khach-hang',
-                home: true,
-            },
-            {
-                title: 'Chăm sóc khách hàng',
-                icon: 'person-add-outline',
-                link: '/pages/admin/quan-ly-khach-hang/cham-soc-khach-hang',
-                home: true,
-            },
-        ],
+        title: 'Khách hàng',
+        icon: 'people-outline',
+        link: '/pages/admin/quan-ly-khach-hang/khach-hang',
+        home: true, 
     },
 
     {

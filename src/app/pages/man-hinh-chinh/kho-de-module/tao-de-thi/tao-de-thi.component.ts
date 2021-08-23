@@ -31,6 +31,7 @@ export class TaoDeThiComponent implements OnInit {
     selectedCauHoi: ICauHoi;
     tenCauHoi: string = "";
     ckConfig = config.basicOption;
+    ckConfig2 = config.other1Option;
 
 
     constructor(

@@ -5,6 +5,7 @@ import { FormUtil } from '../../../../../shared/utils/form';
 import { UrlConstant } from '../../../../../@core/constants/url.constant';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { IChamSocKhachHang } from '../../model/cham-soc-khach-hang.model';
+import { EKichBanCSKH } from '../../base/base.enum';
 @Component({
     selector: 'ngx-form-cham-soc-khach-hang',
     templateUrl: './form-cham-soc-khach-hang.component.html',
@@ -13,15 +14,21 @@ import { IChamSocKhachHang } from '../../model/cham-soc-khach-hang.model';
 export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKhachHang> implements OnInit {
     url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG;
 
+    public get EKichBanCSKH(): typeof EKichBanCSKH {
+        return EKichBanCSKH;
+    }
+
     constructor(
         injector: Injector,
     ) {
         super(injector);
     }
     ngOnInit() {
+        console.log(this.model)
         super.ngOnInit();
         switch(this.action){
             case ActionEnum.CREATE:
+                this.setFormValue(this.model);
                 break;
             case ActionEnum.UPDATE:
                 this.setFormValue(this.model);
@@ -73,7 +80,11 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
             khachHangId: this.model.id,
             baiThiThuId: 0,
             requestXepLopId: 0,
+            kichBanHienTai: [null]
         });
     }
 
+    chonDeThi(data){
+        this.form.get('baiThiThuId').setValue(data.id);
+    }
 }
