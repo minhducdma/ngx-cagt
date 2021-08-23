@@ -1,52 +1,13 @@
 <div class="row">
-    <div class="col-lg-9">
-        <nb-card>
-            <nb-card-header>
-                Làm bài thi
-            </nb-card-header>
-            <nb-card-body>
-              <div *ngFor="let ht of giaoDienCauHois; let i = index">
-                <div style="display:inline" [innerHTML]="ht.noiDungCauHoi"></div>
-                <hr>
-              </div>
-                <cdk-virtual-scroll-viewport style="height: 400px" itemSize="90">
-                    <nb-card>
-                        <nb-card-header>
-                          <div [innerHTML]="currentCauHoi.noiDungCauHoi | safeHtml"></div>
-                        </nb-card-header>
-                        <nb-card-body>
-                          <div *ngIf='currentDapAnFlag == "ckeditor"'>
-                            <ckeditor [config]="ckConfig" [(ngModel)]="currentCauHoi.cauTraLoi"></ckeditor>
-                          </div>
-                          <div *ngIf='currentDapAnFlag == "radio"'>
-                            <nb-radio-group [(ngModel)]="currentCauHoi.dapAnChonSingle">
-                              <nb-radio
-                                *ngFor="let item of currentCauHoi.dapAns"
-                                [value]="item.id">
-                                <div [innerHTML]="item.noiDungCauHoi"></div>
-                              </nb-radio>
-                            </nb-radio-group>
-                          </div>
-                          <div *ngIf='currentDapAnFlag == "checkbox"'>
-                            <p *ngFor="let item of currentCauHoi.dapAns">
-                              <nb-checkbox [(ngModel)]="item.dapAnChon" status="info"><div [innerHTML]="item.noiDungCauHoi"></div></nb-checkbox>
-                            <p>
-                          </div>
-                        </nb-card-body>
-                    </nb-card>
-                </cdk-virtual-scroll-viewport>
-            </nb-card-body>
-        </nb-card>
-    </div>
-    <div class="col-lg 3">
+    <div class="col-3">
         <nb-card>
             <nb-card-header>
                 Thời gian làm bài
             </nb-card-header>
             <nb-card-header>
                 <!-- Set by minutes -->
-                <h2 class="text-center text-bold" style="color: red;">
-                    <ngx-count-down interval="0.5" (onComplete)="completed()"></ngx-count-down>
+                <h2 class="text-center text-bold">
+                    <ngx-count-down interval="30" [rootId]="0" [isStart]="true" (onComplete)="completed()"></ngx-count-down>
                 </h2>
             </nb-card-header>
             <nb-card-header>
@@ -62,40 +23,82 @@
         </nb-card>
         <nb-card>
           <nb-accordion>
+
+
               <!-- Đặt vòng for ở đây -->
-              <div *ngFor="let item of boDemGio">
-                <h2>ok</h2>
-                <nb-accordion-item>
+
+                <nb-accordion-item expanded *ngFor="let item of boDemGio">
                   <nb-accordion-item-header>
                       {{item.ten}}
                   </nb-accordion-item-header>
                   <nb-accordion-item-body>
                       <h2 class="text-center text-bold text-danger">
-                          <ngx-count-down interval="{{item.thoiGian}}" [isStart]="false" (onComplete)="completed()"></ngx-count-down>
+                          <ngx-count-down interval="{{item.thoiGian}}" [rootId]="item.id" [isStart]="item.isStart" (onComplete)="completed()"></ngx-count-down>
                       </h2>
                   </nb-accordion-item-body>
               </nb-accordion-item>
-
-              </div>
-
-
-
           </nb-accordion>
       </nb-card>
         <nb-card>
             <nb-card-body>
                 <nb-alert status="info" class="text-center">Danh sách câu hỏi</nb-alert>
                 <cdk-virtual-scroll-viewport style="height: 215px" itemSize="90">
-                      <button *ngFor="let item of cauHoiTreeLeaf;let i = index" nbButton hero class="m-1" status='{{currentCauHoi.id == item.id ? "success" : "basic" }}' (click)="choosenCurrentCauHoi(item.id)">{{i+1}}</button>
+                    <button *ngFor="let item of cauHoiTreeLeaf;let i = index" nbButton hero class="m-1"
+                        status='{{currentCauHoi.id == item.id ? "success" : "basic" }}'
+                        (click)="choosenCurrentCauHoi(item.id)">{{i+1}}</button>
                 </cdk-virtual-scroll-viewport>
             </nb-card-body>
         </nb-card>
     </div>
-    <div class="col-lg-12">
+    <div class="col-9">
+        <nb-card>
+            <nb-card-header>
+                Làm bài thi
+            </nb-card-header>
+            <nb-card-body>
+                <div class="mb-3">
+                    <nb-button-group status="basic" disabled>
+                        <button nbButton *ngFor="let ht of giaoDienCauHois; let i = index">
+                            <div class="content" [innerHTML]="ht.noiDungCauHoi"></div>
+                        </button>
+                    </nb-button-group>
+                </div>
+                <nb-card accent="success" size="medium">
+                    <nb-card-header>
+                        <cdk-virtual-scroll-viewport style="height: 100px" itemSize="90">
+                            <div [innerHTML]="currentCauHoi.noiDungCauHoi | safeHtml"></div>
+                        </cdk-virtual-scroll-viewport>
+                    </nb-card-header>
+                    <nb-card-body style="height: max-content;">
+                        <div *ngIf='currentDapAnFlag == "ckeditor"'>
+                            <ckeditor [config]="ckConfig" [(ngModel)]="currentCauHoi.cauTraLoi"></ckeditor>
+                        </div>
+                        <div *ngIf='currentDapAnFlag == "radio"'>
+                            <nb-radio-group [(ngModel)]="currentCauHoi.dapAnChonSingle">
+                                <nb-radio *ngFor="let item of currentCauHoi.dapAns" [value]="item.id">
+                                    <div [innerHTML]="item.noiDungCauHoi"></div>
+                                </nb-radio>
+                            </nb-radio-group>
+                        </div>
+                        <div *ngIf='currentDapAnFlag == "checkbox"'>
+                            <p *ngFor="let item of currentCauHoi.dapAns">
+                                <nb-checkbox [(ngModel)]="item.dapAnChon" status="info">
+                                    <div [innerHTML]="item.noiDungCauHoi"></div>
+                                </nb-checkbox>
+                            <p>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-12">
         <nb-card>
             <nb-card-body>
                 <div class="float-left">
-                    <button nbButton size="medium" status="primary" class=" mr-2" [hidden]="showNextButton()" (click)="previewRoot()">
+                    <button nbButton size="medium" status="primary" class=" mr-2" [hidden]="showNextButton()"
+                        (click)="previewRoot()">
                         <i class="fa fa-arrow-left mr-2"></i>Root trước
                     </button>
                     <button nbButton size="medium" status="primary" [hidden]="showPrevButton()" (click)="nextRoot()">

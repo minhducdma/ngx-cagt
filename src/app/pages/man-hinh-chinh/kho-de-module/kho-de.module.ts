@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbAccordionModule, NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAccordionModule, NbAlertModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
@@ -14,6 +14,7 @@ import { ThemeModule } from '../../../@theme/theme.module';
 import { KhoDeRoutingModule, routedComponents } from './kho-de-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CountdownModule } from '../../../shared/controls/count-down/count-down.module';
+import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
 
 @NgModule({
     imports: [
@@ -45,7 +46,10 @@ import { CountdownModule } from '../../../shared/controls/count-down/count-down.
         CountdownModule,
         NbAlertModule,
         NbTabsetModule,
-        NbAccordionModule
+        NbAccordionModule,
+        CagtSelectModule,
+        NbToastrModule,
+        NbButtonGroupModule
     ],
     declarations: [
         ...routedComponents,

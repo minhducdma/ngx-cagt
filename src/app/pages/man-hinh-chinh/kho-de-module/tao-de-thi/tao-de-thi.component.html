@@ -1,15 +1,41 @@
 <nb-card>
     <nb-card-header>
-        <div class="row">
-            <div class="col-lg-8 col-md-8">
-                <span>Tên đề thi</span>
-                <input type="text" nbInput class="ml-2 m-input form-control" style="display: inline;"/>
+        Thông tin đề thi
+    </nb-card-header>
+    <nb-card-body>
+        <form  class="m-form" novalidate [formGroup]="form" (ngSubmit)="saveListCauHoi()">
+            <div class="row">
+                <div class="form-group m-form__group col-4">
+                    <label>Tên đề thi</label>
+                    <input nbInput type="text" fullWidth nbInput class="m-input form-control" formControlName="tenDeThi" />
+                </div>
+                <div class="form-group m-form__group col-2">
+                    <label>Loại đề thi</label>
+                    <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_DE_THI" [isMulti]="false"
+                        formControlName="loaiDeThi">
+                    </ngx-cagt-select>
+                </div>
+                <div class="form-group m-form__group col-2">
+                    <label>Trạng thái đề thi</label>
+                    <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_DE_THI" [isMulti]="false"
+                        formControlName="trangThaiDeThi">
+                    </ngx-cagt-select>
+                </div>
+                <div class="form-group m-form__group col-2">
+                    <label>Thời gian làm bài</label>
+                    <input nbInput type="number" nbInput class="m-input form-control" formControlName="tongThoiGian" placeholder="(phút)"/>
+                </div>
+                <div class="form-group m-form__group col-2">
+                    <label>Tổng số điểm</label>
+                    <input nbInput type="number" nbInput class="m-input form-control" formControlName="tongSoDiem"/>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-4 text-right">
-                <span>Thời gian làm bài</span>
-                <input type="number" nbInput size="small" class="ml-2" style="display: inline;" placeholder="(phút)"/>
-            </div>
-        </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card-header>
+        Nội dung đề thi
     </nb-card-header>
     <nb-card-body>
         <div class="row">
@@ -25,18 +51,11 @@
                         </div>
                     </nb-card-header>
                     <div class="mt-2 mb-2">
-                        <cdk-virtual-scroll-viewport  style="height: 710px" itemSize="90" >
-                            <kendo-treeview 
-                                [resizable]="true" 
-                                kendoTreeViewDragAndDrop kendoTreeViewDragAndDropEditing
-                                kendoTreeViewHierarchyBinding 
-                                [childrenField]="'items'" 
-                                [nodes]="dataCauHoi"
-                                [textField]="'tenCauHoi'" 
-                                kendoTreeViewExpandable [expandBy]="'id'"
-                                [expandedKeys]="expandedKeys"
-                                ng-click="selectCauHoi($event)"
-                                >
+                        <cdk-virtual-scroll-viewport style="height: 710px" itemSize="90">
+                            <kendo-treeview [resizable]="true" kendoTreeViewDragAndDrop kendoTreeViewDragAndDropEditing
+                                kendoTreeViewHierarchyBinding [childrenField]="'items'" [nodes]="dataCauHoi"
+                                [textField]="'tenCauHoi'" kendoTreeViewExpandable [expandBy]="'id'"
+                                [expandedKeys]="expandedKeys" ng-click="selectCauHoi($event)">
                                 <ng-template kendoTreeViewNodeTemplate let-dataItem>
                                     <div class="row" style="width: 100%;" (click)="showCauHoi(dataItem)">
                                         <div class="col-lg-8">
@@ -44,14 +63,13 @@
                                                 [(ngModel)]="dataItem.tenCauHoi" />
                                         </div>
                                         <div class="col-lg-4">
-                                            <button nbButton status="danger" size="small" (click)="removeCauHoi(dataCauHoi,dataItem)"
-                                                class="mr-1" style="height: 100%;"
-                                                *ngIf="dataItem != dataCauHoi[0]"
-                                                >
+                                            <button nbButton status="danger" size="small"
+                                                (click)="removeCauHoi(dataCauHoi,dataItem)" class="mr-1"
+                                                style="height: 100%;" *ngIf="dataItem != dataCauHoi[0]">
                                                 <i class="fa fa-trash"></i>
                                             </button>
-                                            <button nbButton status="success" size="small" (click)="addCauHoi()" class="mr-1"
-                                                style="height: 100%;">
+                                            <button nbButton status="success" size="small" (click)="addCauHoi()"
+                                                class="mr-1" style="height: 100%;">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
@@ -66,11 +84,24 @@
                 <div *ngIf="selectedCauHoi != null && dataCauHoi.length > 0">
                     <nb-card>
                         <nb-card-header>
-                            Câu hỏi
+                            <div class="row m-0">
+                                <div class="col-6">
+                                    Câu hỏi
+                                </div>
+                                <div class="col-6 row m-0 p-0">
+                                    <div class="col-6 text-right m-0 p-0">
+                                        <label class="mr-2">Tổng điểm</label>
+                                        <input class="mr-2" nbInput type="number" class="float-right" nbInput size="small" style="display: inline; width: 40%;" class="m-input form-control" [(ngModel)]="selectedCauHoi.tongSoDiem"/>                               
+                                    </div>
+                                    <div class="col-6 text-right m-0 p-0">
+                                        <label class="mr-2">Thời gian</label>
+                                        <input nbInput type="number" class="float-right" nbInput size="small" style="display: inline; width: 40%;" class="m-input form-control" [(ngModel)]="selectedCauHoi.tongThoiGian"/>
+                                    </div>
+                                </div>
+                            </div>
                         </nb-card-header>
                         <nb-card-body>
-                            <ckeditor [config]="ckConfig"
-                                [(ngModel)]="selectedCauHoi.noiDungCauHoi"></ckeditor>
+                            <ckeditor [config]="ckConfig" [(ngModel)]="selectedCauHoi.noiDungCauHoi"></ckeditor>
                         </nb-card-body>
                     </nb-card>
                     <nb-card>
@@ -81,19 +112,22 @@
                                 <i class="fa fa-plus mr-2"></i>Thêm câu trả lời
                             </button>
                         </nb-card-header>
-                        <nb-card-body *ngIf="selectedCauHoi.dapAns != null && selectedCauHoi.dapAns.length > 0" >
-                            <cdk-virtual-scroll-viewport  style="height: 400px" itemSize="90" >
+                        <nb-card-body *ngIf="selectedCauHoi.dapAns != null && selectedCauHoi.dapAns.length > 0">
+                            <cdk-virtual-scroll-viewport style="height: 400px" itemSize="90">
                                 <nb-card>
                                     <nb-card-body>
                                         <div *ngFor="let dapAn of selectedCauHoi.dapAns; let i = index" class="mb-3">
                                             <nb-card>
                                                 <nb-card-body>
                                                     <div class="mb-3">
-                                                        <nb-checkbox [(ngModel)]="dapAn.isDapAnDung" status="info" style="float: right;">Đáp án đúng</nb-checkbox>
-                                                        <span class="mr-2" style="font-weight: bold; font-size: 20px;">{{i + 1}}.</span>
+                                                        <nb-checkbox [(ngModel)]="dapAn.isDapAnDung" status="info"
+                                                            style="float: right;">Đáp án đúng</nb-checkbox>
+                                                        <span class="mr-2"
+                                                            style="font-weight: bold; font-size: 20px;">{{i +
+                                                            1}}.</span>
                                                     </div>
-                                                    <ckeditor [config]="ckConfig"
-                                                        [(ngModel)]="dapAn.noiDungCauHoi"></ckeditor>
+                                                    <ckeditor [config]="ckConfig" [(ngModel)]="dapAn.noiDungCauHoi">
+                                                    </ckeditor>
                                                     <div class="mt-3" style="text-align: right;">
                                                         <button nbButton status="danger" size="small"
                                                             (click)="removeCauTraLoi(dapAn)" class="mr-1"
@@ -112,14 +146,14 @@
                                     </nb-card-body>
                                 </nb-card>
                             </cdk-virtual-scroll-viewport>
-                            
+
                         </nb-card-body>
                     </nb-card>
                 </div>
             </div>
         </div>
     </nb-card-body>
-    <nb-card-footer> 
+    <nb-card-footer>
         <button nbButton size="large" status="basic" class="float-left">
             <i class="fa fa-arrow-left mr-2"></i>Trở về
         </button>

@@ -43,7 +43,7 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
                     .post(this.url, this.form.value)
                     .subscribe(res => {
                         // show notification
-                        this.notification.show('Success', 'Tạo mới thành công', { status: 'success' });
+                        this.notification.show('Tạo mới thành công','Thành công',  { status: 'success' });
                         // close form
                         this.closeForm();
                     });
@@ -53,7 +53,7 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
                     .put(this.url + '/' + this.model.id.toString(), this.form.value)
                     .subscribe(res => {
                         // show notification
-                        this.notification.show('Thành công','Cập nhật thành công', { status :'success' });
+                        this.notification.show('Cập nhật thành công','Thành công', { status :'success' });
                         // close form
                         this.closeForm();
                     });

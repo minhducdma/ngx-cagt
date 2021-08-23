@@ -34,10 +34,26 @@ export interface IDeThi{
   tenDeThi: string;
   loaiDeThi: string;
   trangThaiDeThi: string;
+  tongThoiGian: number,
+  tongSoDiem: number,
 }
 
 export interface IBoDemGio{
+  id: number;
   ten: string;
   thoiGian: number;
+  isStart: boolean;
 }
 
+
+
+export interface ILamBaiThi {
+  userId: string;
+  userDetail: string;
+  deThiId: number;
+  cauHoiId: number;
+  isDapAnDung: boolean;
+  cauTraLoi : string;
+  listDapAns: number[];
+
+}

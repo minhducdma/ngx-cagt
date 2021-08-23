@@ -1,34 +1,36 @@
-import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UrlConstant } from '../../../@core/constants/url.constant';
 import { ApiService } from '../../../@core/services/api.service';
-import { DropDownListEnum } from './cagt.data';
+import { DropDownListEnum } from '../cagt-select/cagt.data';
 
 @Component({
-    selector: 'ngx-cagt-select',
-    templateUrl: './cagt-select.component.html',
+    selector: 'app-cagt-select-optionCrt',
+    templateUrl: './cagt-select-optionCrt.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
             multi: true,
-            useExisting: forwardRef(() => CagtSelectComponent),
+            useExisting: forwardRef(() => CagtSelectOptionCrtComponent),
         },
     ],
 })
-export class CagtSelectComponent implements ControlValueAccessor {
-    @Input() modeOfDropDowList: DropDownListEnum;
-    @Input() isMulti: Boolean;
 
+
+export class CagtSelectOptionCrtComponent implements OnInit {
+    @Input() modeOfDropDowList: DropDownListEnum;
     url: string = UrlConstant.ROUTE.DANH_MUC;
     value: string;
     lstData = [];
+    fixedLstDataStr: string = '';
     reference: string;
     isDisabled: boolean;
     private readonly destroy$ = new Subject<void>();
 
     constructor(private apiService: ApiService) { }
+
     onChange(value) { }
 
     onTouched: () => void;
@@ -52,6 +54,25 @@ export class CagtSelectComponent implements ControlValueAccessor {
         this.writeValue(e);
         this.onChange(e);
     }
+
+    onSelectionChange(e: string) {
+        this.writeValue(e);
+        this.onChange(e);
+    }
+
+    onKeydownEvent(e) {
+        if (e.keyCode == 13) {
+            this.writeValue(e.target.value);
+            this.onChange(e.target.value);
+            this.lstData.push(e.target.value);
+        }
+    }
+    removeItem(option) {
+        const index = this.lstData.indexOf(option);
+        if (index > -1) {
+            this.lstData.splice(index, 1);
+        }
+    }
     ngOnInit() {
         switch (this.modeOfDropDowList) {
             case DropDownListEnum.LOAI_KHACH_HANG:
@@ -72,12 +93,6 @@ export class CagtSelectComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_CHAM_SOC:
                 this.loadTrangThaiChamSoc();
                 break;
-            case DropDownListEnum.LOAI_DE_THI:
-                this.loadLoaiDeThi();
-                break;
-            case DropDownListEnum.TRANG_THAI_DE_THI:
-                this.loadTrangThaiDeThi();
-                break;
         }
     }
 
@@ -87,7 +102,8 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
+                    this.lstData = res;
+                    this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
     }
@@ -98,7 +114,8 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
+                    this.lstData = res;
+                    this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
     }
@@ -108,7 +125,8 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
+                    this.lstData = res;
+                    this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
     }
@@ -118,7 +136,8 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
+                    this.lstData = res;
+                    this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
     }
@@ -129,7 +148,8 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
+                    this.lstData = res;
+                    this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
     }
@@ -140,7 +160,8 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
+                    this.lstData = res;
+                    this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
     }
@@ -150,27 +171,8 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res
-                }
-            });
-    }
-    loadLoaiDeThi() {
-        this.apiService
-            .get(this.url + `?tenBang=GetDeThis&tenCot=loaiDeThi`)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((res: any) => {
-                if (res) {
-                    this.lstData = res
-                }
-            });
-    }
-    loadTrangThaiDeThi() {
-        this.apiService
-            .get(this.url + `?tenBang=GetDeThis&tenCot=trangThaiDeThi`)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((res: any) => {
-                if (res) {
-                    this.lstData = res
+                    this.lstData = res;
+                    this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
     }
