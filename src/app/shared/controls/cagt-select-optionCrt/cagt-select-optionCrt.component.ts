@@ -107,7 +107,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res.filter(x=>x != null);
                     this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
@@ -119,7 +119,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res.filter(x=>x != null);
                     this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
@@ -130,7 +130,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res.filter(x=>x != null);
                     this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
@@ -141,7 +141,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res.filter(x=>x != null);
                     this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
@@ -153,7 +153,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res.filter(x=>x != null);
                     this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
@@ -165,7 +165,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res.filter(x=>x != null);
                     this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
@@ -176,7 +176,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res;
+                    this.lstData = res.filter(x=>x != null);
                     this.fixedLstDataStr = this.lstData.join(',');
                 }
             });
