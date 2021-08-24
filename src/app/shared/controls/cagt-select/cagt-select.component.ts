@@ -53,6 +53,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
         this.onChange(e);
     }
     ngOnInit() {
+        console.log(this.value);
         switch (this.modeOfDropDowList) {
             case DropDownListEnum.LOAI_KHACH_HANG:
                 this.loadLoaiKhachHang();
