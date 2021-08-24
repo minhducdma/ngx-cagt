@@ -15,12 +15,14 @@ export abstract class AbstractRestService<T> {
 })
 export class ApiService extends BehaviorSubject<GridDataResult> {
     private apiUrl: string;
+    private uploadUrl: string;
     public loading: boolean;
 
     constructor(private http: HttpClient) {
         super(null);
         // set environment
         this.apiUrl = UrlConstant.BASE_URL;
+        this.uploadUrl = UrlConstant.UPLOAD_BASE_URL;
     }
 
     /**
@@ -30,6 +32,7 @@ export class ApiService extends BehaviorSubject<GridDataResult> {
      * @param [isCache]
      * @returns get
      */
+
     get(
         api: string,
         // tslint:disable-next-line:ban-types
@@ -66,6 +69,10 @@ export class ApiService extends BehaviorSubject<GridDataResult> {
      */
     post(api: string, data: any): Observable<IResponseData<any>> {
         return this.http.post<IResponseData<any>>(this.apiUrl + api, data, {});
+    }
+    upload(api: string, data: any): Observable<IResponseData<any>> {
+    console.log(this.uploadUrl);
+      return this.http.post<IResponseData<any>>(this.uploadUrl, data);
     }
 
     /**

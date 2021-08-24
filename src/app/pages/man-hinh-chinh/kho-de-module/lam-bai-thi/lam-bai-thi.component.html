@@ -27,11 +27,13 @@
 
               <!-- Đặt vòng for ở đây -->
 
-                <nb-accordion-item expanded *ngFor="let item of boDemGio">
-                  <nb-accordion-item-header>
+                <nb-accordion-item expanded *ngFor="let item of boDemGio; let i = index">
+                  <nb-accordion-item-header (click)="chooseRoot()">
                       {{item.ten}}
                   </nb-accordion-item-header>
                   <nb-accordion-item-body>
+                    <button (click)="run(item)">Run</button>
+                    <button (click)="stop(item)">Stop</button>
                       <h2 class="text-center text-bold text-danger">
                           <ngx-count-down interval="{{item.thoiGian}}" [rootId]="item.id" [isStart]="item.isStart" (onComplete)="completed()"></ngx-count-down>
                       </h2>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { timer } from 'rxjs';
 
 @Component({
@@ -19,26 +19,30 @@ export class CountDownComponent implements OnInit {
   private flagFirstTime: boolean = true;
 
   constructor() { }
-  ngOnChanges() {
-    if (!this.flagFirstTime) {
-      this.doCountDown();
-      // this.stopCountDown();
-    }
+  // ngOnChanges() {
+  //   if (this.flagFirstTime) {
+  //     this.interval = this.interval * 60;
+  //   }
 
-    // console.log("change",this.countdown, this.isStart, this.interval, this.rootId)
-    // this.doCountDown();
+  //   // console.log("change",this.countdown, this.isStart, this.interval, this.rootId)
+  //   // this.doCountDown();
+
+  // }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(!this.flagFirstTime)
+      this.doCountDown();
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
 
   }
   ngOnInit() {
-
     if(this.flagFirstTime){
+      this.interval = this.interval * 60;
       this.doCountDown();
-      // this.stopCountDown();
-      this.flagFirstTime = false;
     }
-    else{
 
-    }
+    this.flagFirstTime = false;
+
 
     // console.log("init",this.countdown, this.isStart, this.interval, this.rootId)
 
@@ -53,22 +57,20 @@ export class CountDownComponent implements OnInit {
         }
       });
     }
-    else{
-      this.getDefaultTime();
-    }
+
   }
 
   doCountDown() {
-
-    if (this.flagFirstTime) {
-      this.interval = this.interval * 60;
-
+    if (this.isStart) {
+      this.runAfterSecond();
     }
-    else {
-      this.interval = this.interval;
-
+    else{
+      let t = this.interval;
+      this.getDefaultTime(t);
     }
-    this.runAfterSecond();
+
+
+
 
     // console.log(this.interval, this.isStart);
 
@@ -76,35 +78,25 @@ export class CountDownComponent implements OnInit {
 
 
   private getTime(): string {
-    if (this.isStart) {
-      if (this.interval < 0) {
-        this.interval = Math.abs(this.interval);
-        this.completed = true;
-      }
-      const hours = Math.floor(this.interval / 3600);
-      const minutes = Math.floor((this.interval - (hours * 3600)) / 60);
-      const seconds = (this.interval - (hours * 3600) - (minutes * 60));
-      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (this.interval < 0) {
+      this.interval = Math.abs(this.interval);
+      this.completed = true;
     }
+    let second = this.interval;
+
+    const hours = Math.floor(second / 3600);
+    const minutes = Math.floor((second - (hours * 3600)) / 60);
+    const seconds = (second - (hours * 3600) - (minutes * 60));
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
-  private getDefaultTime(): string {
-    if(!this.isStart){
-      // console.log(this.countdown);
-      if (typeof (this.countdown) === 'undefined') {
-        if (this.interval < 0) {
-          this.interval = Math.abs(this.interval);
-          this.completed = true;
-        }
-        const hours = Math.floor(this.interval / 3600);
-        const minutes = Math.floor((this.interval - (hours * 3600)) / 60);
-        const seconds = (this.interval - (hours * 3600) - (minutes * 60));
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      } else {
-        return this.countdown;
-      }
-    }
+  private getDefaultTime(totalTime): string {
 
-
+    console.log("vao day");
+    const hours = Math.floor(totalTime / 3600);
+    const minutes = Math.floor((totalTime - (hours * 3600)) / 60);
+    const seconds = (totalTime - (hours * 3600) - (minutes * 60));
+    this.countdown = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return this.countdown;
   }
 
   private manipulateInterval() {
@@ -126,5 +118,6 @@ export class CountDownComponent implements OnInit {
     this.completed = true;
     this.onComplete.emit();
   }
+
 
 }

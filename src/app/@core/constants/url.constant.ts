@@ -2,9 +2,10 @@ import { environment } from "../../../environments/environment";
 
 const prefixACL = 'ACL/';
 const baseUrl = environment.apis.default.url + "/api/app";
+const baseHost = environment.apis.default.url;
 export const UrlConstant = {
     BASE_URL: environment.apis.default.url + "/api/app",
-
+    UPLOAD_BASE_URL: environment.apis.default.url + "/FileUpload/UploadFiles",
     API: {
         //List API in here
 
@@ -27,13 +28,15 @@ export const UrlConstant = {
         // MODULE: '/management/module',
         UPLOAD_FILE: 'https://apisipm.migroup.asia/FileUpload/UploadFiles',
         STORE_FILE:'https://apisipm.migroup.asia/Uploads/',
-
         KHACH_HANG: '/khach-hangs',
         DANH_MUC: baseUrl + '/common/du-lieu-phan-loai-by-table',
         KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais',
         KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
         CREATE_DE_THI: '/cau-hois/or-update-de-thi_v1',
-        LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/1',
+        CREATE_LAM_BAI_THI: '/lam-bai-thi/luu-tru-lam-bai-thi',
+        GET_UPDATE_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id',
+
+        LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/',
         // KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais',
         // KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
         CHAM_SOC_KHACH_HANG_KENDO:'/cham-soc-khach-hangs/kendo-datatable-cham-soc-khach-hang',

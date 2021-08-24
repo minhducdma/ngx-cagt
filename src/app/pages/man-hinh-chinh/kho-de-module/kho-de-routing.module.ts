@@ -10,7 +10,7 @@ const routes: Routes = [{
     component: KhoDeComponent,
     children: [
         {
-            path: 'tao-de-thi',
+            path: 'tao-de-thi/:deThiId',
             component: TaoDeThiComponent,
         },
         {

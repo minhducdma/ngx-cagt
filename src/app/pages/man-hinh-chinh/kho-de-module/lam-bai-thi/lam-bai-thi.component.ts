@@ -30,7 +30,7 @@ export class LamBaiThiComponent implements OnInit {
     this.dialogService = injector.get(NbDialogService)
 
   }
-
+  urlCreateLamBaiThi: string = UrlConstant.ROUTE.CREATE_LAM_BAI_THI;
   ckConfig = config.basicOption;
   currentRoot = 1;
   maxRoot = 0;
@@ -77,28 +77,18 @@ export class LamBaiThiComponent implements OnInit {
   ngOnInit() {
     this.deThiId = this.route.snapshot.params.deThiId;
     this.userDetail = this.route.snapshot.params.userDetail;
-    console.log(this.boDemGio);
     this.loadDeThi(this.deThiId);
 
 
   }
   loadDeThi(deThiId){
-    this.apiService.post(this.url, deThiId).subscribe((res: any) => {
+    this.apiService.post(this.url + this.deThiId, deThiId).subscribe((res: any) => {
       // show notification
       this.deThiData = res as ICauHoi[];
       this.maxRoot = Math.max.apply(Math, this.deThiData.map(function(o) { return o.root; }))
       this.cauHoiTreeRoot = this.deThiData.filter(e => e.level == 1);
       this.getAllRoot();
-
-      // this.boDemGio[1].isStart = true;
-
-
-      // console.log(this.deThiData);
-
       this.getAllLeaf(this.currentRoot);
-
-      // this.notification.show('Success', 'Tạo mới thành công', { status: 'success' });
-      // close form
     });
   }
 
@@ -110,9 +100,14 @@ export class LamBaiThiComponent implements OnInit {
         id: element.root,
         ten: element.tenCauHoi,
         thoiGian: element.tongThoiGian,
-        isStart: index ==0 ? true : false
+        isStart: false
       })
     });
+
+  }
+
+  chooseRoot(index){
+    this.boDemGio[index].isStart = true;
   }
 
   getAllLeaf(idRoot) {
@@ -172,8 +167,6 @@ export class LamBaiThiComponent implements OnInit {
       }
       return htm;
     }
-
-
   }
   nextRoot(){
 
@@ -217,6 +210,13 @@ export class LamBaiThiComponent implements OnInit {
       });
 
   }
+  run(data){
+    data.isStart = true;
+    console.log(this.boDemGio);
+  }
+  stop(data){
+    data.isStart = false;
+  }
   showNextButton(){
     if(this.currentRoot == this.maxRoot)
       return false
@@ -227,63 +227,27 @@ export class LamBaiThiComponent implements OnInit {
       return false
     return true;
   }
-  submitBaiThi() {
-    console.log(this.deThiData);
-
-  }
-
-  checkLoggedRoot(){
-
-  }
   recordingRoot(){
-
-    let d = this.cauHoiTreeLeaf;
-    d = d.filter(r => r.dapAnChonSingle != null || r.cauTraLoi || r.dapAns.length > 0);
-
     let records = [];
-    let tuLuans = d.filter(r => typeof(r.cauTraLoi)!=='undefined');
+    let d = this.cauHoiTreeLeaf;
+    d.forEach(element =>{
+      if(typeof(element.cauTraLoi)==='undefined')
+        element.cauTraLoi = "";
+      if(typeof(element.dapAnChonSingle) !== 'undefined'){
+        element.dapAns.forEach(e => {
+          e.dapAnChon = false;
+          if(element.dapAnChonSingle == e.id)
+            e.dapAnChon = true;
+        })
+      }
 
-    for(let i = 0; i < tuLuans.length; i++){
-      records.push({
-        userId: this.userDetail,
-        userDetail: this.userDetail,
-        deThiId: this.deThiId,
-        cauHoiId: tuLuans[i].id,
-        isDapAnDung: false,
-        cauTraLoi : tuLuans[i].cauTraLoi,
-        listDapAns: []
-      })
-    }
-
-
-    let singleDapAns = d.filter(r => typeof(r.dapAnChonSingle)!== 'undefined');
-    singleDapAns.forEach((e) => {
-      e.dapAns.forEach((x) =>{
-        x.dapAnChon = false;
-        if(e.dapAnChonSingle == x.id)
-          x.dapAnChon = true;
-      })
-    })
-    singleDapAns.forEach(e => {
-      records.push({
-        userId: this.userDetail,
-        userDetail: this.userDetail,
-        deThiId: this.deThiId,
-        cauHoiId: e.id,
-        isDapAnDung: false,
-        cauTraLoi : "",
-        listDapAns: [e.id],
-      })
     })
 
-    let multipleDapAns = d.filter(r => typeof(r.cauTraLoi)==='undefined')
-    multipleDapAns = multipleDapAns.filter(r => typeof(r.dapAnChonSingle)=== 'undefined')
-
-    multipleDapAns.forEach(e => {
+    d.forEach(e => {
       let record = [];
       let dapAns = e.dapAns;
       dapAns.forEach(r => {
-        if(typeof(r.dapAnChon) != 'undefined')
+        if(typeof(r.dapAnChon) != 'undefined' && r.dapAnChon)
           record.push(r.id);
       })
       records.push({
@@ -292,10 +256,11 @@ export class LamBaiThiComponent implements OnInit {
         deThiId: this.deThiId,
         cauHoiId: e.id,
         isDapAnDung: false,
-        cauTraLoi : "",
+        cauTraLoi : e.cauTraLoi,
         listDapAns: record,
       })
     })
+
 
     if(this.lamBaiThis.length <= 0){
       // console.log(records);
@@ -307,24 +272,18 @@ export class LamBaiThiComponent implements OnInit {
     else{
       records.forEach(element => {
         let aff = this.lamBaiThis.find(x => x.cauHoiId == element.cauHoiId);
-        console.log(aff);
+        // console.log(aff);
         if(aff){
           this.lamBaiThis.splice(this.lamBaiThis.indexOf(aff), 1);
           this.lamBaiThis.push(element);
         }
-
         if(!aff){
           this.lamBaiThis.push(element);
         }
       })
     }
-
     console.log(this.lamBaiThis);
-
-
   }
-
-
   getAllLeaf_Ketqua(idRoot) {
     var lsCauHoiInRoot = this.deThiData.filter(r => r.root == idRoot || idRoot == 0);
     this.cauHoiTreeLeaf = [];
@@ -335,8 +294,6 @@ export class LamBaiThiComponent implements OnInit {
     this.cauHoiTreeLeaf = this.cauHoiTreeLeaf.sort((a, b) => a.id - b.id);
 
   }
-
-
   changeBoDemGio(){
     console.log(this.boDemGio);
     for(let i = 0; i < this.boDemGio.length; i++)
@@ -345,6 +302,44 @@ export class LamBaiThiComponent implements OnInit {
       this.boDemGio.find(r => r.id  == this.currentRoot).isStart = true;
 
     // this.boDemGio.find(r => r.id == rootId).isStart = true;
+  }
+  submitBaiThi() {
+    this.recordingRoot();
+    console.log(this.lamBaiThis);
+    let request = {
+      userLamBai: "",
+      deThiId: 0,
+      loaiLamBaiThi : "",
+      trangThaiLamBaiThi : "",
+      listDapAns: []
+    };
+    if(this.lamBaiThis.length > 0){
+      request.userLamBai = this.userDetail;
+      request.deThiId = this.deThiId;
+      request.loaiLamBaiThi = "Khách Hàng";
+      request.trangThaiLamBaiThi = "Đã thi";
+    }
+
+    this.lamBaiThis.forEach(e => {
+      var d = {
+        lamBaiThiId : 0,
+        cauHoiId : e.cauHoiId,
+        isDapAnDung: false,
+        listDapAns: e.listDapAns.toString(),
+        cauTraLoi: e.cauTraLoi
+      }
+      request.listDapAns.push(d);
+    })
+    this.apiService
+            .post(this.urlCreateLamBaiThi, request)
+            .subscribe(res => {
+                // show notification
+                alert("Thanh cong. Check du lieu xem nao")
+                // this.notification.show('Success', 'Tạo mới thành công', { status: 'success' });
+                // close form
+            });
+
+
   }
 
 
