@@ -1,7 +1,9 @@
 import { Directive, HostListener, inject, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { NbDialogService, NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
+import { WindowService } from "@progress/kendo-angular-dialog";
 import { PagerSettings } from "@progress/kendo-angular-grid";
 import { State } from "@progress/kendo-data-query";
 import { TooltipDirective } from "@swimlane/ngx-charts";
@@ -54,19 +56,21 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.pageHeight = event.target.innerHeight - ReziseTable + 30;
     }
 
-    protected windowService: NbWindowService;
+    protected windowService: WindowService;
     protected apiService: ApiService;
     protected formBuilder: FormBuilder;
     protected notification: NbToastrService;
     protected dialogService: NbDialogService;
+    protected router: Router;
     constructor(
         injector: Injector
     ) {
-        this.windowService = injector.get(NbWindowService)
+        this.windowService = injector.get(WindowService)
         this.apiService = injector.get(ApiService)
         this.formBuilder = injector.get(FormBuilder)
         this.notification = injector.get(NbToastrService)
         this.dialogService = injector.get(NbDialogService)
+        this.router = injector.get(Router)
     }
 
     ngOnInit(): void {

@@ -15,6 +15,7 @@ import { KhoDeRoutingModule, routedComponents } from './kho-de-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CountdownModule } from '../../../shared/controls/count-down/count-down.module';
 import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
+import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
 
 @NgModule({
     imports: [
@@ -49,7 +50,8 @@ import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-sele
         NbAccordionModule,
         CagtSelectModule,
         NbToastrModule,
-        NbButtonGroupModule
+        NbButtonGroupModule,
+        AlertDialogModule
     ],
     declarations: [
         ...routedComponents,

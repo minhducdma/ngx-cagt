@@ -7,40 +7,44 @@
             <nb-card-header>
                 <!-- Set by minutes -->
                 <h2 class="text-center text-bold">
-                    <ngx-count-down interval="30" [rootId]="0" [isStart]="true" (onComplete)="completed()"></ngx-count-down>
+                    <ngx-count-down interval="30" [rootId]="0" [isStart]="true" (onComplete)="completed()">
+                    </ngx-count-down>
                 </h2>
             </nb-card-header>
             <nb-card-header>
-              <!-- Set by minutes -->
+                <!-- Set by minutes -->
 
 
 
 
-              <h2 class="text-center text-bold" style="color: red;">
+                <h2 class="text-center text-bold" style="color: red;">
 
-              </h2>
-          </nb-card-header>
+                </h2>
+            </nb-card-header>
         </nb-card>
         <nb-card>
-          <nb-accordion>
+            <nb-accordion>
 
 
-              <!-- Đặt vòng for ở đây -->
+                <!-- Đặt vòng for ở đây -->
 
                 <nb-accordion-item expanded *ngFor="let item of boDemGio; let i = index">
-                  <nb-accordion-item-header (click)="chooseRoot()">
-                      {{item.ten}}
-                  </nb-accordion-item-header>
-                  <nb-accordion-item-body>
-                    <button (click)="run(item)">Run</button>
-                    <button (click)="stop(item)">Stop</button>
-                      <h2 class="text-center text-bold text-danger">
-                          <ngx-count-down interval="{{item.thoiGian}}" [rootId]="item.id" [isStart]="item.isStart" (onComplete)="completed()"></ngx-count-down>
-                      </h2>
-                  </nb-accordion-item-body>
-              </nb-accordion-item>
-          </nb-accordion>
-      </nb-card>
+                    <nb-accordion-item-header (click)="chooseRoot()">
+                        {{item.ten}}
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                        <h2 class="text-center text-bold text-danger">
+                            <ngx-count-down interval="{{item.thoiGian}}" [rootId]="item.id" [isStart]="item.isStart"
+                                (onComplete)="completed()"></ngx-count-down>
+                        </h2>
+                        <div class="mt-3 text-center">
+                            <button (click)="run(item)" nbButton class="mr-1" status="primary" size="small"><i class="fa fa-play" aria-hidden="true"></i></button>
+                            <button (click)="stop(item)" nbButton status="danger" size="small"><i class="fa fa-stop" aria-hidden="true"></i></button>
+                        </div>
+                    </nb-accordion-item-body>
+                </nb-accordion-item>
+            </nb-accordion>
+        </nb-card>
         <nb-card>
             <nb-card-body>
                 <nb-alert status="info" class="text-center">Danh sách câu hỏi</nb-alert>
@@ -59,15 +63,13 @@
             </nb-card-header>
             <nb-card-body>
                 <div class="mb-3">
-                    <nb-button-group status="basic" disabled>
-                        <button nbButton *ngFor="let ht of giaoDienCauHois; let i = index">
-                            <div class="content" [innerHTML]="ht.noiDungCauHoi"></div>
-                        </button>
-                    </nb-button-group>
+                    <nb-alert outline="primary" status="basic" class="text-left" *ngFor="let ht of giaoDienCauHois; let i = index">
+                        <div class="content" [innerHTML]="ht.noiDungCauHoi"></div>
+                    </nb-alert>
                 </div>
-                <nb-card accent="success" size="medium">
+                <nb-card accent="primary">
                     <nb-card-header>
-                        <cdk-virtual-scroll-viewport style="height: 100px" itemSize="90">
+                        <cdk-virtual-scroll-viewport style="height: 350px" itemSize="90">
                             <div [innerHTML]="currentCauHoi.noiDungCauHoi | safeHtml"></div>
                         </cdk-virtual-scroll-viewport>
                     </nb-card-header>
