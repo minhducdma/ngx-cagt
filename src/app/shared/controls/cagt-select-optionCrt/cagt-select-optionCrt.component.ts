@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UrlConstant } from '../../../@core/constants/url.constant';
@@ -12,14 +12,14 @@ import { DropDownListEnum } from '../cagt-select/cagt.data';
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            multi: true,
             useExisting: forwardRef(() => CagtSelectOptionCrtComponent),
-        },
-    ],
+            multi: true
+        }
+    ]
 })
 
 
-export class CagtSelectOptionCrtComponent implements OnInit {
+export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
     @Input() modeOfDropDowList: DropDownListEnum;
     url: string = UrlConstant.ROUTE.DANH_MUC;
     value: string;
@@ -35,7 +35,8 @@ export class CagtSelectOptionCrtComponent implements OnInit {
 
     onTouched: () => void;
     writeValue(obj: any) {
-        this.value = obj;
+        if (this.value != '')
+            this.value = obj;
     }
 
     registerOnChange(fn: any) {
@@ -50,23 +51,27 @@ export class CagtSelectOptionCrtComponent implements OnInit {
         this.isDisabled = isDisabled;
     }
 
-    handleOnChange(e) {
-        this.writeValue(e);
-        this.onChange(e);
-    }
-
     onSelectionChange(e: string) {
-        this.writeValue(e);
-        this.onChange(e);
+        if (this.value != '') {
+            this.writeValue(e);
+            this.onChange(e);
+        }
+
     }
 
     onKeydownEvent(e) {
+        debugger
         if (e.keyCode == 13) {
-            this.writeValue(e.target.value);
-            this.onChange(e.target.value);
-            this.lstData.push(e.target.value);
+            if (e.target.value != '') {
+                {
+                    this.writeValue(e.target.value);
+                    this.onChange(e.target.value);
+                    this.lstData.push(e.target.value);
+                }
+            }
         }
     }
+
     removeItem(option) {
         const index = this.lstData.indexOf(option);
         if (index > -1) {

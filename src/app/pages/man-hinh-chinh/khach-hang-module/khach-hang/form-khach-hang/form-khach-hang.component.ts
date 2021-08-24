@@ -71,7 +71,7 @@ export class FormKhachHangComponent extends BaseFormComponent<IKhachHang> implem
             ngaySinh: [null, Validators.required],
             nguonKhachHang: [null],
             loaiKhachHang: [null],
-            nhanVienPhuTrach: [null, Validators.required],
+            nhanVienPhuTrach: [null],
             trangThaiKhachHang: [null],
             trinhDo: [null],
             taiKhoanMangXaHoi: [null],

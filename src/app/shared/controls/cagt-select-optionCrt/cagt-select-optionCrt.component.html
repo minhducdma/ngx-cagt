@@ -2,8 +2,12 @@
     #autocompleteInput
     nbInput
     fullWidth
-    [(ngModel)]="value"
+    [value]="value"
+    (ngModelChange)="onChange($event)"
+    (keyup)="onKeydownEvent($event)"
     [nbAutocomplete]="autoNgModel"
+    type="text"
+    (blur)="onTouched()"
     />
 <nb-autocomplete #autoNgModel (selectedChange)="onSelectionChange($event)">
     <nb-option *ngFor="let option of lstData" [value]="option">

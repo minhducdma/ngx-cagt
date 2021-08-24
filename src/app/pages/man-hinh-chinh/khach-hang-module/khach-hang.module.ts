@@ -63,7 +63,8 @@ const _component = [
         NbTabsetModule,
         AlertDialogModule,
         NbAccordionModule,
-        CagtSelectCrtModule
+        CagtSelectCrtModule,
+        NbAutocompleteModule,
     ],
 
     

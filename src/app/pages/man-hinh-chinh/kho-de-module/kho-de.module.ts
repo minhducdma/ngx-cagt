@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbAccordionModule, NbAlertModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAccordionModule, NbAlertModule, NbAutocompleteModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
@@ -15,6 +15,7 @@ import { KhoDeRoutingModule, routedComponents } from './kho-de-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CountdownModule } from '../../../shared/controls/count-down/count-down.module';
 import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
+import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
 
 @NgModule({
     imports: [
@@ -49,7 +50,9 @@ import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-sele
         NbAccordionModule,
         CagtSelectModule,
         NbToastrModule,
-        NbButtonGroupModule
+        NbButtonGroupModule,
+        AlertDialogModule,
+        NbAutocompleteModule,
     ],
     declarations: [
         ...routedComponents,
