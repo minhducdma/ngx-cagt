@@ -60,10 +60,11 @@
         </div>
         <div class="form-group m-form__group col-3">
             <label> Nhân viên phụ trách </label>
-            <app-cagt-select-optionCrt
+            <ngx-cagt-select
                 [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH" 
+                [isMulti]="true"
                 formControlName="nhanVienPhuTrach">
-            </app-cagt-select-optionCrt>
+            </ngx-cagt-select>
         </div>
         <div class="form-group m-form__group col-3">
             <label> Trạng thái khách hàng </label>
