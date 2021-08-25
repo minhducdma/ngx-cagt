@@ -3,7 +3,6 @@ import { Component, Injector, OnInit, SimpleChanges } from '@angular/core';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { ApiService } from "../../../../@core/services/api.service";
 import { ContainsFilterOperatorComponent, GreaterOrEqualToFilterOperatorComponent } from '@progress/kendo-angular-grid';
-import '../../../../shared/controls/ckeditor-config/ckeditor.loader';
 import 'ckeditor';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
