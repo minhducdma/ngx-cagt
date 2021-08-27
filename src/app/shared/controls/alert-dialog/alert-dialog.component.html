@@ -3,10 +3,13 @@
         <nb-card-header>{{ title }}</nb-card-header>
         <nb-card-body>{{ message }}</nb-card-body>
         <nb-card-footer>
-            <div class="text-right">
+            <div class="text-right" *ngIf="!isNotify">
                 <button nbButton class="mr-2" status="primary" (click)="submit()">Xác nhận</button>
                 <button nbButton (click)="cancel()">Hủy</button>
             </div>
+            <div class="text-right" *ngIf="isNotify">
+                <button nbButton class="mr-2" status="primary" (click)="submit()">Xác nhận</button>
+            </div>'
         </nb-card-footer>
     </nb-card>
 </div>
