@@ -106,7 +106,7 @@ export class CountDownComponent implements OnInit {
       this.interval--;
     }
   }
-  private stopIntarval(){
+  private stopInterval(){
     if (this.completed) {
       this.onComplete.emit();
     } else {
