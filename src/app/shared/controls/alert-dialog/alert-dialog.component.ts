@@ -9,6 +9,7 @@ import { NbDialogRef, NbDialogService } from '@nebular/theme';
 export class AlertDialogComponent {
     title: string = "Xác nhận";
     message: string = "Bạn có chắc chắn?";
+    isNotify: boolean = false;
 
     constructor(protected ref: NbDialogRef<AlertDialogComponent>) {}
 

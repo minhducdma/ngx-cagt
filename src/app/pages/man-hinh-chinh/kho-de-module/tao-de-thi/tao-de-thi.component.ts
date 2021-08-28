@@ -1,7 +1,6 @@
 import { IDeThi } from './../model/tao-de-thi.model';
 import { Component, Injector, OnInit } from '@angular/core';
 import { ICauHoi, IDapAn } from '../model/tao-de-thi.model';
-import '../../../../shared/controls/ckeditor-config/ckeditor.loader';
 import 'ckeditor';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';

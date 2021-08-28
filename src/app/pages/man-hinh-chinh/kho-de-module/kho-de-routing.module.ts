@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SuccessfulTestComponent } from '../../miscellaneous/successful-test/successful-test.component';
 import { KhoDeComponent } from './kho-de.component';
 import { LamBaiThiComponent } from './lam-bai-thi/lam-bai-thi.component';
 import { QuanLyDeThiComponent } from './quan-ly-de-thi/quan-ly-de-thi.component';
@@ -25,7 +26,10 @@ const routes: Routes = [{
             path: 'de-thi',
             component: QuanLyDeThiComponent,
         },
-
+        {
+            path: 'successfull',
+            component: SuccessfulTestComponent,
+        },
     ],
 }];
 

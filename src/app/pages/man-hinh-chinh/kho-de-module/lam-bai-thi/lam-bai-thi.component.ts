@@ -3,14 +3,13 @@ import { Component, Injector, OnInit, SimpleChanges } from '@angular/core';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { ApiService } from "../../../../@core/services/api.service";
 import { ContainsFilterOperatorComponent, GreaterOrEqualToFilterOperatorComponent } from '@progress/kendo-angular-grid';
-import '../../../../shared/controls/ckeditor-config/ckeditor.loader';
 import 'ckeditor';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
 import { HtmlParser } from '@angular/compiler';
 import { ActivatedRoute } from '@angular/router';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
-import { takeUntil } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { NbDialogService } from '@nebular/theme';
 import { type } from 'os';
@@ -25,7 +24,7 @@ import { BaseListComponent } from '../base/base-list.component';
 })
 
 export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements OnInit {
-    
+
     private route: ActivatedRoute;
     constructor(injector: Injector) {
         super(injector);
@@ -73,19 +72,31 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
     deThiId: number;
     userDetail: string;
 
-
+    isParentStart: boolean = false;
 
     ngOnInit() {
         super.ngOnInit();
     }
 
-    protected showFormCreateOrUpdate() {
-        throw new Error('Method not implemented.');
+    showFormCreateOrUpdate() {
+        this.dialogService.open(AlertDialogComponent, {
+            context: {
+                title: 'Thông báo',
+                message: 'Bạn có chắc chắn bắt đầu bài thi?',
+                isNotify: false
+            },
+        }).onClose
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(res => {
+                if (res) {
+                    this.isParentStart = true;
+                    this.loadDeThi(this.deThiId);
+                }
+            });
     }
     protected loadItems() {
         this.deThiId = this.route.snapshot.params.deThiId;
         this.userDetail = this.route.snapshot.params.userDetail;
-        this.loadDeThi(this.deThiId);
     }
 
     loadDeThi(deThiId) {
@@ -96,11 +107,13 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
             this.cauHoiTreeRoot = this.deThiData.filter(e => e.level == 1);
             this.getAllRoot();
             this.getAllLeaf(this.currentRoot);
+
+            //run first part
+            this.boDemGio[0].isStart = true;
         });
     }
 
-    completed() {
-    }
+
     getAllRoot() {
         this.cauHoiTreeRoot.forEach((element, index) => {
             this.boDemGio.push({
@@ -176,27 +189,28 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
         }
     }
     nextRoot() {
-
-
         this.dialogService.open(AlertDialogComponent, {
             context: {
-                title: 'Xác nhận chuyển root',
-                message: 'Bạn có chắc chắn muốn chuyển?',
+                title: 'Xác nhận chuyển phần thi',
+                message: 'Khi đã chuyển phần thi sẽ không được phép trở lại phần thi trước. Bạn có chắc chắn muốn chuyển phần thi? ',
             },
         }).onClose
             .pipe(takeUntil(this.destroy$))
             .subscribe(res => {
                 if (res) {
-                    if (this.currentRoot < this.maxRoot) {
-                        if (this.lamBaiThis.filter(r => !this.cauHoiTreeLeaf.find(x => x.id == r.cauHoiId))) this.recordingRoot();
-                        this.currentRoot++;
-                        this.getAllLeaf(this.currentRoot);
-                        this.changeBoDemGio();
-                    }
+                    this.nextRootPart();
                 }
             });
-
     }
+    nextRootPart() {
+        if (this.currentRoot < this.maxRoot) {
+            if (this.lamBaiThis.filter(r => !this.cauHoiTreeLeaf.find(x => x.id == r.cauHoiId))) this.recordingRoot();
+            this.currentRoot++;
+            this.getAllLeaf(this.currentRoot);
+            this.changeBoDemGio();
+        }
+    }
+
     previewRoot() {
         this.dialogService.open(AlertDialogComponent, {
             context: {
@@ -289,7 +303,6 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
                 }
             })
         }
-        console.log(this.lamBaiThis);
     }
     getAllLeaf_Ketqua(idRoot) {
         var lsCauHoiInRoot = this.deThiData.filter(r => r.root == idRoot || idRoot == 0);
@@ -302,7 +315,6 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
 
     }
     changeBoDemGio() {
-        console.log(this.boDemGio);
         for (let i = 0; i < this.boDemGio.length; i++)
             this.boDemGio[i].isStart = false;
 
@@ -310,9 +322,24 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
 
         // this.boDemGio.find(r => r.id == rootId).isStart = true;
     }
+
+    onSubmit() {
+        this.dialogService.open(AlertDialogComponent, {
+            context: {
+                title: 'Xác nhận',
+                message: 'Bạn có chắc chắn muốn nộp bài',
+            },
+        }).onClose
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(res => {
+                if (res) {
+                    this.submitBaiThi();
+                }
+            });
+    }
+
     submitBaiThi() {
         this.recordingRoot();
-        console.log(this.lamBaiThis);
         let request = {
             userLamBai: "",
             deThiId: 0,
@@ -337,13 +364,38 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
             }
             request.listDapAns.push(d);
         })
-        this.apiService
-            .post(this.urlCreateLamBaiThi, request)
-            .subscribe(res => {
-                // show notification
-                this.notification.show('Success', 'Tạo mới thành công', { status: 'success' });
-                this.router.navigate([""]);
-                // close form
-            });
+        // this.apiService
+        //     .post(this.urlCreateLamBaiThi, request)
+        //     .subscribe(res => {
+        //         // show notification
+        //         //this.notification.show('Thành công', 'Tạo mới thành công', { status: 'success' });
+        //         //this.router.navigate([""]);
+        //         // close form
+        //     });
+        this.router.navigate(["/pages/admin/kho-de/successfull"]);
+    }
+
+    completedChildPart(index) {
+        if (this.boDemGio[index].isStart) {
+            if (this.boDemGio[index] != this.boDemGio[this.boDemGio.length - 1]) {
+                this.notification.show('Kết thúc thời gian làm bài phần thi : ' + this.boDemGio[index].ten, 'Thông báo', { status: 'primary' });
+                this.boDemGio[index].isStart = false;
+                this.nextRootPart();
+                if (this.boDemGio[index + 1] != null) {
+                    setTimeout(() => {
+                        this.notification.show('Đã bắt đầu phần thi : ' + this.boDemGio[index + 1].ten, 'Thông báo', { status: 'success' });
+                        this.boDemGio[index + 1].isStart = true;
+                    }, 1500)
+                }
+            } else {
+                this.notification.show('Kết thúc thời gian làm bài, bắt đầu nộp bài thi', 'Thông báo', { status: 'success' });
+                this.submitBaiThi();
+            }
+        }
+    }
+
+    completed() {
+        this.notification.show('Kết thúc thời gian làm bài, bắt đầu nộp bài thi', 'Thông báo', { status: 'success' });
+        this.submitBaiThi();
     }
 }
