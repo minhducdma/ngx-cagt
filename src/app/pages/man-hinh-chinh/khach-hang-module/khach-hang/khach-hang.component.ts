@@ -55,7 +55,6 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     private get extendQueryOptions() {
         return {
-
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
             trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null,
             loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null,
@@ -81,6 +80,10 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     onStateChange(state: State) {
         this.gridState = state;
+        this.loadItemGrids(this.currentGrid);
+    }
+
+    onSearchChangeGrid(){
         this.loadItemGrids(this.currentGrid);
     }
 
@@ -187,32 +190,6 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
                     }
                 }
             });
-
-        // const dialogRef = this.dialog.open(AlertDialogComponent, {
-        //     data: {
-        //         message: 'Bạn có chắc chắn muốn xóa?',
-        //         buttonText: {
-        //             ok: 'Có',
-        //             cancel: 'Không'
-        //         }
-        //     }
-        // });
-        // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-        //     if (confirmed) {
-        //         if (this.selectionIds.length > 0) {
-        //             const body = {
-        //                 ids: [...new Set(this.selectionIds)],
-        //             };
-        //             this.apiService.post(this.url + '/many-khach-hangs', body).subscribe(res => {
-        //                 this.selectionIds = [];
-        //                 alert('Xóa thành công');
-        //                 this.loadItemGrids();
-        //             });
-        //         }
-        //     }
-        // });
-
-
     }
 
 

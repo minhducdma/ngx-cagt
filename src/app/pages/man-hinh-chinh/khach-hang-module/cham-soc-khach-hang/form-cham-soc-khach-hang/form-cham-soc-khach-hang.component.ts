@@ -80,7 +80,8 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
             khachHangId: this.model.id,
             baiThiThuId: 0,
             requestXepLopId: 0,
-            kichBanHienTai: [null]
+            kichBanHienTai: [null],
+            isChuyenKichBan: [null]
         });
     }
 

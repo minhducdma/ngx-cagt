@@ -61,11 +61,10 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12 pb-1">Người phụ trách</div>
                             <div class="col-md-12 col-lg-12">
-                                <ngx-cagt-select 
+                                <app-cagt-select-optionCrt
                                     [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH" 
-                                    [isMulti]="true"
                                     [(ngModel)]="modelSearch.nguoiPhuTrachs">
-                                </ngx-cagt-select>
+                                </app-cagt-select-optionCrt>
                             </div>
                         </div>
                     </div>
@@ -86,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <div class="col-md-6 offset-md-3 text-center">
-                            <button class="mr-2" nbButton size="small" status="primary" (click)="onSearchChange()"> 
+                            <button class="mr-2" nbButton size="small" status="primary" (click)="onSearchChangeGrid()"> 
                                 <i class="fa fa-search mr-2"></i> Tìm kiếm
                             </button>
                             <button class="mr-2" nbButton size="small" status="warning" (click)="resetHandler()">

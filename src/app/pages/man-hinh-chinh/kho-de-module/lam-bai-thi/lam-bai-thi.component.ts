@@ -1,19 +1,13 @@
 import { ICauHoi, IBoDemGio, ILamBaiThi } from './../model/tao-de-thi.model';
-import { Component, Injector, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { ApiService } from "../../../../@core/services/api.service";
-import { ContainsFilterOperatorComponent, GreaterOrEqualToFilterOperatorComponent } from '@progress/kendo-angular-grid';
 import 'ckeditor';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
-import { HtmlParser } from '@angular/compiler';
 import { ActivatedRoute } from '@angular/router';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
-import { delay, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { NbDialogService } from '@nebular/theme';
-import { type } from 'os';
-import { isUndefinedOrEmptyString } from '@abp/ng.core';
 import { BaseListComponent } from '../base/base-list.component';
 
 

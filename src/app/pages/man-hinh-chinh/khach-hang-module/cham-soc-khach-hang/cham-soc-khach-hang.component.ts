@@ -55,7 +55,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
     }
     private get extendQueryOptions() {
         return {
-            keyword: this.modelSearch.filter ? this.modelSearch.filter : null,
+            filter: this.modelSearch.filter ? this.modelSearch.filter : null,
             ngayChamSocTu: this.modelSearch.ngayChamSocTu ? this.modelSearch.ngayChamSocTu : null,
             ngayChamSocDen: this.modelSearch.ngayChamSocDen ? this.modelSearch.ngayChamSocDen : null,
             loaiChamSoc: this.modelSearch.loaiChamSoc ? this.convertArrToStr(this.modelSearch.loaiChamSoc) : null,
@@ -158,7 +158,8 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             khachHangId: this.id,
             baiThiThuId: 0,
             requestXepLopId: 0,
-            kichBanHienTai: this.kichBan
+            kichBanHienTai: this.kichBan,
+            isChuyenKichBan: null
         };
         this.action = ActionEnum.CREATE;
         this.showFormCreateOrUpdate();
