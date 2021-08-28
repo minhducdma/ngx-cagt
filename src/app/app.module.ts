@@ -29,6 +29,8 @@ import { SettingManagementConfigModule } from '@abp/ng.setting-management/config
 import { TenantManagementConfigModule } from '@abp/ng.tenant-management/config';
 import { environment } from '../environments/environment';
 import { NgxsModule } from '@ngxs/store';
+import { MessageService } from '@progress/kendo-angular-l10n';
+import { MessageKendoService } from './@core/services/message-kendo.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,6 +61,9 @@ import { NgxsModule } from '@ngxs/store';
     SettingManagementConfigModule.forRoot(),
     NgxsModule.forRoot(),
   ],
+  providers: [
+    { provide: MessageService, useClass: MessageKendoService },
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {
