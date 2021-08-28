@@ -36,6 +36,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
         ngayChamSocTu: null,
         ngayChamSocDen: null,
         loaiChamSoc: null,
+        idKhachHang: this.id
     };
 
     gridDaChamSoc$ = {
@@ -59,6 +60,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             ngayChamSocTu: this.modelSearch.ngayChamSocTu ? this.modelSearch.ngayChamSocTu : null,
             ngayChamSocDen: this.modelSearch.ngayChamSocDen ? this.modelSearch.ngayChamSocDen : null,
             loaiChamSoc: this.modelSearch.loaiChamSoc ? this.convertArrToStr(this.modelSearch.loaiChamSoc) : null,
+            idKhachHang: this.id,
             ...this.queryOptions,
         };
     }
@@ -80,7 +82,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
-                    let data = res.items.filter(x => x.khachHangId == this.id);
+                    let data = res.items;
                     this.gridView$.data = data;
                     // this.gridView$.total = res.pagingInfo.totalItems;
                     // this.countChamSoc.tongSo = res.pagingInfo.totalItems;
@@ -170,6 +172,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             ngayChamSocTu: null,
             ngayChamSocDen: null,
             loaiChamSoc: null,
+            idKhachHang: this.id
         };
     }
     removeHandler(dataItem) {

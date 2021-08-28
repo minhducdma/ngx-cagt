@@ -68,7 +68,11 @@ export class QuanLyDeThiComponent extends BaseListComponent<IDeThi> implements O
     editHandler(dataItem : IDeThi){
         this.router.navigate(["/pages/admin/kho-de/tao-de-thi/" + dataItem.id]);
     }
-
+    removeHandler(dataItem) {
+        this.selectionIds = [];
+        this.selectionIds.push(dataItem.id);
+        this.removeSelectedHandler();
+    }
     removeSelectedHandler() {
         this.dialogService.open(AlertDialogComponent, {
             context: {
