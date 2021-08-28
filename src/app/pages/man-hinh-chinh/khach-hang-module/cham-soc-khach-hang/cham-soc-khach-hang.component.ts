@@ -64,7 +64,6 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
     }
 
     ngOnChange() {
-        debugger
         this.loadItems();
     }
 

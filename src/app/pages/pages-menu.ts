@@ -19,12 +19,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/pages/admin/kho-de/de-thi',
                 home: true,
             },
-            {
-                title: 'Tạo đề thi',
-                icon: 'book-outline',
-                link: '/pages/admin/kho-de/tao-de-thi',
-                home: true,
-            },
+            // {
+            //     title: 'Tạo đề thi',
+            //     icon: 'book-outline',
+            //     link: '/pages/admin/kho-de/tao-de-thi',
+            //     home: true,
+            // },
             {
                 title: 'Làm bài thi',
                 icon: 'edit-outline',
