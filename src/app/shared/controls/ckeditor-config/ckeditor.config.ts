@@ -3,7 +3,7 @@ import { UrlConstant } from "../../../@core/constants/url.constant";
 export const config = {
     basicOption: {
         extraPlugins:
-            "image,tabletools,html5video,html5audio,widget,lineutils,clipboard,widgetselection,uploadfile,uploadwidget,filetools,notificationaggregator,notification",
+            "divarea,image,tabletools,html5video,html5audio,widget,lineutils,clipboard,widgetselection,uploadfile,uploadwidget,filetools,notificationaggregator,notification",
         // removePlugins: 'horizontalrule,specialchar,about,list,others',
         // removeButtons: 'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Textarea,Find,Select,Button,HiddenField,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,ShowBlocks,Cut,Copy,Paste,Table,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent,Blockquote',
         height: '200',
@@ -13,7 +13,7 @@ export const config = {
 
     other1Option: {
         extraPlugins:
-            "image,tabletools,html5video,html5audio,widget,lineutils,clipboard,widgetselection,uploadfile,uploadwidget,filetools,notificationaggregator,notification",
+            "divarea,image,tabletools,html5video,html5audio,widget,lineutils,clipboard,widgetselection,uploadfile,uploadwidget,filetools,notificationaggregator,notification",
         // removePlugins: 'horizontalrule,specialchar,about,list,others',
         // removeButtons: 'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Textarea,Find,Select,Button,HiddenField,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,ShowBlocks,Cut,Copy,Paste,Table,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent,Blockquote',
         height: '100',

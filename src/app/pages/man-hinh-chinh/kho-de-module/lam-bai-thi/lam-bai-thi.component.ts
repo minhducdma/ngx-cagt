@@ -186,7 +186,7 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
         this.dialogService.open(AlertDialogComponent, {
             context: {
                 title: 'Xác nhận chuyển phần thi',
-                message: 'Khi đã chuyển phần thi sẽ không được phép trở lại phần thi trước. Bạn có chắc chắn muốn chuyển phần thi? ',
+                message: 'Bạn có chắc chắn muốn chuyển phần thi? ',
             },
         }).onClose
             .pipe(takeUntil(this.destroy$))
@@ -209,7 +209,7 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
         this.dialogService.open(AlertDialogComponent, {
             context: {
                 title: 'Xác nhận chuyển root',
-                message: 'Bạn có chắc chắn muốn chuyển?',
+                message: 'Bạn có chắc chắn muốn chuyển phần thi? ',
             },
         }).onClose
             .pipe(takeUntil(this.destroy$))
@@ -358,14 +358,14 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
             }
             request.listDapAns.push(d);
         })
-        // this.apiService
-        //     .post(this.urlCreateLamBaiThi, request)
-        //     .subscribe(res => {
-        //         // show notification
-        //         //this.notification.show('Thành công', 'Tạo mới thành công', { status: 'success' });
-        //         //this.router.navigate([""]);
-        //         // close form
-        //     });
+        this.apiService
+            .post(this.urlCreateLamBaiThi, request)
+            .subscribe(res => {
+                // show notification
+                //this.notification.show('Thành công', 'Tạo mới thành công', { status: 'success' });
+                //this.router.navigate([""]);
+                // close form
+            });
         this.router.navigate(["/pages/admin/kho-de/successfull"]);
     }
 
