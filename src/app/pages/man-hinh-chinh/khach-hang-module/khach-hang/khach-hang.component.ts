@@ -8,7 +8,7 @@ import { FormImportKhachHangComponent } from './form-import-khach-hang/form-impo
 import { ChamSocKhachHangComponent } from '../cham-soc-khach-hang/cham-soc-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
 import { IKhachHang } from '../model/khach-hang.model';
-import { EKhachHang, EKichBanCSKH } from '../base/base.enum';
+import { EKhachHang, EKichBanCSKH, EKichBanKH } from '../base/base.enum';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { FormChamSocKhachHangComponent } from '../cham-soc-khach-hang/form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
@@ -274,22 +274,22 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     selectTab(kichBan) {
         switch (kichBan.tabTitle) {
-            case "Kịch bản 1":
+            case EKichBanKH.KichBan1:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan1;
                 this.currentGrid = this.gridViewKB1$;
                 this.loadItemGrids(this.gridViewKB1$);
                 break;
-            case "Kịch bản 2":
+            case EKichBanKH.KichBan2:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan2;
                 this.currentGrid = this.gridViewKB2$;
                 this.loadItemGrids(this.gridViewKB2$);
                 break;
-            case "Kịch bản 3":
+            case EKichBanKH.KichBan3:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan3;
                 this.currentGrid = this.gridViewKB3$;
                 this.loadItemGrids(this.gridViewKB3$);
                 break;
-            case "Kịch bản 4":
+            case EKichBanKH.KichBan4:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan4;
                 this.currentGrid = this.gridViewKB4$;
                 this.loadItemGrids(this.gridViewKB4$);

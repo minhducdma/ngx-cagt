@@ -11,13 +11,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
     {
         title: 'Quản lý kho đề',
-        icon: 'file-outline',
+        icon: 'archive-outline',
         children: [
             {
                 title: 'Danh sách đề thi',
-                icon: 'file-text-outline',
                 link: '/pages/admin/kho-de/de-thi',
-                home: true,
             },
             // {
             //     title: 'Tạo đề thi',
@@ -27,10 +25,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
             // },
             {
                 title: 'Làm bài thi',
-                icon: 'edit-outline',
                 link: '/pages/admin/kho-de/lam-bai-thi',
-                home: true,
             },
+        ],
+    },
+
+    {
+        title: 'Quản lý học viện',
+        icon: 'home-outline',
+        children: [
+            // {
+            //     title: 'Danh sách đề thi',
+            //     icon: 'file-text-outline',
+            //     link: '/pages/admin/kho-de/de-thi',
+            //     home: true,
+            // },
         ],
     },
 
