@@ -1,4 +1,3 @@
-
 export interface IGenerice {
     id?: number;
     idNhanSu?: number;
@@ -11,4 +10,5 @@ export interface IGenerice {
     checkSum?: string;
     guidId?: string;
     idsFileDinhKem?: any[];
+
 }

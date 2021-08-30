@@ -42,7 +42,9 @@ export const UrlConstant = {
         CREATE_LAM_BAI_THI: '/lam-bai-thi/luu-tru-lam-bai-thi',
         GET_UPDATE_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id',
         LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/',
-        DE_THI_KENDO: '/de-thi/collect-kendo-datatable'
+        DE_THI_KENDO: '/de-thi/collect-kendo-datatable',
+        //Module Học viên
+        LOAD_LOP_HOC: '/lop-hoc'
     },
 
 }

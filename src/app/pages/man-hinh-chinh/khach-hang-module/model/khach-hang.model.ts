@@ -21,4 +21,5 @@ export interface IKhachHang extends IGenerice {
     emailMe: string;
     ghiChu: string;
     quanTamDuHoc: string;
+    isHocVien: boolean;
 }
