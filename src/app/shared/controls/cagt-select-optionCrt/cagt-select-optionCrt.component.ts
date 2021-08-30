@@ -111,6 +111,12 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_DE_THI:
                 this.loadTrangThaiDeThi();
                 break;
+            case DropDownListEnum.LOAI_LOP_HOC:
+                this.loadLoaiLopHoc();
+                break;
+            case DropDownListEnum.TRANG_THAI_LOP_HOC:
+                this.loadTrangThaiLopHoc();
+                break;
         }
     }
 
@@ -219,6 +225,32 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
     loadTrangThaiDeThi() {
         this.apiService
             .get(this.url + `?tenBang=GetDeThis&tenCot=trangThaiDeThi`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+
+    loadLoaiLopHoc(){
+        this.apiService
+            .get(this.url + `?tenBang=GetLopHocs&tenCot=loaiLopHoc`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+
+    loadTrangThaiLopHoc(){
+        this.apiService
+            .get(this.url + `?tenBang=GetLopHocs&tenCot=trangThaiLopHoc`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {

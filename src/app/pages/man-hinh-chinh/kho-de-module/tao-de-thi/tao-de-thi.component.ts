@@ -2,17 +2,11 @@ import { IDeThi } from './../model/tao-de-thi.model';
 import { Component, Injector, OnInit } from '@angular/core';
 import { ICauHoi, IDapAn } from '../model/tao-de-thi.model';
 import 'ckeditor';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
-import { BaseFormComponent } from '../../khach-hang-module/base/base-form.component';
-import { ApiService } from "../../../../@core/services/api.service";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { DropDownListEnum } from '../../../../shared/controls/cagt-select/cagt.data';
 import { FormUtil } from '../../../../shared/utils/form';
-import { NbToastrModule, NbToastrService } from '@nebular/theme';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BaseListComponent } from '../base/base-list.component';
 

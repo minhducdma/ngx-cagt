@@ -14,10 +14,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
 import { CagtSelectCrtModule } from '../../../shared/controls/cagt-select-optionCrt/cagt-select-optionCrt.module'
 import { HocVienRoutingModule, routedComponents } from './hoc-vien-routing.module';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from '@fullcalendar/timegrid';
 const _component = [
 ]
-
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+    dayGridPlugin,
+    timeGridPlugin,
+    listPlugin,
+    interactionPlugin
+]);
 @NgModule({
     imports: [
         NbCardModule,
@@ -55,9 +64,10 @@ const _component = [
         AlertDialogModule,
         NbAccordionModule,
         CagtSelectCrtModule,
+        FullCalendarModule
     ],
 
-    
+
 
     declarations: [
         ...routedComponents,

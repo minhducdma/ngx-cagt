@@ -1,5 +1,5 @@
 import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { NbDialogService, NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
 import { WindowService } from "@progress/kendo-angular-dialog";
 import { PagerSettings } from "@progress/kendo-angular-grid";
@@ -10,8 +10,6 @@ import { ReziseTable } from "../../../../@core/constants/app.constant";
 import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { ApiService } from "../../../../@core/services/api.service";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
-import { EKhachHang } from "./base.enum";
-
 @Directive()
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     @ViewChild(TooltipDirective) public tooltipDir: TooltipDirective;
@@ -19,7 +17,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     isLoading = false;
     opened = false;
     dropdownListEnum = DropDownListEnum;
-    khachHangEnum = EKhachHang;
+    form: FormGroup;
     gridView$ = {
         data: [],
         total: 0
@@ -39,7 +37,6 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     tabName: string;
     openFirstTime = false;
     searchAdvance = false;
-    //dropdownListEnum = DropDownListEnum;
     pageConfig: PagerSettings | boolean = false;
     loading = false;
     selectionIds: number[] = [];
@@ -80,6 +77,10 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.destroyed$.complete();
     }
 
+    setFormValue(data) { 
+        this.form.patchValue(data);
+    }
+    
     // showModalViewFile(guidId, name) {
     //     this.opened = true;
     //     const windowRef = this.windowService.open({
