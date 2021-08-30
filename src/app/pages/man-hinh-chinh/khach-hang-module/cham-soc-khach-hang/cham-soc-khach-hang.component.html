@@ -85,8 +85,8 @@
     <nb-card-body class="group-button pb-0">
         <!-- <button nbButton status="primary" (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button> -->
         <div class="float-left">
-            <button nbButton status="primary" (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
-            <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
+            <button nbButton status="primary" (click)="addHandler()" size="small"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
+            <button nbButton status="danger" (click)="removeSelectedHandler()" size="small" [disabled]="selectionIds.length < 1">
                 <i class="fa fa-trash mr-2"></i> Xóa
             </button>
             <!-- <button nbButton status="basic" (click)="importHandler()"><i

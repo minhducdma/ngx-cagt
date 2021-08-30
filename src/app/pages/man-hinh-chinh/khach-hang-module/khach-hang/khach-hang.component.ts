@@ -192,6 +192,34 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
             });
     }
 
+    changeStudentHandler(dataItem) {
+        this.selectionIds = [];
+        this.selectionIds.push(dataItem.id);
+        this.changeStudentSelectedHandler();
+    }
+
+    changeStudentSelectedHandler(){
+        this.dialogService.open(AlertDialogComponent, {
+            context: {
+                title: 'Xác nhận chuyển thành học viên',
+                message: 'Bạn có chắc chắn muốn chuyển khách hàng đã chọn thành học viên?',
+            },
+        }).onClose
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(res => {
+                if (res) {
+                    if (this.selectionIds.length > 0) {
+                        const body = [...new Set(this.selectionIds)]
+                        // this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
+                        //     this.selectionIds = [];
+                        //     this.showMessage('success', 'Thành công', 'Xóa thành công');
+                        //     this.loadItemGrids(this.currentGrid);
+                        // });
+                    }
+                }
+            });
+    }
+
 
     resetHandler() {
         this.modelSearch = {
