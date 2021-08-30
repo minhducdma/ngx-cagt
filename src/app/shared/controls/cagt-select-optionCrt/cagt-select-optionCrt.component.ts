@@ -1,6 +1,6 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UrlConstant } from '../../../@core/constants/url.constant';
 import { ApiService } from '../../../@core/services/api.service';

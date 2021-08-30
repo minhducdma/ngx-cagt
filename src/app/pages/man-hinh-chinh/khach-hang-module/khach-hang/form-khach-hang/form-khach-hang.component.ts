@@ -83,7 +83,8 @@ export class FormKhachHangComponent extends BaseFormComponent<IKhachHang> implem
             emailMe: [null],
             ghiChu: [null],
             quanTamDuHoc:[null],
-            kichBanHienTai: EKichBanCSKH.KichBan1
+            kichBanHienTai: EKichBanCSKH.KichBan1,
+            isHocVien: [null]
         });
     }
 }

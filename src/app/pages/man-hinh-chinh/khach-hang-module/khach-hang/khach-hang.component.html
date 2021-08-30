@@ -102,13 +102,18 @@
     <nb-card-header> Khách hàng </nb-card-header>
     <nb-card-body class="group-button">
         <div class="float-left">
-            <button nbButton status="primary" (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
-            <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
+            <button nbButton status="primary" size="small" (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
+            <button nbButton status="info" size="small" [disabled]="selectionIds.length < 1" (click)="changeStudentSelectedHandler()">
+                <i class="fa fa-graduation-cap mr-2"></i> Chuyển thành học viên
+            </button>
+            <button nbButton status="danger" size="small" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
                 <i class="fa fa-trash mr-2"></i> Xóa
             </button>
-            <button nbButton status="basic" (click)="importHandler()"><i
+        </div>
+        <div class="float-right">
+            <button nbButton status="basic" size="small" (click)="importHandler()"><i
                 class="fas fa-file-upload mr-2"></i>Import</button>
-            <button nbButton status="success" (click)="exportHandler()"><i
+            <button nbButton status="success" size="small" (click)="exportHandler()"><i
                 class="fas fa-file-download mr-2"></i>Export</button>
         </div>
     </nb-card-body>
@@ -127,16 +132,21 @@
                                     <i class="fa fa-bars"></i>
                                 </button>
                             <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="button_box" (click)="changeStudentHandler(dataItem)">
+                                    <div class="box_botton">
+                                        <i class="fa fa-graduation-cap mr-2" style="width: 20px;"></i>Chuyển thành học viên
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
-                                         </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
-                                        </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+                                    </div>
+                                </button>
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
@@ -388,19 +398,24 @@
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                             <button nbButton status="info" size="small" [matMenuTriggerFor]="menu">
-                                    <i class="fa fa-bars"></i>
-                                </button>
+                                <i class="fa fa-bars"></i>
+                            </button>
                             <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="button_box" (click)="changeStudentHandler(dataItem)">
+                                    <div class="box_botton">
+                                        <i class="fa fa-graduation-cap mr-2" style="width: 20px;"></i>Chuyển thành học viên
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
-                                         </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
-                                        </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+                                    </div>
+                                </button>
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
@@ -652,19 +667,24 @@
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                             <button nbButton status="info" size="small" [matMenuTriggerFor]="menu">
-                                    <i class="fa fa-bars"></i>
-                                </button>
+                                <i class="fa fa-bars"></i>
+                            </button>
                             <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="button_box" (click)="changeStudentHandler(dataItem)">
+                                    <div class="box_botton">
+                                        <i class="fa fa-graduation-cap mr-2" style="width: 20px;"></i>Chuyển thành học viên
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
-                                         </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
-                                        </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+                                    </div>
+                                </button>
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
@@ -916,19 +936,24 @@
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                             <button nbButton status="info" size="small" [matMenuTriggerFor]="menu">
-                                    <i class="fa fa-bars"></i>
-                                </button>
+                                <i class="fa fa-bars"></i>
+                            </button>
                             <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="button_box" (click)="changeStudentHandler(dataItem)">
+                                    <div class="box_botton">
+                                        <i class="fa fa-graduation-cap mr-2" style="width: 20px;"></i>Chuyển thành học viên
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
-                                         </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
-                                        </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+                                    </div>
+                                </button>
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
@@ -1180,19 +1205,24 @@
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                             <button nbButton status="info" size="small" [matMenuTriggerFor]="menu">
-                                    <i class="fa fa-bars"></i>
-                                </button>
+                                <i class="fa fa-bars"></i>
+                            </button>
                             <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="button_box" (click)="changeStudentHandler(dataItem)">
+                                    <div class="box_botton">
+                                        <i class="fa fa-graduation-cap mr-2" style="width: 20px;"></i>Chuyển thành học viên
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
-                                         </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+                                    </div>
+                                </button>
                                 <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
-                                        <div class="box_botton">
-                                            <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
-                                        </div>
-                                    </button>
+                                    <div class="box_botton">
+                                        <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+                                    </div>
+                                </button>
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
