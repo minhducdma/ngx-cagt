@@ -44,7 +44,7 @@ export const UrlConstant = {
         LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/',
         DE_THI_KENDO: '/de-thi/collect-kendo-datatable',
         //Module Học viên
-        LOAD_LOP_HOC: '/lop-hoc'
+        LOAD_LOP_HOC: 'https://apisipm.cagt.top/api/app/lop-hoc/lop-hoc-kendo-data'
     },
 
 }

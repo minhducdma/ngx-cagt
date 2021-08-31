@@ -30,9 +30,35 @@
                         </div>
                     </div>
                 </div> 
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Loại lớp học</div>
+                        <div class="col-md-12 col-lg-12">
+                            <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.LOAI_LOP_HOC" 
+                                [isMulti]="true"
+                                [(ngModel)]="modelSearch.loaiLopHocs">
+                            </ngx-cagt-select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                
               </div>
               <br />
               <div class="row">
+                <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pb-1">Trạng thái lớp học</div>
+                        <div class="col-md-12 col-lg-12">
+                            <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_LOP_HOC" 
+                                [isMulti]="true"
+                                [(ngModel)]="modelSearch.trangThaiLopHocs">
+                            </ngx-cagt-select>
+                        </div>
+                    </div>
+                </div>
               </div>
               <br />
               <div class="row">

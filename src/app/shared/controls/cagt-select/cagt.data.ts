@@ -7,5 +7,7 @@ export enum DropDownListEnum {
     TRANG_THAI_CHAM_SOC,
 
     LOAI_DE_THI,
-    TRANG_THAI_DE_THI
+    TRANG_THAI_DE_THI,
+    LOAI_LOP_HOC,
+    TRANG_THAI_LOP_HOC
 }

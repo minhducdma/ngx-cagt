@@ -20,12 +20,18 @@ export class LopHocComponent extends BaseListComponent<ILopHoc> implements OnIni
     modelSearch = {
         filter: null,
         thoiGianTu: null,
-        thoiGianDen: null
+        thoiGianDen: null,
+        loaiLopHocs: null,
+        trangThaiLopHocs: null
     };
     currentGrid = this.gridView$;
     private get extendQueryOptions() {
         return {
-            filter: this.modelSearch.filter ? this.modelSearch.filter : null
+            filter: this.modelSearch.filter ? this.modelSearch.filter : null,
+            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
+            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null,
+            loaiLopHocs: this.modelSearch.loaiLopHocs ? this.convertArrToStr(this.modelSearch.loaiLopHocs) : null,
+            trangThaiLopHocs: this.modelSearch.trangThaiLopHocs ? this.convertArrToStr(this.modelSearch.trangThaiLopHocs) : null
         };
     }
     constructor( injector: Injector,) { 
@@ -39,31 +45,33 @@ export class LopHocComponent extends BaseListComponent<ILopHoc> implements OnIni
         throw new Error('Method not implemented.');
     }
     loadItems(){
-        
         this.currentGrid = this.gridView$;
         this.loadItemGrids(this.gridView$);
     }
     onSearchChangeGrid(){
+        
         this.loadItemGrids(this.currentGrid);
     }
     loadItemGrids(gridView) {
-        
-        this.apiService.get('https://apisipm.cagt.top/api/app/lop-hoc', this.extendQueryOptions)
+        this.apiService.get(this.url, this.extendQueryOptions)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
                     let data = res.items;
                     gridView.data = data;
-                    // gridView.total = res.totalCount;
-                   
+                    gridView.total = res.pagingInfo.totalItems;
+                    console.log(data);
+                    console.log(this.extendQueryOptions);
                 }
             });
     }
     resetHandler() {
         this.modelSearch = {
-            filter: this.modelSearch.filter ? this.modelSearch.filter : null,
-            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
-            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null
+            filter:  null,
+            thoiGianTu: null,
+            thoiGianDen: null,
+            loaiLopHocs: null,
+            trangThaiLopHocs: null
         };
 
         this.loadItemGrids(this.currentGrid);
