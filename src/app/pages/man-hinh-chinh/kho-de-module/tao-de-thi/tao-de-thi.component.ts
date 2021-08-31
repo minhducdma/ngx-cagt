@@ -41,9 +41,8 @@ export class TaoDeThiComponent extends BaseListComponent<IDeThi> {
         this.deThiId = this.route.snapshot.params.deThiId;
         if (this.deThiId > 0) {
             this.apiService.post(this.getDeThiUrl + '/' + this.deThiId, this.deThiId).subscribe((res) => {
-                console.log(res);
+                this.form.patchValue(res[0]);
                 this.dataCauHoi = JSON.parse(JSON.stringify(res));
-
             })
         }
         super.ngOnInit();
@@ -114,8 +113,6 @@ export class TaoDeThiComponent extends BaseListComponent<IDeThi> {
             deThi: this.form.value,
             cauHois: this.dataCauHoi
         };
-
-        // console.log(obj);
         this.apiService
             .post(this.url, obj)
             .subscribe(res => {
@@ -136,7 +133,6 @@ export class TaoDeThiComponent extends BaseListComponent<IDeThi> {
             id: 0
         } as IDapAn;
         this.selectedCauHoi.dapAns.push(dapAn);
-        console.log(this.selectedCauHoi);
     }
     removeCauTraLoi(item: IDapAn) {
         const index = this.selectedCauHoi.dapAns.indexOf(item, 0);

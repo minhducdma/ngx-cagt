@@ -56,7 +56,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     private get extendQueryOptions() {
         return {
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
-            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null,
+            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.convertArrToStr(this.modelSearch.trangThaiKhachHangs) : null,
             loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null,
             nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null,
             nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.convertArrToStr(this.modelSearch.nguoiPhuTrachs) : null,
@@ -210,11 +210,11 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
                 if (res) {
                     if (this.selectionIds.length > 0) {
                         const body = [...new Set(this.selectionIds)]
-                        // this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
-                        //     this.selectionIds = [];
-                        //     this.showMessage('success', 'Thành công', 'Xóa thành công');
-                        //     this.loadItemGrids(this.currentGrid);
-                        // });
+                        this.apiService.post('/khach-hangs/chuyen-hoc-vien-many-khach-hangs', body).subscribe(res => {
+                            this.selectionIds = [];
+                            this.showMessage('success', 'Thành công', 'Chuyển thành công');
+                            this.loadItemGrids(this.currentGrid);
+                        });
                     }
                 }
             });

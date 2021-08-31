@@ -117,6 +117,12 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_LOP_HOC:
                 this.loadTrangThaiLopHoc();
                 break;
+            case DropDownListEnum.LOAI_HOC_VIEN:
+                this.loadLoaiHocVien();
+                break;
+            case DropDownListEnum.TRANG_THAI_HOC_VIEN:
+                this.loadTrangThaiHocVien();
+                break;
         }
     }
 
@@ -235,7 +241,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             });
     }
 
-    loadLoaiLopHoc(){
+    loadLoaiLopHoc() {
         this.apiService
             .get(this.url + `?tenBang=GetLopHocs&tenCot=loaiLopHoc`)
             .pipe(takeUntil(this.destroy$))
@@ -248,9 +254,33 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             });
     }
 
-    loadTrangThaiLopHoc(){
+    loadTrangThaiLopHoc() {
         this.apiService
             .get(this.url + `?tenBang=GetLopHocs&tenCot=trangThaiLopHoc`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadLoaiHocVien(){
+        this.apiService
+            .get(this.url + `?tenBang=GetHocViens&tenCot=loaiHocVien`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadTrangThaiHocVien(){
+        this.apiService
+            .get(this.url + `?tenBang=GetHocViens&tenCot=trangThaiHocVien`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {

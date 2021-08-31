@@ -81,6 +81,11 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <mat-menu #menu="matMenu">
+                        <button mat-menu-item class="button_box" color="primary" (click)="testExam(dataItem)">
+                            <div class="box_botton">
+                                <i class="fa fa-flask mr-2" style="width: 20px;"></i>Thi thử
+                            </div>
+                        </button>
                         <button mat-menu-item class="button_box" color="primary" (click)="editHandler(dataItem)">
                             <div class="box_botton">
                                 <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa

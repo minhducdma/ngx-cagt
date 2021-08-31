@@ -1,9 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BaseFormComponent } from '../base/base-form.component';
-import { BaseListComponent } from '../base/base-list.component';
-import { ILopHoc } from '../model/lop-hoc-model';
+import { BaseListComponent } from '../../base/base-list.component';
+import { ILopHoc } from '../../model/lop-hoc-model';
 
 @Component({
     selector: 'app-form-lop-hoc',
