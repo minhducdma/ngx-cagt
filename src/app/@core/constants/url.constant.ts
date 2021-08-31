@@ -44,10 +44,10 @@ export const UrlConstant = {
         LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/',
         DE_THI_KENDO: '/de-thi/collect-kendo-datatable',
 
-
         //Module Học viện
         HOC_VIEN_KENDO: '/hoc-vien/collect-kendo-datatable',
-        HOC_VIEN: '/hoc-vien'
+        HOC_VIEN: '/hoc-vien',
+        LOAD_LOP_HOC: 'https://apisipm.cagt.top/api/app/lop-hoc/lop-hoc-kendo-data'
     },
 
 }
