@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { Select2OptionData } from 'ng-select2';
 import { takeUntil } from 'rxjs/operators';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
@@ -20,6 +21,7 @@ export class DanhSachLopHocComponent extends BaseListComponent<ILopHoc> implemen
         loaiLopHocs: null,
         trangThaiLopHocs: null
     };
+    public exampleData: Array<Select2OptionData>;
     private get extendQueryOptions() {
         return {
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
@@ -35,6 +37,25 @@ export class DanhSachLopHocComponent extends BaseListComponent<ILopHoc> implemen
 
     ngOnInit(): void {
         super.ngOnInit();
+        this.exampleData = [
+            {
+              id: 'basic1',
+              text: 'Basic 1'
+            },
+            {
+              id: 'basic2',
+              disabled: true,
+              text: 'Basic 2'
+            },
+            {
+              id: 'basic3',
+              text: 'Basic 3'
+            },
+            {
+              id: 'basic4',
+              text: 'Basic 4'
+            }
+          ];
     }
     protected showFormCreateOrUpdate() {
         throw new Error('Method not implemented.');

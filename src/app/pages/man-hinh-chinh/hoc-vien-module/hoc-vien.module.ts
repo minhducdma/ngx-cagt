@@ -19,6 +19,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { NgSelect2Module } from 'ng-select2';
 const _component = [
 ]
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -64,7 +65,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         AlertDialogModule,
         NbAccordionModule,
         CagtSelectCrtModule,
-        FullCalendarModule
+        FullCalendarModule,
+        NgSelect2Module
     ],
 
 
