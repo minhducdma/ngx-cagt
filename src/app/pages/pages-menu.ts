@@ -11,25 +11,30 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
     {
         title: 'Quản lý kho đề',
-        icon: 'file-outline',
+        icon: 'archive-outline',
         children: [
             {
                 title: 'Danh sách đề thi',
-                icon: 'file-text-outline',
                 link: '/pages/admin/kho-de/de-thi',
-                home: true,
+            },
+            // {
+            //     title: 'Làm bài thi',
+            //     link: '/pages/admin/kho-de/lam-bai-thi',
+            // },
+        ],
+    },
+
+    {
+        title: 'Quản lý học viện',
+        icon: 'home-outline',
+        children: [
+            {
+                title: 'Danh sách lớp học',
+                link: '/pages/admin/quan-ly-hoc-vien/danh-sach-lop-hoc',
             },
             {
-                title: 'Tạo đề thi',
-                icon: 'book-outline',
-                link: '/pages/admin/kho-de/tao-de-thi',
-                home: true,
-            },
-            {
-                title: 'Làm bài thi',
-                icon: 'edit-outline',
-                link: '/pages/admin/kho-de/lam-bai-thi',
-                home: true,
+                title: 'Danh sách học viên',
+                link: '/pages/admin/quan-ly-hoc-vien/danh-sach-hoc-vien',
             },
         ],
     },

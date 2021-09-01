@@ -36,6 +36,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
         ngayChamSocTu: null,
         ngayChamSocDen: null,
         loaiChamSoc: null,
+        idKhachHang: this.id
     };
 
     gridDaChamSoc$ = {
@@ -55,16 +56,16 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
     }
     private get extendQueryOptions() {
         return {
-            keyword: this.modelSearch.filter ? this.modelSearch.filter : null,
+            filter: this.modelSearch.filter ? this.modelSearch.filter : null,
             ngayChamSocTu: this.modelSearch.ngayChamSocTu ? this.modelSearch.ngayChamSocTu : null,
             ngayChamSocDen: this.modelSearch.ngayChamSocDen ? this.modelSearch.ngayChamSocDen : null,
             loaiChamSoc: this.modelSearch.loaiChamSoc ? this.convertArrToStr(this.modelSearch.loaiChamSoc) : null,
+            idKhachHang: this.id,
             ...this.queryOptions,
         };
     }
 
     ngOnChange() {
-        debugger
         this.loadItems();
     }
 
@@ -81,7 +82,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
-                    let data = res.items.filter(x => x.khachHangId == this.id);
+                    let data = res.items;
                     this.gridView$.data = data;
                     // this.gridView$.total = res.pagingInfo.totalItems;
                     // this.countChamSoc.tongSo = res.pagingInfo.totalItems;
@@ -158,7 +159,8 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             khachHangId: this.id,
             baiThiThuId: 0,
             requestXepLopId: 0,
-            kichBanHienTai: this.kichBan
+            kichBanHienTai: this.kichBan,
+            isChuyenKichBan: null
         };
         this.action = ActionEnum.CREATE;
         this.showFormCreateOrUpdate();
@@ -170,6 +172,7 @@ export class ChamSocKhachHangComponent extends BaseListComponent<IChamSocKhachHa
             ngayChamSocTu: null,
             ngayChamSocDen: null,
             loaiChamSoc: null,
+            idKhachHang: this.id
         };
     }
     removeHandler(dataItem) {

@@ -64,7 +64,6 @@ const _component = [
         AlertDialogModule,
         NbAccordionModule,
         CagtSelectCrtModule,
-        NbAutocompleteModule,
     ],
 
     

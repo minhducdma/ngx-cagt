@@ -12,4 +12,5 @@ export interface IChamSocKhachHang extends IGenerice {
     baiThiThuId: number;
     requestXepLopId: number;
     kichBanHienTai: number;
+    isChuyenKichBan: boolean;
 }

@@ -7,7 +7,7 @@ import { UrlConstant } from '../constants/url.constant';
 
 
 export abstract class AbstractRestService<T> {
-    constructor(protected http: HttpClient) {}
+    constructor(protected http: HttpClient) { }
 }
 
 @Injectable({
@@ -71,8 +71,7 @@ export class ApiService extends BehaviorSubject<GridDataResult> {
         return this.http.post<IResponseData<any>>(this.apiUrl + api, data, {});
     }
     upload(api: string, data: any): Observable<IResponseData<any>> {
-    console.log(this.uploadUrl);
-      return this.http.post<IResponseData<any>>(this.uploadUrl, data);
+        return this.http.post<IResponseData<any>>(api, data);
     }
 
     /**

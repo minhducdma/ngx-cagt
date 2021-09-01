@@ -8,8 +8,6 @@ export const UrlConstant = {
     UPLOAD_BASE_URL: environment.apis.default.url + "/FileUpload/UploadFiles",
     IDENTITY_BASE_URL : environment.apis.default.url + '/api/identity/users',
     API: {
-        //List API in here
-
         // PERMISSION
         ACL_ACCOUNT: prefixACL + 'Accounts',
         ACL_PERMISSION: prefixACL + 'Permissions',
@@ -23,29 +21,31 @@ export const UrlConstant = {
 
     ROUTE: {
         LOGIN: '/login',
-        // DASHBOARD: '/management/dashboard',
-        // FORBIDEN: '/management/403',
-        // PROFILE: '/management/profile',
-        // MODULE: '/management/module',
         UPLOAD_FILE: 'https://apisipm.migroup.asia/FileUpload/UploadFiles',
         STORE_FILE:'https://apisipm.migroup.asia/Uploads/',
+
+        // Module Khách hàng
         KHACH_HANG: '/khach-hangs',
         DANH_MUC: baseUrl + '/common/du-lieu-phan-loai-by-table',
         KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais',
         KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
+        CHAM_SOC_KHACH_HANG_KENDO:'/cham-soc-khach-hangs/kendo-datatable-cham-soc-khach-hang',
+        CHAM_SOC_KHACH_HANG:'/cham-soc-khach-hangs',
+        DU_LIEU_PHAN_LOAI_BY_TABLE:'/common/du-lieu-phan-loai-and-count-by-table',
+        GET_USER: 'https://apisipm.cagt.top/api/identity/users',
+        TEMPLATE_FILE_IMPORT_KHACH_HANG: 'https://apisipm.cagt.top/FileTemplate/TemplateImportKhachHang.xlsx',
+        FILE_IMPORT_KH: 'https://apisipm.migroup.asia/FileUpload/UploadFiles/ImportKhachHang​',
+        //Module Đề thi
         CREATE_DE_THI: '/cau-hois/or-update-de-thi_v1',
         CREATE_LAM_BAI_THI: '/lam-bai-thi/luu-tru-lam-bai-thi',
         GET_UPDATE_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id',
-
         LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/',
-        // KHACH_HANG_TRANG_THAI: '/khach-hang-trang-thais',
-        // KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
-        CHAM_SOC_KHACH_HANG_KENDO:'/cham-soc-khach-hangs/kendo-datatable-cham-soc-khach-hang',
-        CHAM_SOC_KHACH_HANG:'/cham-soc-khach-hangs',
         UPDATE_CHAM_SOC_KHACH_HANG: '/cham-soc-khach-hangs/cham-soc-khach-hang-and-change-kich-ban',
-        DU_LIEU_PHAN_LOAI_BY_TABLE:'/common/du-lieu-phan-loai-and-count-by-table',
-
-
+        DE_THI_KENDO: '/de-thi/collect-kendo-datatable',
+        //Module Học viện
+        HOC_VIEN_KENDO: '/hoc-vien/collect-kendo-datatable',
+        HOC_VIEN: '/hoc-vien',
+        LOAD_LOP_HOC: 'https://apisipm.cagt.top/api/app/lop-hoc/lop-hoc-kendo-data'
     },
 
 }

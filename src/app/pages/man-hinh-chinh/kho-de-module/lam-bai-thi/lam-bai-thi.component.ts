@@ -1,19 +1,13 @@
 import { ICauHoi, IBoDemGio, ILamBaiThi } from './../model/tao-de-thi.model';
-import { Component, Injector, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { ApiService } from "../../../../@core/services/api.service";
-import { ContainsFilterOperatorComponent, GreaterOrEqualToFilterOperatorComponent } from '@progress/kendo-angular-grid';
 import 'ckeditor';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
-import { HtmlParser } from '@angular/compiler';
 import { ActivatedRoute } from '@angular/router';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
-import { delay, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { NbDialogService } from '@nebular/theme';
-import { type } from 'os';
-import { isUndefinedOrEmptyString } from '@abp/ng.core';
 import { BaseListComponent } from '../base/base-list.component';
 
 
@@ -192,7 +186,7 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
         this.dialogService.open(AlertDialogComponent, {
             context: {
                 title: 'Xác nhận chuyển phần thi',
-                message: 'Khi đã chuyển phần thi sẽ không được phép trở lại phần thi trước. Bạn có chắc chắn muốn chuyển phần thi? ',
+                message: 'Bạn có chắc chắn muốn chuyển phần thi? ',
             },
         }).onClose
             .pipe(takeUntil(this.destroy$))
@@ -215,7 +209,7 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
         this.dialogService.open(AlertDialogComponent, {
             context: {
                 title: 'Xác nhận chuyển root',
-                message: 'Bạn có chắc chắn muốn chuyển?',
+                message: 'Bạn có chắc chắn muốn chuyển phần thi? ',
             },
         }).onClose
             .pipe(takeUntil(this.destroy$))
@@ -364,14 +358,14 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
             }
             request.listDapAns.push(d);
         })
-        // this.apiService
-        //     .post(this.urlCreateLamBaiThi, request)
-        //     .subscribe(res => {
-        //         // show notification
-        //         //this.notification.show('Thành công', 'Tạo mới thành công', { status: 'success' });
-        //         //this.router.navigate([""]);
-        //         // close form
-        //     });
+        this.apiService
+            .post(this.urlCreateLamBaiThi, request)
+            .subscribe(res => {
+                // show notification
+                //this.notification.show('Thành công', 'Tạo mới thành công', { status: 'success' });
+                //this.router.navigate([""]);
+                // close form
+            });
         this.router.navigate(["/pages/admin/kho-de/successfull"]);
     }
 

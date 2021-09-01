@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-3">
-        <button nbButton fullWidth class="mb-4" size="large" status="success" (click)="showFormCreateOrUpdate()">
+        <button nbButton fullWidth class="mb-4" size="large" status="success" (click)="showFormCreateOrUpdate()"  *ngIf="boDemGio.length == 0">
             <i class="fa fa-file mr-2"></i>Bắt đầu thi
         </button>
         <nb-card>
@@ -29,12 +29,12 @@
                             <!-- <ngx-count-down interval="0.2" [rootId]="item.id" [isStart]="item.isStart"
                                 (onComplete)="completedChildPart(i)"></ngx-count-down> -->
                         </h2>
-                        <!-- <div class="mt-3 text-center">
+                        <div class="mt-3 text-center">
                             <button (click)="run(item)" nbButton class="mr-1" status="primary" size="small"><i
                                     class="fa fa-play" aria-hidden="true"></i></button>
                             <button (click)="stop(item)" nbButton status="danger" size="small"><i class="fa fa-stop"
                                     aria-hidden="true"></i></button>
-                        </div> -->
+                        </div>
                     </nb-accordion-item-body>
                 </nb-accordion-item>
             </nb-accordion>
@@ -103,10 +103,10 @@
         <nb-card>
             <nb-card-body>
                 <div class="float-left">
-                    <!-- <button nbButton size="medium" status="primary" class=" mr-2" [hidden]="showNextButton()"
+                    <button nbButton size="medium" status="primary" class=" mr-2" [hidden]="showNextButton()"
                         (click)="previewRoot()">
-                        <i class="fa fa-arrow-left mr-2"></i>Root trước
-                    </button> -->
+                        <i class="fa fa-arrow-left mr-2"></i>Phần trước
+                    </button>
                     <button nbButton size="medium" status="primary" [hidden]="showPrevButton()" (click)="nextRoot()">
                         Phần sau <i class="fa fa-arrow-right ml-2"></i>
                     </button>

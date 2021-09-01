@@ -8,7 +8,7 @@ import { FormImportKhachHangComponent } from './form-import-khach-hang/form-impo
 import { ChamSocKhachHangComponent } from '../cham-soc-khach-hang/cham-soc-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
 import { IKhachHang } from '../model/khach-hang.model';
-import { EKhachHang, EKichBanCSKH } from '../base/base.enum';
+import { EKhachHang, EKichBanCSKH, EKichBanKH } from '../base/base.enum';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { FormChamSocKhachHangComponent } from '../cham-soc-khach-hang/form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
@@ -55,9 +55,8 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     private get extendQueryOptions() {
         return {
-
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
-            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.modelSearch.trangThaiKhachHangs : null,
+            trangThaiKhachHangs: this.modelSearch.trangThaiKhachHangs ? this.convertArrToStr(this.modelSearch.trangThaiKhachHangs) : null,
             loaiKhachHangs: this.modelSearch.loaiKhachHangs ? this.convertArrToStr(this.modelSearch.loaiKhachHangs) : null,
             nguonKhachHangs: this.modelSearch.nguonKhachHangs ? this.convertArrToStr(this.modelSearch.nguonKhachHangs) : null,
             nguoiPhuTrachs: this.modelSearch.nguoiPhuTrachs ? this.convertArrToStr(this.modelSearch.nguoiPhuTrachs) : null,
@@ -81,6 +80,10 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     onStateChange(state: State) {
         this.gridState = state;
+        this.loadItemGrids(this.currentGrid);
+    }
+
+    onSearchChangeGrid(){
         this.loadItemGrids(this.currentGrid);
     }
 
@@ -187,32 +190,34 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
                     }
                 }
             });
+    }
 
-        // const dialogRef = this.dialog.open(AlertDialogComponent, {
-        //     data: {
-        //         message: 'Bạn có chắc chắn muốn xóa?',
-        //         buttonText: {
-        //             ok: 'Có',
-        //             cancel: 'Không'
-        //         }
-        //     }
-        // });
-        // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-        //     if (confirmed) {
-        //         if (this.selectionIds.length > 0) {
-        //             const body = {
-        //                 ids: [...new Set(this.selectionIds)],
-        //             };
-        //             this.apiService.post(this.url + '/many-khach-hangs', body).subscribe(res => {
-        //                 this.selectionIds = [];
-        //                 alert('Xóa thành công');
-        //                 this.loadItemGrids();
-        //             });
-        //         }
-        //     }
-        // });
+    changeStudentHandler(dataItem) {
+        this.selectionIds = [];
+        this.selectionIds.push(dataItem.id);
+        this.changeStudentSelectedHandler();
+    }
 
-
+    changeStudentSelectedHandler(){
+        this.dialogService.open(AlertDialogComponent, {
+            context: {
+                title: 'Xác nhận chuyển thành học viên',
+                message: 'Bạn có chắc chắn muốn chuyển khách hàng đã chọn thành học viên?',
+            },
+        }).onClose
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(res => {
+                if (res) {
+                    if (this.selectionIds.length > 0) {
+                        const body = [...new Set(this.selectionIds)]
+                        this.apiService.post('/khach-hangs/chuyen-hoc-vien-many-khach-hangs', body).subscribe(res => {
+                            this.selectionIds = [];
+                            this.showMessage('success', 'Thành công', 'Chuyển thành công');
+                            this.loadItemGrids(this.currentGrid);
+                        });
+                    }
+                }
+            });
     }
 
 
@@ -297,22 +302,22 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     selectTab(kichBan) {
         switch (kichBan.tabTitle) {
-            case "Kịch bản 1":
+            case EKichBanKH.KichBan1:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan1;
                 this.currentGrid = this.gridViewKB1$;
                 this.loadItemGrids(this.gridViewKB1$);
                 break;
-            case "Kịch bản 2":
+            case EKichBanKH.KichBan2:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan2;
                 this.currentGrid = this.gridViewKB2$;
                 this.loadItemGrids(this.gridViewKB2$);
                 break;
-            case "Kịch bản 3":
+            case EKichBanKH.KichBan3:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan3;
                 this.currentGrid = this.gridViewKB3$;
                 this.loadItemGrids(this.gridViewKB3$);
                 break;
-            case "Kịch bản 4":
+            case EKichBanKH.KichBan4:
                 this.modelSearch.kichBan = EKichBanCSKH.KichBan4;
                 this.currentGrid = this.gridViewKB4$;
                 this.loadItemGrids(this.gridViewKB4$);

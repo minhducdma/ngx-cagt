@@ -1,0 +1,43 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { DanhSachHocVienComponent } from './danh-sach-hoc-vien/danh-sach-hoc-vien.component';
+import { FormHocVienComponent } from './danh-sach-hoc-vien/form-hoc-vien/form-hoc-vien.component';
+import { DanhSachLopHocComponent } from './danh-sach-lop-hoc/danh-sach-lop-hoc.component';
+import { FormLopHocComponent } from './danh-sach-lop-hoc/form-lop-hoc/form-lop-hoc.component';
+import { HocViensComponent } from './hoc-vien.component';
+import { LichXepLopComponent } from './_component/lich-xep-lop/lich-xep-lop.component';
+
+const routes: Routes = [{
+    path: '',
+    component: HocViensComponent,
+    children: [
+        {
+            path: 'edit-lop-hoc/:lopId',
+            component: FormLopHocComponent,
+        },
+        {
+            path: 'danh-sach-hoc-vien',
+            component: DanhSachHocVienComponent,
+        },
+        {
+            path: 'danh-sach-lop-hoc',
+            component: DanhSachLopHocComponent,
+        },
+    ],
+}];
+
+@NgModule({
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
+
+})
+export class HocVienRoutingModule { }
+
+export const routedComponents = [
+    HocViensComponent,
+    FormLopHocComponent,
+    LichXepLopComponent,
+    DanhSachHocVienComponent,
+    DanhSachLopHocComponent,
+    FormHocVienComponent
+];

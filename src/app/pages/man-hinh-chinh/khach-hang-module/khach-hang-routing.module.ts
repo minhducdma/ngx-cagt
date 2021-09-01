@@ -9,32 +9,32 @@ import { FormKhachHangComponent } from './khach-hang/form-khach-hang/form-khach-
 import { KhachHangComponent } from './khach-hang/khach-hang.component';
 
 const routes: Routes = [{
-  path: '',
-  component: KhachHangsComponent,
-  children: [
-    {
-      path: 'khach-hang',
-      component: KhachHangComponent,
-    },
-    {
-      path: 'cham-soc-khach-hang',
-      component: ChamSocKhachHangComponent,
-    },
-  ],
+    path: '',
+    component: KhachHangsComponent,
+    children: [
+        {
+            path: 'khach-hang',
+            component: KhachHangComponent,
+        },
+        {
+            path: 'cham-soc-khach-hang',
+            component: ChamSocKhachHangComponent,
+        },
+    ],
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
+
 })
 export class KhachHangRoutingModule { }
 
 export const routedComponents = [
-  KhachHangsComponent,
-  KhachHangComponent,
-  FormKhachHangComponent,
-  FormImportKhachHangComponent,
-  ChamSocKhachHangComponent,
-  FormChamSocKhachHangComponent,
+    KhachHangsComponent,
+    KhachHangComponent,
+    FormKhachHangComponent,
+    FormImportKhachHangComponent,
+    ChamSocKhachHangComponent,
+    FormChamSocKhachHangComponent,
 ];

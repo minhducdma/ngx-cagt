@@ -16,6 +16,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CountdownModule } from '../../../shared/controls/count-down/count-down.module';
 import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-select.module';
 import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
+import { CagtSelectCrtModule } from '../../../shared/controls/cagt-select-optionCrt/cagt-select-optionCrt.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     imports: [
@@ -52,7 +54,8 @@ import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-d
         NbToastrModule,
         NbButtonGroupModule,
         AlertDialogModule,
-        NbAutocompleteModule,
+        CagtSelectCrtModule,
+        MatMenuModule
     ],
     declarations: [
         ...routedComponents,
