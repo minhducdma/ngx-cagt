@@ -12,14 +12,17 @@ import { ILopHoc } from '../model/lop-hoc-model';
     styleUrls: ['./danh-sach-lop-hoc.component.scss']
 })
 export class DanhSachLopHocComponent extends BaseListComponent<ILopHoc> implements OnInit {
-    url: string = UrlConstant.ROUTE.LOAD_LOP_HOC;
+    url: string = UrlConstant.ROUTE.LOP_HOC_KENDO;
 
     modelSearch = {
         filter: null,
+        loaiLopHocs: null,
+        trangThaiLopHocs: null,
         thoiGianTu: null,
         thoiGianDen: null,
-        loaiLopHocs: null,
-        trangThaiLopHocs: null
+        nguoiPhuTrachs: null,
+        index: 0,
+        size: 0
     };
     public exampleData: Array<Select2OptionData>;
     private get extendQueryOptions() {
@@ -37,31 +40,14 @@ export class DanhSachLopHocComponent extends BaseListComponent<ILopHoc> implemen
 
     ngOnInit(): void {
         super.ngOnInit();
-        this.exampleData = [
-            {
-              id: 'basic1',
-              text: 'Basic 1'
-            },
-            {
-              id: 'basic2',
-              disabled: true,
-              text: 'Basic 2'
-            },
-            {
-              id: 'basic3',
-              text: 'Basic 3'
-            },
-            {
-              id: 'basic4',
-              text: 'Basic 4'
-            }
-          ];
     }
+
     protected showFormCreateOrUpdate() {
         throw new Error('Method not implemented.');
     }
+
     loadItems() {
-        this.apiService.get(this.url, this.extendQueryOptions)
+        this.apiService.post(this.url, this.extendQueryOptions)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
@@ -70,13 +56,17 @@ export class DanhSachLopHocComponent extends BaseListComponent<ILopHoc> implemen
                 }
             });
     }
+
     resetHandler() {
         this.modelSearch = {
             filter: null,
+            loaiLopHocs: null,
+            trangThaiLopHocs: null,
             thoiGianTu: null,
             thoiGianDen: null,
-            loaiLopHocs: null,
-            trangThaiLopHocs: null
+            nguoiPhuTrachs: null,
+            index: 0,
+            size: 0
         };
         this.loadItems();
     }
@@ -98,7 +88,7 @@ export class DanhSachLopHocComponent extends BaseListComponent<ILopHoc> implemen
                 if (res) {
                     if (this.selectionIds.length > 0) {
                         const body = [...new Set(this.selectionIds)]
-                        this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
+                        this.apiService.post('/lop-hoc/delete-many-lop-hocs', body).subscribe(res => {
                             this.selectionIds = [];
                             this.showMessage('success', 'Thành công', 'Xóa thành công');
                             this.loadItems();

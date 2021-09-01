@@ -47,7 +47,8 @@ export const UrlConstant = {
         //Module Học viện
         HOC_VIEN_KENDO: '/hoc-vien/collect-kendo-datatable',
         HOC_VIEN: '/hoc-vien',
-        LOAD_LOP_HOC: 'https://apisipm.cagt.top/api/app/lop-hoc/lop-hoc-kendo-data'
+        LOP_HOC_KENDO: '/lop-hoc/get-lop-hoc-kendo-data',
+        LOP_HOC_GETID: 'https://apisipm.migroup.asia/api/app/lop-hoc/'
     },
 
 }

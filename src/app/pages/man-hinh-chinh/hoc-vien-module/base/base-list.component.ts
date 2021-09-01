@@ -1,5 +1,6 @@
 import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
 import { NbDialogService, NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
 import { WindowService } from "@progress/kendo-angular-dialog";
 import { PagerSettings } from "@progress/kendo-angular-grid";
@@ -58,6 +59,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     protected formBuilder: FormBuilder;
     protected notification: NbToastrService;
     protected dialogService: NbDialogService;
+    protected router: Router;
     constructor(
         injector: Injector
     ) {
@@ -66,6 +68,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.formBuilder = injector.get(FormBuilder)
         this.notification = injector.get(NbToastrService)
         this.dialogService = injector.get(NbDialogService)
+        this.router = injector.get(Router)
     }
 
     ngOnInit(): void {
