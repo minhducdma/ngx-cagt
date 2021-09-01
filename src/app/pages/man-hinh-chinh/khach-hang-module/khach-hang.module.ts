@@ -21,6 +21,9 @@ import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-d
 import { CagtSelectCrtModule } from '../../../shared/controls/cagt-select-optionCrt/cagt-select-optionCrt.module';
 import { ChonDeThiComponent } from './_components/chon-de-thi/chon-de-thi.component';
 import { TriggerChonDeThiComponent } from './_components/chon-de-thi/trigger-chon-de-thi/trigger-chon-de-thi.component';
+import { NgSelect2Module } from 'ng-select2';
+import * as jquery from 'jquery';
+
 
 const _component = [
     ChonDeThiComponent,
@@ -64,9 +67,10 @@ const _component = [
         AlertDialogModule,
         NbAccordionModule,
         CagtSelectCrtModule,
+        NgSelect2Module
     ],
 
-    
+
 
     declarations: [
         ...routedComponents,

@@ -12,6 +12,12 @@ import { EKhachHang, EKichBanCSKH, EKichBanKH } from '../base/base.enum';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { FormChamSocKhachHangComponent } from '../cham-soc-khach-hang/form-cham-soc-khach-hang/form-cham-soc-khach-hang.component';
+
+
+
+
+
+
 @Component({
     selector: 'ngx-khach-hang',
     templateUrl: './khach-hang.component.html',
@@ -31,6 +37,7 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
     };
 
     currentGrid = this.gridView$;
+    select2data = []
 
     gridViewKB1$ = {
         data: [],
@@ -70,12 +77,21 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
 
     constructor(
         injector: Injector,
+
     ) {
         super(injector)
     }
 
     ngOnInit(): void {
+
         super.ngOnInit();
+        this.select2data = [
+          {text: "Qua tao", id: "Qua Tao"},
+          {text: "Qua cam", id: "Qua cam"},
+          {text: "Qua chanh", id: "Qua chanh"},
+          {text: "Qua mit", id: "Qua mit"},
+          {text: "Qua buoi", id: "Qua buoi"}
+        ]
     }
 
     onStateChange(state: State) {

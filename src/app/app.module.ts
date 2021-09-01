@@ -31,6 +31,8 @@ import { environment } from '../environments/environment';
 import { NgxsModule } from '@ngxs/store';
 import { MessageService } from '@progress/kendo-angular-l10n';
 import { MessageKendoService } from './@core/services/message-kendo.service';
+import * as $ from 'jquery'
+
 
 @NgModule({
   declarations: [AppComponent],
