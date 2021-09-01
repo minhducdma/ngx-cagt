@@ -17,7 +17,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://apisipm.cagt.top',
+    issuer: 'https://localhost:44317',
     redirectUri: baseUrl,
     clientId: 'SiPM_App',
     responseType: 'code',
@@ -25,7 +25,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://apisipm.cagt.top',
+      url: 'https://localhost:44317',
       rootNamespace: 'SiPM',
     },
   },

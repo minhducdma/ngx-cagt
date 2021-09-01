@@ -6,6 +6,7 @@ const baseHost = environment.apis.default.url;
 export const UrlConstant = {
     BASE_URL: environment.apis.default.url + "/api/app",
     UPLOAD_BASE_URL: environment.apis.default.url + "/FileUpload/UploadFiles",
+    IDENTITY_BASE_URL : environment.apis.default.url + '/api/identity/users',
     API: {
         //List API in here
 
@@ -41,8 +42,10 @@ export const UrlConstant = {
         // KHACH_HANG_KENDO:'/khach-hangs/kendo-datatable-khach-hang',
         CHAM_SOC_KHACH_HANG_KENDO:'/cham-soc-khach-hangs/kendo-datatable-cham-soc-khach-hang',
         CHAM_SOC_KHACH_HANG:'/cham-soc-khach-hangs',
+        UPDATE_CHAM_SOC_KHACH_HANG: '/cham-soc-khach-hangs/cham-soc-khach-hang-and-change-kich-ban',
         DU_LIEU_PHAN_LOAI_BY_TABLE:'/common/du-lieu-phan-loai-and-count-by-table',
-        GET_USER: 'https://apisipm.cagt.top/api/identity/users'
+
+
     },
 
 }

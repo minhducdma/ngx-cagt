@@ -126,7 +126,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
 
     loadNhanVienPhuTrach() {
         this.apiService
-            .get(UrlConstant.ROUTE.GET_USER)
+            .get(UrlConstant.IDENTITY_BASE_URL)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {

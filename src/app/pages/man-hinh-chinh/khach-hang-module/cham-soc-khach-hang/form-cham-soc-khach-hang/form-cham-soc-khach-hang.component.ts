@@ -13,6 +13,7 @@ import { EKichBanCSKH } from '../../base/base.enum';
 })
 export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKhachHang> implements OnInit {
     url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG;
+    urlUpdate: string = UrlConstant.ROUTE.UPDATE_CHAM_SOC_KHACH_HANG;
 
     public get EKichBanCSKH(): typeof EKichBanCSKH {
         return EKichBanCSKH;
@@ -57,7 +58,7 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
                 break;
             case ActionEnum.UPDATE:
                 this.apiService
-                    .put(this.url + '/' + this.model.id.toString(), this.form.value)
+                    .put(this.urlUpdate, this.form.value)
                     .subscribe(res => {
                         // show notification
                         this.notification.show('Cập nhật thành công','Thành công', { status :'success' });
@@ -66,7 +67,7 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
                     });
                 break;
         }
-        
+
     }
     createForm() {
         this.form = this.formBuilder.group({
