@@ -67,7 +67,6 @@ const _component = [
         AlertDialogModule,
         NbAccordionModule,
         CagtSelectCrtModule,
-        NgSelect2Module
     ],
 
 

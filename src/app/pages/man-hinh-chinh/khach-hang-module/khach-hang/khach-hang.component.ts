@@ -82,16 +82,10 @@ export class KhachHangComponent extends BaseListComponent<IKhachHang> implements
         super(injector)
     }
 
+
     ngOnInit(): void {
 
         super.ngOnInit();
-        this.select2data = [
-          {text: "Qua tao", id: "Qua Tao"},
-          {text: "Qua cam", id: "Qua cam"},
-          {text: "Qua chanh", id: "Qua chanh"},
-          {text: "Qua mit", id: "Qua mit"},
-          {text: "Qua buoi", id: "Qua buoi"}
-        ]
     }
 
     onStateChange(state: State) {

@@ -1,4 +1,4 @@
-<div *ngIf="isMulti; else elseBlock">
+<!-- <div *ngIf="isMulti; else elseBlock">
     <nb-select placeholder="Chọn" fullWidth [(ngModel)]="value" multiple (selectedChange)="handleOnChange($event)"
         style="width: 100%;">
         <nb-option *ngFor="let item of lstData" value="{{item}}">{{item}}</nb-option>
@@ -9,12 +9,12 @@
         style="width: 100%;">
         <nb-option *ngFor="let item of lstData" value="{{item}}">{{item}}</nb-option>
     </nb-select>
-</ng-template>
+</ng-template> -->
 
-<!-- <ng-select [items]="lstData" 
-    bindLabel="name" 
-    bindValue="name" 
-    placeholder="Chọn"
-    [(ngModel)]="value">
-    <ng-option>xxx</ng-option>
-</ng-select> -->
+<ng-select2 [data]="lstData"
+    [(ngModel)]="value"
+    [options]="options"
+    (valueChanged)="handleOnChange($event)"
+    bindLabel="text"
+    bindValue="text">
+</ng-select2>

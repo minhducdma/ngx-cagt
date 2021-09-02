@@ -49,14 +49,11 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
                             <div class="col-md-12 col-lg-12">
-                                <ng-select2 [data]="select2data"
-                                            [(ngModel)]="modelSearch.loaiKhachHangs"
-                                            [width]="300"></ng-select2>
-                                <!-- <ngx-cagt-select
+                                <ngx-cagt-select
                                     [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG"
                                     [isMulti]="true"
                                     [(ngModel)]="modelSearch.loaiKhachHangs">
-                                </ngx-cagt-select> -->
+                                </ngx-cagt-select>
                             </div>
                         </div>
                     </div>
@@ -64,10 +61,11 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12 pb-1">Người phụ trách</div>
                             <div class="col-md-12 col-lg-12">
-                                <app-cagt-select-optionCrt
+                                <ngx-cagt-select
                                     [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH"
+                                    [isMulti]="true"
                                     [(ngModel)]="modelSearch.nguoiPhuTrachs">
-                                </app-cagt-select-optionCrt>
+                                </ngx-cagt-select>
                             </div>
                         </div>
                     </div>
