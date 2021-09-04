@@ -4,6 +4,7 @@ import { HocVienLopHocComponent } from './hoc-vien-lop-hoc/hoc-vien-lop-hoc.comp
 
 import { HocViensComponent } from './hoc-vien.component';
 import { LopHocComponent } from './lop-hoc/lop-hoc.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [{
     path: '',
@@ -16,7 +17,11 @@ const routes: Routes = [{
         {
             path: 'lop-hoc',
             component: LopHocComponent,
-          },
+        },
+        {
+            path: 'danh-sach-user',
+            component: UserComponent,
+        },
     ],
 }];
 
@@ -30,5 +35,6 @@ export class HocVienRoutingModule { }
 export const routedComponents = [
     HocViensComponent,
     HocVienLopHocComponent,
-    LopHocComponent
+    LopHocComponent,
+    UserComponent
 ];

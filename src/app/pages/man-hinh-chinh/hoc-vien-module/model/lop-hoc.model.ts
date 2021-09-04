@@ -2,7 +2,7 @@ import { IGenerice } from "./base.model";
 
 export interface ILopHoc extends IGenerice {
 
-    id: 0,
+    id: number,
     creationTime: string,
     creatorId: string,
     maLopHoc: string,

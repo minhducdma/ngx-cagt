@@ -5,44 +5,39 @@ import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { FormImportKhachHangComponent } from '../../khach-hang-module/khach-hang/form-import-khach-hang/form-import-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
-import { ILopHoc } from '../model/lop-hoc.model';
-
+import { IUser } from '../model/user.model';
 
 @Component({
-  selector: 'ngx-lop-hoc',
-  templateUrl: './lop-hoc.component.html',
-  styleUrls: ['./lop-hoc.component.scss']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class LopHocComponent extends BaseListComponent<ILopHoc> implements OnInit {
-    
-    url: string = UrlConstant.ROUTE.LOAD_LOP_HOC;
+export class UserComponent extends BaseListComponent<IUser> implements OnInit {
+  
+
+  url: string = UrlConstant.ROUTE.LOAD_USER;
     
     modelSearch = {
         filter: null,
-        thoiGianTu: null, 
-        thoiGianDen: null,
-        loaiLopHocs: null,
-        trangThaiLopHocs: null
+        thoiGianTu: null,
+        thoiGianDen: null
     };
     currentGrid = this.gridView$;
     private get extendQueryOptions() {
         return {
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
             thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
-            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null,
-            loaiLopHocs: this.modelSearch.loaiLopHocs ? this.convertArrToStr(this.modelSearch.loaiLopHocs) : null,
-            trangThaiLopHocs: this.modelSearch.trangThaiLopHocs ? this.convertArrToStr(this.modelSearch.trangThaiLopHocs) : null
+            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null
+            // loaiLopHocs: this.modelSearch.loaiLopHocs ? this.convertArrToStr(this.modelSearch.loaiLopHocs) : null,
+            // trangThaiLopHocs: this.modelSearch.trangThaiLopHocs ? this.convertArrToStr(this.modelSearch.trangThaiLopHocs) : null
         };
     }
     constructor( injector: Injector,) { 
         super(injector)
     }
-  
+
     ngOnInit(): void  {
         super.ngOnInit();
-    }
-    protected showFormCreateOrUpdate() {
-        throw new Error('Method not implemented.');
     }
     loadItems(){
         this.currentGrid = this.gridView$;
@@ -67,12 +62,13 @@ export class LopHocComponent extends BaseListComponent<ILopHoc> implements OnIni
         this.modelSearch = {
             filter:  null,
             thoiGianTu: null,
-            thoiGianDen: null,
-            loaiLopHocs: null,
-            trangThaiLopHocs: null
+            thoiGianDen: null
         };
 
         this.loadItemGrids(this.currentGrid);
+    }
+    protected showFormCreateOrUpdate() {
+        throw new Error('Method not implemented.');
     }
     removeHandler(dataItem) {
         this.selectionIds = [];
