@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { State } from '@progress/kendo-data-query';
 import { takeUntil } from 'rxjs/operators';
@@ -15,11 +15,14 @@ import { FormHocVienComponent } from './form-hoc-vien/form-hoc-vien.component';
      styleUrls: ['./danh-sach-hoc-vien.component.scss']
 })
 export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implements OnInit {
+     @Input() isChild: Boolean = false;
+     @Input() lopId: number = 0;
      url: string = UrlConstant.ROUTE.HOC_VIEN_KENDO;
 
      modelSearch = {
           filter: null,
           idKhachHang: null,
+          idsLop: [],
           trangThaiHocViens: 0,
           loaiHocViens: null
      };
@@ -34,6 +37,7 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
           return {
                filter: this.modelSearch.filter ? this.modelSearch.filter : null,
                idKhachHang: 0,
+               idsLop:  this.modelSearch.idsLop,
                trangThaiHocViens: this.modelSearch.trangThaiHocViens ? this.convertArrToStr(this.modelSearch.trangThaiHocViens) : null,
                loaiHocViens: this.modelSearch.loaiHocViens ? this.convertArrToStr(this.modelSearch.loaiHocViens) : null,
                ...this.queryOptions,
@@ -41,6 +45,8 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
      }
 
      ngOnChange() {
+          if(this.lopId > 0)
+               this.modelSearch.idsLop.push(this.lopId);
           this.loadItems();
      }
 
@@ -102,6 +108,7 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
           this.modelSearch = {
                filter: null,
                idKhachHang: 0,
+               idsLop: [],
                trangThaiHocViens: null,
                loaiHocViens: null
           };

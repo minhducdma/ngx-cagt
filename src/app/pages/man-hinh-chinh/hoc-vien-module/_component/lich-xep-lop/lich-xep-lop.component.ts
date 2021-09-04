@@ -41,7 +41,6 @@ export class LichXepLopComponent extends BaseListComponent<ILopHoc> implements O
         eventClick: this.handleEventClick.bind(this),
         eventDrop: this.handleEvents.bind(this),
         locale: 'vi',
-        height: 600,
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:

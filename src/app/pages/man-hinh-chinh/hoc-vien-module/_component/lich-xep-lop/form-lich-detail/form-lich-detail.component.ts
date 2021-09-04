@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActionEnum } from '../../../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../../../@core/constants/url.constant';
@@ -11,7 +11,7 @@ import { ILichDetail } from '../../../model/lich-detail-model';
     templateUrl: './form-lich-detail.component.html',
     styleUrls: ['./form-lich-detail.component.scss']
 })
-export class FormLichDetailComponent extends BaseFormComponent<ILichDetail> implements OnInit {
+export class FormLichDetailComponent extends BaseFormComponent<ILichDetail> implements OnInit, OnChanges {
     @Input() lichId: number = 0;
     @Input() thoiGianBatDau: string;
     @Input() thoiGianKetThuc: string;
@@ -22,6 +22,9 @@ export class FormLichDetailComponent extends BaseFormComponent<ILichDetail> impl
         injector: Injector
     ) {
         super(injector)
+    }
+
+    ngOnChanges() {
     }
 
     ngOnInit() {
@@ -54,7 +57,7 @@ export class FormLichDetailComponent extends BaseFormComponent<ILichDetail> impl
                     .post(this.url, this.form.value)
                     .subscribe(res => {
                         // show notification
-                        this.notification.show('Tạo mới thành công','Thành công', { status :'success' });
+                        this.notification.show('Tạo mới thành công', 'Thành công', { status: 'success' });
                         // close form
                         this.closeForm();
                     });
@@ -64,7 +67,7 @@ export class FormLichDetailComponent extends BaseFormComponent<ILichDetail> impl
                     .put(this.url + '/' + this.model.id.toString(), this.form.value)
                     .subscribe(res => {
                         // show notification
-                        this.notification.show('Cập nhật thành công','Thành công', { status :'success' });
+                        this.notification.show('Cập nhật thành công', 'Thành công', { status: 'success' });
                         // close form
                         this.closeForm();
                     });
