@@ -1,0 +1,312 @@
+<div class="mb-3">
+    <nb-accordion>
+        <nb-accordion-item expanded>
+            <nb-accordion-item-header>
+                Tìm kiếm
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Từ khóa</div>
+                            <div class="col-md-12 col-lg-12">
+                                <input type="text" fullWidth nbInput class="m-input form-control"
+                                    [(ngModel)]="modelSearch.filter" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Thời gian từ</div>
+                            <div class="col-md-12 col-lg-12">
+                                <input type="date" fullWidth nbInput class="m-input form-control mr-2"
+                                    [(ngModel)]="modelSearch.thoiGianTu" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Thời gian đến</div>
+                            <div class="col-md-12 col-lg-12">
+                                <input type="date" fullWidth nbInput class="m-input form-control mr-2"
+                                    [(ngModel)]="modelSearch.thoiGianDen" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Loại lớp học</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.LOAI_LOP_HOC" [isMulti]="true"
+                                    [(ngModel)]="modelSearch.loaiLopHocs">
+                                </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Trạng thái lớp học</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_LOP_HOC"
+                                    [isMulti]="true" [(ngModel)]="modelSearch.trangThaiLopHocs">
+                                </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="col-md-6 offset-md-3 text-center">
+                            <button class="mr-2" nbButton size="small" status="primary" (click)="onSearchChange()">
+                                <i class="fa fa-search mr-2"></i> Tìm kiếm
+                            </button>
+                            <button class="mr-2" nbButton size="small" status="warning" (click)="resetHandler()">
+                                <i class="fas fa-redo-alt mr-2"></i> Làm mới
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+<nb-card>
+    <nb-card-header> Lớp học </nb-card-header>
+    <nb-card-body class="group-button">
+        <div class="float-left">
+            <button nbButton status="primary"  (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
+            <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
+                <i class="fa fa-trash mr-2"></i> Xóa
+            </button>
+        </div>
+    </nb-card-body>
+    <nb-card-body>
+
+
+        <kendo-grid 
+            [data]="gridView$" 
+            [resizable]="true" 
+            [pageSize]="gridState.take" 
+            [skip]="gridState.skip"
+            [loading]="isLoading" 
+            [pageable]="true" 
+            [resizable]="true" 
+            kendoGridSelectBy="id" 
+            [selectable]="true"
+            [selectedKeys]="selectionIds" 
+            (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false"
+                [headerStyle]="{
+                      'text-align': 'center'
+                    }">
+
+            </kendo-grid-checkbox-column>
+            <kendo-grid-column class="text-center" [width]="80">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <button nbButton status="info" size="small" [matMenuTriggerFor]="menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item class="button_box" color="primary"  (click)="editHandler(dataItem)">
+                            <div class="box_botton">
+                                <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+                            </div>
+                        </button>
+                        <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
+                            <div class="box_botton">
+                                <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+                            </div>
+                        </button>
+                    </mat-menu>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column title="STT" [width]="60" class="text-center" [headerStyle]="{ 'text-align': 'center'}">
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    {{ rowIndex + 1 }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="maLopHoc" title="Mã lớp học" [width]="100">
+            </kendo-grid-column>
+            <kendo-grid-column field="tenLopHoc" title="Tên lớp học" [width]="180">
+            </kendo-grid-column>
+            <kendo-grid-column field="loaiLopHoc" title="Loại" [width]="180">
+            </kendo-grid-column>
+            <kendo-grid-column field="trangThaiLopHoc" title="Trạng thái" [width]="100">
+            </kendo-grid-column>
+            <kendo-grid-column field="thoiGianBatDau" title="Ngày bắt đầu" [width]="100" class="text-center"
+                [headerStyle]="{'text-align': 'center'}">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.thoiGianBatDau | date: "dd/MM/yyyy" }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="thoiGianKetThuc" title="Ngày kết thúc" [width]="100" class="text-center"
+                [headerStyle]="{'text-align': 'center'}">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.thoiGianKetThuc | date: "dd/MM/yyyy" }}
+                </ng-template>
+            </kendo-grid-column>
+            <ng-template kendoGridDetailTemplate let-dataItem>
+                <nb-tabset>
+                    <nb-tab class="pl-0 pr-0" tabTitle="Thông tin chung">
+                        <section>
+                            <div *ngIf="dataItem.maLopHoc != null && dataItem.maLopHoc != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Mã lớp học </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.maLopHoc }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.tenLopHoc != null && dataItem.tenLopHoc != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Tên lớp học </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem.tenLopHoc }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.loaiLopHoc != null && dataItem.loaiLopHoc != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Loại lớp học</label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.loaiLopHoc }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.trangThaiLopHoc != null && dataItem.trangThaiLopHoc != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Trạng thái lớp </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.trangThaiLopHoc }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.siSoToiDa != null && dataItem.siSoToiDa != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Sĩ số tối đa </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.siSoToiDa }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.isNgayChan != null && dataItem.isNgayChan != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Ngày chẵn/lẻ </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.isNgayChan ? 'ngày chẵn' : 'ngày lẻ' }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.tongSoBuoi != null && dataItem.tongSoBuoi != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Tổng số buổi </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.tongSoBuoi }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.tongSoBaiKiemTra != null && dataItem.tongSoBaiKiemTra != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Tổng số bài kiểm tra </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.tongSoBaiKiemTra }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.thoiGianBatDau != null && dataItem.thoiGianBatDau != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Nguồn khách hàng </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.thoiGianBatDau | date: "dd/MM/yyyy" }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.thoiGianKetThuc != null && dataItem.thoiGianKetThuc != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Thời gian kết thúc </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.thoiGianKetThuc | date: "dd/MM/yyyy" }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="dataItem.nhanVienPhuTrach != null && dataItem.nhanVienPhuTrach != ''">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xxxl-2 float-left custom_table">
+                                        <label class="col-form-label"> Nhân viên phụ trách </label>
+                                        <span class="float-right">:</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9 col-xxxl-2">
+                                        <label class=" col-form-label lb-bold-info">
+                                            {{ dataItem?.nhanVienPhuTrach }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </nb-tab>
+
+                </nb-tabset>
+
+            </ng-template>
+        </kendo-grid>
+    </nb-card-body>
+</nb-card>
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
+    <div kendoWindowContainer></div>
+</div>

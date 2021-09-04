@@ -1,5 +1,6 @@
 import { Directive, HostListener, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
 import { NbDialogService, NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
 import { WindowService } from "@progress/kendo-angular-dialog";
 import { PagerSettings } from "@progress/kendo-angular-grid";
@@ -10,8 +11,6 @@ import { ReziseTable } from "../../../../@core/constants/app.constant";
 import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { ApiService } from "../../../../@core/services/api.service";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
-
-
 @Directive()
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     @ViewChild(TooltipDirective) public tooltipDir: TooltipDirective;
@@ -19,7 +18,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     isLoading = false;
     opened = false;
     dropdownListEnum = DropDownListEnum;
-    // khachHangEnum = EKhachHang;
+    form: FormGroup;
     gridView$ = {
         data: [],
         total: 0
@@ -39,7 +38,6 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     tabName: string;
     openFirstTime = false;
     searchAdvance = false;
-    //dropdownListEnum = DropDownListEnum;
     pageConfig: PagerSettings | boolean = false;
     loading = false;
     selectionIds: number[] = [];
@@ -61,6 +59,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     protected formBuilder: FormBuilder;
     protected notification: NbToastrService;
     protected dialogService: NbDialogService;
+    protected router: Router;
     constructor(
         injector: Injector
     ) {
@@ -69,6 +68,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.formBuilder = injector.get(FormBuilder)
         this.notification = injector.get(NbToastrService)
         this.dialogService = injector.get(NbDialogService)
+        this.router = injector.get(Router)
     }
 
     ngOnInit(): void {
@@ -80,6 +80,10 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.destroyed$.complete();
     }
 
+    setFormValue(data) { 
+        this.form.patchValue(data);
+    }
+    
     // showModalViewFile(guidId, name) {
     //     this.opened = true;
     //     const windowRef = this.windowService.open({

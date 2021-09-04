@@ -1,39 +1,35 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActionEnum } from '../../../../../@core/constants/enum.constant';
-import { FormUtil } from '../../../../../shared/utils/form';
 import { UrlConstant } from '../../../../../@core/constants/url.constant';
+import { FormUtil } from '../../../../../shared/utils/form';
 import { BaseFormComponent } from '../../base/base-form.component';
-import { IChamSocKhachHang } from '../../model/cham-soc-khach-hang.model';
-import { EKichBanCSKH } from '../../base/base.enum';
-@Component({
-    selector: 'ngx-form-cham-soc-khach-hang',
-    templateUrl: './form-cham-soc-khach-hang.component.html',
-    styleUrls: ['./form-cham-soc-khach-hang.component.scss']
-})
-export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKhachHang> implements OnInit {
-    url: string = UrlConstant.ROUTE.CHAM_SOC_KHACH_HANG;
-    urlUpdate: string = UrlConstant.ROUTE.UPDATE_CHAM_SOC_KHACH_HANG;
+import { IHocVien } from '../../model/hoc-vien-model';
 
-    public get EKichBanCSKH(): typeof EKichBanCSKH {
-        return EKichBanCSKH;
-    }
+@Component({
+    selector: 'app-form-hoc-vien',
+    templateUrl: './form-hoc-vien.component.html',
+    styleUrls: ['./form-hoc-vien.component.scss']
+})
+export class FormHocVienComponent extends BaseFormComponent<IHocVien> implements OnInit {
+    url: string = UrlConstant.ROUTE.HOC_VIEN;
 
     constructor(
-        injector: Injector,
+        injector: Injector
     ) {
-        super(injector);
+        super(injector)
     }
+
     ngOnInit() {
-        console.log(this.model)
         super.ngOnInit();
         switch(this.action){
             case ActionEnum.CREATE:
-                this.setFormValue(this.model);
                 break;
             case ActionEnum.UPDATE:
                 this.setFormValue(this.model);
-                this.form.get('ngayChamSocDuKien').setValue(this.formatDate(this.form.get('ngayChamSocDuKien').value));
+
+                this.form.get('ngaySinh').setValue(this.formatDate(this.form.get('ngaySinh').value));
+
                 break;
         }
     }
@@ -44,21 +40,20 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
             FormUtil.validateAllFormFields(this.form);
             return;
         }
-
         switch (this.action) {
             case ActionEnum.CREATE:
                 this.apiService
                     .post(this.url, this.form.value)
                     .subscribe(res => {
                         // show notification
-                        this.notification.show('Tạo mới thành công','Thành công',  { status: 'success' });
+                        this.notification.show('Tạo mới thành công','Thành công', { status :'success' });
                         // close form
                         this.closeForm();
                     });
                 break;
             case ActionEnum.UPDATE:
                 this.apiService
-                    .put(this.urlUpdate, this.form.value)
+                    .put(this.url + '/' + this.model.id.toString(), this.form.value)
                     .subscribe(res => {
                         // show notification
                         this.notification.show('Cập nhật thành công','Thành công', { status :'success' });
@@ -67,26 +62,18 @@ export class FormChamSocKhachHangComponent extends BaseFormComponent<IChamSocKha
                     });
                 break;
         }
-
     }
     createForm() {
         this.form = this.formBuilder.group({
             id: [0, Validators.required],
-            codeChamSoc: [null, Validators.required],
-            noiDungChamSoc: [null, Validators.required],
-            ngayChamSocDuKien: [null, Validators.required],
-            feedBackKhahHang: [null],
-            loaiChamSoc: [null],
-            trangThaiChamSoc: [null, Validators.required],
-            khachHangId: this.model.id,
-            baiThiThuId: 0,
-            requestXepLopId: 0,
-            kichBanHienTai: [null],
-            isChuyenKichBan: [null]
+            creationTime: [null],
+            creatorId: [null],
+            khachHangId: [null],
+            maHocVien: [null, Validators.required],
+            countKhoaHoc: 0,
+            loaiHocVien: [null, Validators.required],
+            trangThaiHocVien: [null, Validators.required],
         });
     }
 
-    chonDeThi(data){
-        this.form.get('baiThiThuId').setValue(data.id);
-    }
 }

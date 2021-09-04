@@ -47,3 +47,32 @@ td.k-detail-cell {
 td.k-hierarchy-cell {
     background: #FAFAFA;
 }
+span.select2-selection.select2-selection--single {
+    height: 40px !important;
+    background-color: #f7f9fc;
+    border-color: #e4e9f2;
+    font-weight:bold;
+}
+span.select2-selection.select2-selection--multiple {
+    height: 40px !important;
+    background-color: #f7f9fc;
+    border-color: #e4e9f2;
+    font-weight:bold;
+}
+.select2-selection__rendered {
+    line-height: 40px !important;
+    height: 40px !important;
+}   
+.select2-selection__arrow {
+    height: 40px !important;
+}
+.fc-scrollgrid-sync-table{
+    height: 600px;
+    width: 1100px !important;
+}
+.fc-col-header {
+    width: 1100px !important;
+}
+td.fc-daygrid-day.fc-day{
+    height: 90px;
+}

@@ -6,7 +6,7 @@ const baseHost = environment.apis.default.url;
 export const UrlConstant = {
     BASE_URL: environment.apis.default.url + "/api/app",
     UPLOAD_BASE_URL: environment.apis.default.url + "/FileUpload/UploadFiles",
-    
+    IDENTITY_BASE_URL : environment.apis.default.url + '/api/identity/users',
     API: {
         // PERMISSION
         ACL_ACCOUNT: prefixACL + 'Accounts',
@@ -35,17 +35,19 @@ export const UrlConstant = {
         GET_USER: 'https://apisipm.cagt.top/api/identity/users',
         TEMPLATE_FILE_IMPORT_KHACH_HANG: 'https://apisipm.cagt.top/FileTemplate/TemplateImportKhachHang.xlsx',
         FILE_IMPORT_KH: 'https://apisipm.migroup.asia/FileUpload/UploadFiles/ImportKhachHang​',
-
-
         //Module Đề thi
         CREATE_DE_THI: '/cau-hois/or-update-de-thi_v1',
         CREATE_LAM_BAI_THI: '/lam-bai-thi/luu-tru-lam-bai-thi',
         GET_UPDATE_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id',
         LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/',
+        UPDATE_CHAM_SOC_KHACH_HANG: '/cham-soc-khach-hangs/cham-soc-khach-hang-and-change-kich-ban',
         DE_THI_KENDO: '/de-thi/collect-kendo-datatable',
-        //Module Học viên
-        LOAD_LOP_HOC: 'https://apisipm.cagt.top/api/app/lop-hoc/lop-hoc-kendo-data',
-        LOAD_USER: 'https://apisipm.cagt.top/api/identity/users'
+        //Module Học viện
+        HOC_VIEN_KENDO: '/hoc-vien/collect-kendo-datatable',
+        HOC_VIEN: '/hoc-vien',
+        LOP_HOC_KENDO: '/lop-hoc/get-lop-hoc-kendo-data',
+        LOP_HOC_GETID: '/lop-hoc/collect-full-detail-lop-hoc',
+        LICH_DETAIL: '/lich-detail'
     },
 
 }

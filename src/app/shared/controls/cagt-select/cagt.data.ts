@@ -9,5 +9,11 @@ export enum DropDownListEnum {
     LOAI_DE_THI,
     TRANG_THAI_DE_THI,
     LOAI_LOP_HOC,
-    TRANG_THAI_LOP_HOC
+    TRANG_THAI_LOP_HOC,
+
+    TRANG_THAI_HOC_VIEN,
+    LOAI_HOC_VIEN,
+
+    LOAI_DAT_LICH,
+    TRANG_THAI_DAT_LICH
 }

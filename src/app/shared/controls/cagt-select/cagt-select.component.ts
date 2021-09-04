@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -19,7 +19,9 @@ import { DropDownListEnum } from './cagt.data';
 })
 export class CagtSelectComponent implements ControlValueAccessor {
     @Input() modeOfDropDowList: DropDownListEnum;
-    @Input() isMulti: Boolean;
+    @Input() isMulti: Boolean = false;
+
+    options;
 
     url: string = UrlConstant.ROUTE.DANH_MUC;
     value: string;
@@ -49,11 +51,17 @@ export class CagtSelectComponent implements ControlValueAccessor {
     }
 
     handleOnChange(e) {
-        this.writeValue(e);
-        this.onChange(e);
+        if(e != undefined){
+            this.writeValue(e);
+            this.onChange(e);
+        }
     }
     ngOnInit() {
-        console.log(this.value);
+        this.options = {
+            multiple: this.isMulti,
+            tags: this.isMulti,
+            width: '100%'
+        };
         switch (this.modeOfDropDowList) {
             case DropDownListEnum.LOAI_KHACH_HANG:
                 this.loadLoaiKhachHang();
@@ -85,6 +93,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_LOP_HOC:
                 this.loadTrangThaiLopHoc();
                 break;
+            case DropDownListEnum.LOAI_HOC_VIEN:
+                this.loadLoaiHocVien();
+                break;
+            case DropDownListEnum.TRANG_THAI_HOC_VIEN:
+                this.loadTrangThaiHocVien();
+                break;
         }
     }
 
@@ -94,7 +108,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
@@ -105,7 +124,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
@@ -115,7 +139,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
@@ -125,21 +154,29 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
 
     loadNhanVienPhuTrach() {
         this.apiService
-            .get(UrlConstant.ROUTE.GET_USER)
+            .get(UrlConstant.IDENTITY_BASE_URL)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    let data = res.items.map((x:any)=>{
-                        return x.name;
+                    let data = res.items.map((x: any) => {
+                        return {
+                            id: x.name,
+                            text: x.name
+                        };
                     })
-                    this.lstData = data.filter(x=>x != null);
+                    this.lstData = data.filter(x => x != null);
                 }
             });
     }
@@ -150,7 +187,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
@@ -160,7 +202,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
@@ -170,7 +217,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
@@ -180,27 +232,74 @@ export class CagtSelectComponent implements ControlValueAccessor {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
+
     loadLoaiLopHoc() {
         this.apiService
             .get(this.url + `?tenBang=GetLopHocs&tenCot=loaiLopHoc`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }
+
     loadTrangThaiLopHoc() {
         this.apiService
             .get(this.url + `?tenBang=GetLopHocs&tenCot=trangThaiLopHoc`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
-                    this.lstData = res.filter(x=>x != null);
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    }
+    loadLoaiHocVien() {
+        this.apiService
+            .get(this.url + `?tenBang=GetHocViens&tenCot=loaiHocVien`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    }
+    loadTrangThaiHocVien() {
+        this.apiService
+            .get(this.url + `?tenBang=GetHocViens&tenCot=trangThaiHocVien`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
                 }
             });
     }

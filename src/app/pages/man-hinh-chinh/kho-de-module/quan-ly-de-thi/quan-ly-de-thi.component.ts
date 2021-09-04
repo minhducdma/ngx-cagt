@@ -85,7 +85,7 @@ export class QuanLyDeThiComponent extends BaseListComponent<IDeThi> implements O
                 if (res) {
                     if (this.selectionIds.length > 0) {
                         const body = [...new Set(this.selectionIds)]
-                        this.apiService.post('/khach-hangs/delete-many-de-this', body).subscribe(res => {
+                        this.apiService.post('/de-thi/delete-many-de-this', body).subscribe(res => {
                             this.selectionIds = [];
                             this.showMessage('success', 'Thành công', 'Xóa thành công');
                             this.loadItems();
@@ -93,6 +93,10 @@ export class QuanLyDeThiComponent extends BaseListComponent<IDeThi> implements O
                     }
                 }
             });
+    }
+
+    testExam(dataItem){
+        this.router.navigate(["/pages/admin/kho-de/" + dataItem.id + "/user/0"]);
     }
 
 }

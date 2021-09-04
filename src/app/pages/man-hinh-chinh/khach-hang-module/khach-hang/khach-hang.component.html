@@ -29,13 +29,13 @@
                                 <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianDen" />
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-md-3 col-lg-3 col-xxxl-3 ">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 pb-1">Nguồn khách hàng</div>
                             <div class="col-md-12 col-lg-12">
-                                <ngx-cagt-select 
-                                    [modeOfDropDowList]="dropdownListEnum.NGUON_KHACH_HANG" 
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.NGUON_KHACH_HANG"
                                     [isMulti]="true"
                                     [(ngModel)]="modelSearch.nguonKhachHangs">
                                 </ngx-cagt-select>
@@ -49,8 +49,8 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
                             <div class="col-md-12 col-lg-12">
-                                <ngx-cagt-select 
-                                    [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" 
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG"
                                     [isMulti]="true"
                                     [(ngModel)]="modelSearch.loaiKhachHangs">
                                 </ngx-cagt-select>
@@ -61,10 +61,11 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12 pb-1">Người phụ trách</div>
                             <div class="col-md-12 col-lg-12">
-                                <app-cagt-select-optionCrt
-                                    [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH" 
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH"
+                                    [isMulti]="true"
                                     [(ngModel)]="modelSearch.nguoiPhuTrachs">
-                                </app-cagt-select-optionCrt>
+                                </ngx-cagt-select>
                             </div>
                         </div>
                     </div>
@@ -72,8 +73,8 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12 pb-1">Trạng thái khách hàng</div>
                             <div class="col-md-12 col-lg-12">
-                                <ngx-cagt-select 
-                                    [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_KHACH_HANG" 
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_KHACH_HANG"
                                     [isMulti]="true"
                                     [(ngModel)]="modelSearch.trangThaiKhachHangs">
                                 </ngx-cagt-select>
@@ -85,7 +86,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <div class="col-md-6 offset-md-3 text-center">
-                            <button class="mr-2" nbButton size="small" status="primary" (click)="onSearchChangeGrid()"> 
+                            <button class="mr-2" nbButton size="small" status="primary" (click)="onSearchChangeGrid()">
                                 <i class="fa fa-search mr-2"></i> Tìm kiếm
                             </button>
                             <button class="mr-2" nbButton size="small" status="warning" (click)="resetHandler()">
@@ -124,7 +125,7 @@
                     <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
                       'text-align': 'center'
                     }">
-            
+
                     </kendo-grid-checkbox-column>
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -150,10 +151,10 @@
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        title="STT" 
-                        [width]="60" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        title="STT"
+                        [width]="60"
+                        class="text-center"
                         [headerStyle]="{ 'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                             {{ rowIndex + 1 }}
@@ -161,11 +162,11 @@
                     </kendo-grid-column>
                     <kendo-grid-column field="hoTen" title="Họ tên" [width]="180">
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        field="ngaySinh" 
-                        title="Ngày sinh" 
-                        [width]="100" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        field="ngaySinh"
+                        title="Ngày sinh"
+                        [width]="100"
+                        class="text-center"
                         [headerStyle]="{'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-dataItem>
                             {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
@@ -191,7 +192,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTen }} 
+                                                    {{ dataItem?.hoTen }}
                                                 </label>
                                             </div>
                                         </div>
@@ -204,7 +205,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} 
+                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
                                                 </label>
                                             </div>
                                         </div>
@@ -217,7 +218,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenBo }} 
+                                                    {{ dataItem?.hoTenBo }}
                                                 </label>
                                             </div>
                                         </div>
@@ -230,7 +231,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenMe }} 
+                                                    {{ dataItem?.hoTenMe }}
                                                 </label>
                                             </div>
                                         </div>
@@ -384,7 +385,7 @@
                                 <ngx-cham-soc-khach-hang [isChild]="true" [id]="dataItem.id" [kichBan]="dataItem.kichBanHienTai" (onComplete)="completeCSKH($event)"></ngx-cham-soc-khach-hang>
                             </nb-tab>
                         </nb-tabset>
-                        
+
                     </ng-template>
                 </kendo-grid>
             </nb-tab>
@@ -393,7 +394,7 @@
                     <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
                       'text-align': 'center'
                     }">
-            
+
                     </kendo-grid-checkbox-column>
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -419,10 +420,10 @@
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        title="STT" 
-                        [width]="60" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        title="STT"
+                        [width]="60"
+                        class="text-center"
                         [headerStyle]="{ 'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                             {{ rowIndex + 1 }}
@@ -430,11 +431,11 @@
                     </kendo-grid-column>
                     <kendo-grid-column field="hoTen" title="Họ tên" [width]="180">
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        field="ngaySinh" 
-                        title="Ngày sinh" 
-                        [width]="100" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        field="ngaySinh"
+                        title="Ngày sinh"
+                        [width]="100"
+                        class="text-center"
                         [headerStyle]="{'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-dataItem>
                             {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
@@ -460,7 +461,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTen }} 
+                                                    {{ dataItem?.hoTen }}
                                                 </label>
                                             </div>
                                         </div>
@@ -473,7 +474,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} 
+                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
                                                 </label>
                                             </div>
                                         </div>
@@ -486,7 +487,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenBo }} 
+                                                    {{ dataItem?.hoTenBo }}
                                                 </label>
                                             </div>
                                         </div>
@@ -499,7 +500,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenMe }} 
+                                                    {{ dataItem?.hoTenMe }}
                                                 </label>
                                             </div>
                                         </div>
@@ -653,7 +654,7 @@
                                 <ngx-cham-soc-khach-hang [isChild]="true" [id]="dataItem.id" [kichBan]="dataItem.kichBanHienTai" (onComplete)="completeCSKH($event)"></ngx-cham-soc-khach-hang>
                             </nb-tab>
                         </nb-tabset>
-                        
+
                     </ng-template>
                 </kendo-grid>
             </nb-tab>
@@ -662,7 +663,7 @@
                     <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
                       'text-align': 'center'
                     }">
-            
+
                     </kendo-grid-checkbox-column>
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -688,10 +689,10 @@
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        title="STT" 
-                        [width]="60" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        title="STT"
+                        [width]="60"
+                        class="text-center"
                         [headerStyle]="{ 'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                             {{ rowIndex + 1 }}
@@ -699,11 +700,11 @@
                     </kendo-grid-column>
                     <kendo-grid-column field="hoTen" title="Họ tên" [width]="180">
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        field="ngaySinh" 
-                        title="Ngày sinh" 
-                        [width]="100" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        field="ngaySinh"
+                        title="Ngày sinh"
+                        [width]="100"
+                        class="text-center"
                         [headerStyle]="{'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-dataItem>
                             {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
@@ -729,7 +730,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTen }} 
+                                                    {{ dataItem?.hoTen }}
                                                 </label>
                                             </div>
                                         </div>
@@ -742,7 +743,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} 
+                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
                                                 </label>
                                             </div>
                                         </div>
@@ -755,7 +756,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenBo }} 
+                                                    {{ dataItem?.hoTenBo }}
                                                 </label>
                                             </div>
                                         </div>
@@ -768,7 +769,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenMe }} 
+                                                    {{ dataItem?.hoTenMe }}
                                                 </label>
                                             </div>
                                         </div>
@@ -922,7 +923,7 @@
                                 <ngx-cham-soc-khach-hang [isChild]="true" [id]="dataItem.id" [kichBan]="dataItem.kichBanHienTai" (onComplete)="completeCSKH($event)"></ngx-cham-soc-khach-hang>
                             </nb-tab>
                         </nb-tabset>
-                        
+
                     </ng-template>
                 </kendo-grid>
             </nb-tab>
@@ -931,7 +932,7 @@
                     <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
                       'text-align': 'center'
                     }">
-            
+
                     </kendo-grid-checkbox-column>
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -957,10 +958,10 @@
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        title="STT" 
-                        [width]="60" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        title="STT"
+                        [width]="60"
+                        class="text-center"
                         [headerStyle]="{ 'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                             {{ rowIndex + 1 }}
@@ -968,11 +969,11 @@
                     </kendo-grid-column>
                     <kendo-grid-column field="hoTen" title="Họ tên" [width]="180">
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        field="ngaySinh" 
-                        title="Ngày sinh" 
-                        [width]="100" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        field="ngaySinh"
+                        title="Ngày sinh"
+                        [width]="100"
+                        class="text-center"
                         [headerStyle]="{'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-dataItem>
                             {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
@@ -998,7 +999,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTen }} 
+                                                    {{ dataItem?.hoTen }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1011,7 +1012,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} 
+                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1024,7 +1025,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenBo }} 
+                                                    {{ dataItem?.hoTenBo }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1037,7 +1038,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenMe }} 
+                                                    {{ dataItem?.hoTenMe }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1191,7 +1192,7 @@
                                 <ngx-cham-soc-khach-hang [isChild]="true" [id]="dataItem.id" [kichBan]="dataItem.kichBanHienTai" (onComplete)="completeCSKH($event)"></ngx-cham-soc-khach-hang>
                             </nb-tab>
                         </nb-tabset>
-                        
+
                     </ng-template>
                 </kendo-grid>
             </nb-tab>
@@ -1200,7 +1201,7 @@
                     <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
                       'text-align': 'center'
                     }">
-            
+
                     </kendo-grid-checkbox-column>
                     <kendo-grid-column class="text-center" [width]="80">
                         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -1226,10 +1227,10 @@
                             </mat-menu>
                         </ng-template>
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        title="STT" 
-                        [width]="60" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        title="STT"
+                        [width]="60"
+                        class="text-center"
                         [headerStyle]="{ 'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                             {{ rowIndex + 1 }}
@@ -1237,11 +1238,11 @@
                     </kendo-grid-column>
                     <kendo-grid-column field="hoTen" title="Họ tên" [width]="180">
                     </kendo-grid-column>
-                    <kendo-grid-column 
-                        field="ngaySinh" 
-                        title="Ngày sinh" 
-                        [width]="100" 
-                        class="text-center" 
+                    <kendo-grid-column
+                        field="ngaySinh"
+                        title="Ngày sinh"
+                        [width]="100"
+                        class="text-center"
                         [headerStyle]="{'text-align': 'center'}">
                         <ng-template kendoGridCellTemplate let-dataItem>
                             {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
@@ -1267,7 +1268,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTen }} 
+                                                    {{ dataItem?.hoTen }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1280,7 +1281,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }} 
+                                                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1293,7 +1294,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenBo }} 
+                                                    {{ dataItem?.hoTenBo }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1306,7 +1307,7 @@
                                             </div>
                                             <div class="col-md-12 col-lg-9 col-xxxl-2">
                                                 <label class=" col-form-label lb-bold-info">
-                                                    {{ dataItem?.hoTenMe }} 
+                                                    {{ dataItem?.hoTenMe }}
                                                 </label>
                                             </div>
                                         </div>
@@ -1460,11 +1461,11 @@
                                 <ngx-cham-soc-khach-hang [isChild]="true" [id]="dataItem.id" [kichBan]="dataItem.kichBanHienTai" (onComplete)="completeCSKH($event)"></ngx-cham-soc-khach-hang>
                             </nb-tab>
                         </nb-tabset>
-                        
+
                     </ng-template>
                 </kendo-grid>
             </nb-tab>
-        </nb-tabset>     
+        </nb-tabset>
     </nb-card-body>
 </nb-card>
 <div class="k-overlay" *ngIf="opened"></div>

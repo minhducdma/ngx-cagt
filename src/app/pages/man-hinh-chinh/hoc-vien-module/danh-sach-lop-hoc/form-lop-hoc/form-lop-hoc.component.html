@@ -1,0 +1,87 @@
+<div class="mb-3">
+    <nb-accordion>
+        <nb-accordion-item expanded>
+            <nb-accordion-item-header>
+                Thông tin đề thi
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <form class="m-form" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="form-group m-form__group col-3">
+                            <label>Mã lớp học</label>
+                            <input nbInput type="text" fullWidth nbInput class="m-input form-control"
+                                formControlName="maLopHoc" />
+                        </div>
+                        <div class="form-group m-form__group col-9">
+                            <label>Tên lớp học</label>
+                            <input nbInput type="text" fullWidth nbInput class="m-input form-control"
+                                formControlName="tenLopHoc" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label class="label">Thời gian bắt đầu</label>
+                            <input type="date" nbInput fullWidth formControlName="thoiGianBatDau" placeholder="">
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label class="label">Thời gian kết thúc</label>
+                            <input type="date" nbInput fullWidth formControlName="thoiGianKetThuc" placeholder="">
+                        </div>
+                        <div class="form-group m-form__group col-2">
+                            <label>Sĩ số tối đa</label>
+                            <input nbInput type="number" min="0" nbInput class="m-input form-control" formControlName="siSoToiDa" />
+                        </div>
+                        <div class="form-group m-form__group col-2">
+                            <label>Tổng số buổi</label>
+                            <input nbInput type="number" min="0" nbInput class="m-input form-control" formControlName="tongSoBuoi" />
+                        </div>
+                        <div class="form-group m-form__group col-2">
+                            <label>Tổng số bài kiểm tra</label>
+                            <input nbInput type="number" min="0" nbInput class="m-input form-control" formControlName="tongSoBaiKiemTra" />
+                        </div>
+                        <div class="form-group m-form__group col-2">
+                            <label>Thời gian bắt đầu</label>
+                            <input nbInput  type="text"  [nbTimepicker]="timepicker" fullWidth formControlName="thoiGianVaoLopInput" />
+                            <nb-timepicker #timepicker></nb-timepicker>
+                        </div>
+                        <div class="form-group m-form__group col-2">
+                            <label>Thời gian điểm danh</label>
+                            <input nbInput type="number" nbInput min="0" class="m-input form-control" placeholder="(phút)" formControlName="thoiGianDiemDanh" />
+                        </div>
+                        <div class="form-group m-form__group col-2">
+                            <label>Tổng thời gian buổi học</label>
+                            <input nbInput type="number" nbInput  min="0" class="m-input form-control" placeholder="(phút)" formControlName="thoiGianTietHoc" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label>Loại lớp học</label>
+                            <app-cagt-select-optionCrt [modeOfDropDowList]="dropdownListEnum.LOAI_LOP_HOC"
+                                formControlName="loaiLopHoc">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label>Trạng thái lớp học</label>
+                            <app-cagt-select-optionCrt [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_LOP_HOC"
+                                formControlName="trangThaiLopHoc">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <nb-checkbox formControlName="isNgayChan">Là ngày chẵn</nb-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+
+<app-lich-xep-lop *ngIf="lopId > 0" [dataInput]="lichDetail" [lichId]="lichId" (dataOutput)="changeDataLichDetail($event)"></app-lich-xep-lop>
+<nb-card>
+    <nb-card-body>
+        <button nbButton size="large" status="basic" class="float-left" (click)="backToList()">
+            <i class="fa fa-arrow-left mr-2"></i>Trở về
+        </button>
+        <button nbButton size="large" status="primary" (click)="onSubmit()" class="float-right">
+            <i class="fa fa-file mr-2"></i>Lưu
+        </button>
+    </nb-card-body>
+</nb-card>

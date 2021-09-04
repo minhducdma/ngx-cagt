@@ -10,6 +10,7 @@ import { SeoService } from './@core/utils/seo.service';
 import { AuthService } from '@abp/ng.core';
 import { OAuthService } from 'angular-oauth2-oidc'
 import { NbMenuService } from '@nebular/theme';
+declare var $: any;
 
 
 @Component({
@@ -23,6 +24,9 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+    $(document).ready(() => {
+      console.log("Jquery");
+    });
 		this.checkLogin();
 		this.menuService.onItemClick()
 			.subscribe((event) => {

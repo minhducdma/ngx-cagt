@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbAccordionModule, NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAccordionModule, NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbTimepickerModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { WindowModule } from '@progress/kendo-angular-dialog';
 import { CommonModule } from '@angular/common';
@@ -14,12 +14,23 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
 import { CagtSelectCrtModule } from '../../../shared/controls/cagt-select-optionCrt/cagt-select-optionCrt.module'
 import { HocVienRoutingModule, routedComponents } from './hoc-vien-routing.module';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import listPlugin from '@fullcalendar/list';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { NgSelect2Module } from 'ng-select2';
 const _component = [
 ]
-
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+    dayGridPlugin,
+    timeGridPlugin,
+    listPlugin,
+    interactionPlugin
+]);
 @NgModule({
     imports: [
+        NbTabsetModule,
         NbCardModule,
         NbTreeGridModule,
         NbIconModule,
@@ -43,7 +54,6 @@ const _component = [
         NbDialogModule,
         //TreeViewModule,
         CKEditorModule,
-        NbCheckboxModule,
         DragDropModule,
         ControlErrorModule,
         CagtSelectModule,
@@ -51,13 +61,15 @@ const _component = [
         //DropDownsModule,
         MatMenuModule,
         NbAlertModule,
-        NbTabsetModule,
         AlertDialogModule,
         NbAccordionModule,
         CagtSelectCrtModule,
+        FullCalendarModule,
+        NgSelect2Module,
+        NbTimepickerModule
     ],
 
-    
+
 
     declarations: [
         ...routedComponents,
