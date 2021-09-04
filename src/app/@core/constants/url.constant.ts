@@ -47,7 +47,9 @@ export const UrlConstant = {
         HOC_VIEN: '/hoc-vien',
         LOP_HOC_KENDO: '/lop-hoc/get-lop-hoc-kendo-data',
         LOP_HOC_GETID: '/lop-hoc/collect-full-detail-lop-hoc',
-        LICH_DETAIL: '/lich-detail'
+        LICH_DETAIL: '/lich-detail',
+        HOC_VIEN_LOP_HOC: '/hoc-vien-lop-hoc',
+        LOP_HOC_SAVE: '/lop-hoc/save-lop-hoc',
     },
 
 }

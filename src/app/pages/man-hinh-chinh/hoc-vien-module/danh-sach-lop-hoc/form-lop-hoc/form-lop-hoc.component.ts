@@ -6,6 +6,8 @@ import { UrlConstant } from '../../../../../@core/constants/url.constant';
 import { BaseListComponent } from '../../base/base-list.component';
 import { ILopHoc } from '../../model/lop-hoc-model';
 import { DatePipe } from '@angular/common';
+import { FormUtil } from '../../../../../shared/utils/form';
+import { ActionEnum } from '../../../../../@core/constants/enum.constant';
 @Component({
     selector: 'app-form-lop-hoc',
     templateUrl: './form-lop-hoc.component.html',
@@ -13,6 +15,7 @@ import { DatePipe } from '@angular/common';
 })
 export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements OnInit {
     getLopHocUrl = UrlConstant.ROUTE.LOP_HOC_GETID;
+    url = UrlConstant.ROUTE.LOP_HOC_SAVE;
     lopId: number;
     lichDetail = [];
     lichId: number = 0;
@@ -34,11 +37,14 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
     }
 
     loadItems() {
+        var today = new Date();
         this.lopId = this.route.snapshot.params.lopId;
-        if(this.lopId > 0){
-            this.apiService.post(this.getLopHocUrl + '/' + this.lopId,{}).subscribe((res : any) => {
+        if (this.lopId > 0) {
+            this.apiService.post(this.getLopHocUrl + '/' + this.lopId, {}).subscribe((res: any) => {
                 if (res) {
                     this.form.patchValue(res.lopHocDTO);
+                    let timeArr = res.lopHocDTO.thoiGianVaoLop.split(':');
+                    this.form.get("thoiGianVaoLopInput").setValue(new Date(0, 0, 0, timeArr[0], timeArr[1], 0));
                     this.lichDetail = res.lichDetailDTOs;
                     this.lichId = res.lichDTO.id;
                 }
@@ -53,11 +59,21 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
         this.form.get("thoiGianVaoLop").setValue(thoiGianVaoLop);
 
         let isNgayChan = this.form.get("isNgayChan").value;
-        if(isNgayChan == null)
+        if (isNgayChan == null)
             this.form.get("isNgayChan").setValue(false);
 
-
-        console.log(this.form.value);
+        if (this.form.invalid) {
+            // trigger validate all field
+            FormUtil.validateAllFormFields(this.form);
+            return;
+        }
+        this.apiService
+            .post(this.url, this.form.value)
+            .subscribe(res => {
+                // show notification
+                this.notification.show('Tạo mới thành công', 'Thành công', { status: 'success' });
+                // close form
+            });
     }
 
     backToList() {
@@ -84,8 +100,12 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
         });
     }
 
-    changeDataLichDetail(res){
-        if(res)
+    changeDataLichDetail(res) {
+        if (res)
             this.loadItems();
+    }
+
+    onComplete(value) {
+        this.opened = value;
     }
 }

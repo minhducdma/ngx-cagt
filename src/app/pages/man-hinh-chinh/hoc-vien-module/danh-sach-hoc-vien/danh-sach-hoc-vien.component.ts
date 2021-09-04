@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { State } from '@progress/kendo-data-query';
 import { takeUntil } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { FormKhachHangComponent } from '../../khach-hang-module/khach-hang/form-khach-hang/form-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
 import { IHocVien } from '../model/hoc-vien-model';
+import { FormHocVienLopHocComponent } from './form-hoc-vien-lop-hoc/form-hoc-vien-lop-hoc.component';
 import { FormHocVienComponent } from './form-hoc-vien/form-hoc-vien.component';
 
 @Component({
@@ -17,6 +18,8 @@ import { FormHocVienComponent } from './form-hoc-vien/form-hoc-vien.component';
 export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implements OnInit {
      @Input() isChild: Boolean = false;
      @Input() lopId: number = 0;
+     @Output() onComplete = new EventEmitter<any>();
+
      url: string = UrlConstant.ROUTE.HOC_VIEN_KENDO;
 
      modelSearch = {
@@ -37,20 +40,16 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
           return {
                filter: this.modelSearch.filter ? this.modelSearch.filter : null,
                idKhachHang: 0,
-               idsLop:  this.modelSearch.idsLop,
+               idsLop: this.modelSearch.idsLop,
                trangThaiHocViens: this.modelSearch.trangThaiHocViens ? this.convertArrToStr(this.modelSearch.trangThaiHocViens) : null,
                loaiHocViens: this.modelSearch.loaiHocViens ? this.convertArrToStr(this.modelSearch.loaiHocViens) : null,
                ...this.queryOptions,
           };
      }
 
-     ngOnChange() {
-          if(this.lopId > 0)
-               this.modelSearch.idsLop.push(this.lopId);
-          this.loadItems();
-     }
-
      ngOnInit(): void {
+          if (this.lopId > 0)
+               this.modelSearch.idsLop.push(Number(this.lopId));
           super.ngOnInit();
      }
 
@@ -91,6 +90,30 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
           });
      }
 
+     showFormCreateOrUpdateHocVienLopHoc() {
+          this.onComplete.emit(true);
+          this.opened = true;
+          const windowRef = this.windowService.open({
+               title: "Cập nhật học viên lớp học",
+               content: FormHocVienLopHocComponent,
+               width: 500,
+               top: 100,
+               autoFocusedElement: 'body',
+          });
+          const param = windowRef.content.instance;
+          param.action = this.action;
+          param.model = this.model;
+          param.lopId = this.lopId;
+
+          windowRef.result.subscribe(result => {
+               if (result instanceof WindowCloseResult) {
+                    this.opened = false;
+                    this.onComplete.emit(false);
+                    this.loadItems();
+               }
+          });
+     }
+
      editHandler(dataItem) {
           // tslint:disable-next-line: no-unsafe-any
           this.model = dataItem;
@@ -102,6 +125,12 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
           this.model = undefined;
           this.action = ActionEnum.CREATE;
           this.showFormCreateOrUpdate();
+     }
+
+     addHandlerHocVienLopHoc() {
+          this.model = undefined;
+          this.action = ActionEnum.CREATE;
+          this.showFormCreateOrUpdateHocVienLopHoc();
      }
 
      resetHandler() {
@@ -126,7 +155,14 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
                const body = {
                     ids: [...new Set(this.selectionIds)],
                };
-               this.apiService.post('/hoc-vien/delete-many-hoc-viens', body.ids).subscribe(res => {
+               let urlDelete = '';
+
+               if (this.isChild)
+                    urlDelete = '/hoc-vien-lop-hoc/delete-many-hoc-viens';
+               else
+                    urlDelete = '/hoc-vien/delete-many-hoc-viens';
+
+               this.apiService.post(urlDelete, body.ids).subscribe(res => {
                     this.selectionIds = [];
                     this.showMessage('success', 'Thành công', 'Xóa thành công');
                     this.loadItems();
