@@ -97,4 +97,12 @@ export class DanhSachLopHocComponent extends BaseListComponent<ILopHoc> implemen
                 }
             });
     }
+
+    addHandler(){
+        this.router.navigate(["/pages/admin/quan-ly-hoc-vien/edit-lop-hoc/0"]);
+    }
+
+    editHandler(dataItem){
+        this.router.navigate(["/pages/admin/quan-ly-hoc-vien/edit-lop-hoc/" + dataItem.id]);
+    }
 }

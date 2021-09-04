@@ -5,9 +5,12 @@ export interface ILopHoc {
     loaiLopHoc: string;
     trangThaiLopHoc: string;
     siSoToiDa: number;
-    isNgayChan: true;
+    isNgayChan: boolean;
     tongSoBuoi: number;
     tongSoBaiKiemTra: number;
     thoiGianBatDau: string;
     thoiGianKetThuc: string;
+    thoiGianDiemDanh: number;
+    thoiGianVaoLop: string;
+    thoiGianTietHoc: number;
 }

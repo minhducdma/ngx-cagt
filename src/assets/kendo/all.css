@@ -66,3 +66,13 @@ span.select2-selection.select2-selection--multiple {
 .select2-selection__arrow {
     height: 40px !important;
 }
+.fc-scrollgrid-sync-table{
+    height: 600px;
+    width: 1100px !important;
+}
+.fc-col-header {
+    width: 1100px !important;
+}
+td.fc-daygrid-day.fc-day{
+    height: 90px;
+}

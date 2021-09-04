@@ -1,50 +1,28 @@
-<div class='demo-app'>
-
-  <div class='demo-app-sidebar'>
-    <div class='demo-app-sidebar-section'>
-      <h2>Instructions</h2>
-      <ul>
-        <li>Select dates and you will be prompted to create a new event</li>
-        <li>Drag, drop, and resize events</li>
-        <li>Click an event to delete it</li>
-      </ul>
-    </div>
-    <div class='demo-app-sidebar-section'>
-      <label>
-        <input
-          type='checkbox'
-          [checked]='calendarVisible'
-          (change)='handleCalendarToggle()'
-        />
-        toggle whole calendar
-      </label>
-    </div>
-    <div class='demo-app-sidebar-section'>
-      <label>
-        <input
-          type='checkbox'
-          [checked]='calendarOptions.weekends'
-          (change)='handleWeekendsToggle()'
-        />
-        toggle weekends
-      </label>
-    </div>
-    <div class='demo-app-sidebar-section'>
-      <h2>All Events ({{currentEvents.length}})</h2>
-      <ul>
-        <li *ngFor='let event of currentEvents'>
-          <b>{{event.startStr}}</b>
-          <i>{{event.title}}</i>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class='demo-app-main'>
-    <full-calendar
-      *ngIf='calendarVisible'
-      [options]='calendarOptions'
-    ></full-calendar>
-  </div>
-
+<full-calendar *ngIf='calendarVisible' [options]='calendarOptions' (contextmenu)="onContextMenu($event,this)">
+</full-calendar>
+<div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu">
+    <ng-template matMenuContent let-item="item">
+        <button mat-menu-item class="button_box" color="primary" *ngIf="item == null && selectCurrentInfo != null" (click)="addNewDateSelect()">
+            <div class="box_botton">
+                <i class="fa fa-plus mr-2" style="width: 20px;"></i>Thêm mới
+            </div>
+        </button>
+        <button mat-menu-item class="button_box" color="primary" (click)="editDataHandler(item)" *ngIf="item != null">
+            <div class="box_botton">
+                <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+            </div>
+        </button>
+        <button mat-menu-item class="button_box" (click)="removeHandler(item)" *ngIf="item != null">
+            <div class="box_botton">
+                <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+            </div>
+        </button>
+    </ng-template>
+</mat-menu>
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
+    <div kendoWindowContainer></div>
 </div>

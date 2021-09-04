@@ -123,6 +123,12 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_HOC_VIEN:
                 this.loadTrangThaiHocVien();
                 break;
+            case DropDownListEnum.LOAI_DAT_LICH:
+                this.loadLoaiDatLich();
+                break;
+            case DropDownListEnum.TRANG_THAI_DAT_LICH:
+                this.loadTrangThaiDatLich();
+                break;
         }
     }
 
@@ -266,7 +272,7 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
                 }
             });
     }
-    loadLoaiHocVien(){
+    loadLoaiHocVien() {
         this.apiService
             .get(this.url + `?tenBang=GetHocViens&tenCot=loaiHocVien`)
             .pipe(takeUntil(this.destroy$))
@@ -278,9 +284,33 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
                 }
             });
     }
-    loadTrangThaiHocVien(){
+    loadTrangThaiHocVien() {
         this.apiService
             .get(this.url + `?tenBang=GetHocViens&tenCot=trangThaiHocVien`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadLoaiDatLich() {
+        this.apiService
+            .get(this.url + `?tenBang=GetLichDetails&tenCot=loaiDatLich`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadTrangThaiDatLich() {
+        this.apiService
+            .get(this.url + `?tenBang=GetLichDetails&tenCot=trangThaiDatLich`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {

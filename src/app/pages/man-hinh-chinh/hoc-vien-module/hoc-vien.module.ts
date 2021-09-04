@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbAccordionModule, NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
+import { NbAccordionModule, NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbTimepickerModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { WindowModule } from '@progress/kendo-angular-dialog';
 import { CommonModule } from '@angular/common';
@@ -30,6 +30,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 @NgModule({
     imports: [
+        NbTabsetModule,
         NbCardModule,
         NbTreeGridModule,
         NbIconModule,
@@ -53,7 +54,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         NbDialogModule,
         //TreeViewModule,
         CKEditorModule,
-        NbCheckboxModule,
         DragDropModule,
         ControlErrorModule,
         CagtSelectModule,
@@ -61,12 +61,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         //DropDownsModule,
         MatMenuModule,
         NbAlertModule,
-        NbTabsetModule,
         AlertDialogModule,
         NbAccordionModule,
         CagtSelectCrtModule,
         FullCalendarModule,
-        NgSelect2Module
+        NgSelect2Module,
+        NbTimepickerModule
     ],
 
 

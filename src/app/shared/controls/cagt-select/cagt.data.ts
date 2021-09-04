@@ -13,4 +13,7 @@ export enum DropDownListEnum {
 
     TRANG_THAI_HOC_VIEN,
     LOAI_HOC_VIEN,
+
+    LOAI_DAT_LICH,
+    TRANG_THAI_DAT_LICH
 }

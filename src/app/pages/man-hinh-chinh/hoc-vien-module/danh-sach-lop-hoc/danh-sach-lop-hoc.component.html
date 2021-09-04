@@ -75,10 +75,10 @@
     </nb-accordion>
 </div>
 <nb-card>
-    <nb-card-header> Học viên </nb-card-header>
+    <nb-card-header> Lớp học </nb-card-header>
     <nb-card-body class="group-button">
         <div class="float-left">
-            <button nbButton status="primary"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
+            <button nbButton status="primary"  (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
             <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
                 <i class="fa fa-trash mr-2"></i> Xóa
             </button>
@@ -111,7 +111,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item class="button_box" color="primary">
+                        <button mat-menu-item class="button_box" color="primary"  (click)="editHandler(dataItem)">
                             <div class="box_botton">
                                 <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
                             </div>

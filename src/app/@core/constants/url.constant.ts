@@ -46,7 +46,8 @@ export const UrlConstant = {
         HOC_VIEN_KENDO: '/hoc-vien/collect-kendo-datatable',
         HOC_VIEN: '/hoc-vien',
         LOP_HOC_KENDO: '/lop-hoc/get-lop-hoc-kendo-data',
-        LOP_HOC_GETID: 'https://apisipm.migroup.asia/api/app/lop-hoc/'
+        LOP_HOC_GETID: '/lop-hoc/collect-full-detail-lop-hoc',
+        LICH_DETAIL: '/lich-detail'
     },
 
 }
