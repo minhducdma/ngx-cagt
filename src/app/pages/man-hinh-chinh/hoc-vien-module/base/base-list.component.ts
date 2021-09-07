@@ -177,4 +177,12 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
             title,
             config);
     }
+    
+    isFailValidateRangeDate(fromDate: Date, toDate: Date ){
+        if(fromDate > toDate){
+            this.notification.show('Thời gian bắt đầu không được lớn hơn thời gian kết thúc', 'Cảnh báo', { status: 'warning' });
+            return true;
+        }
+        return false;
+    }
 }

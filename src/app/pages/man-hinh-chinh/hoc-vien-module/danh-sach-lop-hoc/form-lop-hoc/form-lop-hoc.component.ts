@@ -55,6 +55,14 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
     }
 
     onSubmit() {
+        if (this.form.invalid) {
+            // trigger validate all field
+            FormUtil.validateAllFormFields(this.form);
+            return;
+        }
+
+        if(this.isFailValidateRangeDate(this.form.get("thoiGianBatDau").value,this.form.get("thoiGianKetThuc").value)) return;
+
         let thoiGianVaoLop = this.datepipe.transform(new Date(this.form.get("thoiGianVaoLopInput").value), 'HH:mm');
         this.form.get("thoiGianVaoLop").setValue(thoiGianVaoLop);
 
@@ -62,11 +70,7 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
         if (isNgayChan == null)
             this.form.get("isNgayChan").setValue(false);
 
-        if (this.form.invalid) {
-            // trigger validate all field
-            FormUtil.validateAllFormFields(this.form);
-            return;
-        }
+        
         this.apiService
             .post(this.url, this.form.value)
             .subscribe(res => {
