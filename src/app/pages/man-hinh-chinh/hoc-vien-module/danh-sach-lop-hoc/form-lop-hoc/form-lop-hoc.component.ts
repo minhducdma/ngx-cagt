@@ -96,7 +96,8 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
             thoiGianDiemDanh: [null],
             thoiGianVaoLopInput: [null, Validators.required],
             thoiGianVaoLop: [null],
-            thoiGianTietHoc: [null]
+            thoiGianTietHoc: [null],
+            lichDetails:[]
         });
     }
 

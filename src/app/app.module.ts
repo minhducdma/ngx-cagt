@@ -33,10 +33,11 @@ import { environment } from '../environments/environment';
 import { NgxsModule } from '@ngxs/store';
 import { MessageService } from '@progress/kendo-angular-l10n';
 import { MessageKendoService } from './@core/services/message-kendo.service';
-import * as $ from 'jquery'
 import { ContextMenuModule } from 'ngx-contextmenu';
-
-
+import localeVN from '@angular/common/locales/vi';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeVN);
+import { MomentModule } from 'ngx-moment';
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -67,10 +68,14 @@ import { ContextMenuModule } from 'ngx-contextmenu';
         SettingManagementConfigModule.forRoot(),
         NgxsModule.forRoot(),
         ContextMenuModule.forRoot(),
+        MomentModule.forRoot({
+            relativeTimeThresholdOptions: {
+                m: 59
+            }
+        })
     ],
     providers: [
         { provide: MessageService, useClass: MessageKendoService },
-        { provide: LOCALE_ID, useValue: 'en-EN' },
     ],
     bootstrap: [AppComponent],
 })
