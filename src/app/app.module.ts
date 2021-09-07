@@ -37,7 +37,6 @@ import { ContextMenuModule } from 'ngx-contextmenu';
 import localeVN from '@angular/common/locales/vi';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeVN);
-import { MomentModule } from 'ngx-moment';
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -68,11 +67,6 @@ import { MomentModule } from 'ngx-moment';
         SettingManagementConfigModule.forRoot(),
         NgxsModule.forRoot(),
         ContextMenuModule.forRoot(),
-        MomentModule.forRoot({
-            relativeTimeThresholdOptions: {
-                m: 59
-            }
-        })
     ],
     providers: [
         { provide: MessageService, useClass: MessageKendoService },
