@@ -121,6 +121,12 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
           this.showFormCreateOrUpdate();
      }
 
+     editHandlerHocVienLopHoc(dataItem) {
+          this.model = dataItem;
+          this.action = ActionEnum.UPDATE;
+          this.showFormCreateOrUpdateHocVienLopHoc();
+     }
+
      addHandler() {
           this.model = undefined;
           this.action = ActionEnum.CREATE;

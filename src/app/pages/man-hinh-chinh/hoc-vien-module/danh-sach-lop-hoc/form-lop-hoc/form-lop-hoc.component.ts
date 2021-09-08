@@ -37,12 +37,13 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
     }
 
     loadItems() {
-        var today = new Date();
         this.lopId = this.route.snapshot.params.lopId;
         if (this.lopId > 0) {
             this.apiService.post(this.getLopHocUrl + '/' + this.lopId, {}).subscribe((res: any) => {
                 if (res) {
                     this.form.patchValue(res.lopHocDTO);
+                    this.form.get('thoiGianBatDau').setValue(this.formatDate(res.lopHocDTO.thoiGianBatDau));
+                    this.form.get('thoiGianKetThuc').setValue(this.formatDate(res.lopHocDTO.thoiGianKetThuc));
                     let timeArr = res.lopHocDTO.thoiGianVaoLop.split(':');
                     this.form.get("thoiGianVaoLopInput").setValue(new Date(0, 0, 0, timeArr[0], timeArr[1], 0));
                     this.lichDetail = res.lichDetailDTOs;
@@ -61,7 +62,7 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
             return;
         }
 
-        if(this.isFailValidateRangeDate(this.form.get("thoiGianBatDau").value,this.form.get("thoiGianKetThuc").value)) return;
+        if (this.isFailValidateRangeDate(this.form.get("thoiGianBatDau").value, this.form.get("thoiGianKetThuc").value)) return;
 
         let thoiGianVaoLop = this.datepipe.transform(new Date(this.form.get("thoiGianVaoLopInput").value), 'HH:mm');
         this.form.get("thoiGianVaoLop").setValue(thoiGianVaoLop);
@@ -70,7 +71,7 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
         if (isNgayChan == null)
             this.form.get("isNgayChan").setValue(false);
 
-        
+
         this.apiService
             .post(this.url, this.form.value)
             .subscribe(res => {
@@ -101,7 +102,7 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
             thoiGianVaoLopInput: [null, Validators.required],
             thoiGianVaoLop: [null],
             thoiGianTietHoc: [null],
-            lichDetails:[]
+            lichDetails: []
         });
     }
 
