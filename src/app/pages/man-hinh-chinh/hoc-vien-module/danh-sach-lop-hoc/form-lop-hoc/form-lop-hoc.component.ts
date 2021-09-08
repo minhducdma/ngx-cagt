@@ -74,10 +74,15 @@ export class FormLopHocComponent extends BaseListComponent<ILopHoc> implements O
 
         this.apiService
             .post(this.url, this.form.value)
-            .subscribe(res => {
+            .subscribe((res) => {
                 // show notification
-                this.notification.show('Tạo mới thành công', 'Thành công', { status: 'success' });
+                this.notification.show('Cập nhật thành công', 'Thành công', { status: 'success' });
                 // close form
+                setTimeout(() => {
+                    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                    this.router.onSameUrlNavigation = 'reload';
+                    this.router.navigate(["/pages/admin/quan-ly-hoc-vien/edit-lop-hoc/" + res]);
+                },1000);
             });
     }
 

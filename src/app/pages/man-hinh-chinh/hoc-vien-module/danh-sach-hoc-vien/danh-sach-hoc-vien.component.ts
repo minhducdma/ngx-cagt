@@ -163,16 +163,27 @@ export class DanhSachHocVienComponent extends BaseListComponent<IHocVien> implem
                };
                let urlDelete = '';
 
-               if (this.isChild)
-                    urlDelete = '/hoc-vien-lop-hoc/delete-many-hoc-viens';
-               else
+               if (this.isChild){
+                    urlDelete = '/hoc-vien-lop-hoc/delete-many-hoc-viens-in-lop-hoc';
+                    this.apiService.post(urlDelete, {
+                         lopHocId: this.lopId,
+                         hocVienIds: [...body.ids]
+                    }).subscribe(res => {
+                         this.selectionIds = [];
+                         this.showMessage('success', 'Thành công', 'Xóa thành công');
+                         this.loadItems();
+                    });
+               }
+               else{
                     urlDelete = '/hoc-vien/delete-many-hoc-viens';
+                    this.apiService.post(urlDelete, body.ids).subscribe(res => {
+                         this.selectionIds = [];
+                         this.showMessage('success', 'Thành công', 'Xóa thành công');
+                         this.loadItems();
+                    });
+               }
 
-               this.apiService.post(urlDelete, body.ids).subscribe(res => {
-                    this.selectionIds = [];
-                    this.showMessage('success', 'Thành công', 'Xóa thành công');
-                    this.loadItems();
-               });
+               
           }
      }
 

@@ -53,7 +53,7 @@ export const routedComponents = [
     FormLichDetailComponent,
     TriggerChonHocVienComponent,
     ChonHocVienComponent,
-    FormHocVienLopHocComponent
+    FormHocVienLopHocComponent,
     UserComponent,
     FormImportNhanVienComponent
 ];
