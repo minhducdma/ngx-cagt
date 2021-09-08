@@ -1,28 +1,32 @@
 import { IGenerice } from "./base.model";
 
 export interface IUser{
-    id: string,
+    userId: string,
+    soDienThoai: string,
+    gioiTinh: number,
+    maSoCanCuoc: string,
+    quocTich: string,
+    danToc: string,
+    tonGiao: string,
+    maSoThue: string,
+    soTaiKhoan: string,
+    tenTaiKhoan: string,
+    tenNganHang: string,
+    chiNhanhNganHang: string,
+    loaiNhanVien: string,
+    trangThaiNhanVien: string,
+    ngaySinh: string,
+    userDetail: {
+        id: string,
+        name: string,
+        surname: string,
+        email: string,
+        normalizedEmail: string,
+        roles: Array<{}>,
+        userName: string,
+        normalizedUserName: string
+    },
     creationTime: string,
     creatorId: string,
-    lastModificationTime: string,
-    lastModifierId: string,
-    isDeleted: boolean,
-    deleterId: string,
-    deletionTime: string,
-    tenantId: string,
-    userName: string,
-    name: string,
-    surname: string,
-    email: string,
-    emailConfirmed: boolean,
-    phoneNumber: string,
-    phoneNumberConfirmed: boolean,
-    lockoutEnabled: boolean,
-    lockoutEnd: string,
-    concurrencyStamp: string,
-    extraProperties: {
-        additionalProp1: string,
-        additionalProp2: string,
-        additionalProp3: string
-    }
+    id: number
 }

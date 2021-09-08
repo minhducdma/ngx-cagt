@@ -5,6 +5,8 @@ import { FormHocVienComponent } from './danh-sach-hoc-vien/form-hoc-vien/form-ho
 import { DanhSachLopHocComponent } from './danh-sach-lop-hoc/danh-sach-lop-hoc.component';
 import { FormLopHocComponent } from './danh-sach-lop-hoc/form-lop-hoc/form-lop-hoc.component';
 import { HocViensComponent } from './hoc-vien.component';
+import { FormImportNhanVienComponent } from './user/form-import-nhan-vien/form-import-nhan-vien.component';
+import { UserComponent } from './user/user.component';
 import { FormLichDetailComponent } from './_component/lich-xep-lop/form-lich-detail/form-lich-detail.component';
 import { LichXepLopComponent } from './_component/lich-xep-lop/lich-xep-lop.component';
 
@@ -24,6 +26,10 @@ const routes: Routes = [{
             path: 'danh-sach-lop-hoc',
             component: DanhSachLopHocComponent,
         },
+        {
+            path: 'danh-sach-user',
+            component: UserComponent,
+        },
     ],
 }];
 
@@ -41,5 +47,7 @@ export const routedComponents = [
     DanhSachHocVienComponent,
     DanhSachLopHocComponent,
     FormHocVienComponent,
-    FormLichDetailComponent
+    FormLichDetailComponent,
+    UserComponent,
+    FormImportNhanVienComponent
 ];

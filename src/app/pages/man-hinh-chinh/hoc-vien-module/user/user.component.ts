@@ -1,11 +1,14 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { WindowCloseResult } from '@progress/kendo-angular-dialog';
+import { State } from '@progress/kendo-data-query';
 import { takeUntil } from 'rxjs/operators';
+import { ActionEnum } from '../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { FormImportKhachHangComponent } from '../../khach-hang-module/khach-hang/form-import-khach-hang/form-import-khach-hang.component';
 import { BaseListComponent } from '../base/base-list.component';
 import { IUser } from '../model/user.model';
+import { FormImportNhanVienComponent } from './form-import-nhan-vien/form-import-nhan-vien.component';
 
 @Component({
   selector: 'app-user',
@@ -15,21 +18,21 @@ import { IUser } from '../model/user.model';
 export class UserComponent extends BaseListComponent<IUser> implements OnInit {
   
 
-  url: string = UrlConstant.ROUTE.LOAD_USER;
+  url: string = UrlConstant.ROUTE.NHAN_VIEN_KENDO;
     
     modelSearch = {
         filter: null,
-        thoiGianTu: null,
-        thoiGianDen: null
+        loaiNhanViens: null,
+        trangThaiNhanViens: null,
+        listRoles: null
     };
     currentGrid = this.gridView$;
     private get extendQueryOptions() {
         return {
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
-            thoiGianTu: this.modelSearch.thoiGianTu ? this.modelSearch.thoiGianTu : null,
-            thoiGianDen: this.modelSearch.thoiGianDen ? this.modelSearch.thoiGianDen : null
-            // loaiLopHocs: this.modelSearch.loaiLopHocs ? this.convertArrToStr(this.modelSearch.loaiLopHocs) : null,
-            // trangThaiLopHocs: this.modelSearch.trangThaiLopHocs ? this.convertArrToStr(this.modelSearch.trangThaiLopHocs) : null
+            loaiLopHocs: this.modelSearch.loaiNhanViens ? this.convertArrToStr(this.modelSearch.loaiNhanViens) : null,
+            trangThaiLopHocs: this.modelSearch.trangThaiNhanViens ? this.convertArrToStr(this.modelSearch.trangThaiNhanViens) : null,
+            listRoles: this.modelSearch.listRoles ? this.convertArrToStr(this.modelSearch.listRoles) : null
         };
     }
     constructor( injector: Injector,) { 
@@ -43,12 +46,17 @@ export class UserComponent extends BaseListComponent<IUser> implements OnInit {
         this.currentGrid = this.gridView$;
         this.loadItemGrids(this.gridView$);
     }
+    onStateChange(state: State) {
+        this.gridState = state;
+        this.loadItems();
+   }
     onSearchChangeGrid(){
         
         this.loadItemGrids(this.currentGrid);
     }
     loadItemGrids(gridView) {
-        this.apiService.get(this.url, this.extendQueryOptions)
+        
+        this.apiService.post(this.url, this.extendQueryOptions)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res && res.items) {
@@ -60,19 +68,49 @@ export class UserComponent extends BaseListComponent<IUser> implements OnInit {
     }
     resetHandler() {
         this.modelSearch = {
-            filter:  null,
-            thoiGianTu: null,
-            thoiGianDen: null
+            filter: null,
+            loaiNhanViens: null,
+            trangThaiNhanViens: null,
+            listRoles: null
         };
 
         this.loadItemGrids(this.currentGrid);
     }
+    editHandler(dataItem) {
+        // tslint:disable-next-line: no-unsafe-any
+        this.model = dataItem;
+        this.action = ActionEnum.UPDATE;
+        this.showFormCreateOrUpdate();
+    }
+
+    addHandler() {
+        this.model = undefined;
+        this.action = ActionEnum.CREATE;
+        this.showFormCreateOrUpdate();
+    }
     protected showFormCreateOrUpdate() {
-        throw new Error('Method not implemented.');
+        this.opened = true;
+        const windowRef = this.windowService.open({
+            title: this.action == ActionEnum.UPDATE ? 'Cập nhật nhân viên' : 'Thêm mới nhân viên',
+            content: FormImportNhanVienComponent,
+            width: 1200,
+            top: 100,
+            autoFocusedElement: 'body',
+        });
+        const param = windowRef.content.instance;
+        param.action = this.action;
+        param.model = this.model;
+
+        windowRef.result.subscribe(result => {
+            if (result instanceof WindowCloseResult) {
+                this.opened = false;
+                this.loadItemGrids(this.currentGrid);
+            }
+        });
     }
     removeHandler(dataItem) {
         this.selectionIds = [];
-        this.selectionIds.push(dataItem.id);
+        this.selectionIds.push(dataItem.userId);
         this.removeSelectedHandler();
     }
 
@@ -88,7 +126,7 @@ export class UserComponent extends BaseListComponent<IUser> implements OnInit {
                 if (res) {
                     if (this.selectionIds.length > 0) {
                         const body = [...new Set(this.selectionIds)]
-                        this.apiService.post('/khach-hangs/delete-many-khach-hangs', body).subscribe(res => {
+                        this.apiService.post('/nhan-vien/delete-many-nhan-viens', body).subscribe(res => {
                             this.selectionIds = [];
                             this.showMessage('success', 'Thành công', 'Xóa thành công');
                             this.loadItemGrids(this.currentGrid);

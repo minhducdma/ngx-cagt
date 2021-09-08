@@ -1,0 +1,109 @@
+<form class="m-form" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="form-group m-form__group col-3">
+            <label> Họ tên </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="surname" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Số điện thoại </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="soDienThoai" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Số căn cước  </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="maSoCanCuoc" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Mã só thuế  </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="maSoThue" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Giới tính </label>
+            <br/>
+            <nb-select placeholder="--Chọn--" style="width: 100%;" formControlName="gioiTinh" [(selected)]="model.gioiTinh">
+                <nb-option value="0">Nam</nb-option>
+                <nb-option value="1">Nữ</nb-option> 
+            </nb-select>
+       
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Quốc tịch  </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="quocTich" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Dân tộc  </label>
+            <app-cagt-select-optionCrt
+                [modeOfDropDowList]="dropdownListEnum.LOAD_DAN_TOC" 
+                formControlName="danToc">
+            </app-cagt-select-optionCrt>
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Tôn giáo </label>
+            <app-cagt-select-optionCrt
+                [modeOfDropDowList]="dropdownListEnum.LOAD_TON_GIAO" 
+                formControlName="tonGiao">
+            </app-cagt-select-optionCrt>
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Tên tài khoản </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="tenTaiKhoan" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Số tài khoản  </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="soTaiKhoan" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Tên ngân hàng </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="tenNganHang" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Chi nhánh ngân hàng  </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="chiNhanhNganHang" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Ngày sinh </label>
+            <input nbInput type="date" nbInput class="m-input form-control" formControlName="ngaySinh" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Loại nhân viên </label>
+            <app-cagt-select-optionCrt 
+                [modeOfDropDowList]="dropdownListEnum.LOAI_NHAN_VIEN"  
+                formControlName="loaiNhanVien">
+            </app-cagt-select-optionCrt>
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Trạng thái nhân viên </label>
+            <app-cagt-select-optionCrt 
+                [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_NHAN_VIEN"  
+                formControlName="trangThaiNhanVien">
+            </app-cagt-select-optionCrt>
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> User name  </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="userName" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Password  </label>
+            <input nbInput type="password" class="m-input form-control" formControlName="password" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Password confirm </label>
+            <input nbInput type="password" class="m-input form-control" formControlName="passwordcf" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label> Email  </label>
+            <input nbInput type="text" class="m-input form-control" formControlName="email" />
+        </div>
+        <div class="form-group m-form__group col-3">
+            <label > Quyền</label>
+            <ngx-cagt-select
+                [modeOfDropDowList]="dropdownListEnum.LOAD_ROLE"
+                [isMulti]="true"
+                formControlName="roles">
+            </ngx-cagt-select>
+        </div>
+    </div>
+  <div class="text-right border-form-footer">
+      <button nbButton status="primary" type="button" (click)="closeForm()" class="btn_custom btn_df mr-1">Hủy</button>
+      <button nbButton status="danger" type="submit" class="btn_custom btn_add">Lưu</button>
+  </div>
+</form>
