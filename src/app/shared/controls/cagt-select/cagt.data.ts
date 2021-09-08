@@ -15,5 +15,10 @@ export enum DropDownListEnum {
     LOAI_HOC_VIEN,
 
     LOAI_DAT_LICH,
-    TRANG_THAI_DAT_LICH
+    TRANG_THAI_DAT_LICH,
+    LOAI_NHAN_VIEN,
+    TRANG_THAI_NHAN_VIEN,
+    LOAD_ROLE,
+    LOAD_DAN_TOC,
+    LOAD_TON_GIAO
 }

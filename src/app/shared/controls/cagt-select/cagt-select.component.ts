@@ -99,6 +99,22 @@ export class CagtSelectComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_HOC_VIEN:
                 this.loadTrangThaiHocVien();
                 break;
+            case DropDownListEnum.LOAI_NHAN_VIEN:
+                this.loadLoaiNhanVien();
+                break;
+            case DropDownListEnum.TRANG_THAI_NHAN_VIEN:
+                this.loadTrangThaiNhanVien();
+                break;
+            case DropDownListEnum.LOAD_ROLE:
+                this.loadRole();
+                break;
+            case DropDownListEnum.LOAD_DAN_TOC:
+                this.loadDanToc();
+                break;
+            case DropDownListEnum.LOAD_TON_GIAO:
+                this.loadTonGiao();
+                break;
+
         }
     }
 
@@ -302,5 +318,86 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
+    
+    }
+    loadLoaiNhanVien() {
+        this.apiService
+            .get(this.url + `?tenBang=GetNhanViens&tenCot=loaiNhanVien`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    
+    }
+    loadTrangThaiNhanVien() {
+        this.apiService
+            .get(this.url + `?tenBang=GetNhanViens&tenCot=trangThaiNhanVien`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    
+    }
+    loadRole() {
+        this.apiService
+            .get(this.url + `?tenBang=AbpRoles&tenCot=Name`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    
+    }
+    loadDanToc() {
+        this.apiService
+            .get(this.url + `?tenBang=GetNhanViens&tenCot=danToc`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    
+    }
+    loadTonGiao() {
+        this.apiService
+            .get(this.url + `?tenBang=GetNhanViens&tenCot=tonGiao`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    
     }
 }

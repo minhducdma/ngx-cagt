@@ -50,6 +50,8 @@ export const UrlConstant = {
         LICH_DETAIL: '/lich-detail',
         HOC_VIEN_LOP_HOC: '/hoc-vien-lop-hoc',
         LOP_HOC_SAVE: '/lop-hoc/save-lop-hoc',
+        NHAN_VIEN_KENDO: '/nhan-vien/collect-nhan-vien-or-kendo-datatable',
+        ADD_UPDATE_NHAN_VIEN: '/nhan-vien/or-update-nhan-vien'
     },
 
 }
