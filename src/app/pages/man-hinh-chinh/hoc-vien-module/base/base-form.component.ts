@@ -75,7 +75,8 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
     }
 
     convertCorrectDateTime(date: Date){
-        return this.datepipe.transform(date, 'yyyy-MM-dd HH:mm:ss')
+        date.setTime(date.getTime() + (7*60*60*1000)) //Convert to VN datetime
+        return new Date(date);
     }
 
     isFailValidateRangeDate(fromDate: Date, toDate: Date ){

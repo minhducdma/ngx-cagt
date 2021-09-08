@@ -24,6 +24,17 @@ export class FormHocVienLopHocComponent extends BaseFormComponent<IHocVienLopHoc
 
     ngOnInit() {
         super.ngOnInit();
+        console.log(this.model);
+        if(this.action == ActionEnum.UPDATE){
+            this.apiService
+            .post(this.url + '/collect-hoc-vien-lop-hoc', {
+                lopHocId: this.lopId,
+                hocVienId: this.model.hocVienId
+            })
+            .subscribe(res => {
+                console.log(res);
+            });
+        }
     }
 
     onSubmit() {
