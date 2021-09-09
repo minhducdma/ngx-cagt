@@ -15,6 +15,7 @@ import { IHocVien } from '../../model/hoc-vien-model';
 export class FormHocVienLopHocComponent extends BaseFormComponent<IHocVienLopHoc> implements OnInit {
     url: string = UrlConstant.ROUTE.HOC_VIEN_LOP_HOC;
     lopId: number = 0;
+    idHocVien: number = 0;
 
     constructor(
         injector : Injector
@@ -24,15 +25,13 @@ export class FormHocVienLopHocComponent extends BaseFormComponent<IHocVienLopHoc
 
     ngOnInit() {
         super.ngOnInit();
-        console.log(this.model);
         if(this.action == ActionEnum.UPDATE){
             this.apiService
-            .post(this.url + '/collect-hoc-vien-lop-hoc', {
-                lopHocId: this.lopId,
-                hocVienId: this.model.hocVienId
-            })
-            .subscribe(res => {
-                console.log(res);
+            .post(this.url + '/collect-hoc-vien-lop-hoc?lopHocId='+this.lopId+'&hocVienId='+this.model.id, {})
+            .subscribe((res : any) => {
+                this.form.patchValue(res);
+                this.form.get('thoiGianJoinLop').setValue(this.formatDate(res.thoiGianJoinLop));
+                this.idHocVien = res.id;
             });
         }
     }
@@ -60,7 +59,7 @@ export class FormHocVienLopHocComponent extends BaseFormComponent<IHocVienLopHoc
                 break;
             case ActionEnum.UPDATE:
                 this.apiService
-                    .put(this.url + '/' + this.model.id.toString(), this.form.value)
+                    .put(this.url + '/' +  this.idHocVien, this.form.value)
                     .subscribe(res => {
                         // show notification
                         this.notification.show('Cập nhật thành công','Thành công', { status :'success' });

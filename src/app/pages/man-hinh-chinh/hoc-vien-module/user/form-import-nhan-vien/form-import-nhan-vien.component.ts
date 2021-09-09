@@ -7,34 +7,31 @@ import { BaseFormComponent } from '../../base/base-form.component';
 import { IUser } from '../../model/user.model';
 
 @Component({
-  selector: 'app-form-import-nhan-vien',
-  templateUrl: './form-import-nhan-vien.component.html',
-  styleUrls: ['./form-import-nhan-vien.component.scss']
+    selector: 'app-form-import-nhan-vien',
+    templateUrl: './form-import-nhan-vien.component.html',
+    styleUrls: ['./form-import-nhan-vien.component.scss']
 })
 export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implements OnInit {
-  
-
-  url: string = UrlConstant.ROUTE.ADD_UPDATE_NHAN_VIEN;
+    url: string = UrlConstant.ROUTE.ADD_UPDATE_NHAN_VIEN;
     
     constructor(
         injector: Injector,
     ) {
         super(injector);
-    } 
-    ngOnInit() { 
+    }
+    ngOnInit() {
         super.ngOnInit();
-        switch(this.action){
+        switch (this.action) {
             case ActionEnum.CREATE:
                 break;
             case ActionEnum.UPDATE:
                 this.setFormValue(this.model);
-
                 this.form.get('ngaySinh').setValue(this.formatDate(this.form.get('ngaySinh').value));
-                console.log(this.model);
                 this.form.get('userName').setValue(this.model.userDetail.userName);
                 this.form.get('email').setValue(this.model.userDetail.email);
                 this.form.get('roles').setValue(this.model.userDetail.roles);
                 this.form.get('surname').setValue(this.model.userDetail.surname);
+                this.form.get('gioiTinh').setValue(this.model.gioiTinh.toString());
                 // this.form.get('ngaySinh').setValue(this.formatDate(this.form.get('ngaySinh').value));
 
                 break;
@@ -51,27 +48,27 @@ export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implem
 
         switch (this.action) {
             case ActionEnum.CREATE:
-                if(this.form.get('password').value == this.form.get('passwordcf').value){
+                if (this.form.get('password').value == this.form.get('passwordcf').value) {
 
                     this.apiService
-                    .post(this.url, this.form.value)
-                    .subscribe(res => {
-                        // show notification
-                        this.notification.show('Tạo mới thành công','Thành công', { status :'success' });
-                        // close form
-                        this.closeForm();
-                    });
+                        .post(this.url, this.form.value)
+                        .subscribe(res => {
+                            // show notification
+                            this.notification.show('Tạo mới thành công', 'Thành công', { status: 'success' });
+                            // close form
+                            this.closeForm();
+                        });
 
                 }
-                
-                
+
+
                 break;
             case ActionEnum.UPDATE:
                 this.apiService
                     .put(this.url + '/' + this.model.id.toString(), this.form.value)
                     .subscribe(res => {
                         // show notification
-                        this.notification.show('Cập nhật thành công','Thành công', { status :'success' });
+                        this.notification.show('Cập nhật thành công', 'Thành công', { status: 'success' });
                         // close form
                         this.closeForm();
                     });
@@ -89,7 +86,7 @@ export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implem
             quocTich: [null, Validators.required],
             danToc: [null],
             tonGiao: [null],
-            maSoThue:[null, Validators.required],
+            maSoThue: [null, Validators.required],
             soTaiKhoan: [null],
             tenTaiKhoan: [null],
             tenNganHang: [null],
@@ -105,6 +102,6 @@ export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implem
                 [null]
             ]
         });
-    
+
     }
 }

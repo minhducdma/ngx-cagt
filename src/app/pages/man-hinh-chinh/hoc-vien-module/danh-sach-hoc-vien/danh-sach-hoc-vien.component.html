@@ -60,8 +60,8 @@
     <nb-card-header  *ngIf="!isChild"> Học viên </nb-card-header>
     <nb-card-body class="group-button">
         <div class="float-left">
-            <button nbButton status="primary" size="small" (click)="addHandlerHocVienLopHoc()"*ngIf="isChild"><i class="fa fa-plus mr-2" ></i> Thêm mới</button>
-            <button nbButton status="danger" size="small" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
+            <button nbButton status="primary" size="medium" (click)="addHandlerHocVienLopHoc()"*ngIf="isChild"><i class="fa fa-plus mr-2" ></i> Thêm mới</button>
+            <button nbButton status="danger" size="medium" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
                 <i class="fa fa-trash mr-2"></i> Xóa
             </button>
         </div>
