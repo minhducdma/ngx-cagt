@@ -7,15 +7,15 @@ import { BaseFormComponent } from '../../base/base-form.component';
 import { IUser } from '../../model/user.model';
 
 @Component({
-  selector: 'app-form-import-nhan-vien',
+  selector: 'app-form-import-nhan-vien ',
   templateUrl: './form-import-nhan-vien.component.html',
   styleUrls: ['./form-import-nhan-vien.component.scss']
 })
 export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implements OnInit {
   
 
-  url: string = UrlConstant.ROUTE.ADD_UPDATE_NHAN_VIEN;
-    
+    url: string = UrlConstant.ROUTE.ADD_UPDATE_NHAN_VIEN;
+    selectedItem;
     constructor(
         injector: Injector,
     ) {
@@ -27,8 +27,10 @@ export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implem
             case ActionEnum.CREATE:
                 break;
             case ActionEnum.UPDATE:
+                
                 this.setFormValue(this.model);
 
+                this.selectedItem = this.form.get('gioiTinh').value;
                 this.form.get('ngaySinh').setValue(this.formatDate(this.form.get('ngaySinh').value));
                 console.log(this.model);
                 this.form.get('userName').setValue(this.model.userDetail.userName);
@@ -68,7 +70,7 @@ export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implem
                 break;
             case ActionEnum.UPDATE:
                 this.apiService
-                    .put(this.url + '/' + this.model.id.toString(), this.form.value)
+                    .post(this.url, this.form.value)
                     .subscribe(res => {
                         // show notification
                         this.notification.show('Cập nhật thành công','Thành công', { status :'success' });
