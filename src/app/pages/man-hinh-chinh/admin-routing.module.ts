@@ -20,6 +20,11 @@ const routes: Routes = [{
             loadChildren: () => import('./hoc-vien-module/hoc-vien.module')
                 .then(m => m.HocVienModule),
         },
+        {
+            path: 'cham-thi',
+            loadChildren: () => import('./cham-thi-module/cham-thi.module')
+                .then(m => m.ChamThiModule),
+        },
     ],
 }];
 

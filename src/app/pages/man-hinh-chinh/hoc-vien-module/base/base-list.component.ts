@@ -26,7 +26,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     gridState: State = {
         sort: [{ field: 'id', dir: 'desc' }],
         skip: 0,
-        take: 20,
+        take: 10,
     };
     buttonsConfig: NbWindowControlButtonsConfig = {
         minimize: false,
@@ -176,5 +176,22 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
             body,
             title,
             config);
+    }
+    
+    isFailValidateRangeDate(fromDate: Date, toDate: Date ){
+        if(fromDate > toDate){
+            this.notification.show('Thời gian bắt đầu không được lớn hơn thời gian kết thúc', 'Cảnh báo', { status: 'warning' });
+            return true;
+        }
+        return false;
+    }
+    formatDate(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [year, month, day].join('-');
     }
 }

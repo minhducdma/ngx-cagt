@@ -390,7 +390,18 @@
                 </kendo-grid>
             </nb-tab>
             <nb-tab class="pl-0 pr-0" tabTitle="Kịch bản 1" tabIcon="film-outline">
-                <kendo-grid [data]="gridViewKB1$" [resizable]="true" [pageSize]="gridState.take" [skip]="gridState.skip" [loading]="isLoading" [pageable]="true" [resizable]="true" kendoGridSelectBy="id" [selectable]="true" [selectedKeys]="selectionIds" (dataStateChange)="onStateChange($event)">
+                <kendo-grid 
+                    [data]="gridViewKB1$" 
+                    [resizable]="true" 
+                    [pageSize]="gridState.take" 
+                    [skip]="gridState.skip" 
+                    [loading]="isLoading" 
+                    [pageable]="true" 
+                    [resizable]="true" 
+                    kendoGridSelectBy="id" 
+                    [selectable]="true" 
+                    [selectedKeys]="selectionIds"
+                    (dataStateChange)="onStateChange($event)">
                     <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
                       'text-align': 'center'
                     }">

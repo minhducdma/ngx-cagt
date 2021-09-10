@@ -28,7 +28,7 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
 
 
     constructor(
-        injector : Injector
+        injector: Injector
     ) {
         this.windowRef = injector.get(WindowRef)
         this.formBuilder = injector.get(FormBuilder)
@@ -53,10 +53,10 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
         this.windowRef.close();
     }
 
-    setFormValue(data) { 
+    setFormValue(data) {
         this.form.patchValue(data);
     }
-    
+
     abstract onSubmit();
 
     abstract createForm();
@@ -69,5 +69,5 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
         return [year, month, day].join('-');
-      }
+    }
 }

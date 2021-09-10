@@ -73,8 +73,17 @@
         </nb-accordion-item>
     </nb-accordion>
 </div>
-
 <app-lich-xep-lop *ngIf="lopId > 0" [dataInput]="lichDetail" [lichId]="lichId" (dataOutput)="changeDataLichDetail($event)"></app-lich-xep-lop>
+<nb-accordion *ngIf="lopId > 0" class="mb-3">
+    <nb-accordion-item>
+        <nb-accordion-item-header>
+            Danh sách học viên
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+            <app-danh-sach-hoc-vien [isChild]="true" [lopId]="lopId" (onComplete)="onComplete($event)"></app-danh-sach-hoc-vien>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>
 <nb-card>
     <nb-card-body>
         <button nbButton size="large" status="basic" class="float-left" (click)="backToList()">
@@ -85,3 +94,7 @@
         </button>
     </nb-card-body>
 </nb-card>
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
+    <div kendoWindowContainer></div>
+</div>

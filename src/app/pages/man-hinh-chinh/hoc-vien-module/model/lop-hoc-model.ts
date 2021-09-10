@@ -1,3 +1,5 @@
+import { ILichDetail } from "./lich-detail-model";
+
 export interface ILopHoc {
     id: number;
     maLopHoc: string;
@@ -13,4 +15,5 @@ export interface ILopHoc {
     thoiGianDiemDanh: number;
     thoiGianVaoLop: string;
     thoiGianTietHoc: number;
+    lichDetails: ILichDetail[];
 }

@@ -6,7 +6,6 @@ import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
 import { ApiService } from "../../../../@core/services/api.service";
 import { NbToastrService } from "@nebular/theme";
-import { DatePipe } from "@angular/common";
 
 @Directive()
 export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
@@ -26,17 +25,15 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
     protected formBuilder: FormBuilder;
     protected apiService: ApiService;
     protected notification: NbToastrService;
-    protected datepipe: DatePipe;
 
 
     constructor(
-        injector: Injector
+        injector : Injector
     ) {
         this.windowRef = injector.get(WindowRef)
         this.formBuilder = injector.get(FormBuilder)
         this.apiService = injector.get(ApiService)
         this.notification = injector.get(NbToastrService)
-        this.datepipe = injector.get(DatePipe)
     }
 
     ngOnInit(): void {
@@ -56,10 +53,10 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
         this.windowRef.close();
     }
 
-    setFormValue(data) {
+    setFormValue(data) { 
         this.form.patchValue(data);
     }
-
+    
     abstract onSubmit();
 
     abstract createForm();
@@ -72,18 +69,5 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
         return [year, month, day].join('-');
-    }
-
-    convertCorrectDateTime(date: Date){
-        date.setTime(date.getTime() + (7*60*60*1000)) //Convert to VN datetime
-        return new Date(date);
-    }
-
-    isFailValidateRangeDate(fromDate: Date, toDate: Date ){
-        if(fromDate > toDate){
-            this.notification.show('Thời gian bắt đầu không được lớn hơn thời gian kết thúc', 'Cảnh báo', { status: 'warning' });
-            return true;
-        }
-        return false;
-    }
+      }
 }

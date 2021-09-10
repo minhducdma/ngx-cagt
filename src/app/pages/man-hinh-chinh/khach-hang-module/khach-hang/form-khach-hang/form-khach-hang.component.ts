@@ -38,6 +38,11 @@ export class FormKhachHangComponent extends BaseFormComponent<IKhachHang> implem
             FormUtil.validateAllFormFields(this.form);
             return;
         }
+
+        const isHocVien = this.form.get("isHocVien").value;
+        if(isHocVien == null)
+            this.form.get("isHocVien").setValue(false);
+
         switch (this.action) {
             case ActionEnum.CREATE:
                 this.apiService

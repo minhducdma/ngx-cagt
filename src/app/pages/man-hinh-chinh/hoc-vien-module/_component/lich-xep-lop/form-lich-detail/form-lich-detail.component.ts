@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Injector, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActionEnum } from '../../../../../../@core/constants/enum.constant';
@@ -19,7 +20,7 @@ export class FormLichDetailComponent extends BaseFormComponent<ILichDetail> impl
     url = UrlConstant.ROUTE.LICH_DETAIL;
 
     constructor(
-        injector: Injector
+        injector: Injector,
     ) {
         super(injector)
     }
@@ -46,11 +47,16 @@ export class FormLichDetailComponent extends BaseFormComponent<ILichDetail> impl
     }
 
     onSubmit() {
+      
         if (this.form.invalid) {
             // trigger validate all field
             FormUtil.validateAllFormFields(this.form);
             return;
         }
+        if(this.isFailValidateRangeDate(this.form.get("thoiGianBatDau").value,this.form.get("thoiGianKetThuc").value)) return;
+        this.form.get("thoiGianBatDau").setValue(this.convertCorrectDateTime(this.form.get("thoiGianBatDau").value));
+        this.form.get("thoiGianKetThuc").setValue(this.convertCorrectDateTime(this.form.get("thoiGianKetThuc").value));
+
         switch (this.action) {
             case ActionEnum.CREATE:
                 this.apiService

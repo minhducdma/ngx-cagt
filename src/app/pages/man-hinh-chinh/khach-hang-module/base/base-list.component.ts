@@ -27,7 +27,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     gridState: State = {
         sort: [{ field: 'id', dir: 'desc' }],
         skip: 0,
-        take: 20,
+        take: 10,
     };
     buttonsConfig: NbWindowControlButtonsConfig = {
         minimize: false,

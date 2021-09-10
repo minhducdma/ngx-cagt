@@ -36,6 +36,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 title: 'Danh sách học viên',
                 link: '/pages/admin/quan-ly-hoc-vien/danh-sach-hoc-vien',
             },
+            {
+                title: 'Danh sách tài khoản',
+                link: '/pages/admin/quan-ly-hoc-vien/danh-sach-user',
+            },
         ],
     },
 

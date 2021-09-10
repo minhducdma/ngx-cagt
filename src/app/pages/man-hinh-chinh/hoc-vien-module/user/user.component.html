@@ -134,20 +134,15 @@
                     {{ rowIndex + 1 }}
                 </ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="userDetail.surname" title="Họ">
+            <kendo-grid-column field="userDetail.surname" title="Họ" [width]="150">
             </kendo-grid-column>
-            <kendo-grid-column field="userDetail.name" title="Tên" >
+            <kendo-grid-column field="userDetail.name" title="Tên">
             </kendo-grid-column>
-            <kendo-grid-column field="userDetail.email" title="Email" >
+            <kendo-grid-column field="userDetail.email" title="Email" [width]="250">
             </kendo-grid-column>
-            <kendo-grid-column field="soDienThoai" title="Điện thoại" >
+            <kendo-grid-column field="soDienThoai" title="Điện thoại" [width]="200">
             </kendo-grid-column>
-            <kendo-grid-column field="maSoCanCuoc" title="CMND" >
-            </kendo-grid-column>
-            <kendo-grid-column field="gioiTinh" title="Giới tính" >
-                <ng-template kendoGridCellTemplate let-dataItem>
-                    {{ dataItem.gioiTinh==0?'Nam':'Nữ'  }}
-                </ng-template>
+            <kendo-grid-column field="maSoCanCuoc" title="CMND" [width]="200">
             </kendo-grid-column>
             <ng-template kendoGridDetailTemplate let-dataItem>
                 <nb-tabset>
