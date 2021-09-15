@@ -41,6 +41,7 @@ export class UserComponent extends BaseListComponent<IUser> implements OnInit {
 
     ngOnInit(): void  {
         super.ngOnInit();
+        console.log(this.currentUser.userId);
     }
     loadItems(){
         this.currentGrid = this.gridView$;
