@@ -23,6 +23,6 @@ export abstract class BaseCheckPermissionComponent implements OnInit, OnDestroy 
     }
 
     getCurrentUser() {
-        this.currentUser = JSON.parse(localStorage.getItem("currentUser")) as IUser;
+        this.currentUser = JSON.parse(localStorage.getItem("currentUserLogin")) as IUser;
     }
 }

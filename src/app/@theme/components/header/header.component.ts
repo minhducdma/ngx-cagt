@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(this.oAuthService.hasValidAccessToken()){
       this.config.getOne$("currentUser").subscribe(currentUser => {
         this.user = currentUser;
-        localStorage.setItem('currentUser',  JSON.stringify(currentUser));
+        localStorage.setItem('currentUserLogin',  JSON.stringify(currentUser));
      })
 
     }
