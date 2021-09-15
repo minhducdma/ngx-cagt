@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.config.getOne$("currentUser").subscribe(currentUser => {
         this.user = currentUser;
         if(localStorage.getItem('currentUser') == null)
-          localStorage.setItem('currentUser', currentUser);
+          localStorage.setItem('currentUserLogin', currentUser);
      })
 
     }

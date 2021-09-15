@@ -1,8 +1,6 @@
 import { Directive, Injector, OnDestroy, OnInit } from "@angular/core";
 import { Subject } from "rxjs";
 import { IUser } from "../models/user.model";
-import { ConfigStateService } from '@abp/ng.core';
-import { OAuthService } from 'angular-oauth2-oidc'
 
 @Directive()
 export abstract class BaseCheckPermissionComponent implements OnInit, OnDestroy {
@@ -23,6 +21,6 @@ export abstract class BaseCheckPermissionComponent implements OnInit, OnDestroy 
     }
 
     getCurrentUser() {
-        this.currentUser = JSON.parse(localStorage.getItem("currentUser")) as IUser;
+        this.currentUser = JSON.parse(localStorage.getItem("currentUserLogin")) as IUser;
     }
 }
