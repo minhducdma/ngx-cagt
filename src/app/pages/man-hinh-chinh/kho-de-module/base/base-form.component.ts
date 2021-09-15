@@ -6,9 +6,10 @@ import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
 import { ApiService } from "../../../../@core/services/api.service";
 import { NbToastrService } from "@nebular/theme";
+import { BaseCheckPermissionComponent } from "../../../../shared/base/base-check-permission";
 
 @Directive()
-export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
+export abstract class BaseFormComponent<T> extends BaseCheckPermissionComponent implements OnInit, OnDestroy {
     @Input() action: ActionEnum;
     @Input() model: T;
 
@@ -30,6 +31,7 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
     constructor(
         injector : Injector
     ) {
+        super(injector)
         this.windowRef = injector.get(WindowRef)
         this.formBuilder = injector.get(FormBuilder)
         this.apiService = injector.get(ApiService)
@@ -37,6 +39,7 @@ export abstract class BaseFormComponent<T> implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        super.ngOnInit();
         this.createForm();
         if (!this.action) {
             this.action = this.model ? ActionEnum.UPDATE : ActionEnum.CREATE;

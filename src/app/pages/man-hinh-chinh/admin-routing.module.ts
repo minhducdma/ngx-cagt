@@ -25,6 +25,11 @@ const routes: Routes = [{
             loadChildren: () => import('./cham-thi-module/cham-thi.module')
                 .then(m => m.ChamThiModule),
         },
+        {
+            path: 'dich-vu',
+            loadChildren: () => import('./dich-vu-module/dich-vu.module')
+                .then(m => m.DichVuModule),
+        },
     ],
 }];
 
