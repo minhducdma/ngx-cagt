@@ -126,6 +126,7 @@ export class UserComponent extends BaseListComponent<IUser> implements OnInit {
                 if (res) {
                     if (this.selectionIds.length > 0) {
                         const body = [...new Set(this.selectionIds)]
+                        console.log(body);
                         this.apiService.post('/nhan-vien/delete-many-nhan-viens', body).subscribe(res => {
                             this.selectionIds = [];
                             this.showMessage('success', 'Thành công', 'Xóa thành công');

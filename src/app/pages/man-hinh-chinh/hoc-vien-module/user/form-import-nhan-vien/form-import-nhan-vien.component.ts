@@ -65,6 +65,7 @@ export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implem
 
                 break;
             case ActionEnum.UPDATE:
+                console.log(this.form.value);
                 this.apiService
                     .post(this.url, this.form.value)
                     .subscribe(res => {
