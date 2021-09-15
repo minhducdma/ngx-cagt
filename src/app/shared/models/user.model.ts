@@ -1,14 +1,15 @@
 export interface IUser{
-    userId:number;
-    userName:string;
-    sex:number;
-    mobile:string;
-    email:string;
-    userType:number;
-    typeName:string;
-    parentId:number;
-    parentName:string;
-    parentEmail:string;
-    status:number;
-    pic:string;
+    email: string;
+    emailVerified: boolean;
+    id: string;
+    impersonatorTenantId: string;
+    impersonatorUserId: string;
+    isAuthenticated: boolean;
+    name: string;
+    phoneNumber: string;
+    phoneNumberVerified: boolean;
+    roles: [];
+    surName: string;
+    tenantId: string;
+    userName: string;
 }
