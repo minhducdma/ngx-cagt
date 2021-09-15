@@ -11,10 +11,11 @@ import { Subject } from "rxjs";
 import { ReziseTable } from "../../../../@core/constants/app.constant";
 import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { ApiService } from "../../../../@core/services/api.service";
+import { BaseCheckPermissionComponent } from "../../../../shared/base/base-check-permission";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
 
 @Directive()
-export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
+export abstract class BaseListComponent<T> extends BaseCheckPermissionComponent implements OnInit, OnDestroy {
     @ViewChild(TooltipDirective) public tooltipDir: TooltipDirective;
     destroy$ = new Subject<void>();
     isLoading = false;
@@ -62,9 +63,11 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     protected notification: NbToastrService;
     protected dialogService: NbDialogService;
     protected router: Router;
+
     constructor(
         injector: Injector
     ) {
+        super(injector)
         this.windowService = injector.get(WindowService)
         this.apiService = injector.get(ApiService)
         this.formBuilder = injector.get(FormBuilder)
@@ -74,6 +77,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        super.ngOnInit();
         this.loadItems();
     }
 

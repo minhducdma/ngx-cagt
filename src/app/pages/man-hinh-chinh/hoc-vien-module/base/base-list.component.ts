@@ -11,8 +11,9 @@ import { ReziseTable } from "../../../../@core/constants/app.constant";
 import { ActionEnum } from "../../../../@core/constants/enum.constant";
 import { ApiService } from "../../../../@core/services/api.service";
 import { DropDownListEnum } from "../../../../shared/controls/cagt-select/cagt.data";
+import { BaseCheckPermissionComponent } from "../../../../shared/base/base-check-permission";
 @Directive()
-export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
+export abstract class BaseListComponent<T> extends BaseCheckPermissionComponent implements OnInit, OnDestroy {
     @ViewChild(TooltipDirective) public tooltipDir: TooltipDirective;
     destroy$ = new Subject<void>();
     isLoading = false;
@@ -63,6 +64,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     constructor(
         injector: Injector
     ) {
+        super(injector)
         this.windowService = injector.get(WindowService)
         this.apiService = injector.get(ApiService)
         this.formBuilder = injector.get(FormBuilder)
@@ -72,6 +74,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        super.ngOnInit();
         this.loadItems();
     }
 
