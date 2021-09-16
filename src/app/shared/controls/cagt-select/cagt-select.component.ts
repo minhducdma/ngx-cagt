@@ -51,7 +51,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
     }
 
     handleOnChange(e) {
-        if(e != undefined){
+        if (e != undefined) {
             this.writeValue(e);
             this.onChange(e);
         }
@@ -114,7 +114,12 @@ export class CagtSelectComponent implements ControlValueAccessor {
             case DropDownListEnum.LOAD_TON_GIAO:
                 this.loadTonGiao();
                 break;
-
+            case DropDownListEnum.LOAI_DICH_VU:
+                this.loadLoaiDichVu();
+                break;
+            case DropDownListEnum.TRANG_THAI_DICH_VU:
+                this.loadTrangThaiDichVu();
+                break;
         }
     }
 
@@ -318,7 +323,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
-    
+
     }
     loadLoaiNhanVien() {
         this.apiService
@@ -334,7 +339,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
-    
+
     }
     loadTrangThaiNhanVien() {
         this.apiService
@@ -350,7 +355,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
-    
+
     }
     loadRole() {
         this.apiService
@@ -366,7 +371,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
-    
+
     }
     loadDanToc() {
         this.apiService
@@ -382,7 +387,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
-    
+
     }
     loadTonGiao() {
         this.apiService
@@ -398,6 +403,36 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
-    
+
+    }
+    loadLoaiDichVu() {
+        this.apiService
+            .get(this.url + `?tenBang=GetDichVus&tenCot=loaiDichVu`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    }
+    loadTrangThaiDichVu() {
+        this.apiService
+            .get(this.url + `?tenBang=GetDichVus&tenCot=trangThaiDichVu`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
     }
 }

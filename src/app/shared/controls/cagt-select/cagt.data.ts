@@ -20,5 +20,8 @@ export enum DropDownListEnum {
     TRANG_THAI_NHAN_VIEN,
     LOAD_ROLE,
     LOAD_DAN_TOC,
-    LOAD_TON_GIAO
+    LOAD_TON_GIAO,
+
+    LOAI_DICH_VU,
+    TRANG_THAI_DICH_VU
 }

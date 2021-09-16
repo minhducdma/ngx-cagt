@@ -43,6 +43,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
         ],
     },
 
+    {
+        title: 'Dịch vụ',
+        icon: 'briefcase-outline',
+        children: [
+            {
+                title: 'Quản lý dịch vụ',
+                link: '/pages/admin/dich-vu/ql-dich-vu',
+            },
+        ],
+    },
+
 
     // {
     //     title: 'Đề thi',

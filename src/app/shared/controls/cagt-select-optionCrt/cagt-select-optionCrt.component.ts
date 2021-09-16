@@ -129,6 +129,12 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_DAT_LICH:
                 this.loadTrangThaiDatLich();
                 break;
+            case DropDownListEnum.LOAI_DICH_VU:
+                this.loadLoaiDichVu();
+                break;
+            case DropDownListEnum.TRANG_THAI_DICH_VU:
+                this.loadTrangThaiDichVu();
+                break;
         }
     }
 
@@ -319,5 +325,29 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
                     this.lstTemp = JSON.stringify(this.lstData);
                 }
             });
+    }
+    loadLoaiDichVu() {
+        this.apiService
+            .get(this.url + `?tenBang=GetDichVus&tenCot=loaiDichVu`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadTrangThaiDichVu(){
+        this.apiService
+        .get(this.url + `?tenBang=GetDichVus&tenCot=trangThaiDichVu`)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+            if (res) {
+                this.lstData = res.filter(x => x != null);
+                this.fixedLstDataStr = this.lstData.join(',');
+                this.lstTemp = JSON.stringify(this.lstData);
+            }
+        });
     }
 }

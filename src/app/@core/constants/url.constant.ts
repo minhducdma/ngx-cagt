@@ -51,7 +51,9 @@ export const UrlConstant = {
         HOC_VIEN_LOP_HOC: '/hoc-vien-lop-hoc',
         LOP_HOC_SAVE: '/lop-hoc/save-lop-hoc',
         NHAN_VIEN_KENDO: '/nhan-vien/collect-nhan-vien-or-kendo-datatable',
-        ADD_UPDATE_NHAN_VIEN: '/nhan-vien/or-update-nhan-vien'
+        ADD_UPDATE_NHAN_VIEN: '/nhan-vien/or-update-nhan-vien',
+        DICH_VU_KENDO: '/dich-vu/collect-kendo-datatable',
+        DICH_VU: 'https://apisipm.cagt.top/api/app/dich-vu',
     },
 
 }
