@@ -1,43 +1,55 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnChanges, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { State } from '@progress/kendo-data-query';
 import { takeUntil } from 'rxjs/operators';
 import { ActionEnum } from '../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { BaseListComponent } from '../base/base-list.component';
-import { IDichVu } from '../model/dich-vu.model';
-import { FormQlDichVuComponent } from './form-ql-dich-vu/form-ql-dich-vu.component';
+import { ISanPham } from '../model/san-pham.model';
+import { FormSanPhamComponent } from './form-san-pham/form-san-pham.component';
 
 @Component({
-    selector: 'app-ql-dich-vu',
-    templateUrl: './ql-dich-vu.component.html',
-    styleUrls: ['./ql-dich-vu.component.scss']
+    selector: 'app-san-pham',
+    templateUrl: './san-pham.component.html',
+    styleUrls: ['./san-pham.component.scss']
 })
-export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnInit {
-    url: string = UrlConstant.ROUTE.DICH_VU_KENDO;
+export class SanPhamComponent extends BaseListComponent<ISanPham> implements OnInit {
+    url: string = UrlConstant.ROUTE.SAN_PHAM_KENDO;
+    dichVuId: number;
+    isChild: false;
 
     modelSearch = {
+        dichVuIds: [],
         filter: null,
-        loaiDichVu: null,
-        trangThaiDichVu: null
+        loaiSanPhams: null,
+        trangThaiSanPhams: null,
     };
 
     constructor(
         injector: Injector,
+        private route: ActivatedRoute,
     ) {
         super(injector)
+        this.route.paramMap.subscribe(params => {
+            this.modelSearch.dichVuIds = [];
+            this.ngOnInit();
+        });
     }
 
     private get extendQueryOptions() {
         return {
+            dichVuIds: this.modelSearch.dichVuIds,
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
-            loaiDichVus: this.modelSearch.loaiDichVu ? this.convertArrToStr(this.modelSearch.loaiDichVu) : null,
-            trangThaiDichVus: this.modelSearch.trangThaiDichVu ? this.convertArrToStr(this.modelSearch.trangThaiDichVu) : null,
+            loaiSanPhams: this.modelSearch.loaiSanPhams ? this.convertArrToStr(this.modelSearch.loaiSanPhams) : null,
+            trangThaiSanPhams: this.modelSearch.trangThaiSanPhams ? this.convertArrToStr(this.modelSearch.trangThaiSanPhams) : null,
             ...this.queryOptions,
         };
     }
 
     ngOnInit(): void {
+        this.dichVuId = this.route.snapshot.params.dichVuId;
+        this.modelSearch.dichVuIds.push(this.dichVuId);
         super.ngOnInit();
     }
 
@@ -59,8 +71,8 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
     showFormCreateOrUpdate() {
         this.opened = true;
         const windowRef = this.windowService.open({
-            title: "Cập nhật dịch vụ",
-            content: FormQlDichVuComponent,
+            title: "Cập nhật sản phẩm",
+            content: FormSanPhamComponent,
             width: 800,
             top: 100,
             autoFocusedElement: 'body',
@@ -68,13 +80,13 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
         const param = windowRef.content.instance;
         param.action = this.action;
         param.model = this.model;
+        param.dichVuId = this.dichVuId;
         param.isHocVien = true;
 
         windowRef.result.subscribe(result => {
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
                 this.loadItems();
-                window.location.reload();
             }
         });
     }
@@ -94,9 +106,10 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
 
     resetHandler() {
         this.modelSearch = {
+            dichVuIds: [this.dichVuId],
             filter: null,
-            loaiDichVu: null,
-            trangThaiDichVu: null
+            loaiSanPhams: null,
+            trangThaiSanPhams: null,
         };
 
         this.loadItems();
@@ -116,7 +129,6 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
                 this.selectionIds = [];
                 this.showMessage('success', 'Thành công', 'Xóa thành công');
                 this.loadItems();
-                window.location.reload();
             });
         }
     }

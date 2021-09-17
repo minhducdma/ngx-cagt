@@ -44,12 +44,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
 
     {
-        title: 'Dịch vụ',
+        title: 'Danh sách dịch vụ',
+        icon: 'clipboard-outline',
+        children: [],
+    },
+    {
+        title: 'Quản lý Dịch vụ',
         icon: 'briefcase-outline',
         children: [
             {
                 title: 'Quản lý dịch vụ',
                 link: '/pages/admin/dich-vu/ql-dich-vu',
+            },
+            {
+                title: 'Quản lý bộ sản phẩm',
+                link: '/pages/admin/dich-vu/ql-bo-san-pham',
             },
         ],
     },

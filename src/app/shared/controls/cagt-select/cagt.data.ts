@@ -23,5 +23,11 @@ export enum DropDownListEnum {
     LOAD_TON_GIAO,
 
     LOAI_DICH_VU,
-    TRANG_THAI_DICH_VU
+    TRANG_THAI_DICH_VU,
+
+    LOAI_BO_SAN_PHAM,
+    TRANG_THAI_BO_SAN_PHAM,
+
+    LOAI_SAN_PHAM,
+    TRANG_THAI_SAN_PHAM,
 }

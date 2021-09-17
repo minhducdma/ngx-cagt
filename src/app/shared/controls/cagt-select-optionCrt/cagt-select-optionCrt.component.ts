@@ -135,6 +135,12 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_DICH_VU:
                 this.loadTrangThaiDichVu();
                 break;
+            case DropDownListEnum.LOAI_BO_SAN_PHAM:
+                this.loadBoSanPham();
+                break;
+            case DropDownListEnum.TRANG_THAI_BO_SAN_PHAM:
+                this.loadTrangThaiBoSanPham();
+                break;
         }
     }
 
@@ -338,16 +344,40 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
                 }
             });
     }
-    loadTrangThaiDichVu(){
+    loadTrangThaiDichVu() {
         this.apiService
-        .get(this.url + `?tenBang=GetDichVus&tenCot=trangThaiDichVu`)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((res: any) => {
-            if (res) {
-                this.lstData = res.filter(x => x != null);
-                this.fixedLstDataStr = this.lstData.join(',');
-                this.lstTemp = JSON.stringify(this.lstData);
-            }
-        });
+            .get(this.url + `?tenBang=GetDichVus&tenCot=trangThaiDichVu`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadBoSanPham() {
+        this.apiService
+            .get(this.url + `?tenBang=GetBoSanPhams&tenCot=loaiBoSanPham`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadTrangThaiBoSanPham() {
+        this.apiService
+            .get(this.url + `?tenBang=GetBoSanPhams&tenCot=trangThaiBoSanPham`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
     }
 }

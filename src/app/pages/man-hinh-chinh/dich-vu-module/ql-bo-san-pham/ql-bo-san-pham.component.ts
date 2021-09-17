@@ -1,38 +1,44 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { WindowCloseResult } from '@progress/kendo-angular-dialog';
+import { WindowCloseResult, WindowRef } from '@progress/kendo-angular-dialog';
+import { SelectionEvent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { takeUntil } from 'rxjs/operators';
 import { ActionEnum } from '../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { BaseListComponent } from '../base/base-list.component';
-import { IDichVu } from '../model/dich-vu.model';
-import { FormQlDichVuComponent } from './form-ql-dich-vu/form-ql-dich-vu.component';
+import { IBoSanPham } from '../model/bo-san-pham.model';
+import { FormQlBoSanPhamComponent } from './form-ql-bo-san-pham/form-ql-bo-san-pham.component';
 
 @Component({
-    selector: 'app-ql-dich-vu',
-    templateUrl: './ql-dich-vu.component.html',
-    styleUrls: ['./ql-dich-vu.component.scss']
+    selector: 'app-ql-bo-san-pham',
+    templateUrl: './ql-bo-san-pham.component.html',
+    styleUrls: ['./ql-bo-san-pham.component.scss']
 })
-export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnInit {
-    url: string = UrlConstant.ROUTE.DICH_VU_KENDO;
-
+export class QlBoSanPhamComponent extends BaseListComponent<IBoSanPham> implements OnInit {
+    url: string = UrlConstant.ROUTE.BO_SAN_PHAM_KENDO;
+    isChild: false;
     modelSearch = {
         filter: null,
-        loaiDichVu: null,
-        trangThaiDichVu: null
+        loaiBoSanPhams: null,
+        trangThaiBoSanPhams: null
     };
+    selectedItem: IBoSanPham;
 
+    protected windowRef: WindowRef;
     constructor(
         injector: Injector,
+        
     ) {
         super(injector)
+        this.windowRef = injector.get(WindowRef)
+
     }
 
     private get extendQueryOptions() {
         return {
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
-            loaiDichVus: this.modelSearch.loaiDichVu ? this.convertArrToStr(this.modelSearch.loaiDichVu) : null,
-            trangThaiDichVus: this.modelSearch.trangThaiDichVu ? this.convertArrToStr(this.modelSearch.trangThaiDichVu) : null,
+            loaiBoSanPhams: this.modelSearch.loaiBoSanPhams ? this.convertArrToStr(this.modelSearch.loaiBoSanPhams) : null,
+            trangThaiBoSanPhams: this.modelSearch.trangThaiBoSanPhams ? this.convertArrToStr(this.modelSearch.trangThaiBoSanPhams) : null,
             ...this.queryOptions,
         };
     }
@@ -59,10 +65,10 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
     showFormCreateOrUpdate() {
         this.opened = true;
         const windowRef = this.windowService.open({
-            title: "Cập nhật dịch vụ",
-            content: FormQlDichVuComponent,
+            title: "Cập nhật bộ sản phẩm",
+            content: FormQlBoSanPhamComponent,
             width: 800,
-            top: 100,
+            top: 200,
             autoFocusedElement: 'body',
         });
         const param = windowRef.content.instance;
@@ -74,7 +80,6 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
             if (result instanceof WindowCloseResult) {
                 this.opened = false;
                 this.loadItems();
-                window.location.reload();
             }
         });
     }
@@ -95,8 +100,8 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
     resetHandler() {
         this.modelSearch = {
             filter: null,
-            loaiDichVu: null,
-            trangThaiDichVu: null
+            loaiBoSanPhams: null,
+            trangThaiBoSanPhams: null
         };
 
         this.loadItems();
@@ -112,13 +117,31 @@ export class QlDichVuComponent extends BaseListComponent<IDichVu> implements OnI
             const body = {
                 listIds: [...new Set(this.selectionIds)],
             };
-            this.apiService.post('/dich-vu/delete-many-dich-vus', body).subscribe(res => {
+            this.apiService.post('/bo-san-pham/delete-many-bo-san-phams', body).subscribe(res => {
                 this.selectionIds = [];
                 this.showMessage('success', 'Thành công', 'Xóa thành công');
                 this.loadItems();
-                window.location.reload();
             });
         }
     }
 
+
+    closeForm() {
+        this.windowRef.close();
+    }
+
+    chonBoSanPham(){
+        if(this.selectedItem != null){
+            this.windowRef.close(this.selectedItem);
+        }else{
+            this.notification.show('Vui lòng chọn bộ sản phẩm','Cảnh báo', { status :'warning' });
+        }
+    }
+    selectRow(e: SelectionEvent) {
+        if(e.selectedRows.length > 0){
+            this.selectedItem = e.selectedRows[0].dataItem;
+        }else{
+            this.selectedItem = null;
+        }
+    }
 }

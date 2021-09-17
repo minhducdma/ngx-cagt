@@ -15,7 +15,7 @@ import { MENU_ITEMS } from './pages-menu';
   `,
 })
 export class PagesComponent implements OnInit {
-    urlDichVu: string = UrlConstant.ROUTE.DICH_VU;
+    urlDichVu: string = UrlConstant.ROUTE.DICH_VU_GET_MENU;
 
     constructor(
         protected apiService: ApiService
@@ -32,11 +32,11 @@ export class PagesComponent implements OnInit {
                 const data = res.items.map(x => {
                     return {
                         title: x.ten,
-                        link: '/pages/admin/dich-vu/ql-dich-vu',
+                        link: '/pages/admin/dich-vu/san-pham/' + x.id,
                     }
                 })
 
-                var dichVuMenu = this.menu.find((x: any) => x.title == 'Dịch vụ');
+                var dichVuMenu = this.menu.find((x: any) => x.title == 'Danh sách dịch vụ');
                 dichVuMenu.children = [
                     ...data,
                     ...dichVuMenu.children,

@@ -1,14 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { NbAccordionModule, NbAlertModule, NbAutocompleteModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NbAccordionModule, NbAlertModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbToastrModule, NbTreeGridModule } from '@nebular/theme';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DialogsModule, WindowModule } from '@progress/kendo-angular-dialog';
-import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { CKEditorModule } from 'ckeditor4-angular';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormDirectiveModule } from '../../../shared/directives/forms';
 import { ThemeModule } from '../../../@theme/theme.module';
 import { DichVuRoutingModule, routedComponents } from './dich-vu-routing.module';
@@ -18,6 +15,17 @@ import { CagtSelectModule } from '../../../shared/controls/cagt-select/cagt-sele
 import { AlertDialogModule } from '../../../shared/controls/alert-dialog/alert-dialog.module';
 import { CagtSelectCrtModule } from '../../../shared/controls/cagt-select-optionCrt/cagt-select-optionCrt.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { CurrencyMaskConfig, CurrencyMaskModule } from 'ng2-currency-mask';
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+    align: 'right',
+    allowNegative: false,
+    decimal: ',',
+    precision: 2,
+    prefix: '',
+    suffix: '',
+    thousands: '.'
+};
 
 @NgModule({
     imports: [
@@ -55,11 +63,13 @@ import { MatMenuModule } from '@angular/material/menu';
         NbButtonGroupModule,
         AlertDialogModule,
         CagtSelectCrtModule,
-        MatMenuModule
+        MatMenuModule,
+        CurrencyMaskModule
     ],
     declarations: [
         ...routedComponents,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
 export class DichVuModule { }

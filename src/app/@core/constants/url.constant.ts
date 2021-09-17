@@ -53,7 +53,12 @@ export const UrlConstant = {
         NHAN_VIEN_KENDO: '/nhan-vien/collect-nhan-vien-or-kendo-datatable',
         ADD_UPDATE_NHAN_VIEN: '/nhan-vien/or-update-nhan-vien',
         DICH_VU_KENDO: '/dich-vu/collect-kendo-datatable',
-        DICH_VU: 'https://apisipm.cagt.top/api/app/dich-vu',
+        DICH_VU_GET_MENU: 'https://apisipm.cagt.top/api/app/dich-vu',
+        DICH_VU: '/dich-vu',
+        BO_SAN_PHAM_KENDO: '/bo-san-pham/collect-kendo-datatable',
+        BO_SAN_PHAM: '/bo-san-pham',
+        SAN_PHAM_KENDO: '/san-pham/collect-kendo-datatable',
+        SAN_PHAM: '/san-pham'
     },
 
 }
