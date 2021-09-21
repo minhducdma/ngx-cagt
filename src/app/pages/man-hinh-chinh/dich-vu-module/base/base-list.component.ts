@@ -1,5 +1,5 @@
 import { Directive, HostListener, inject, Injector, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { NbDialogService, NbToastrService, NbWindowControlButtonsConfig, NbWindowService } from "@nebular/theme";
@@ -35,8 +35,7 @@ export abstract class BaseListComponent<T> extends BaseCheckPermissionComponent 
         maximize: false,
         fullScreen: true,
     };
-
-    nhanSuId: number;
+    form: FormGroup;
     tabName: string;
     openFirstTime = false;
     searchAdvance = false;
@@ -177,5 +176,19 @@ export abstract class BaseListComponent<T> extends BaseCheckPermissionComponent 
             body,
             title,
             config);
+    }
+
+    setFormValue(data) { 
+        this.form.patchValue(data);
+    }
+
+    formatDate(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [year, month, day].join('-');
     }
 }

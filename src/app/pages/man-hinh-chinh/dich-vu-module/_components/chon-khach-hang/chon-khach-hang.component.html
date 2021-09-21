@@ -1,0 +1,155 @@
+<div class="mb-3">
+    <nb-accordion>
+        <nb-accordion-item>
+          <nb-accordion-item-header>
+                Tìm kiếm
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Từ khóa</div>
+                            <div class="col-md-12 col-lg-12">
+                                <input type="text" nbInput class="m-input form-control" [(ngModel)]="modelSearch.filter" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Thời gian từ</div>
+                            <div class="col-md-12 col-lg-12">
+                                <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianTu" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Thời gian đến</div>
+                            <div class="col-md-12 col-lg-12">
+                                <input type="date" nbInput class="m-input form-control mr-2" [(ngModel)]="modelSearch.thoiGianDen" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Nguồn khách hàng</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.NGUON_KHACH_HANG"
+                                    [isMulti]="true"
+                                    [(ngModel)]="modelSearch.nguonKhachHangs">
+                                </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Loại khách hàng</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG"
+                                    [isMulti]="true"
+                                    [(ngModel)]="modelSearch.loaiKhachHangs">
+                                </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Người phụ trách</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH"
+                                    [isMulti]="true"
+                                    [(ngModel)]="modelSearch.nguoiPhuTrachs">
+                                </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xxxl-3 ">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Trạng thái khách hàng</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select
+                                    [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_KHACH_HANG"
+                                    [isMulti]="true"
+                                    [(ngModel)]="modelSearch.trangThaiKhachHangs">
+                                </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="col-md-6 offset-md-3 text-center">
+                            <button class="mr-2" nbButton size="small" status="primary" (click)="onSearchChangeGrid()">
+                                <i class="fa fa-search mr-2"></i> Tìm kiếm
+                            </button>
+                            <button class="mr-2" nbButton size="small" status="warning" (click)="resetHandler()">
+                                <i class="fas fa-redo-alt mr-2"></i> Làm mới
+                            </button>
+                        </div>
+                    </div>
+                </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+<nb-card>
+    <nb-card-header> Khách hàng </nb-card-header>
+    <nb-card-body>
+        <kendo-grid 
+            [data]="gridView$" 
+            [resizable]="true" 
+            [pageSize]="5" 
+            [skip]="gridState.skip" 
+            [loading]="isLoading" 
+            [pageable]="true" 
+            [resizable]="true" 
+            kendoGridSelectBy="id" 
+            [selectable]="{mode: 'single'}"
+            [selectedKeys]="selectionIds" 
+            (selectionChange)="selectRow($event)"
+            (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false" [headerStyle]="{
+              'text-align': 'center'
+            }">
+
+            </kendo-grid-checkbox-column>
+            <kendo-grid-column
+                title="STT"
+                [width]="60"
+                class="text-center"
+                [headerStyle]="{ 'text-align': 'center'}">
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    {{ rowIndex + 1 }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="hoTen" title="Họ tên" [width]="180">
+            </kendo-grid-column>
+            <kendo-grid-column
+                field="ngaySinh"
+                title="Ngày sinh"
+                [width]="100"
+                class="text-center"
+                [headerStyle]="{'text-align': 'center'}">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.ngaySinh | date: "dd/MM/yyyy" }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="soDienThoai" title="Số điện thoại" [width]="120">
+            </kendo-grid-column>
+            <kendo-grid-column field="email" title="Email" [width]="150">
+            </kendo-grid-column>
+        </kendo-grid>
+    </nb-card-body>
+</nb-card>
+<div class="text-right border-form-footer">
+    <button nbButton status="primary" type="button" (click)="closeForm()"
+        class="btn_custom btn_df mr-1"  size="small">Hủy</button>
+    <a nbButton status="danger" (click)="chonKhachHang()" class="btn_custom btn_add" size="small">Chọn</a>
+</div>

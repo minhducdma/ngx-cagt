@@ -68,8 +68,6 @@
         </div>
     </nb-card-body>
     <nb-card-body>
-
-
         <kendo-grid 
             [data]="gridView$" 
             [resizable]="true" 
@@ -272,7 +270,7 @@
         </kendo-grid>
     </nb-card-body>
 </nb-card>
-<div class="k-overlay" *ngIf="opened && !isChild"></div>
-<div class="wrapper form-layouts" *ngIf="!isChild">
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
     <div kendoWindowContainer></div>
 </div>

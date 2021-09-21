@@ -141,6 +141,12 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
             case DropDownListEnum.TRANG_THAI_BO_SAN_PHAM:
                 this.loadTrangThaiBoSanPham();
                 break;
+            case DropDownListEnum.LOAI_DON_HANG:
+                this.loadDonHang();
+                break;
+            case DropDownListEnum.TRANG_THAI_DON_HANG:
+                this.loadTrangThaiDonHang();
+                break;
         }
     }
 
@@ -370,7 +376,31 @@ export class CagtSelectOptionCrtComponent implements ControlValueAccessor {
     }
     loadTrangThaiBoSanPham() {
         this.apiService
-            .get(this.url + `?tenBang=GetBoSanPhams&tenCot=trangThaiBoSanPham`)
+            .get(this.url + `?tenBang=GetBoSanPhams&tenCot=trangThaiBoSanPhams`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadDonHang() {
+        this.apiService
+            .get(this.url + `?tenBang=GetDonHangs&tenCot=loaiDonHang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null);
+                    this.fixedLstDataStr = this.lstData.join(',');
+                    this.lstTemp = JSON.stringify(this.lstData);
+                }
+            });
+    }
+    loadTrangThaiDonHang() {
+        this.apiService
+            .get(this.url + `?tenBang=GetDonHangs&tenCot=trangThaiDonHang`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {

@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UrlConstant } from '../../../@core/constants/url.constant';
 import { ApiService } from '../../../@core/services/api.service';
+import { IBoSanPham } from '../../../pages/man-hinh-chinh/dich-vu-module/model/bo-san-pham.model';
+import { IDichVu } from '../../../pages/man-hinh-chinh/dich-vu-module/model/dich-vu.model';
 import { DropDownListEnum } from './cagt.data';
 
 @Component({
@@ -125,6 +127,18 @@ export class CagtSelectComponent implements ControlValueAccessor {
                 break;
             case DropDownListEnum.TRANG_THAI_BO_SAN_PHAM:
                 this.loadTrangThaiBoSanPham();
+                break;
+            case DropDownListEnum.LOAI_DON_HANG:
+                this.loadDonHang();
+                break;
+            case DropDownListEnum.TRANG_THAI_DON_HANG:
+                this.loadTrangThaiDonHang();
+                break;
+            case DropDownListEnum.DICH_VU_ID:
+                this.loadDichVuById();
+                break;
+            case DropDownListEnum.BO_SAN_PHAM_ID:
+                this.loadBoSanPhamById();
                 break;
         }
     }
@@ -488,7 +502,7 @@ export class CagtSelectComponent implements ControlValueAccessor {
     }
     loadTrangThaiSanPham() {
         this.apiService
-            .get(this.url + `?tenBang=GetSanPhams&tenCot=trangThaiSanPham`)
+            .get(this.url + `?tenBang=GetSanPhams&tenCot=trangThaiSanPhams`)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res) {
@@ -500,5 +514,65 @@ export class CagtSelectComponent implements ControlValueAccessor {
                     });
                 }
             });
+    }
+    loadDonHang() {
+        this.apiService
+            .get(this.url + `?tenBang=GetDonHangs&tenCot=loaiDonHang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    }
+    loadTrangThaiDonHang() {
+        this.apiService
+            .get(this.url + `?tenBang=GetDonHangs&tenCot=trangThaiDonHang`)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                if (res) {
+                    this.lstData = res.filter(x => x != null).map((e: any) => {
+                        return {
+                            id: e,
+                            text: e
+                        }
+                    });
+                }
+            });
+    }
+    loadDichVuById(){
+        this.apiService
+        .get('https://apisipm.migroup.asia/api/app/dich-vu')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+            if (res) {
+                this.lstData = res.items.filter(x => x != null).map((e: IDichVu) => {
+                    return {
+                        id: e.id,
+                        text: e.ten
+                    }
+                });
+            }
+        });
+    }
+    loadBoSanPhamById(){
+        this.apiService
+        .get('https://apisipm.migroup.asia/api/app/bo-san-pham')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+            if (res) {
+                this.lstData = res.items.filter(x => x != null).map((e: IBoSanPham) => {
+                    return {
+                        id: e.id,
+                        text: e.ten
+                    }
+                });
+            }
+        });
     }
 }

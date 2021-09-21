@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WindowService } from '@progress/kendo-angular-dialog';
 import { IBoSanPham } from '../../model/bo-san-pham.model';
-import { ISanPham } from '../../model/san-pham.model';
-import { QlBoSanPhamComponent } from '../../ql-bo-san-pham/ql-bo-san-pham.component';
+import { SelectBoSanPhamComponent } from './select-bo-san-pham/select-bo-san-pham.component';
 
 @Component({
     selector: 'app-chon-bo-san-pham',
@@ -27,7 +26,7 @@ export class ChonBoSanPhamComponent implements OnInit {
         this.opened = true;
         const windowRef = this.windowService.open({
             title: "Chọn bộ sản phẩm",
-            content: QlBoSanPhamComponent,
+            content: SelectBoSanPhamComponent,
             width: 1100,
             top: 100,
             autoFocusedElement: 'body',

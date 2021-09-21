@@ -58,7 +58,9 @@ export const UrlConstant = {
         BO_SAN_PHAM_KENDO: '/bo-san-pham/collect-kendo-datatable',
         BO_SAN_PHAM: '/bo-san-pham',
         SAN_PHAM_KENDO: '/san-pham/collect-kendo-datatable',
-        SAN_PHAM: '/san-pham'
+        SAN_PHAM: '/san-pham',
+        DON_HANG_KENDO: '/don-hang/collect-don-hang-kendo-data',
+        DON_HANG: '/don-hang'
     },
 
 }

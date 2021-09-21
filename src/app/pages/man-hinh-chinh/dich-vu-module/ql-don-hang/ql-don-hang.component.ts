@@ -1,54 +1,44 @@
-import { Component, Injector, OnChanges, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Injector, OnInit } from '@angular/core';
 import { WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { State } from '@progress/kendo-data-query';
 import { takeUntil } from 'rxjs/operators';
 import { ActionEnum } from '../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../@core/constants/url.constant';
 import { BaseListComponent } from '../base/base-list.component';
-import { ISanPham } from '../model/san-pham.model';
-import { FormSanPhamComponent } from './form-san-pham/form-san-pham.component';
+import { IDonHang } from '../model/don-hang.model';
+import { FormQlDonHangComponent } from './form-ql-don-hang/form-ql-don-hang.component';
 
 @Component({
-    selector: 'app-san-pham',
-    templateUrl: './san-pham.component.html',
-    styleUrls: ['./san-pham.component.scss']
+    selector: 'app-ql-don-hang',
+    templateUrl: './ql-don-hang.component.html',
+    styleUrls: ['./ql-don-hang.component.scss']
 })
-export class SanPhamComponent extends BaseListComponent<ISanPham> implements OnInit {
-    url: string = UrlConstant.ROUTE.SAN_PHAM_KENDO;
+export class QlDonHangComponent extends BaseListComponent<IDonHang> implements OnInit {
+    url: string = UrlConstant.ROUTE.DON_HANG_KENDO;
     dichVuId: number;
 
     modelSearch = {
-        dichVuIds: [],
         filter: null,
-        loaiSanPhams: null,
-        trangThaiSanPhams: null,
+        loaiDonHangs: null,
+        trangThaiDonHangs: null,
     };
 
     constructor(
         injector: Injector,
-        private route: ActivatedRoute,
     ) {
         super(injector)
-        this.route.paramMap.subscribe(params => {
-            this.modelSearch.dichVuIds = [];
-            this.ngOnInit();
-        });
     }
 
     private get extendQueryOptions() {
         return {
-            dichVuIds: this.modelSearch.dichVuIds,
             filter: this.modelSearch.filter ? this.modelSearch.filter : null,
-            loaiSanPhams: this.modelSearch.loaiSanPhams ? this.convertArrToStr(this.modelSearch.loaiSanPhams) : null,
-            trangThaiSanPhams: this.modelSearch.trangThaiSanPhams ? this.convertArrToStr(this.modelSearch.trangThaiSanPhams) : null,
+            loaiDonHangs: this.modelSearch.loaiDonHangs ? this.convertArrToStr(this.modelSearch.loaiDonHangs) : null,
+            trangThaiDonHangs: this.modelSearch.trangThaiDonHangs ? this.convertArrToStr(this.modelSearch.trangThaiDonHangs) : null,
             ...this.queryOptions,
         };
     }
 
     ngOnInit(): void {
-        this.dichVuId = this.route.snapshot.params.dichVuId;
-        this.modelSearch.dichVuIds.push(this.dichVuId);
         super.ngOnInit();
     }
 
@@ -70,8 +60,8 @@ export class SanPhamComponent extends BaseListComponent<ISanPham> implements OnI
     showFormCreateOrUpdate() {
         this.opened = true;
         const windowRef = this.windowService.open({
-            title: "Cập nhật sản phẩm",
-            content: FormSanPhamComponent,
+            title: "Cập nhật đơn hàng",
+            content: FormQlDonHangComponent,
             width: 800,
             top: 100,
             autoFocusedElement: 'body',
@@ -92,23 +82,26 @@ export class SanPhamComponent extends BaseListComponent<ISanPham> implements OnI
 
     editHandler(dataItem) {
         // tslint:disable-next-line: no-unsafe-any
-        this.model = dataItem;
-        this.action = ActionEnum.UPDATE;
-        this.showFormCreateOrUpdate();
+        // this.model = dataItem;
+        // this.action = ActionEnum.UPDATE;
+        // this.showFormCreateOrUpdate();
+        this.router.navigate(["/pages/admin/dich-vu/ql-don-hang/" + dataItem.id]);
+
     }
 
     addHandler() {
-        this.model = undefined;
-        this.action = ActionEnum.CREATE;
-        this.showFormCreateOrUpdate();
+        // this.model = undefined;
+        // this.action = ActionEnum.CREATE;
+        // this.showFormCreateOrUpdate();
+        this.router.navigate(["/pages/admin/dich-vu/ql-don-hang/0"]);
+
     }
 
     resetHandler() {
         this.modelSearch = {
-            dichVuIds: [this.dichVuId],
             filter: null,
-            loaiSanPhams: null,
-            trangThaiSanPhams: null,
+            loaiDonHangs: null,
+            trangThaiDonHangs: null,
         };
 
         this.loadItems();
@@ -124,7 +117,7 @@ export class SanPhamComponent extends BaseListComponent<ISanPham> implements OnI
             const body = {
                 listIds: [...new Set(this.selectionIds)],
             };
-            this.apiService.post('/san-pham/delete-many-bo-san-phams', body).subscribe(res => {
+            this.apiService.post('/dich-vu/delete-many-dich-vus', body).subscribe(res => {
                 this.selectionIds = [];
                 this.showMessage('success', 'Thành công', 'Xóa thành công');
                 this.loadItems();

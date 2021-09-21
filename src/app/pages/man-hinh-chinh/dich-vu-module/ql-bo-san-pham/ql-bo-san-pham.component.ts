@@ -27,11 +27,8 @@ export class QlBoSanPhamComponent extends BaseListComponent<IBoSanPham> implemen
     protected windowRef: WindowRef;
     constructor(
         injector: Injector,
-        
     ) {
         super(injector)
-        this.windowRef = injector.get(WindowRef)
-
     }
 
     private get extendQueryOptions() {
@@ -130,17 +127,17 @@ export class QlBoSanPhamComponent extends BaseListComponent<IBoSanPham> implemen
         this.windowRef.close();
     }
 
-    chonBoSanPham(){
-        if(this.selectedItem != null){
+    chonBoSanPham() {
+        if (this.selectedItem != null) {
             this.windowRef.close(this.selectedItem);
-        }else{
-            this.notification.show('Vui lòng chọn bộ sản phẩm','Cảnh báo', { status :'warning' });
+        } else {
+            this.notification.show('Vui lòng chọn bộ sản phẩm', 'Cảnh báo', { status: 'warning' });
         }
     }
     selectRow(e: SelectionEvent) {
-        if(e.selectedRows.length > 0){
+        if (e.selectedRows.length > 0) {
             this.selectedItem = e.selectedRows[0].dataItem;
-        }else{
+        } else {
             this.selectedItem = null;
         }
     }

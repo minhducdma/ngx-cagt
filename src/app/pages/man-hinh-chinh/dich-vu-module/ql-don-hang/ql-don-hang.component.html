@@ -1,0 +1,146 @@
+<div class="mb-3">
+    <nb-accordion>
+        <nb-accordion-item expanded>
+            <nb-accordion-item-header>
+                Tìm kiếm
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Từ khóa</div>
+                            <div class="col-md-12 col-lg-12">
+                                <input type="text" fullWidth nbInput class="m-input form-control"
+                                    [(ngModel)]="modelSearch.filter" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Loại</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select 
+                                [modeOfDropDowList]="dropdownListEnum.LOAI_DON_HANG" 
+                                [isMulti]="true"
+                                [(ngModel)]="modelSearch.loaiDonHangs">
+                            </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xxxl-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 pb-1">Trạng thái</div>
+                            <div class="col-md-12 col-lg-12">
+                                <ngx-cagt-select 
+                                    [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_DON_HANG" 
+                                    [isMulti]="true"
+                                    [(ngModel)]="modelSearch.trangThaiDonHangs">
+                                </ngx-cagt-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="col-md-6 offset-md-3 text-center">
+                            <button class="mr-2" nbButton size="small" status="primary" (click)="onSearchChange()">
+                                <i class="fa fa-search mr-2"></i> Tìm kiếm
+                            </button>
+                            <button class="mr-2" nbButton size="small" status="warning" (click)="resetHandler()">
+                                <i class="fas fa-redo-alt mr-2"></i> Làm mới
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+<nb-card>
+    <nb-card-header> Đơn hàng </nb-card-header>
+    <nb-card-body class="group-button">
+        <div class="float-left">
+            <button nbButton status="primary"  (click)="addHandler()"><i class="fa fa-plus mr-2"></i> Thêm mới</button>
+            <button nbButton status="danger" (click)="removeSelectedHandler()" [disabled]="selectionIds.length < 1">
+                <i class="fa fa-trash mr-2"></i> Xóa
+            </button>
+        </div>
+    </nb-card-body>
+    <nb-card-body>
+
+
+        <kendo-grid 
+            [data]="gridView$" 
+            [resizable]="true" 
+            [pageSize]="gridState.take" 
+            [skip]="gridState.skip"
+            [loading]="isLoading" 
+            [pageable]="true" 
+            [resizable]="true" 
+            kendoGridSelectBy="id" 
+            [selectable]="true"
+            [selectedKeys]="selectionIds" 
+            (dataStateChange)="onStateChange($event)">
+            <kendo-grid-checkbox-column class="text-center" showSelectAll="true" [width]="50" [columnMenu]="false"
+                [headerStyle]="{
+                      'text-align': 'center'
+                    }">
+
+            </kendo-grid-checkbox-column>
+            <kendo-grid-column class="text-center" [width]="60">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    <button nbButton status="info" size="small" [matMenuTriggerFor]="menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item class="button_box" color="primary"  (click)="editHandler(dataItem)">
+                            <div class="box_botton">
+                                <i class="fa fa-edit mr-2" style="width: 20px;"></i>Chỉnh sửa
+                            </div>
+                        </button>
+                        <button mat-menu-item class="button_box" (click)="removeHandler(dataItem)">
+                            <div class="box_botton">
+                                <i class="fa fa-trash mr-2" style="width: 20px;"></i>Xóa
+                            </div>
+                        </button>
+                    </mat-menu>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column title="STT" [width]="60" class="text-center" [headerStyle]="{ 'text-align': 'center'}">
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    {{ rowIndex + 1 }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="codeDonHang" title="Mã" [width]="120">
+            </kendo-grid-column>
+            <kendo-grid-column field="tenDonHang" title="Tên" [width]="250">
+            </kendo-grid-column>
+            <kendo-grid-column field="loaiDonHang" title="Loại" [width]="150">
+            </kendo-grid-column>
+            <kendo-grid-column field="tongGiaBan" title="Tổng giá bán" [width]="150">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div class="text-right">
+                        {{ dataItem.tongGiaBan?.toLocaleString() }}
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column 
+                field="ngayThanhToan" 
+                title="Ngày thanh toán" 
+                [width]="150" 
+                class="text-center" 
+                [headerStyle]="{'text-align': 'center'}">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.ngayThanhToan | date: "dd/MM/yyyy" }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="trangThaiDonHang" title="Trạng thái" [width]="100">
+            </kendo-grid-column>
+        </kendo-grid>
+    </nb-card-body>
+</nb-card>
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
+    <div kendoWindowContainer></div>
+</div>

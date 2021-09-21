@@ -1,0 +1,237 @@
+<div class="mb-3 mt-3">
+    <nb-accordion>
+        <nb-accordion-item expanded>
+            <nb-accordion-item-header>
+                Thông tin đơn hàng
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <form class="m-form" novalidate [formGroup]="formDonHang" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="form-group m-form__group col-4">
+                            <label> Mã </label>
+                            <input nbInput type="text" class="m-input form-control" fullWidth formControlName="codeDonHang" />
+                        </div>
+                        <div class="form-group m-form__group col-8">
+                            <label> Tên </label>
+                            <input nbInput type="text" class="m-input form-control" fullWidth formControlName="tenDonHang" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Loại </label>
+                            <app-cagt-select-optionCrt
+                                [modeOfDropDowList]="dropdownListEnum.LOAI_DON_HANG" 
+                                formControlName="loaiDonHang">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Trạng thái </label>
+                            <app-cagt-select-optionCrt
+                                [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_DON_HANG" 
+                                formControlName="trangThaiDonHang">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Ngày tạo đơn </label>
+                            <input nbInput type="date" nbInput class="m-input form-control" formControlName="ngayTaoDonHang" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Ngày thanh toán </label>
+                            <input nbInput type="date" nbInput class="m-input form-control" formControlName="ngayThanhToan" />
+                        </div>
+                        <div class="form-group m-form__group col-12">
+                            <label> Ghi chú </label>
+                            <textarea rows="3"  nbInput fullWidth formControlName="ghiChu" ></textarea>
+                        </div>
+                    </div>
+                </form>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+
+<div class="mb-3">
+    <nb-accordion>
+        <nb-accordion-item expanded>
+            <nb-accordion-item-header>
+                Thông tin khách hàng
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <form class="m-form" novalidate [formGroup]="formKhachHang">
+                    <div class="row">
+                        <div class="form-group m-form__group col-12 text-right">
+                            <button nbButton size="medium" status="primary" (click)="selectKhachHang()">
+                                <i class="fa fa-user-plus mr-2"></i>Chọn khách hàng từ hệ thống
+                            </button>
+                            <button nbButton class="ml-2" size="medium" status="basic" (click)="removeDataKhachHang()">
+                                <i class="fa fa-trash mr-2"></i>Xóa dữ liệu
+                            </button>
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Họ và tên </label>
+                            <input nbInput type="text" class="m-input form-control" formControlName="hoTen" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Ngày sinh </label>
+                            <input nbInput type="date" nbInput class="m-input form-control" formControlName="ngaySinh" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Email </label>
+                            <input nbInput type="email" class="m-input form-control" formControlName="email" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Số điện thoại </label>
+                            <input nbInput type="text" class="m-input form-control" formControlName="soDienThoai" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Họ tên bố </label>
+                            <input nbInput type="text" class="m-input form-control" formControlName="hoTenBo" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Email bố </label>
+                            <input nbInput type="email" class="m-input form-control" formControlName="emailBo" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Họ tên mẹ </label>
+                            <input nbInput type="text" class="m-input form-control" formControlName="hoTenMe" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Email mẹ </label>
+                            <input nbInput type="email" class="m-input form-control" formControlName="emailMe" />
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Loại khách hàng </label>
+                            <app-cagt-select-optionCrt 
+                                [modeOfDropDowList]="dropdownListEnum.LOAI_KHACH_HANG" 
+                                formControlName="loaiKhachHang">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Nguồn khách hàng </label>
+                            <app-cagt-select-optionCrt
+                                [modeOfDropDowList]="dropdownListEnum.NGUON_KHACH_HANG" 
+                                formControlName="nguonKhachHang">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Nhân viên phụ trách </label>
+                            <app-cagt-select-optionCrt
+                                [modeOfDropDowList]="dropdownListEnum.NHAN_VIEN_PHU_TRACH" 
+                                formControlName="nhanVienPhuTrach">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="form-group m-form__group col-3">
+                            <label> Trạng thái khách hàng </label>
+                            <app-cagt-select-optionCrt
+                                [modeOfDropDowList]="dropdownListEnum.TRANG_THAI_KHACH_HANG" 
+                                formControlName="trangThaiKhachHang">
+                            </app-cagt-select-optionCrt>
+                        </div>
+                        <div class="form-group m-form__group col-12">
+                            <label> Địa chỉ </label>
+                            <input type="text" nbInput fullWidth  formControlName="diaChi" />
+                        </div> 
+                
+                        <!-- <div class="form-group m-form__group col-3">
+                            <label> Giới tính </label>
+                            <br/>
+                            <nb-select placeholder="--Chọn--" style="width: 100%;">
+                                <nb-option value="1">Nam</nb-option>
+                                <nb-option value="2">Nữ</nb-option> 
+                              </nb-select>
+                       
+                        </div> -->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <nb-checkbox formControlName="isHocVien">Là học viên</nb-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+
+<div class="mb-3">
+    <nb-accordion>
+        <nb-accordion-item expanded>
+            <nb-accordion-item-header>
+                Thông tin dịch vụ
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <table class="table table-bordered">
+                    <thead class="table-active">
+                      <tr>
+                        <th scope="col" style="width:60px; text-align: center;">STT</th>
+                        <th scope="col" style="width:60px; text-align: center;" ></th>
+                        <th scope="col" style="width:220px">Sản phẩm</th>
+                        <th scope="col" style="width:150px">Số lượng <span style="color: red;">(*)</span></th>
+                        <th scope="col" style="width:150px">Giá gốc <span style="color: red;">(*)</span></th>
+                        <th scope="col" style="width:150px">Giá bán <span style="color: red;">(*)</span></th>
+                        <th scope="col" style="width:150px">Giá khuyến mãi</th>
+                        <th scope="col" style="width:150px">Thuế (%) <span style="color: red;">(*)</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of arrChiTietDonHang; let i = index">
+                        <td class="text-center font-weight-bold" style="vertical-align: middle;">{{i+1}}</td>
+                        <td class="text-center" style="vertical-align: middle;">
+                            <button nbButton status="danger" (click)="removeSelectedSanPham(item)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                        <td style="vertical-align: middle;">{{item.tenSanPham}}</td>
+                        <td>
+                            <input nbInput fullWidth [(ngModel)]="item.soLuong" (keyup)="calculatePrice()" currencyMask min="0" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+                        </td>
+                        <td>
+                            <input nbInput fullWidth [(ngModel)]="item.giaGoc" (keyup)="calculatePrice()" currencyMask min="0" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+                        </td>
+                        <td>
+                            <input nbInput fullWidth [(ngModel)]="item.giaBan" (keyup)="calculatePrice()" currencyMask min="0" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+                        </td>
+                        <td>
+                            <input nbInput fullWidth [(ngModel)]="item.giaKhuyenMai" (keyup)="calculatePrice()" currencyMask min="0" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+                        </td>
+                        <td>
+                            <input nbInput fullWidth [(ngModel)]="item.phanTramThue" (keyup)="calculatePrice()" currencyMask min="0" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 0 }"/>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button nbButton status="success" size="medium" (click)="addSanPham()"
+                                                class="mr-1" style="height: 100%;">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+<nb-card>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <label class="font-weight-bold"> Tổng giá nhập:  </label> <b class="float-right mr-5" style="color:red; font-size: large;">{{tongGiaNhap.toLocaleString()}}</b>
+            </div>
+            <div class="col-3">
+                <label class="font-weight-bold"> Tổng giá bán:  </label> <b class="float-right mr-5" style="color:red; font-size: large;">{{tongGiaBan.toLocaleString()}}</b>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card-body>
+        <button nbButton size="large" status="basic" class="float-left" (click)="backToList()">
+            <i class="fa fa-arrow-left mr-2"></i>Trở về
+        </button>
+        <button nbButton size="large" status="primary" (click)="onSubmit()" class="float-right">
+            <i class="fa fa-file mr-2"></i>Lưu
+        </button>
+    </nb-card-body>
+</nb-card>
+
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
+    <div kendoWindowContainer></div>
+</div>

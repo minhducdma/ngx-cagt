@@ -30,4 +30,10 @@ export enum DropDownListEnum {
 
     LOAI_SAN_PHAM,
     TRANG_THAI_SAN_PHAM,
+
+    LOAI_DON_HANG,
+    TRANG_THAI_DON_HANG,
+
+    DICH_VU_ID,
+    BO_SAN_PHAM_ID
 }
