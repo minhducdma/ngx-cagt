@@ -1,0 +1,137 @@
+<nb-card>
+    <nb-accordion>
+        <nb-accordion-item expanded>
+            <nb-accordion-item-header>
+                Thông tin chung
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Tên đề thi:</b>{{deThiInfo?.tenDeThi}}
+                        </div>
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Loại đề thi:</b>{{deThiInfo?.loaiDeThi}}
+                        </div>
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Tổng thời gian (phút):</b>{{deThiInfo?.tongThoiGian}}
+                        </div>
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Tổng số điểm:</b>{{deThiInfo?.tongSoDiem}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Mã học viên:</b>{{hocVienInfo?.khachHang?.maHocVien}}
+                        </div>
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Tên học viên:</b>{{hocVienInfo?.khachHang?.hoTen}}
+                        </div>
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Ngày sinh:</b>{{hocVienInfo?.khachHang?.ngaySinh}}
+                        </div>
+                        <div class="col-3 form-group m-form__group">
+                            <b class="mr-2">Email học viên:</b>{{hocVienInfo?.khachHang?.email}}
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</nb-card>
+<div class="row">
+    <div class="col-3">
+        <nb-card *ngIf="boDemGio.length > 0">
+            <nb-accordion>
+                <nb-accordion-item *ngFor="let item of cauHoiTreeRoot">
+                    <nb-accordion-item-header (click)="chooseRoot(item)">
+                        {{item.tenCauHoi}}
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                        <nb-card-body>
+                            <cdk-virtual-scroll-viewport style="height: 215px" itemSize="90">
+                                <button *ngFor="let item of cauHoiTreeLeaf;let i = index" nbButton hero class="m-1"
+                                    status='{{currentCauHoi.id == item.id ? "success" : "basic" }}'
+                                    (click)="choosenCurrentCauHoi(item.id)">{{i+1}}</button>
+                            </cdk-virtual-scroll-viewport>
+                        </nb-card-body>
+                    </nb-accordion-item-body>
+                </nb-accordion-item>
+            </nb-accordion>
+        </nb-card>
+    </div>
+    <div class="col-9">
+        <nb-card>
+            <nb-card-header>
+                Chấm phần thi{{tenPhanThi != null ? ": " + tenPhanThi : null}}
+            </nb-card-header>
+            <nb-card-body>
+                <div style="height: 120px;" *ngIf="cauHoiTreeLeaf.length == 0">
+                    <h1 class="text-center">
+                        Chọn phần thi để bắt đầu chấm bài
+                    </h1>
+                </div>
+                <div  *ngIf="cauHoiTreeLeaf.length > 0">
+                    <nb-card accent="primary">
+                        <nb-card-header>
+                            <div class="w-100">
+                                <div class="float-left">
+                                    <button nbButton size="small" status="info" (click)="openComment(currentCauHoi)">
+                                        <i class="fa fa-comments mr-2"></i>Nhận xét
+                                    </button>
+                                </div>
+                                <div class="ml-2 float-right">
+                                    <input nbInput type="number" style="width: 80px;;display: inline !important;height: 30px;" class="m-input form-control text-right" min="0" [max]="currentCauHoi.tongSoDiem"/> <span class="ml-1 font-weight-bold text-danger">/{{currentCauHoi.tongSoDiem}}</span>
+                                </div>
+                            </div>
+                        </nb-card-header>
+                        <nb-card-header>
+                            <cdk-virtual-scroll-viewport style="height: 200px" itemSize="90">
+                                <div [innerHTML]="currentCauHoi.noiDungCauHoi | safeHtml"></div>
+                            </cdk-virtual-scroll-viewport>
+                        </nb-card-header>
+                        <nb-card-body style="height: max-content;">
+                            <div *ngIf='currentDapAnFlag == "ckeditor"'>
+                                <span class="text-info font-weight-bold font-italic">Phần trả lời của thí sinh:</span>
+                                <div [innerHTML]="currentCauHoi.cauTraLoi"></div>
+                            </div>
+                            <div *ngIf='currentDapAnFlag == "radio"'>
+                                <label *ngFor="let item of currentCauHoi.dapAns" style="width: 100%;">
+                                    <input type="radio" class="mr-2" style="transform: scale(1.5);" [checked]="item.dapAnChon" disabled>
+                                    <div style="display: inherit;" [innerHTML]="item.noiDungCauHoi"></div>
+                                    <span class="font-weight-bold" *ngIf="item.isDapAnDung == item.dapAnChon"><i class="fa fa-check ml-1 text-success" aria-hidden="true"></i></span>
+                                    <span class="font-weight-bold" *ngIf="item.dapAnChon == true && item.isDapAnDung != item.dapAnChon"><i class="fa fa-times ml-1 text-danger" aria-hidden="true"></i></span>
+                                  </label>
+                            </div>
+                            <div *ngIf='currentDapAnFlag == "checkbox"'>
+                                <label *ngFor="let item of currentCauHoi.dapAns" style="width: 100%;">
+                                    <input type="checkbox" class="mr-2" style="transform: scale(1.5);" [checked]="item.dapAnChon" disabled>
+                                    <div style="display: inherit;" [innerHTML]="item.noiDungCauHoi"></div>
+                                    <span class="font-weight-bold" *ngIf="item.isDapAnDung == item.dapAnChon"><i class="fa fa-check ml-1 text-success" aria-hidden="true"></i></span>
+                                    <span class="font-weight-bold" *ngIf="item.dapAnChon == true && item.isDapAnDung != item.dapAnChon"><i class="fa fa-times ml-1 text-danger" aria-hidden="true"></i></span>
+                                </label>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-12" *ngIf="cauHoiTreeLeaf.length > 0">
+        <nb-card>
+            <nb-card-body>
+                <div class="float-right">
+                    <button nbButton size="medium" status="success" (click)="onSubmit()">
+                        <i class="fa fa-file mr-2"></i>Chấm điểm
+                    </button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<div class="k-overlay" *ngIf="opened"></div>
+<div class="wrapper form-layouts">
+    <div kendoWindowContainer></div>
+</div>

@@ -42,6 +42,7 @@ export const UrlConstant = {
         LOAD_DE_THI: '/cau-hois/collect-cau-hoi-by-de-thi-id_Float-data/',
         UPDATE_CHAM_SOC_KHACH_HANG: '/cham-soc-khach-hangs/cham-soc-khach-hang-and-change-kich-ban',
         DE_THI_KENDO: '/de-thi/collect-kendo-datatable',
+        GET_DE_THI_ID:'https://apisipm.cagt.top/api/app/de-thi/',
         //Module Học viện
         HOC_VIEN_KENDO: '/hoc-vien/collect-kendo-datatable',
         HOC_VIEN: '/hoc-vien',
@@ -60,7 +61,8 @@ export const UrlConstant = {
         SAN_PHAM_KENDO: '/san-pham/collect-kendo-datatable',
         SAN_PHAM: '/san-pham',
         DON_HANG_KENDO: '/don-hang/collect-don-hang-kendo-data',
-        DON_HANG: '/don-hang'
+        DON_HANG: '/don-hang',
+        GET_CHAM_THI: '/cham-thi/collect-cham-thi-with-detail_v2',
     },
 
 }

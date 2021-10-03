@@ -19,7 +19,7 @@ export const environment = {
   oAuthConfig: {
     issuer: 'https://apisipm.cagt.top',
     redirectUri: baseUrl,
-    clientId: 'SiPM_App',
+    clientId: 'SiPM_Web',
     responseType: 'code',
     scope: 'offline_access SiPM',
   },

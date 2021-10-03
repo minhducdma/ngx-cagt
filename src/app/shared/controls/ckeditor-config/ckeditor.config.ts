@@ -12,11 +12,11 @@ export const config = {
     },
 
     other1Option: {
-        extraPlugins:
-            "divarea,image,tabletools,html5video,html5audio,widget,lineutils,clipboard,widgetselection,uploadfile,uploadwidget,filetools,notificationaggregator,notification",
-        // removePlugins: 'horizontalrule,specialchar,about,list,others',
-        // removeButtons: 'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Textarea,Find,Select,Button,HiddenField,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,ShowBlocks,Cut,Copy,Paste,Table,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent,Blockquote',
-        height: '100',
+        extraPlugins:"divarea",
+        removePlugins: 'horizontalrule,specialchar,about,list,others',
+        removeButtons: 'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Textarea,Find,Select,Button,HiddenField,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,ShowBlocks,Cut,Copy,Paste,Table,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent,Blockquote',
+        height: '200',
+        readonly: true,
         filebrowserImageBrowseUrl: UrlConstant.ROUTE.STORE_FILE,
         filebrowserUploadUrl: UrlConstant.ROUTE.UPLOAD_FILE
     }

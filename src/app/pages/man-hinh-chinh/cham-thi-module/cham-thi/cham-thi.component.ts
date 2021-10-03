@@ -1,31 +1,34 @@
-import { ICauHoi, IBoDemGio, ILamBaiThi } from './../model/tao-de-thi.model';
 import { Component, Injector, OnInit } from '@angular/core';
-import { UrlConstant } from '../../../../@core/constants/url.constant';
-import { ApiService } from "../../../../@core/services/api.service";
-import 'ckeditor';
-import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
 import { ActivatedRoute } from '@angular/router';
-import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
-import { takeUntil } from 'rxjs/operators';
+import { config } from '../../../../shared/controls/ckeditor-config/ckeditor.config';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { UrlConstant } from '../../../../@core/constants/url.constant';
+import { ApiService } from '../../../../@core/services/api.service';
+import { AlertDialogComponent } from '../../../../shared/controls/alert-dialog/alert-dialog.component';
 import { BaseListComponent } from '../base/base-list.component';
-
+import { IBoDemGio, ICauHoi, IChamThi, IChamThiDetail, IDapAnChon, ILamBaiThi } from '../model/cham-thi.model';
+import { FormChamThiComponent } from './form-cham-thi/form-cham-thi.component';
+import { WindowCloseResult } from '@progress/kendo-angular-dialog';
+import { IDapAn, IDeThi } from '../../kho-de-module/model/tao-de-thi.model';
+import { IHocVien } from '../../hoc-vien-module/model/hoc-vien-model';
 
 @Component({
-    selector: 'ngx-lam-bai-thi',
-    templateUrl: './lam-bai-thi.component.html',
-    styleUrls: ['./lam-bai-thi.component.scss']
+    selector: 'app-cham-thi',
+    templateUrl: './cham-thi.component.html',
+    styleUrls: ['./cham-thi.component.scss']
 })
-
-export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements OnInit {
-
+export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnInit {
     private route: ActivatedRoute;
     constructor(injector: Injector) {
         super(injector);
         this.route = injector.get(ActivatedRoute);
     }
     urlCreateLamBaiThi: string = UrlConstant.ROUTE.CREATE_LAM_BAI_THI;
-    ckConfig = config.basicOption;
+    urlGetLamBaiThi: string = UrlConstant.ROUTE.GET_CHAM_THI;
+    urlGetDeThiInfo: string = UrlConstant.ROUTE.GET_DE_THI_ID;
+
+    ckConfig = config.other1Option;
     currentRoot = 1;
     maxRoot = 0;
     currentCauHoi: ICauHoi = {
@@ -47,66 +50,112 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
         orderDetail: "",
         randomGUID: 0,
         cauTraLoi: "",
-        dapAnChonSingle: 0
+        dapAnChonSingle: 0,
+        dapAnChons: [],
+        lamBaiThiId: 0
     };
     currentDapAnFlag: string;
     deThiData: ICauHoi[] = [];
+    deThiInfo: IDeThi;
+    hocVienInfo: IHocVien;
     cauHoiTreeRoot: ICauHoi[] = [];
     cauHoiTreeLeaf: ICauHoi[] = [];
     giaoDienCauHois: ICauHoi[];
     apiService: ApiService;
     lichSuTraLoi: any;
+    lstDapAnChon: IDapAnChon[];
     cauTraLoi: [];
     safeHtml: "";
     url: string = UrlConstant.ROUTE.LOAD_DE_THI;
     boDemGio: IBoDemGio[] = [];
     destroy$ = new Subject<void>();
-
     lamBaiThis: ILamBaiThi[] = [];
     deThiId: number;
     userDetail: string;
-
     isParentStart: boolean = false;
+    tenPhanThi: string;
+    chamThiInit: IChamThi;
+    lamBaiThiId: number = 5;
+    chamThiId: number = 0;
 
     ngOnInit() {
         super.ngOnInit();
     }
 
-    showFormCreateOrUpdate() {
-        this.dialogService.open(AlertDialogComponent, {
-            context: {
-                title: 'Thông báo',
-                message: 'Bạn có chắc chắn bắt đầu bài thi?',
-                isNotify: false
-            },
-        }).onClose
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(res => {
-                if (res) {
-                    this.isParentStart = true;
-                    this.loadDeThi(this.deThiId);
-                }
+    getDataChamThi() {
+        this.apiService.post(this.urlGetLamBaiThi, {
+            lamBaiThiId: this.lamBaiThiId,
+            chamThiId: this.chamThiId
+        })
+            .subscribe((res: any) => {
+                this.lstDapAnChon = res.listDapAnChons as IDapAnChon[];
+                this.hocVienInfo = res.hocVienDTO as IHocVien;
+                this.loadInfoDeThi(res.lamBaiThiDTO.deThiId);
+                this.loadDeThi(res.lamBaiThiDTO.deThiId);
             });
     }
+
+    loadInfoDeThi(deThiId) {
+        this.apiService.get(this.urlGetDeThiInfo + deThiId)
+            .subscribe((res: any) => {
+                this.deThiInfo = res as IDeThi;
+            });
+    }
+
+    showFormCreateOrUpdate() {
+        this.opened = true;
+        const windowRef = this.windowService.open({
+            title: "Nhận xét",
+            content: FormChamThiComponent,
+            width: 500,
+            top: 100,
+            autoFocusedElement: 'body',
+        });
+        const param = windowRef.content.instance;
+        param.action = this.action;
+        param.model = this.model;
+        param.isHocVien = true;
+
+        windowRef.result.subscribe(result => {
+            if (result instanceof WindowCloseResult) {
+                this.opened = false;
+            }
+        });
+    }
     protected loadItems() {
+        this.chamThiInit = {
+            id: 0,
+            chamThiId: this.chamThiId,
+            lamBaiThiId: this.lamBaiThiId,
+            nhanVienId: this.currentUser.id,
+            tenChamThi: "",
+            noiDungChamThi: "",
+            diemThucTe: null,
+            tongDiem: null,
+            loaiChamThi: null,
+            trangThaiChamThi: null,
+            chamThiDetails: []
+        }
+
         this.deThiId = this.route.snapshot.params.deThiId;
         this.userDetail = this.route.snapshot.params.userDetail;
+        this.getDataChamThi();
+        //this.loadDeThi(this.deThiId);
+
     }
 
     loadDeThi(deThiId) {
-        this.apiService.post(this.url + this.deThiId, deThiId).subscribe((res: any) => {
+        this.apiService.post(this.url + deThiId, deThiId).subscribe((res: any) => {
             // show notification
             this.deThiData = res as ICauHoi[];
             this.maxRoot = Math.max.apply(Math, this.deThiData.map(function (o) { return o.root; }))
             this.cauHoiTreeRoot = this.deThiData.filter(e => e.level == 1);
             this.getAllRoot();
-            this.getAllLeaf(this.currentRoot);
+            this.getAllLeaf(0);
 
             //run first part
-            this.boDemGio[0].isStart = true;
         });
     }
-
 
     getAllRoot() {
         this.cauHoiTreeRoot.forEach((element, index) => {
@@ -120,8 +169,9 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
 
     }
 
-    chooseRoot(index) {
-        this.boDemGio[index].isStart = true;
+    chooseRoot(item) {
+        this.getAllLeaf(item.root);
+        this.tenPhanThi = item.tenCauHoi;
     }
 
     getAllLeaf(idRoot) {
@@ -137,22 +187,28 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
     }
     setterCurrentCauHoi(index) {
         this.currentCauHoi = this.cauHoiTreeLeaf[index];
-        if (typeof (this.currentCauHoi.cauTraLoi) === 'undefined')
+        if (this.currentCauHoi?.cauTraLoi && typeof (this.currentCauHoi?.cauTraLoi) === 'undefined')
             this.currentCauHoi.cauTraLoi = "";
-        this.buildGiaoDienCauHoi(this.currentCauHoi.id);
+        let currentDapAnChon = this.lstDapAnChon?.filter(x => x.cauHoiId == this.currentCauHoi?.dapAns[0]?.cauHoiId)[0] as IDapAnChon;
+        if (currentDapAnChon != null) {
+            if (this.currentCauHoi.dapAns.length > 0)
+                this.currentCauHoi.dapAns.map((x: IDapAn) => {
+                    x.dapAnChon = currentDapAnChon.listDapAns?.includes(x.id.toString()) ? true : false;
+                })
+        }
+        this.buildGiaoDienCauHoi(this.currentCauHoi?.id);
         this.setterDapAnFlag();
-
     }
     setterDapAnFlag() {
-        if (this.currentCauHoi.dapAns.length <= 1){
+        if (this.currentCauHoi?.dapAns.length <= 1) {
             this.currentDapAnFlag = "ckeditor";
         }
-        if (this.currentCauHoi.dapAns.length > 0){
-            if (this.currentCauHoi.dapAns.filter(r => r.isDapAnDung == true).length > 1)
-            this.currentDapAnFlag = "checkbox";
+        if (this.currentCauHoi?.dapAns.length > 0) {
+            if (this.currentCauHoi?.dapAns.filter(r => r.isDapAnDung == true).length > 1)
+                this.currentDapAnFlag = "checkbox";
         }
-            
-        if ( this.currentCauHoi.dapAns.length > 1 && this.currentCauHoi.dapAns.filter(r => r.isDapAnDung == true).length == 1){
+
+        if (this.currentCauHoi?.dapAns.length > 1 && this.currentCauHoi?.dapAns.filter(r => r.isDapAnDung == true).length == 1) {
             this.currentDapAnFlag = "radio";
         }
     }
@@ -166,12 +222,12 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
 
     buildGiaoDienCauHoi(cauHoiId) {
         let cauHoiAffected = this.deThiData.find(r => r.id == cauHoiId);
-        let orderList = cauHoiAffected.orderDetail.split("_");
-        this.giaoDienCauHois = this.deThiData.filter(r => r.root == cauHoiAffected.root);
+        let orderList = cauHoiAffected?.orderDetail.split("_");
+        this.giaoDienCauHois = this.deThiData?.filter(r => r.root == cauHoiAffected?.root);
 
-        this.giaoDienCauHois = this.giaoDienCauHois.filter(r => r.id != this.currentCauHoi.id && orderList.indexOf(r.id.toString()) >= 0);
+        this.giaoDienCauHois = this.giaoDienCauHois?.filter(r => r.id != this.currentCauHoi.id && orderList.indexOf(r.id.toString()) >= 0);
         // console.log(this.giaoDienCauHois);
-        this.giaoDienCauHois = this.giaoDienCauHois.sort((a, b) => a.level - b.level);
+        this.giaoDienCauHois = this.giaoDienCauHois?.sort((a, b) => a.level - b.level);
         // for (var i = 0; i < this.giaoDienCauHois.length; i++) {
         //   if (i > 0)
         //     this.giaoDienCauHois[i].noiDungCauHoi = "<p style='display:inline'>"+this.buildSpaceGiaoDienCauHoi(this.giaoDienCauHois[i].level)+"</p>" + this.giaoDienCauHois[i].noiDungCauHoi
@@ -231,7 +287,7 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
     }
     run(data) {
         data.isStart = true;
-        console.log(this.boDemGio);
+        //console.log(this.boDemGio);
     }
     stop(data) {
         data.isStart = false;
@@ -336,6 +392,39 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
             });
     }
 
+    openComment(item: ICauHoi) {
+        this.opened = true;
+        const windowRef = this.windowService.open({
+            title: "Nhận xét",
+            content: FormChamThiComponent,
+            width: 500,
+            top: 100,
+            autoFocusedElement: 'body',
+        });
+        const param = windowRef.content.instance;
+        param.chamThiDetail = {
+            id: 0,
+            chamThiId: this.chamThiId,
+            lamBaiThiId: this.lamBaiThiId,
+            cauHoiId: this.currentCauHoi?.id,
+            nhanXet: ""
+        }
+
+        windowRef.result.subscribe((result: IChamThiDetail) => {
+            if (result != null && result.nhanXet != "") {
+                let oldChamThiDetail = this.chamThiInit.chamThiDetails.find(x => x.cauHoiId == result.cauHoiId);
+                if (oldChamThiDetail) {
+                    const index = this.chamThiInit.chamThiDetails.indexOf(oldChamThiDetail, 0);
+                    if (index > -1) {
+                        this.chamThiInit.chamThiDetails.splice(index, 1);
+                    }
+                    this.chamThiInit.chamThiDetails.push(result);
+                }
+            }
+            this.opened = false;
+        });
+    }
+
     submitBaiThi() {
         this.recordingRoot();
         let request = {
@@ -397,3 +486,4 @@ export class LamBaiThiComponent extends BaseListComponent<ICauHoi> implements On
         this.submitBaiThi();
     }
 }
+

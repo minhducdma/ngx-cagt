@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ChamThiComponent } from './cham-thi.component';
+import { ChamThisComponent } from './cham-thi.component';
+import { ChamThiComponent } from './cham-thi/cham-thi.component';
+import { FormChamThiComponent } from './cham-thi/form-cham-thi/form-cham-thi.component';
 
 const routes: Routes = [{
     path: '',
-    component: ChamThiComponent,
+    component: ChamThisComponent,
     children: [
-        // {
-        //     path: 'tao-de-thi/:deThiId',
-        //     component: TaoDeThiComponent,
-        // },
+        {
+            path: 'cham-thi/:deThiId',
+            component: ChamThiComponent,
+        },
     ],
 }];
 
@@ -20,5 +22,7 @@ const routes: Routes = [{
 export class ChamThiRoutingModule { }
 
 export const routedComponents = [
-    ChamThiComponent
+    ChamThisComponent,
+    ChamThiComponent,
+    FormChamThiComponent
 ];

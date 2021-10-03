@@ -4,5 +4,5 @@ import { Component } from '@angular/core';
     selector: 'ngx-admins-cham-thi',
     template: `<router-outlet></router-outlet>`,
 })
-export class ChamThiComponent {
+export class ChamThisComponent {
 }

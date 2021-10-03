@@ -55,7 +55,7 @@ import { MatMenuModule } from '@angular/material/menu';
         NbButtonGroupModule,
         AlertDialogModule,
         CagtSelectCrtModule,
-        MatMenuModule
+        MatMenuModule,
     ],
     declarations: [
         ...routedComponents,
