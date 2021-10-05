@@ -22,7 +22,6 @@ export class FormChamThiComponent extends BaseFormComponent<IChamThiDetail> impl
 
     ngOnInit() {
         super.ngOnInit();
-
         this.form.patchValue(this.chamThiDetail);
     }
 

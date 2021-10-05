@@ -166,7 +166,6 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
                 isStart: false
             })
         });
-
     }
 
     chooseRoot(item) {
@@ -261,7 +260,6 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
             if (this.lamBaiThis.filter(r => !this.cauHoiTreeLeaf.find(x => x.id == r.cauHoiId))) this.recordingRoot();
             this.currentRoot++;
             this.getAllLeaf(this.currentRoot);
-            this.changeBoDemGio();
         }
     }
 
@@ -279,7 +277,6 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
                         if (this.lamBaiThis.filter(r => !this.cauHoiTreeLeaf.find(x => x.id == r.cauHoiId))) this.recordingRoot();
                         this.currentRoot--;
                         this.getAllLeaf(this.currentRoot);
-                        this.changeBoDemGio();
                     }
                 }
             });
@@ -368,28 +365,25 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
         this.cauHoiTreeLeaf = this.cauHoiTreeLeaf.sort((a, b) => a.id - b.id);
 
     }
-    changeBoDemGio() {
-        for (let i = 0; i < this.boDemGio.length; i++)
-            this.boDemGio[i].isStart = false;
-
-        this.boDemGio.find(r => r.id == this.currentRoot).isStart = true;
-
-        // this.boDemGio.find(r => r.id == rootId).isStart = true;
-    }
 
     onSubmit() {
-        this.dialogService.open(AlertDialogComponent, {
-            context: {
-                title: 'Xác nhận',
-                message: 'Bạn có chắc chắn muốn nộp bài',
-            },
-        }).onClose
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(res => {
-                if (res) {
-                    this.submitBaiThi();
-                }
-            });
+        console.log(this.cauHoiTreeRoot);
+        this.opened = true;
+        const windowRef = this.windowService.open({
+            title: "Nhận xét chung từng phần thi",
+            content: FormChamThiComponent,
+            width: 700,
+            top: 100,
+            autoFocusedElement: 'body',
+        });
+        const param = windowRef.content.instance;
+        param.cauHoiTreeRoot = this.cauHoiTreeRoot;
+        windowRef.result.subscribe((result: IChamThiDetail) => {
+            if (result != null) {
+                
+            }
+            this.opened = false;
+        });
     }
 
     openComment(item: ICauHoi) {
@@ -409,6 +403,9 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
             cauHoiId: this.currentCauHoi?.id,
             nhanXet: ""
         }
+        let oldChamThiDetail = this.chamThiInit.chamThiDetails.find(x => x.cauHoiId == this.currentCauHoi?.id);
+        if(oldChamThiDetail)
+            param.chamThiDetail = oldChamThiDetail;
 
         windowRef.result.subscribe((result: IChamThiDetail) => {
             if (result != null && result.nhanXet != "") {
@@ -418,8 +415,8 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
                     if (index > -1) {
                         this.chamThiInit.chamThiDetails.splice(index, 1);
                     }
-                    this.chamThiInit.chamThiDetails.push(result);
                 }
+                this.chamThiInit.chamThiDetails.push(result);
             }
             this.opened = false;
         });

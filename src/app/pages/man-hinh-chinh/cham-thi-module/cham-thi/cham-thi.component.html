@@ -99,7 +99,7 @@
                                 <label *ngFor="let item of currentCauHoi.dapAns" style="width: 100%;">
                                     <input type="radio" class="mr-2" style="transform: scale(1.5);" [checked]="item.dapAnChon" disabled>
                                     <div style="display: inherit;" [innerHTML]="item.noiDungCauHoi"></div>
-                                    <span class="font-weight-bold" *ngIf="item.isDapAnDung == item.dapAnChon"><i class="fa fa-check ml-1 text-success" aria-hidden="true"></i></span>
+                                    <span class="font-weight-bold" *ngIf="item.dapAnChon == true && item.isDapAnDung == item.dapAnChon"><i class="fa fa-check ml-1 text-success" aria-hidden="true"></i></span>
                                     <span class="font-weight-bold" *ngIf="item.dapAnChon == true && item.isDapAnDung != item.dapAnChon"><i class="fa fa-times ml-1 text-danger" aria-hidden="true"></i></span>
                                   </label>
                             </div>
@@ -107,7 +107,7 @@
                                 <label *ngFor="let item of currentCauHoi.dapAns" style="width: 100%;">
                                     <input type="checkbox" class="mr-2" style="transform: scale(1.5);" [checked]="item.dapAnChon" disabled>
                                     <div style="display: inherit;" [innerHTML]="item.noiDungCauHoi"></div>
-                                    <span class="font-weight-bold" *ngIf="item.isDapAnDung == item.dapAnChon"><i class="fa fa-check ml-1 text-success" aria-hidden="true"></i></span>
+                                    <span class="font-weight-bold" *ngIf="item.dapAnChon == true && item.isDapAnDung == item.dapAnChon"><i class="fa fa-check ml-1 text-success" aria-hidden="true"></i></span>
                                     <span class="font-weight-bold" *ngIf="item.dapAnChon == true && item.isDapAnDung != item.dapAnChon"><i class="fa fa-times ml-1 text-danger" aria-hidden="true"></i></span>
                                 </label>
                             </div>

@@ -19,6 +19,7 @@ export class TaoDeThiComponent extends BaseListComponent<IDeThi> {
     
     url: string = UrlConstant.ROUTE.CREATE_DE_THI;
     getDeThiUrl = UrlConstant.ROUTE.GET_UPDATE_DE_THI;
+    getDeThiId = UrlConstant.ROUTE.GET_DE_THI_ID;
 
     public expandedKeys: number[] = [1];
     public dataCauHoi: ICauHoi[] = [];
@@ -40,8 +41,11 @@ export class TaoDeThiComponent extends BaseListComponent<IDeThi> {
     ngOnInit() {
         this.deThiId = this.route.snapshot.params.deThiId;
         if (this.deThiId > 0) {
+            this.apiService.get(this.getDeThiId + this.deThiId).subscribe(res =>{
+                this.form.patchValue(res);
+            })
+
             this.apiService.post(this.getDeThiUrl + '/' + this.deThiId, this.deThiId).subscribe((res) => {
-                this.form.patchValue(res[0]);
                 this.dataCauHoi = JSON.parse(JSON.stringify(res));
             })
         }

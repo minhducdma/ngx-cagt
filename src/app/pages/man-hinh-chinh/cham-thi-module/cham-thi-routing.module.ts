@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ChamThisComponent } from './cham-thi.component';
 import { ChamThiComponent } from './cham-thi/cham-thi.component';
+import { FormChamThiPhanThiComponent } from './cham-thi/form-cham-thi-phan-thi/form-cham-thi-phan-thi.component';
 import { FormChamThiComponent } from './cham-thi/form-cham-thi/form-cham-thi.component';
 
 const routes: Routes = [{
@@ -24,5 +25,6 @@ export class ChamThiRoutingModule { }
 export const routedComponents = [
     ChamThisComponent,
     ChamThiComponent,
-    FormChamThiComponent
+    FormChamThiComponent,
+    FormChamThiPhanThiComponent
 ];

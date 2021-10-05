@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
     $(document).ready(() => {
-      console.log("Jquery");
+      //console.log("Jquery");
     });
 		this.checkLogin();
 		this.menuService.onItemClick()
