@@ -220,6 +220,6 @@ export class LichXepLopComponent extends BaseListComponent<ILopHoc> implements O
     }
 
     submit() {
-        console.log(this.dataInput);
+        //console.log(this.dataInput);
     }
 }

@@ -38,7 +38,6 @@ export class FormImportNhanVienComponent extends BaseFormComponent<IUser> implem
         }
     }
     onSubmit() {
-        console.log(this.form.value);
         if (this.form.invalid) {
 
             // trigger validate all field

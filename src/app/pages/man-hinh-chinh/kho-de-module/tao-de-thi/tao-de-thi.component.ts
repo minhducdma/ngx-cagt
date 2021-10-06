@@ -81,7 +81,6 @@ export class TaoDeThiComponent extends BaseListComponent<IDeThi> {
         this.dataCauHoi.push(cauhoi);
     }
     selectCauHoi(data) {
-        console.log(data);
     }
 
     removeCauHoi(dataItem: ICauHoi[], item: ICauHoi) {

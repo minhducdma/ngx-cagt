@@ -12,6 +12,7 @@ import { FormChamThiComponent } from './form-cham-thi/form-cham-thi.component';
 import { WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { IDapAn, IDeThi } from '../../kho-de-module/model/tao-de-thi.model';
 import { IHocVien } from '../../hoc-vien-module/model/hoc-vien-model';
+import { FormChamThiPhanThiComponent } from './form-cham-thi-phan-thi/form-cham-thi-phan-thi.component';
 
 @Component({
     selector: 'app-cham-thi',
@@ -76,9 +77,10 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
     tenPhanThi: string;
     chamThiInit: IChamThi;
     lamBaiThiId: number = 5;
-    chamThiId: number = 0;
+    chamThiId: number;
 
     ngOnInit() {
+        this.chamThiId = this.route.snapshot.params.chamThiId;
         super.ngOnInit();
     }
 
@@ -124,7 +126,7 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
     }
     protected loadItems() {
         this.chamThiInit = {
-            id: 0,
+            id: this.chamThiId,
             chamThiId: this.chamThiId,
             lamBaiThiId: this.lamBaiThiId,
             nhanVienId: this.currentUser.id,
@@ -262,43 +264,6 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
             this.getAllLeaf(this.currentRoot);
         }
     }
-
-    previewRoot() {
-        this.dialogService.open(AlertDialogComponent, {
-            context: {
-                title: 'Xác nhận chuyển root',
-                message: 'Bạn có chắc chắn muốn chuyển phần thi? ',
-            },
-        }).onClose
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(res => {
-                if (res) {
-                    if (this.currentRoot > 1) {
-                        if (this.lamBaiThis.filter(r => !this.cauHoiTreeLeaf.find(x => x.id == r.cauHoiId))) this.recordingRoot();
-                        this.currentRoot--;
-                        this.getAllLeaf(this.currentRoot);
-                    }
-                }
-            });
-
-    }
-    run(data) {
-        data.isStart = true;
-        //console.log(this.boDemGio);
-    }
-    stop(data) {
-        data.isStart = false;
-    }
-    showNextButton() {
-        if (this.currentRoot == this.maxRoot)
-            return false
-        return true;
-    }
-    showPrevButton() {
-        if (this.currentRoot == 1)
-            return false
-        return true;
-    }
     recordingRoot() {
         let records = [];
         let d = this.cauHoiTreeLeaf;
@@ -367,21 +332,18 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
     }
 
     onSubmit() {
-        console.log(this.cauHoiTreeRoot);
         this.opened = true;
         const windowRef = this.windowService.open({
             title: "Nhận xét chung từng phần thi",
-            content: FormChamThiComponent,
-            width: 700,
+            content: FormChamThiPhanThiComponent,
+            width: 1000,
             top: 100,
             autoFocusedElement: 'body',
         });
         const param = windowRef.content.instance;
         param.cauHoiTreeRoot = this.cauHoiTreeRoot;
-        windowRef.result.subscribe((result: IChamThiDetail) => {
-            if (result != null) {
-                
-            }
+        param.chamThiInit = this.chamThiInit;
+        windowRef.result.subscribe((res) => {
             this.opened = false;
         });
     }
@@ -420,67 +382,6 @@ export class ChamThiComponent extends BaseListComponent<ICauHoi> implements OnIn
             }
             this.opened = false;
         });
-    }
-
-    submitBaiThi() {
-        this.recordingRoot();
-        let request = {
-            userLamBai: "",
-            deThiId: 0,
-            loaiLamBaiThi: "",
-            trangThaiLamBaiThi: "",
-            listDapAns: []
-        };
-        if (this.lamBaiThis.length > 0) {
-            request.userLamBai = this.userDetail;
-            request.deThiId = this.deThiId;
-            request.loaiLamBaiThi = "Khách Hàng";
-            request.trangThaiLamBaiThi = "Đã thi";
-        }
-
-        this.lamBaiThis.forEach(e => {
-            var d = {
-                lamBaiThiId: 0,
-                cauHoiId: e.cauHoiId,
-                isDapAnDung: false,
-                listDapAns: e.listDapAns.toString(),
-                cauTraLoi: e.cauTraLoi
-            }
-            request.listDapAns.push(d);
-        })
-        this.apiService
-            .post(this.urlCreateLamBaiThi, request)
-            .subscribe(res => {
-                // show notification
-                //this.notification.show('Thành công', 'Tạo mới thành công', { status: 'success' });
-                //this.router.navigate([""]);
-                // close form
-            });
-        this.router.navigate(["/pages/admin/kho-de/successfull"]);
-    }
-
-    completedChildPart(index) {
-        if (this.boDemGio[index].isStart) {
-            if (this.boDemGio[index] != this.boDemGio[this.boDemGio.length - 1]) {
-                this.notification.show('Kết thúc thời gian làm bài phần thi : ' + this.boDemGio[index].ten, 'Thông báo', { status: 'primary' });
-                this.boDemGio[index].isStart = false;
-                this.nextRootPart();
-                if (this.boDemGio[index + 1] != null) {
-                    setTimeout(() => {
-                        this.notification.show('Đã bắt đầu phần thi : ' + this.boDemGio[index + 1].ten, 'Thông báo', { status: 'success' });
-                        this.boDemGio[index + 1].isStart = true;
-                    }, 1500)
-                }
-            } else {
-                this.notification.show('Kết thúc thời gian làm bài, bắt đầu nộp bài thi', 'Thông báo', { status: 'success' });
-                this.submitBaiThi();
-            }
-        }
-    }
-
-    completed() {
-        this.notification.show('Kết thúc thời gian làm bài, bắt đầu nộp bài thi', 'Thông báo', { status: 'success' });
-        this.submitBaiThi();
     }
 }
 

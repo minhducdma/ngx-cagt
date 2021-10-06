@@ -1,3 +1,12 @@
-<p>
-    form-cham-thi-phan-thi works!
-</p>
+<div class="m-form">
+    <div class="row">
+        <div class="form-group m-form__group col-6" *ngFor="let item of lstChamThiDetail">
+            <label> Nhận xét phần thi <b>{{item.tenCauHoi}}</b> <span class="text-danger">(*)</span></label>
+            <textarea rows="3"  nbInput fullWidth [(ngModel)]="item.nhanXet" ></textarea>
+        </div>
+    </div>
+    <div class="text-right border-form-footer">
+        <button nbButton status="primary" type="button" (click)="closeForm()" class="btn_custom btn_df mr-1">Hủy</button>
+        <button nbButton status="danger" type="submit" (click)="onSubmit()" class="btn_custom btn_add">Lưu</button>
+    </div>
+</div>

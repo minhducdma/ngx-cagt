@@ -27,7 +27,6 @@ export class FormSanPhamComponent extends BaseFormComponent<ISanPham> implements
             case ActionEnum.CREATE:
                 break;
             case ActionEnum.UPDATE:
-                console.log(this.model);
                 this.setFormValue(this.model);
                 break;
         }

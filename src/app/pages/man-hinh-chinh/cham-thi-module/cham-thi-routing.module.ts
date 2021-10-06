@@ -10,7 +10,7 @@ const routes: Routes = [{
     component: ChamThisComponent,
     children: [
         {
-            path: 'cham-thi/:deThiId',
+            path: 'cham-thi/:chamThiId',
             component: ChamThiComponent,
         },
     ],

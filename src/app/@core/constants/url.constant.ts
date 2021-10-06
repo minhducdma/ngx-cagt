@@ -63,6 +63,7 @@ export const UrlConstant = {
         DON_HANG_KENDO: '/don-hang/collect-don-hang-kendo-data',
         DON_HANG: '/don-hang',
         GET_CHAM_THI: '/cham-thi/collect-cham-thi-with-detail_v2',
+        SAVE_CHAM_THI: '/cham-thi/create_or-update-cham-thi-with-detail_v1'
     },
 
 }

@@ -1,6 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ActionEnum } from '../../../../../@core/constants/enum.constant';
 import { UrlConstant } from '../../../../../@core/constants/url.constant';
 import { FormUtil } from '../../../../../shared/utils/form';
 import { BaseFormComponent } from '../../base/base-form.component';
