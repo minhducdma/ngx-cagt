@@ -1,7 +1,4 @@
-import { data } from './../../../pages/man-hinh-chinh/kho-de-module/quan-ly-de-thi/data.example';
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { timer } from 'rxjs';
-import '../../../../shared/controls/ckeditor-config/ckeditor.loader';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import 'ckeditor';
 import { config } from '../ckeditor-config/ckeditor.config';
 import { ControlValueAccessor } from '@angular/forms';
